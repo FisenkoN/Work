@@ -206,7 +206,7 @@ namespace School.WEB.Controllers
             {
                 teacher = _service.Teachers_GetForId(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -558,18 +558,6 @@ namespace School.WEB.Controllers
                 return NotFound();
             }
 
-            var students = _service.Students_GetAll();
-
-            var teachers = _service.Teachers_GetAll();
-
-            ViewData["Students"] = new SelectList(students,
-                "Id",
-                "FullName");
-
-            ViewData["Teachers"] = new SelectList(teachers,
-                "Id",
-                "FullName");
-
             return View(subject);
         }
 
@@ -584,12 +572,6 @@ namespace School.WEB.Controllers
 
             _service.Subject_Edit_Name(id,
                 subject.Name);
-
-            _service.Subjects_Edit_Students(id,
-                subject.StudentIds.ToList());
-
-            _service.Subjects_Edit_Teachers(id,
-                subject.TeacherIds.ToList());
 
             return RedirectToAction("GetSubjects");
         }

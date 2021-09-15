@@ -6,20 +6,19 @@ namespace School.DAL.Entities
 {
     public class Class : EntityBase
     {
+        public Class()
+        {
+            Students = new List<Student>();
+        }
+
         [Required(ErrorMessage = "It's required value!")]
         [StringLength(10, ErrorMessage = "Name cannot be longer than 10 characters.")]
         public string Name { get; set; }
 
         public int? TeacherId { get; set; }
 
-        [ForeignKey("TeacherId")] 
-        public Teacher Teacher { get; set; }
+        [ForeignKey("TeacherId")] public Teacher Teacher { get; set; }
 
         public ICollection<Student> Students { get; set; }
-
-        public Class()
-        {
-            Students = new List<Student>();
-        }
     }
 }

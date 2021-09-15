@@ -7,21 +7,20 @@ namespace School.DAL.Repository
 {
     public class EfUnitOfWork : IUnitOfWork
     {
-        private SchoolDbContext db;
+        private ClassRepository _classRepository;
 
         private StudentRepository _studentRepository;
 
-        private ClassRepository _classRepository;
+        private SubjectRepository _subjectRepository;
 
         private TeacherRepository _teacherRepository;
-
-        private SubjectRepository _subjectRepository;
+        private readonly SchoolDbContext db;
 
         public EfUnitOfWork()
         {
             db = new SchoolDbContext();
         }
-        
+
         public EfUnitOfWork(SchoolDbContext dbContext)
         {
             db = dbContext;

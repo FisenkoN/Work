@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.IEnumerable<School.BLL.Dto.SubjectDto>
+﻿@model IEnumerable<School.BLL.Dto.SubjectDto>
 
 @{
     ViewData["Title"] = "GetSubjects";
@@ -6,7 +6,7 @@
 }
 
 <td>
-    <a asp-action="CreateSubject" >Create</a>
+    <a asp-action="CreateSubject">Create</a>
 </td>
 
 <h1>Subjects list</h1>
@@ -21,13 +21,14 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="EditSubject" asp-route-id="@item.Id" >Edit</a>
+                <a asp-action="EditSubject" asp-route-id="@item.Id">Edit</a>
             </td>
             <td>
                 <a asp-action="DeleteSubject" asp-route-id="@item.Id">Delete</a>

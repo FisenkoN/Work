@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.IEnumerable<School.BLL.Dto.TeacherDto>
+﻿@model IEnumerable<School.BLL.Dto.TeacherDto>
 
 @{
     ViewData["Title"] = "GetTeachers";
@@ -6,7 +6,7 @@
 }
 
 <td>
-    <a asp-action="CreateTeacher" >Create</a>
+    <a asp-action="CreateTeacher">Create</a>
 </td>
 
 <h1>Teachers list</h1>
@@ -30,7 +30,8 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)

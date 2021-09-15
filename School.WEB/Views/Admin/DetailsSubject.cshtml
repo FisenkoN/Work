@@ -1,4 +1,4 @@
-﻿@model (School.BLL.Dto.SubjectDto subject, System.Collections.Generic.IEnumerable<string> students, System.Collections.Generic.IEnumerable<string> teachers)
+﻿@model (School.BLL.Dto.SubjectDto subject, IEnumerable<string> students, IEnumerable<string> teachers)
 
 @{
     ViewBag.Title = "title";
@@ -9,24 +9,24 @@
 
 <div>
     <h4>Subjects</h4>
-    <hr />
+    <hr/>
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item1.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item1.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             <p>Students</p>
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.ListBox("students", new SelectList(Model.Item2))
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             <p>Teachers</p>
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.ListBox("teachers", new SelectList(Model.Item3))
         </dd>
     </dl>

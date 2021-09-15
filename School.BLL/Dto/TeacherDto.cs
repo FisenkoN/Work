@@ -5,7 +5,7 @@ namespace School.BLL.Dto
     public class TeacherDto
     {
         public int Id { get; set; }
-        
+
         public string FullName => FirstName + " " + LastName;
 
         public string FirstName { get; set; }

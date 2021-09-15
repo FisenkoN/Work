@@ -12,27 +12,31 @@ namespace School.DAL.Repository
     {
         public StudentRepository()
         {
-            
         }
-        
+
         public StudentRepository(SchoolDbContext db) : base(db)
         {
-            
         }
 
-        public virtual IIncludableQueryable<Student, Class> GetRelatedData() =>
-            DbContext.Students
+        public virtual IIncludableQueryable<Student, Class> GetRelatedData()
+        {
+            return DbContext.Students
                 .Include(s => s.Subjects)
                 .Include(s => s.Class);
+        }
 
-        public virtual Student GetOneRelated(int? id) =>
-            GetAll()
+        public virtual Student GetOneRelated(int? id)
+        {
+            return GetAll()
                 .ToList()
                 .Find(s => s.Id == id);
+        }
 
 
-        public override IQueryable<Student> GetSome(Expression<Func<Student, bool>> @where) =>
-            GetRelatedData()
+        public override IQueryable<Student> GetSome(Expression<Func<Student, bool>> where)
+        {
+            return GetRelatedData()
                 .Where(where);
+        }
     }
 }

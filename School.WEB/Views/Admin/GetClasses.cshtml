@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.IEnumerable<School.BLL.Dto.ClassDto>
+﻿@model IEnumerable<School.BLL.Dto.ClassDto>
 
 @{
     ViewData["Title"] = "GetClasses";
@@ -6,7 +6,7 @@
 }
 
 <td>
-    <a asp-action="CreateClass" >Create</a>
+    <a asp-action="CreateClass">Create</a>
 </td>
 
 <h1>Classes list</h1>
@@ -21,13 +21,14 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="EditClass" asp-route-id="@item.Id" >Edit</a>
+                <a asp-action="EditClass" asp-route-id="@item.Id">Edit</a>
             </td>
             <td>
                 <a asp-action="DeleteClass" asp-route-id="@item.Id">Delete</a>
@@ -42,4 +43,3 @@
 <div>
     <a asp-action="Index">Back to Admin form</a>
 </div>
-

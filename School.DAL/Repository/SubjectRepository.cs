@@ -15,17 +15,20 @@ namespace School.DAL.Repository
 
         public SubjectRepository()
         {
-            
         }
 
-        public virtual IIncludableQueryable<Subject, ICollection<Teacher>> GetRelatedData() =>
-            DbContext.Subjects
+        public virtual IIncludableQueryable<Subject, ICollection<Teacher>> GetRelatedData()
+        {
+            return DbContext.Subjects
                 .Include(s => s.Students)
                 .Include(s => s.Teachers);
+        }
 
-        public virtual Subject GetOneRelated(int? id) =>
-            GetRelatedData()
+        public virtual Subject GetOneRelated(int? id)
+        {
+            return GetRelatedData()
                 .ToList()
                 .Find(s => s.Id == id);
+        }
     }
 }

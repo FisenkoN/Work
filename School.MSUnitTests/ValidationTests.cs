@@ -22,7 +22,7 @@ namespace School.MSUnitTests
             Assert.IsNotNull(name);
             Assert.IsTrue(result);
         }
-        
+
         [DataRow(null)]
         [DataRow("l")]
         [DataRow("12")]
@@ -48,11 +48,11 @@ namespace School.MSUnitTests
         {
             //Act
             var result = Validation.ClassName(name);
-            
+
             //Assert
             Assert.IsTrue(result);
         }
-        
+
         [DataRow("Math")]
         [DataRow("History")]
         [TestMethod]
@@ -60,11 +60,11 @@ namespace School.MSUnitTests
         {
             //Act
             var result = Validation.SubjectName(name);
-            
+
             //Assert
             Assert.IsTrue(result);
         }
-        
+
         [DataRow("")]
         [DataRow("dddd")]
         [DataRow("13122")]
@@ -76,11 +76,11 @@ namespace School.MSUnitTests
         {
             //Act
             var result = Validation.ClassName(name);
-            
+
             //Assert
             Assert.IsFalse(result);
         }
-        
+
         [DataRow("")]
         [DataRow("awdadwawdqawdacaedfweffaergerergeargergweggwef")]
         [DataRow("aewew3")]
@@ -93,7 +93,7 @@ namespace School.MSUnitTests
         {
             //Act
             var result = Validation.SubjectName(name);
-            
+
             //Assert
             Assert.IsFalse(result);
         }

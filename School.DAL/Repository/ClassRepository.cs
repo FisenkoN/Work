@@ -10,20 +10,23 @@ namespace School.DAL.Repository
     {
         public ClassRepository()
         {
-            
         }
-        
+
         public ClassRepository(SchoolDbContext dbContext) : base(dbContext)
         {
         }
 
-        public virtual IIncludableQueryable<Class, Teacher> GetRelatedData() =>
-            DbContext.Classes
+        public virtual IIncludableQueryable<Class, Teacher> GetRelatedData()
+        {
+            return DbContext.Classes
                 .Include(c => c.Students)
                 .Include(c => c.Teacher);
+        }
 
-        public virtual Class GetOneRelated(int? id) =>
-            GetRelatedData()
+        public virtual Class GetOneRelated(int? id)
+        {
+            return GetRelatedData()
                 .First(c => c.Id == id);
+        }
     }
 }

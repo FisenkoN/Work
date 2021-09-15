@@ -5,19 +5,21 @@ using School.DAL.Repository;
 
 namespace School.BLL.Services
 {
-    public class MainService
+    public sealed class MainService
     {
         private readonly SchoolDbContext _context;
 
         public MainService()
         {
             _context = new SchoolDbContext();
-            
+
             MyDataInitializer.RecreateDatabase(_context);
             MyDataInitializer.InitializeData(_context);
         }
 
-        public virtual IUnitOfWork UnitOfWork() =>
-            new EfUnitOfWork(_context);
+        public IUnitOfWork UnitOfWork()
+        {
+            return new EfUnitOfWork(_context);
+        }
     }
 }

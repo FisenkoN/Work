@@ -101,7 +101,7 @@ namespace School.DAL.DataInitialization
                     t5
                 }
             };
-            
+
             var subj2 = new Subject
             {
                 Name = "Art",
@@ -110,7 +110,7 @@ namespace School.DAL.DataInitialization
                     t2
                 }
             };
-            
+
             var subj3 = new Subject
             {
                 Name = "English",
@@ -120,7 +120,7 @@ namespace School.DAL.DataInitialization
                     t6
                 }
             };
-            
+
             var subj4 = new Subject
             {
                 Name = "Music",
@@ -129,7 +129,7 @@ namespace School.DAL.DataInitialization
                     t2
                 }
             };
-            
+
             var subj5 = new Subject
             {
                 Name = "Science",
@@ -139,7 +139,7 @@ namespace School.DAL.DataInitialization
                     t5
                 }
             };
-            
+
             var subj6 = new Subject
             {
                 Name = "History",
@@ -148,7 +148,7 @@ namespace School.DAL.DataInitialization
                     t10
                 }
             };
-            
+
             var subj7 = new Subject
             {
                 Name = "Geography",
@@ -157,7 +157,7 @@ namespace School.DAL.DataInitialization
                     t10
                 }
             };
-            
+
             var subj8 = new Subject
             {
                 Name = "IT",
@@ -166,7 +166,7 @@ namespace School.DAL.DataInitialization
                     t3
                 }
             };
-            
+
             var subj9 = new Subject
             {
                 Name = "Biology",
@@ -175,7 +175,7 @@ namespace School.DAL.DataInitialization
                     t7
                 }
             };
-            
+
             var subj10 = new Subject
             {
                 Name = "Drama",
@@ -184,7 +184,7 @@ namespace School.DAL.DataInitialization
                     t8
                 }
             };
-            
+
             var subj11 = new Subject
             {
                 Name = "Swimming",
@@ -193,7 +193,7 @@ namespace School.DAL.DataInitialization
                     t9
                 }
             };
-            
+
             var subj12 = new Subject
             {
                 Name = "Physical education",
@@ -225,35 +225,35 @@ namespace School.DAL.DataInitialization
                 Teacher = t1,
                 TeacherId = t1.Id
             };
-            
+
             var c2 = new Class
             {
                 Name = "10B",
                 Teacher = t6,
                 TeacherId = t6.Id
             };
-            
+
             var c3 = new Class
             {
                 Name = "11A",
                 Teacher = t10,
                 TeacherId = t10.Id
             };
-            
+
             var c4 = new Class
             {
                 Name = "10C",
                 Teacher = t3,
                 TeacherId = t3.Id
             };
-            
+
             var c5 = new Class
             {
                 Name = "11B",
                 Teacher = t2,
                 TeacherId = t2.Id
             };
-            
+
             var c6 = new Class
             {
                 Name = "9A",
@@ -268,7 +268,7 @@ namespace School.DAL.DataInitialization
                 c5,
                 c6);
 
-            var subjPacket1 = new List<Subject>()
+            var subjPacket1 = new List<Subject>
             {
                 subj1,
                 subj2,
@@ -278,8 +278,8 @@ namespace School.DAL.DataInitialization
                 subj12,
                 subj11
             };
-            
-            var subjPacket2 = new List<Subject>()
+
+            var subjPacket2 = new List<Subject>
             {
                 subj3,
                 subj2,
@@ -289,8 +289,8 @@ namespace School.DAL.DataInitialization
                 subj12,
                 subj8
             };
-            
-            var subjPacket3 = new List<Subject>()
+
+            var subjPacket3 = new List<Subject>
             {
                 subj1,
                 subj2,
@@ -300,16 +300,16 @@ namespace School.DAL.DataInitialization
                 subj10,
                 subj11
             };
-            
-            var subjPacket4 = new List<Subject>()
+
+            var subjPacket4 = new List<Subject>
             {
                 subj1,
                 subj6,
                 subj7,
                 subj8
             };
-            
-            var subjPacket5 = new List<Subject>()
+
+            var subjPacket5 = new List<Subject>
             {
                 subj10,
                 subj12,
@@ -319,8 +319,8 @@ namespace School.DAL.DataInitialization
                 subj2,
                 subj11
             };
-            
-            var subjPacket6 = new List<Subject>()
+
+            var subjPacket6 = new List<Subject>
             {
                 subj10,
                 subj12,
@@ -662,7 +662,7 @@ namespace School.DAL.DataInitialization
                 Age = 15,
                 Gender = Gender.Male
             };
-            
+
             dbContext.Students.AddRange(
                 s1,
                 s2,
@@ -787,7 +787,6 @@ namespace School.DAL.DataInitialization
             foreach (var subject in subjPacket3)
                 s33.Subjects.Add(subject);
 
-            
 
             dbContext.SaveChanges();
         }

@@ -8,21 +8,23 @@ namespace School.BLL.Services
 {
     public class VisitorService
     {
-        private IUnitOfWork _unitOfWork;
-        
-        private Map map;
-        
+        private readonly IUnitOfWork _unitOfWork;
+
+        private readonly Map _map;
+
         public VisitorService(MainService mainService)
         {
             _unitOfWork = mainService.UnitOfWork();
 
-            map = new Map(_unitOfWork);
+            _map = new Map(_unitOfWork);
         }
 
-        public IEnumerable<ClassDto> GetClasses() =>
-            from c in _unitOfWork.Classes
-                .GetAll() 
-            select map.To(c);
+        public IEnumerable<ClassDto> GetClasses()
+        {
+            return from c in _unitOfWork.Classes
+                    .GetAll()
+                select _map.To(c);
+        }
 
         public string GetTeachersClass(int? teacherId)
         {
@@ -33,47 +35,65 @@ namespace School.BLL.Services
             return c?.Name ?? "no class";
         }
 
-        public TeacherDto GetTeacher(int? id) =>
-            map.To(_unitOfWork.Teachers.GetOneRelated(id));
+        public TeacherDto GetTeacher(int? id)
+        {
+            return _map.To(_unitOfWork.Teachers.GetOneRelated(id));
+        }
 
-        public IEnumerable<string> GetSubjectsForTeacher(int? id) =>
-            _unitOfWork.Teachers
+        public IEnumerable<string> GetSubjectsForTeacher(int? id)
+        {
+            return _unitOfWork.Teachers
                 .GetOneRelated(id)
                 .Subjects
-                    .Select(s => s.Name);
+                .Select(s => s.Name);
+        }
 
-        public IEnumerable<TeacherDto> GetTeachers() =>
-            from t in _unitOfWork.Teachers
-                .GetAll() 
-            select map.To(t);
+        public IEnumerable<TeacherDto> GetTeachers()
+        {
+            return from t in _unitOfWork.Teachers
+                    .GetAll()
+                select _map.To(t);
+        }
 
-        public SubjectDto GetSubject(int? id) =>
-            map.To(_unitOfWork.Subjects.GetOneRelated(id));
+        public SubjectDto GetSubject(int? id)
+        {
+            return _map.To(_unitOfWork.Subjects.GetOneRelated(id));
+        }
 
-        public IEnumerable<string> TeachersForSubjectId(int? id) =>
-            _unitOfWork.Subjects
+        public IEnumerable<string> TeachersForSubjectId(int? id)
+        {
+            return _unitOfWork.Subjects
                 .GetOneRelated(id)
                 .Teachers
-                    .Select(s => s.FirstName + " " + s.LastName);
+                .Select(s => s.FirstName + " " + s.LastName);
+        }
 
-        public IEnumerable<string> StudentsForSubjectId(int? id) =>
-            _unitOfWork.Subjects
+        public IEnumerable<string> StudentsForSubjectId(int? id)
+        {
+            return _unitOfWork.Subjects
                 .GetOneRelated(id)
                 .Students
-                    .Select(s => s.FirstName + " " + s.LastName);
+                .Select(s => s.FirstName + " " + s.LastName);
+        }
 
-        public ClassDto GetClass(int? id) =>
-            map.To(_unitOfWork.Classes.GetOneRelated(id));
+        public ClassDto GetClass(int? id)
+        {
+            return _map.To(_unitOfWork.Classes.GetOneRelated(id));
+        }
 
-        public IEnumerable<SubjectDto> GetSubjects() =>
-            from s in _unitOfWork.Subjects
-                .GetAll() 
-            select map.To(s);
+        public IEnumerable<SubjectDto> GetSubjects()
+        {
+            return from s in _unitOfWork.Subjects
+                    .GetAll()
+                select _map.To(s);
+        }
 
-        public IEnumerable<string> GetStudents(int? classId) =>
-            _unitOfWork.Classes
+        public IEnumerable<string> GetStudents(int? classId)
+        {
+            return _unitOfWork.Classes
                 .GetOneRelated(classId)
                 .Students
-                    .Select(s => s.FirstName + " " + s.LastName);
+                .Select(s => s.FirstName + " " + s.LastName);
+        }
     }
 }

@@ -7,14 +7,16 @@ namespace School.BLL.Mapper
 {
     public class Map
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+
         public Map(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public ClassDto To(Class c) =>
-            new()
+        public ClassDto To(Class c)
+        {
+            return new()
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -22,9 +24,11 @@ namespace School.BLL.Mapper
                 StudentIds = c.Students
                     .Select(s => s.Id)
             };
+        }
 
-        public StudentDto To(Student s) =>
-            new()
+        public StudentDto To(Student s)
+        {
+            return new()
             {
                 Id = s.Id,
                 Age = s.Age,
@@ -33,11 +37,13 @@ namespace School.BLL.Mapper
                 LastName = s.LastName,
                 Gender = (GenderDto)s.Gender,
                 SubjectIds = s.Subjects
-                    .Select(subject => subject.Id),
+                    .Select(subject => subject.Id)
             };
+        }
 
-        public TeacherDto To(Teacher t) =>
-            new()
+        public TeacherDto To(Teacher t)
+        {
+            return new()
             {
                 Id = t.Id,
                 FirstName = t.FirstName,
@@ -48,18 +54,22 @@ namespace School.BLL.Mapper
                 SubjectIds = t.Subjects?
                     .Select(s => s.Id)
             };
+        }
 
-        public SubjectDto To(Subject s) =>
-            new()
+        public SubjectDto To(Subject s)
+        {
+            return new()
             {
                 Id = s.Id,
                 Name = s.Name,
                 StudentIds = s.Students.Select(z => z.Id),
                 TeacherIds = s.Teachers.Select(t => t.Id)
             };
+        }
 
-        public Subject To(SubjectDto s) =>
-            new()
+        public Subject To(SubjectDto s)
+        {
+            return new()
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -69,15 +79,15 @@ namespace School.BLL.Mapper
                         .Where(i =>
                             s.StudentIds
                                 .ToList()
-                                .Exists(t => 
+                                .Exists(t =>
                                     t == i.Id))
                         .ToList()
                     : null,
-                
+
                 Teachers = s.TeacherIds != null
                     ? _unitOfWork.Teachers
                         .GetAll()
-                        .Where(i => 
+                        .Where(i =>
                             s.TeacherIds
                                 .ToList()
                                 .Exists(t =>
@@ -85,25 +95,29 @@ namespace School.BLL.Mapper
                         .ToList()
                     : null
             };
+        }
 
-        public Class To(ClassDto c) =>
-            new()
+        public Class To(ClassDto c)
+        {
+            return new()
             {
                 Id = c.Id,
                 Name = c.Name,
                 TeacherId = c.TeacherId,
                 Students = _unitOfWork.Students
                     .GetAll()
-                    .Where(i => 
+                    .Where(i =>
                         c.StudentIds
                             .ToList()
                             .Exists(t =>
                                 t == i.Id))
                     .ToList()
             };
+        }
 
-        public Student To(StudentDto s) =>
-            new()
+        public Student To(StudentDto s)
+        {
+            return new()
             {
                 Id = s.Id,
                 Age = s.Age,
@@ -113,16 +127,18 @@ namespace School.BLL.Mapper
                 Gender = (Gender)s.Gender,
                 Subjects = _unitOfWork.Subjects
                     .GetAll()
-                    .Where(i => 
+                    .Where(i =>
                         s.SubjectIds
                             .ToList()
                             .Exists(t =>
                                 t == i.Id))
                     .ToList()
             };
+        }
 
-        public Teacher To(TeacherDto t) =>
-            new()
+        public Teacher To(TeacherDto t)
+        {
+            return new()
             {
                 Id = t.Id,
                 Age = t.Age,
@@ -133,13 +149,14 @@ namespace School.BLL.Mapper
                 Subjects = t.SubjectIds != null
                     ? _unitOfWork.Subjects
                         .GetAll()
-                        .Where(i => 
+                        .Where(i =>
                             t.SubjectIds
                                 .ToList()
-                                .Exists(s => 
+                                .Exists(s =>
                                     s == i.Id))
                         .ToList()
                     : null
             };
+        }
     }
 }

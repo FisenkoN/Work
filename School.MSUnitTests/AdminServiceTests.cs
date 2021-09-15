@@ -14,10 +14,9 @@ namespace School.MSUnitTests
     [TestClass]
     public class AdminServiceTests
     {
+        private readonly Mock<MainService> _service;
         private readonly Mock<IUnitOfWork> _unitOfWork;
 
-        private readonly Mock<MainService> _service;
-        
         public AdminServiceTests()
         {
             _unitOfWork = new Mock<IUnitOfWork>();
@@ -38,7 +37,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -55,13 +54,13 @@ namespace School.MSUnitTests
         {
             //Arrange
             const int idFaceTeacher = 1;
-            
+
             _unitOfWork.Setup(unit => unit.Teachers.Delete(idFaceTeacher));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -77,13 +76,13 @@ namespace School.MSUnitTests
         {
             //Arrange
             const int idFaceClass = 1;
-            
+
             _unitOfWork.Setup(unit => unit.Classes.Delete(idFaceClass));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -101,11 +100,11 @@ namespace School.MSUnitTests
             const int idFaceSubject = 1;
 
             _unitOfWork.Setup(unit => unit.Subjects.Delete(idFaceSubject));
-                
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -120,7 +119,7 @@ namespace School.MSUnitTests
         public void StudentAdd()
         {
             //Arrange
-            var newStudent = new Student()
+            var newStudent = new Student
             {
                 Id = 100,
                 Age = 18,
@@ -139,13 +138,13 @@ namespace School.MSUnitTests
             };
             _unitOfWork.Setup(unit => unit.Subjects.GetAll())
                 .Returns(GetSubjects);
-            
+
             _unitOfWork.Setup(unit => unit.Students.Add(newStudent));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -169,7 +168,7 @@ namespace School.MSUnitTests
         public void TeacherAdd()
         {
             //Arrange
-            var newTeacher = new Teacher()
+            var newTeacher = new Teacher
             {
                 Id = 100,
                 Age = 26,
@@ -188,17 +187,17 @@ namespace School.MSUnitTests
             };
             _unitOfWork.Setup(unit => unit.Subjects.GetAll())
                 .Returns(GetSubjects);
-            
+
             _unitOfWork.Setup(unit => unit.Teachers.Add(newTeacher));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Teacher_Create(new TeacherDto()
+            service.Teacher_Create(new TeacherDto
             {
                 Id = newTeacher.Id,
                 FirstName = newTeacher.FirstName,
@@ -218,7 +217,7 @@ namespace School.MSUnitTests
         public void ClassAdd()
         {
             //Arrange
-            var newClass = new Class()
+            var newClass = new Class
             {
                 Id = 100,
                 Name = "7A",
@@ -239,13 +238,13 @@ namespace School.MSUnitTests
             };
             _unitOfWork.Setup(unit => unit.Students.GetAll())
                 .Returns(GetStudents);
-            
+
             _unitOfWork.Setup(unit => unit.Classes.Add(newClass));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -266,7 +265,7 @@ namespace School.MSUnitTests
         public void SubjectsAdd()
         {
             //Arrange
-            var newSubject = new Subject()
+            var newSubject = new Subject
             {
                 Id = 100,
                 Name = "Ukraine History",
@@ -278,15 +277,15 @@ namespace School.MSUnitTests
             _unitOfWork.Setup(unit => unit.Teachers.GetAll())
                 .Returns(GetTeachers);
             _unitOfWork.Setup(unit => unit.Subjects.Add(newSubject));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Subject_Create(new SubjectDto()
+            service.Subject_Create(new SubjectDto
             {
                 Id = newSubject.Id,
                 Name = newSubject.Name,
@@ -305,11 +304,11 @@ namespace School.MSUnitTests
             //Arrange
             _unitOfWork.Setup(unit => unit.Students.GetAll())
                 .Returns(GetStudents);
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -329,11 +328,11 @@ namespace School.MSUnitTests
             //Arrange
             _unitOfWork.Setup(unit => unit.Subjects.GetAll())
                 .Returns(GetSubjects);
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -353,11 +352,11 @@ namespace School.MSUnitTests
             //Arrange
             _unitOfWork.Setup(unit => unit.Classes.GetAll())
                 .Returns(GetClasses);
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -377,11 +376,11 @@ namespace School.MSUnitTests
             //Arrange
             _unitOfWork.Setup(unit => unit.Teachers.GetAll())
                 .Returns(GetTeachers);
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -406,15 +405,15 @@ namespace School.MSUnitTests
             //Arrange
             var student = GetStudents()
                 .Find(s => s.Id == testStudentId);
-            
+
             _unitOfWork.Setup(unit => unit.Students.GetOneRelated(testStudentId))
                 .Returns(GetStudents()
                     .FirstOrDefault(s => s.Id == testStudentId));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -447,15 +446,15 @@ namespace School.MSUnitTests
             //Arrange
             var subject = GetSubjects()
                 .Find(s => s.Id == testSubjectId);
-            
+
             _unitOfWork.Setup(unit => unit.Subjects.GetOneRelated(testSubjectId))
                 .Returns(GetSubjects()
                     .FirstOrDefault(s => s.Id == testSubjectId));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -486,7 +485,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -518,7 +517,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -555,7 +554,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -584,7 +583,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -613,7 +612,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -641,7 +640,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -672,7 +671,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -708,7 +707,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -738,7 +737,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -767,7 +766,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -796,7 +795,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -824,7 +823,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -855,7 +854,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -883,19 +882,19 @@ namespace School.MSUnitTests
             };
             var newTeacher = GetTeachers()
                 .FirstOrDefault(s => s.Id == teacherFaceId);
-                
+
             _unitOfWork.Setup(unit => unit.Teachers.GetOneRelated(teacherFaceId))
                 .Returns(newTeacher);
-            
+
             _unitOfWork.Setup(unit => unit.Teachers.Update(newTeacher));
-            
+
             _unitOfWork.Setup(unit => unit.Subjects.GetOne(It.IsAny<int>()))
                 .Returns(new Subject());
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -916,21 +915,21 @@ namespace School.MSUnitTests
         {
             //Arrange
             const int classFaceId = 1;
-            
+
             const string newFaceName = "4A";
-            
+
             var newClass = GetClasses()
                 .FirstOrDefault(s => s.Id == classFaceId);
-            
+
             _unitOfWork.Setup(unit => unit.Classes.GetOne(classFaceId))
                 .Returns(newClass);
-            
+
             _unitOfWork.Setup(unit => unit.Classes.Update(newClass));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -950,24 +949,24 @@ namespace School.MSUnitTests
         {
             //Arrange
             const int classFaceId = 1;
-            
+
             const int newFaceTeacherId = 1;
-            
+
             var newClass = GetClasses()
                 .FirstOrDefault(s => s.Id == classFaceId);
-            
+
             _unitOfWork.Setup(unit => unit.Classes.GetOne(classFaceId))
                 .Returns(newClass);
-            
+
             _unitOfWork.Setup(unit => unit.Teachers.GetOne(classFaceId))
                 .Returns(new Teacher());
-            
+
             _unitOfWork.Setup(unit => unit.Classes.Update(newClass));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -995,24 +994,24 @@ namespace School.MSUnitTests
             };
             var newClass = GetClasses()
                 .FirstOrDefault(s => s.Id == classFaceId);
-            
+
             _unitOfWork.Setup(unit => unit.Classes.GetOneRelated(classFaceId))
                 .Returns(newClass);
 
             _unitOfWork.Setup(unit => unit.Classes.GetOne(classFaceId))
                 .Returns(newClass);
-                
+
             _unitOfWork.Setup(unit => unit.Students.GetOne(It.IsAny<int>()))
                 .Returns(new Student());
-            
+
             _unitOfWork.Setup(unit => unit.Students.Update(new Student()));
-            
+
             _unitOfWork.Setup(unit => unit.Classes.Update(newClass));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -1037,21 +1036,21 @@ namespace School.MSUnitTests
         {
             //Arrange
             const int subjectFaceId = 1;
-            
+
             const string newFaceName = "newName";
-            
+
             var newSubject = GetSubjects()
                 .FirstOrDefault(s => s.Id == subjectFaceId);
-            
+
             _unitOfWork.Setup(unit => unit.Subjects.GetOne(subjectFaceId))
                 .Returns(newSubject);
-            
+
             _unitOfWork.Setup(unit => unit.Subjects.Update(newSubject));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -1078,19 +1077,19 @@ namespace School.MSUnitTests
             };
             var newSubject = GetSubjects()
                 .FirstOrDefault(s => s.Id == subjectFaceId);
-            
+
             _unitOfWork.Setup(unit => unit.Subjects.GetOne(subjectFaceId))
                 .Returns(newSubject);
-            
+
             _unitOfWork.Setup(unit => unit.Teachers.GetOne(subjectFaceId))
                 .Returns(new Teacher());
-            
+
             _unitOfWork.Setup(unit => unit.Subjects.Update(newSubject));
-            
+
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -1126,7 +1125,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -1153,7 +1152,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -1181,7 +1180,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
@@ -1207,7 +1206,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
             var test = GetStudents()
                 .Find(s => s.Id == value);
@@ -1233,7 +1232,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
             var test = GetSubjects()
                 .Find(s => s.Id == value);
@@ -1260,7 +1259,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
             var test = GetSubjects()
                 .Find(s => s.Id == value);
@@ -1286,7 +1285,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
             var test = GetClasses()
                 .Find(s => s.Id == value);
@@ -1313,7 +1312,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
             var test = GetTeachers()
                 .Find(s => s.Id == value);
@@ -1340,7 +1339,7 @@ namespace School.MSUnitTests
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
-            
+
             var service = new AdminService(_service.Object);
 
             //Act
