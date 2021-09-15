@@ -1,0 +1,44 @@
+﻿@model System.Collections.Generic.IEnumerable<School.BLL.Dto.SubjectDto>
+
+@{
+    ViewData["Title"] = "GetSubjects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<td>
+    <a asp-action="CreateSubject" >Create</a>
+</td>
+
+<h1>Subjects list</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="EditSubject" asp-route-id="@item.Id" >Edit</a>
+            </td>
+            <td>
+                <a asp-action="DeleteSubject" asp-route-id="@item.Id">Delete</a>
+            </td>
+            <td>
+                <a asp-action="DetailsSubject" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to Admin form</a>
+</div>

@@ -1,0 +1,37 @@
+﻿@model System.Tuple<School.BLL.Dto.SubjectDto,System.Collections.Generic.IEnumerable<string>,System.Collections.Generic.IEnumerable<string>>
+
+
+@{
+    ViewData["Title"] = "SubjectDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Class</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Item1.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Item1.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            <p>Teachers</p>
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.ListBox("teachers", new SelectList(Model.Item2))
+        </dd>
+        <dt class = "col-sm-2">
+           <p>Students</p>
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.ListBox("students", new SelectList(Model.Item3))
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

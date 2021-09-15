@@ -1,0 +1,46 @@
+﻿@model (School.BLL.Dto.ClassDto form, System.Collections.Generic.IEnumerable<string> students, string teacher)
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Class</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Item1.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Item1.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            <p>Teacher</p>    
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.Item2 != null)
+            {
+                @Html.DisplayFor(model => model.Item3)
+            }   
+            else
+            {
+                <p>no teacher</p>
+            }
+        </dd>
+        <dt class = "col-sm-2">
+           <p>Students</p>
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.ListBox("students", new SelectList(Model.Item2))
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditClass" asp-route-id="@Model.Item1.Id">Edit</a>
+    <a asp-action="DeleteClass" asp-route-id="@Model.Item1.Id">Delete</a>
+    <a asp-action="GetClasses">Back to List</a>
+</div>
+

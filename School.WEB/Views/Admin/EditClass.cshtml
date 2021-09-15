@@ -1,0 +1,44 @@
+﻿@model School.BLL.Dto.ClassDto
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Class</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditClass">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            @{
+                if ((ViewBag.Teachers as SelectList)!.Any())
+                {
+                    <div class="form-group">
+                        <label asp-for="TeacherId" class="control-label"></label>
+                        <select asp-for="TeacherId" class="form-control" asp-items="ViewBag.Teachers"></select>
+                    </div>
+                }
+            }
+            <div class="form-group">
+                <label asp-for="StudentIds" class="control-label"></label>
+                <select asp-for="StudentIds" class="form-control" multiple="multiple" asp-items="ViewBag.Students"></select>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetClasses">Back to List</a>
+</div>

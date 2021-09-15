@@ -1,0 +1,15 @@
+Z:\Work\School.BLL\bin\Release\net5.0\School.BLL.deps.json
+Z:\Work\School.BLL\bin\Release\net5.0\School.BLL.dll
+Z:\Work\School.BLL\bin\Release\net5.0\ref\School.BLL.dll
+Z:\Work\School.BLL\bin\Release\net5.0\School.BLL.pdb
+Z:\Work\School.BLL\bin\Release\net5.0\School.DAL.dll
+Z:\Work\School.BLL\bin\Release\net5.0\School.DAL.pdb
+Z:\Work\School.BLL\obj\Release\net5.0\School.BLL.csproj.AssemblyReference.cache
+Z:\Work\School.BLL\obj\Release\net5.0\School.BLL.GeneratedMSBuildEditorConfig.editorconfig
+Z:\Work\School.BLL\obj\Release\net5.0\School.BLL.AssemblyInfoInputs.cache
+Z:\Work\School.BLL\obj\Release\net5.0\School.BLL.AssemblyInfo.cs
+Z:\Work\School.BLL\obj\Release\net5.0\School.BLL.csproj.CoreCompileInputs.cache
+Z:\Work\School.BLL\obj\Release\net5.0\School.BLL.csproj.CopyComplete
+Z:\Work\School.BLL\obj\Release\net5.0\School.BLL.dll
+Z:\Work\School.BLL\obj\Release\net5.0\ref\School.BLL.dll
+Z:\Work\School.BLL\obj\Release\net5.0\School.BLL.pdb

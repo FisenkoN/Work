@@ -1,0 +1,58 @@
+﻿@model ICollection<School.BLL.Dto.StudentDto>
+
+@{
+    ViewData["Title"] = "ShowClassmates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Classmates</h1>
+
+@{
+    if (Model != null)
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    <p>First Name</p>
+                </th>
+                <th>
+                    <p>Last Name</p>
+                </th>
+                <th>
+                    <p>Age</p>
+                </th>
+                <th>
+                    <p>Gender</p>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>This student doesn't have classmates</p>
+    }
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

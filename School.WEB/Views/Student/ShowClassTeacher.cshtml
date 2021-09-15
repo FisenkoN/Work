@@ -1,0 +1,52 @@
+﻿@model School.BLL.Dto.TeacherDto
+
+
+@{
+    ViewData["Title"] = "StudentDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>My class teacher</h1>
+
+<div>
+    <h4>Teacher</h4>
+    <hr />
+    @{
+        if (Model != null)
+        {
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Age)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Age)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Gender)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Gender)
+                </dd>
+            </dl>
+        }
+        else
+        {
+            <p>This student doesn't have class and class teacher!!!</p>
+        }
+    }
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
