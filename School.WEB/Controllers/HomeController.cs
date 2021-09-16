@@ -1,11 +1,17 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using School.BLL.Services;
 using School.WEB.Models;
 
 namespace School.WEB.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController(MainService mainService)
+        {
+            
+        }
+        
         public IActionResult Index()
         {
             return View();

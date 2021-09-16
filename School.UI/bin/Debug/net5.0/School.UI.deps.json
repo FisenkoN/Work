@@ -10,8 +10,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.9",
           "Microsoft.EntityFrameworkCore.Tools.DotNet": "2.0.3",
-          "School.BLL": "1.0.0",
-          "School.DAL": "1.0.0"
+          "School.BLL": "1.0.0"
         },
         "runtime": {
           "School.UI.dll": {}

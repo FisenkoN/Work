@@ -7,7 +7,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\School.BLL\School.BLL.csproj" />
-      <ProjectReference Include="..\School.DAL\School.DAL.csproj" />
     </ItemGroup>
 
     <ItemGroup>

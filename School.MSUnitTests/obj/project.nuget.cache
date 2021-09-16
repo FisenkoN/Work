@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o6s/0JCzyKHKSe8KjQS7fvux1PZ3ga34eIMmGAz3RxIiUzzlApiCzsGhcKyHsAiKCEIdGqCz7qnAbV5ZJIEYiQ==",
-  "success": false,
-  "projectFilePath": "Z:\\Work\\School.MSUnitTests\\School.MSUnitTests.csproj",
+  "dgSpecHash": "pMJM0Q5vLOJM8f67j0Lf+i3Rhnt1gtw1zsUSNzR2mab2JdrWhSyVuf+KgbPDOH8KESFR42mx2XT7FUnCXpNeQg==",
+  "success": true,
+  "projectFilePath": "G:\\Proj\\School.MSUnitTests\\School.MSUnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nazar\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
@@ -134,15 +134,5 @@
     "C:\\Users\\Nazar\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Не удалось найти проект \"Z:\\Work\\School.Console\\School.Console.csproj\". Убедитесь, что ссылка на проект действительна и файл проекта существует.",
-      "libraryId": "Z:\\Work\\School.Console\\School.Console.csproj",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    }
-  ]
+  "logs": []
 }

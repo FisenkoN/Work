@@ -2369,8 +2369,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "5.0.9",
           "Microsoft.EntityFrameworkCore.Tools.DotNet": "2.0.3",
-          "School.BLL": "1.0.0",
-          "School.DAL": "1.0.0"
+          "School.BLL": "1.0.0"
         },
         "compile": {
           "bin/placeholder/School.UI.dll": {}
@@ -8485,7 +8484,6 @@
       "School.BLL >= 1.0.0",
       "School.DAL >= 1.0.0",
       "School.UI >= 1.0.0",
-      "Z:\\Work\\School.Console\\School.Console.csproj",
       "coverlet.collector >= 3.1.0"
     ]
   },
@@ -8497,11 +8495,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\Work\\School.MSUnitTests\\School.MSUnitTests.csproj",
+      "projectUniqueName": "G:\\Proj\\School.MSUnitTests\\School.MSUnitTests.csproj",
       "projectName": "School.MSUnitTests",
-      "projectPath": "Z:\\Work\\School.MSUnitTests\\School.MSUnitTests.csproj",
+      "projectPath": "G:\\Proj\\School.MSUnitTests\\School.MSUnitTests.csproj",
       "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-      "outputPath": "Z:\\Work\\School.MSUnitTests\\obj\\",
+      "outputPath": "G:\\Proj\\School.MSUnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -8524,17 +8522,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "Z:\\Work\\School.BLL\\School.BLL.csproj": {
-              "projectPath": "Z:\\Work\\School.BLL\\School.BLL.csproj"
+            "G:\\Proj\\School.BLL\\School.BLL.csproj": {
+              "projectPath": "G:\\Proj\\School.BLL\\School.BLL.csproj"
             },
-            "Z:\\Work\\School.Console\\School.Console.csproj": {
-              "projectPath": "Z:\\Work\\School.Console\\School.Console.csproj"
+            "G:\\Proj\\School.DAL\\School.DAL.csproj": {
+              "projectPath": "G:\\Proj\\School.DAL\\School.DAL.csproj"
             },
-            "Z:\\Work\\School.DAL\\School.DAL.csproj": {
-              "projectPath": "Z:\\Work\\School.DAL\\School.DAL.csproj"
-            },
-            "Z:\\Work\\School.UI\\School.UI.csproj": {
-              "projectPath": "Z:\\Work\\School.UI\\School.UI.csproj"
+            "G:\\Proj\\School.UI\\School.UI.csproj": {
+              "projectPath": "G:\\Proj\\School.UI\\School.UI.csproj"
             }
           }
         }
@@ -8591,19 +8586,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-preview.7.21379.14\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Не удалось найти проект \"Z:\\Work\\School.Console\\School.Console.csproj\". Убедитесь, что ссылка на проект действительна и файл проекта существует.",
-      "libraryId": "Z:\\Work\\School.Console\\School.Console.csproj",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    }
-  ]
+  }
 }

@@ -1,4 +1,5 @@
-﻿@model (School.BLL.Dto.ClassDto form, IEnumerable<string> students, string teacher)
+﻿@using School.DAL.Entities
+@model (School.BLL.Dto.ClassDto form, IEnumerable<string> students, string teacher)
 
 @{
     ViewBag.Title = "title";
@@ -21,9 +22,9 @@
             <p>Teacher</p>
         </dt>
         <dd class="col-sm-10">
-            @if (Model.Item2 != null)
+            @if (Model.Item3 != null)
             {
-                @Html.DisplayFor(model => model.Item3)
+                @Html.ActionLink(Model.Item3, "DetailsTeacher", "Admin", new {Id = Model.Item1.Id})
             }
             else
             {

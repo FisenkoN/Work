@@ -41,7 +41,7 @@
         <dd class="col-sm-10">
             @if (Model.Item2 != null)
             {
-                @Html.DisplayFor(model => model.Item2)
+                @Html.ActionLink(Model.Item2, "DetailsClass", "Admin", new {Id = Model.Item1.ClassId})
             }
             else
             {

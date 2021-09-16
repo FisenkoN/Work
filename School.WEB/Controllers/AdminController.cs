@@ -24,6 +24,8 @@ namespace School.WEB.Controllers
 
         public IActionResult GetTeachers()
         {
+            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
+            
             var teachers = _service.Teachers_GetAll();
 
             if (!teachers.Any())
@@ -34,6 +36,8 @@ namespace School.WEB.Controllers
 
         public IActionResult GetClasses()
         {
+            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
+
             var classes = _service.Classes_GetAll();
 
             if (!classes.Any())
@@ -44,6 +48,8 @@ namespace School.WEB.Controllers
 
         public IActionResult GetStudents()
         {
+            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
+            
             var students = _service.Students_GetAll();
 
             if (!students.Any())
@@ -54,6 +60,8 @@ namespace School.WEB.Controllers
 
         public IActionResult GetSubjects()
         {
+            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
+            
             var subjects = _service.Subjects_GetAll();
 
             if (!subjects.Any())
@@ -84,6 +92,8 @@ namespace School.WEB.Controllers
         {
             _service.Teacher_Create(teacherDto);
 
+            TempData["Message"] = $"Teacher: {teacherDto.FullName} was created at {DateTime.Now.ToShortTimeString()}";
+            
             return RedirectToAction("GetTeachers");
         }
 
@@ -165,6 +175,8 @@ namespace School.WEB.Controllers
 
             _service.Teachers_Edit_Subjects(id,
                 teacher.SubjectIds.ToList());
+            
+            TempData["Message"] = $"Teacher: {_service.Teachers_GetForId(id).FullName} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetTeachers");
         }
@@ -187,6 +199,9 @@ namespace School.WEB.Controllers
             try
             {
                 _service.Teacher_Delete(id);
+                
+                TempData["Message"] = $"Teacher with id : {id} was deleted at {DateTime.Now.ToShortTimeString()}";
+                
                 return RedirectToAction("GetTeachers");
             }
             catch (Exception)
@@ -239,17 +254,19 @@ namespace School.WEB.Controllers
         [HttpPost]
         public IActionResult CreateStudent(
             [Bind("FirstName, LastName, ClassId, SubjectIds, Gender, Id, Age")]
-            StudentDto teacherDto)
+            StudentDto student)
         {
             try
             {
-                _service.Student_Create(teacherDto);
+                _service.Student_Create(student);
             }
             catch (Exception)
             {
                 return BadRequest("You entered wrong value. Every students must have subject");
             }
 
+            TempData["Message"] = $"Student: {student.FullName} was created at {DateTime.Now.ToShortTimeString()}";
+            
             return RedirectToAction("GetStudents");
         }
 
@@ -318,6 +335,8 @@ namespace School.WEB.Controllers
                 return RedirectToAction("GetStudents");
             }
 
+            TempData["Message"] = $"Student: {student.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
+            
             return RedirectToAction("GetStudents");
         }
 
@@ -339,6 +358,10 @@ namespace School.WEB.Controllers
             try
             {
                 _service.Student_Delete(id);
+
+                TempData["Message"] =
+                    $"Student: with {id} was deleted at {DateTime.Now.ToShortTimeString()}";
+                
                 return RedirectToAction("GetStudents");
             }
             catch (Exception)
@@ -401,6 +424,8 @@ namespace School.WEB.Controllers
                 return BadRequest("Every class must have one or more students");
             }
 
+            TempData["Message"] = $"Class: {classDto.Name} was created at {DateTime.Now.ToShortTimeString()}";
+            
             return RedirectToAction("GetClasses");
         }
 
@@ -423,6 +448,8 @@ namespace School.WEB.Controllers
             SubjectDto subject)
         {
             _service.Subject_Create(subject);
+            
+            TempData["Message"] = $"Subject: {subject.Name} was created at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetSubjects");
         }
@@ -484,6 +511,8 @@ namespace School.WEB.Controllers
 
             _service.Class_Edit_Teacher(id,
                 classDto.TeacherId);
+            
+            TempData["Message"] = $"Class: {classDto.Name} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetClasses");
         }
@@ -502,16 +531,12 @@ namespace School.WEB.Controllers
             {
                 return NotFound();
             }
-
-            try
-            {
-                _service.Class_Delete(id);
-                return RedirectToAction("GetClasses");
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            
+            _service.Class_Delete(id);
+            
+            TempData["Message"] = $"Class: with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
+                
+            return RedirectToAction("GetClasses");
         }
 
         public IActionResult DetailsClass(int? id)
@@ -572,6 +597,8 @@ namespace School.WEB.Controllers
 
             _service.Subject_Edit_Name(id,
                 subject.Name);
+            
+            TempData["Message"] = $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetSubjects");
         }
@@ -594,6 +621,9 @@ namespace School.WEB.Controllers
             try
             {
                 _service.Subject_Delete(id);
+                
+                TempData["Message"] = $"Subject with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
+                
                 return RedirectToAction("GetSubjects");
             }
             catch (Exception)

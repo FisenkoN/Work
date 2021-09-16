@@ -8,7 +8,150 @@
     <projectFile profileName="School.WEB">School.WEB/School.WEB.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1ef8307-cc6b-4bf6-b7a4-c18968ddea39" name="Changes" comment="First" />
+    <list default="true" id="b1ef8307-cc6b-4bf6-b7a4-c18968ddea39" name="Changes" comment="First">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.School/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.School/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/config/applicationhost.config" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/config/applicationhost.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/ref/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/ref/School.BLL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/ref/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/ref/School.BLL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/School.BLL.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/School.BLL.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/School.BLL.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/School.BLL.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/ref/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/ref/School.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/ref/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/ref/School.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/School.DAL.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/School.DAL.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/School.DAL.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/School.DAL.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.DAL/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/CoverletSourceRootsMapping" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/CoverletSourceRootsMapping" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/School.MSUnitTests.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/School.MSUnitTests.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/School.MSUnitTests.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/School.MSUnitTests.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/School.UI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/School.UI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/School.UI.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/School.UI.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/School.UI.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/School.UI.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.UI/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Controllers/AdminController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsClass.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsClass.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsStudent.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsStudent.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsTeacher.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsTeacher.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/GetClasses.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/GetClasses.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/GetStudents.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/GetStudents.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/GetSubjects.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/GetSubjects.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/GetTeachers.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/GetTeachers.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Student/StudentDetails.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Student/StudentDetails.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/ref/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/ref/School.WEB.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateClass.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateClass.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateStudent.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateStudent.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateSubject.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateSubject.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateTeacher.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateTeacher.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsClass.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsClass.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsStudent.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsStudent.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsSubject.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsSubject.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsTeacher.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsTeacher.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditClass.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditClass.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditStudent.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditStudent.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditSubject.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditSubject.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditTeacher.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditTeacher.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetClasses.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetClasses.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetStudents.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetStudents.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetSubjects.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetSubjects.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetTeachers.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetTeachers.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/Index.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/Index.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/Index.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/Index.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/Privacy.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/Privacy.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Shared/Error.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Shared/Error.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Shared/_Layout.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Shared/_Layout.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/Edit.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/Edit.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/Index.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/Index.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/ShowClassTeacher.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/ShowClassTeacher.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/ShowClassmates.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/ShowClassmates.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/StudentDetails.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Student/StudentDetails.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/ClassDetails.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/ClassDetails.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/GetClasses.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/GetClasses.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/GetSubjects.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/GetSubjects.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/GetTeachers.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/GetTeachers.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/Index.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/Index.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/SubjectDetails.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/SubjectDetails.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/TeacherDetails.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Visitor/TeacherDetails.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/_ViewImports.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/_ViewImports.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/_ViewStart.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/_ViewStart.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/ref/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/ref/School.WEB.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/School.WEB.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/School.WEB.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/School.WEB.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/School.WEB.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/rider.project.restore.info" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,52 +175,54 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4d9e81850faf4a539694b7d8467cc130cf88/3/AuthorizationMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d8b3911349d4693a6f115f7e0f6143d91d78/4F/Streams.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49954eb56c674e768be7a97e2a6794c343e00/19/Mock.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9dcb8a6f7ff643daa3d765a7a23ed9d01bef78/90/HttpProtocol.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/B7/Number.Parsing.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/School.BLL/Services/StudentService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/_ViewStart.cshtml.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99cbd7af0f2e40198a0e67c467f9665825388/11/589e7ffa/MethodInfoExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/School.BLL/Services/VisitorService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/School.BLL/Services/AdminService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99cbd7af0f2e40198a0e67c467f9665825388/c2/5b41b926/TestMethodInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bd73da3c6440fbb258d36855a3f9401bfb78/74/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bd73da3c6440fbb258d36855a3f9401bfb78/347/Check.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/School.DAL/Repository/StudentRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/School.DAL/Repository/SubjectRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/233/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/School.DAL/Repository/TeacherRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5ccc1fc389c84ad9ba997502d12204bdc800/04/5e62dc3c/ThreadOperations.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.BLL/Services/VisitorService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/12f8289f40244d719022cb6ef860d1db1bbb78/10F/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.BLL/Services/StudentService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/12f8289f40244d719022cb6ef860d1db1bbb78/11A/ControllerActionInvoker.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d8b3911349d4693a6f115f7e0f6143d91d78/3F/IISHttpContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/2A0/SafeHandle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.BLL/Services/AdminService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/E2/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3cf9c3d4bdfe4f4aac7e19c2f844d73d11590/f2/be2d4016/TestMethodAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5470554a76b44037b6766b9c6d384105b0778/E/Controller.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/fa7b5f9c671f42b5affca05ab46f2dd88cb0/27/d2fb053a/Executor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49954eb56c674e768be7a97e2a6794c343e00/2E/Mock`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/12f8289f40244d719022cb6ef860d1db1bbb78/13A/ResourceInvoker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3cf9c3d4bdfe4f4aac7e19c2f844d73d11590/37/62b91cd3/Assert.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99cbd7af0f2e40198a0e67c467f9665825388/8c/7e4bea5f/TestMethodRunner.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/School.MSUnitTests/AdminServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bd73da3c6440fbb258d36855a3f9401bfb78/132/DbContextServices.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8c458e0524a445c88938677f039f0a998578/17/EndpointMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99cbd7af0f2e40198a0e67c467f9665825388/cf/e2873d3d/UnitTestRunner.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a1dccf1ec347413189f1599755a3aa0f2df78/8/Queryable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49954eb56c674e768be7a97e2a6794c343e00/13/Guard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49954eb56c674e768be7a97e2a6794c343e00/36/CastleProxyFactory.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bd73da3c6440fbb258d36855a3f9401bfb78/D1/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99cbd7af0f2e40198a0e67c467f9665825388/2b/c33cd8e2/TestExecutionManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99cbd7af0f2e40198a0e67c467f9665825388/f8/68be4207/MSTestExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/1B2/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c21a9621256e40dbbf724986af856144133178/150/SingleQueryingEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateClass.cshtml.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4d9e81850faf4a539694b7d8467cc130cf88/3/AuthorizationMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.DAL/Repository/SubjectRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49954eb56c674e768be7a97e2a6794c343e00/19/Mock.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9dcb8a6f7ff643daa3d765a7a23ed9d01bef78/90/HttpProtocol.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.DAL/Repository/TeacherRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.DAL/Repository/StudentRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/B7/Number.Parsing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.DAL/Repository/ClassRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bd73da3c6440fbb258d36855a3f9401bfb78/347/Check.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/School.MSUnitTests/AdminServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d8b3911349d4693a6f115f7e0f6143d91d78/3F/IISHttpContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/2A0/SafeHandle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/fa7b5f9c671f42b5affca05ab46f2dd88cb0/27/d2fb053a/Executor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bd73da3c6440fbb258d36855a3f9401bfb78/132/DbContextServices.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49954eb56c674e768be7a97e2a6794c343e00/13/Guard.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bd73da3c6440fbb258d36855a3f9401bfb78/D1/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bd73da3c6440fbb258d36855a3f9401bfb78/292/IIncludableQueryable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/23c4e6013839447196863c89842d515844200/f4/d12de6ec/ProxyGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/1B2/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b997ce4b621741e6875cc78c527be20d66578/46/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c21a9621256e40dbbf724986af856144133178/150/SingleQueryingEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c21a9621256e40dbbf724986af856144133178/1E7/RelationalCommand.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/School.DAL/Repository/ClassRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6a2b6d7419f8455f8e570cf0db64726933578/8/DefaultHttpContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d8b3911349d4693a6f115f7e0f6143d91d78/46/IISHttpContextOfT.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -100,7 +245,7 @@
     <property name="settings.editor.selected.configurable" value="RiderMsTestUnitTestingPageId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.School.WEB">
+  <component name="RunManager" selected=".NET Launch Settings Profile.School.WEB: IIS Express">
     <configuration name="School.UI (1)" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -239,6 +384,7 @@
       <workItem from="1631264701846" duration="21381000" />
       <workItem from="1631608502939" duration="14880000" />
       <workItem from="1631696549658" duration="4155000" />
+      <workItem from="1631786146599" duration="7572000" />
     </task>
     <task id="LOCAL-00001" summary="Some fix">
       <created>1630056334633</created>

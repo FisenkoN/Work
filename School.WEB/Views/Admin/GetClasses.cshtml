@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <td>
     <a asp-action="CreateClass">Create</a>
 </td>
@@ -43,3 +45,10 @@
 <div>
     <a asp-action="Index">Back to Admin form</a>
 </div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.Message");
+    </script>
+}
