@@ -8,6 +8,8 @@
 
 <h1>Details</h1>
 
+<img height="250" src="@Model.Item1?.Image" alt="avatar"/>
+
 <div>
     <h4>Class</h4>
     <hr/>
@@ -58,5 +60,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="GetTeachers">Back to List</a>
+    <a asp-action="Index">Back to categories</a>
 </div>

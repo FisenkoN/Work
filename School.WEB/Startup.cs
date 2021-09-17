@@ -20,6 +20,7 @@ namespace School.WEB
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            
             services.AddSingleton<MainService>();
         }
 

@@ -156,5 +156,14 @@ namespace School.BLL.Services
                     .GetAll()
                 select _map.To(s);
         }
+
+        public void Edit_Image(int? id, string studentImage)
+        {
+            var s = _unitOfWork.Students.GetOne(id);
+
+            s.Image = studentImage;
+
+            _unitOfWork.Students.Update(s);
+        }
     }
 }

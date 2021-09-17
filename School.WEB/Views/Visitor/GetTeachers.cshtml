@@ -10,6 +10,7 @@
 <table class="table">
     <thead>
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -30,6 +31,9 @@
     {
         <tr>
             <td>
+                <img height="50" src="@item?.Image" alt="avatar"/>
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
@@ -48,3 +52,6 @@
     }
     </tbody>
 </table>
+<div>
+    <a asp-action="Index">Back to categories</a>
+</div>

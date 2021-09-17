@@ -24,5 +24,7 @@ namespace School.DAL.Entities
         [ForeignKey("ClassId")] public Class Class { get; set; }
 
         public ICollection<Subject> Subjects { get; set; }
+
+        public string Image { get; set; }
     }
 }

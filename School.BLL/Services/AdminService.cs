@@ -537,5 +537,31 @@ namespace School.BLL.Services
                 .Subjects
                 .Update(subject);
         }
+
+        public void Teachers_Edit_Image(int? id, string teacherImage)
+        {
+            var teacher = _unitOfWork
+                .Teachers
+                .GetOne(id);
+
+            teacher.Image = teacherImage;
+
+            _unitOfWork
+                .Teachers
+                .Update(teacher);
+        }
+        
+        public void Students_Edit_Image(int? id, string studentImage)
+        {
+            var student = _unitOfWork
+                .Students
+                .GetOne(id);
+
+            student.Image = studentImage;
+
+            _unitOfWork
+                .Students
+                .Update(student);
+        }
     }
 }

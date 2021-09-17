@@ -18,6 +18,8 @@ namespace School.BLL.Dto
 
         public int? ClassId { get; set; }
 
+        public string Image { get; set; }   
+
         public IEnumerable<int> SubjectIds { get; set; }
     }
 }

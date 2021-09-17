@@ -87,7 +87,7 @@ namespace School.WEB.Controllers
 
         [HttpPost]
         public IActionResult CreateTeacher(
-            [Bind("FirstName, LastName, ClassId, SubjectIds, Gender, Id, Age")]
+            [Bind("FirstName, Image, LastName, ClassId, SubjectIds, Gender, Id, Age")]
             TeacherDto teacherDto)
         {
             _service.Teacher_Create(teacherDto);
@@ -152,7 +152,7 @@ namespace School.WEB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditTeacher(int? id,
-            [Bind("Id, FirstName, LastName, Age, Gender, ClassId, SubjectIds")]
+            [Bind("Id, FirstName, LastName,Image, Age, Gender, ClassId, SubjectIds")]
             TeacherDto teacher)
         {
             if (id != teacher.Id)
@@ -172,6 +172,9 @@ namespace School.WEB.Controllers
 
             _service.Teachers_Edit_Class(id,
                 teacher.ClassId);
+            
+            _service.Teachers_Edit_Image(id,
+                teacher.Image);
 
             _service.Teachers_Edit_Subjects(id,
                 teacher.SubjectIds.ToList());
@@ -253,7 +256,7 @@ namespace School.WEB.Controllers
 
         [HttpPost]
         public IActionResult CreateStudent(
-            [Bind("FirstName, LastName, ClassId, SubjectIds, Gender, Id, Age")]
+            [Bind("FirstName, LastName, Image, ClassId, SubjectIds, Gender, Id, Age")]
             StudentDto student)
         {
             try
@@ -304,7 +307,7 @@ namespace School.WEB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditStudent(int? id,
-            [Bind("Id, FirstName, LastName, Age, Gender, ClassId, SubjectIds")]
+            [Bind("Id, FirstName, LastName,Image, Age, Gender, ClassId, SubjectIds")]
             StudentDto student)
         {
             if (id != student.Id)
@@ -324,6 +327,9 @@ namespace School.WEB.Controllers
 
             _service.Students_Edit_Class(id,
                 student.ClassId);
+            
+            _service.Students_Edit_Image(id,
+                student.Image);
 
             try
             {

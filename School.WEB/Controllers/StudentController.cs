@@ -87,7 +87,7 @@ namespace School.WEB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int? id,
-            [Bind("Id, FirstName, LastName, Age, Gender, ClassId, SubjectIds")]
+            [Bind("Id, FirstName, LastName, Age, Image, Gender, ClassId, SubjectIds")]
             StudentDto student)
         {
             if (id != student.Id)
@@ -107,6 +107,9 @@ namespace School.WEB.Controllers
 
             _service.Edit_Class(id,
                 student.ClassId);
+            
+            _service.Edit_Image(id,
+                student.Image);
 
             _service.Edit_Subjects(id,
                 student.SubjectIds.ToList());

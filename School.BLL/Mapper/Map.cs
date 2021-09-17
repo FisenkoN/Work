@@ -36,6 +36,7 @@ namespace School.BLL.Mapper
                 FirstName = s.FirstName,
                 LastName = s.LastName,
                 Gender = (GenderDto)s.Gender,
+                Image = s.Image,
                 SubjectIds = s.Subjects
                     .Select(subject => subject.Id)
             };
@@ -49,6 +50,7 @@ namespace School.BLL.Mapper
                 FirstName = t.FirstName,
                 LastName = t.LastName,
                 Age = t.Age,
+                Image = t.Image,
                 ClassId = t.ClassId,
                 Gender = (GenderDto)t.Gender,
                 SubjectIds = t.Subjects?
@@ -124,6 +126,7 @@ namespace School.BLL.Mapper
                 ClassId = s.ClassId,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
+                Image = s.Image,
                 Gender = (Gender)s.Gender,
                 Subjects = _unitOfWork.Subjects
                     .GetAll()
@@ -144,6 +147,7 @@ namespace School.BLL.Mapper
                 Age = t.Age,
                 ClassId = t.ClassId,
                 FirstName = t.FirstName,
+                Image = t.Image,
                 Gender = (Gender)t.Gender,
                 LastName = t.LastName,
                 Subjects = t.SubjectIds != null
