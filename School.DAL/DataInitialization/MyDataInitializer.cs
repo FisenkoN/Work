@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using School.DAL.Entities;
 
 namespace School.DAL.DataInitialization
