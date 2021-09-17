@@ -21,25 +21,21 @@ namespace School.WEB.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult GetClasses()
         {
             return View(_service.GetClasses());
         }
 
-        [HttpGet]
         public IActionResult GetTeachers()
         {
             return View(_service.GetTeachers());
         }
 
-        [HttpGet]
         public IActionResult GetSubjects()
         {
             return View(_service.GetSubjects());
         }
 
-        [HttpGet]
         public IActionResult ClassDetails(int? id)
         {
             if (id == null)

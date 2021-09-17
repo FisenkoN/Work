@@ -43,7 +43,7 @@
             {
                 @Html.ActionLink(Model.Item2, "DetailsClass", "Admin", new {Id = Model.Item1.ClassId})
             }
-            else
+            else if(Model.Item2 == null)
             {
                 <p>no class</p>
             }

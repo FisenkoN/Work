@@ -24,7 +24,7 @@
         <dd class="col-sm-10">
             @if (Model.Item3 != null)
             {
-                @Html.ActionLink(Model.Item3, "DetailsTeacher", "Admin", new {Id = Model.Item1.Id})
+                @Html.ActionLink(Model.Item3, "DetailsTeacher", "Admin", new {Id = Model.Item1.TeacherId})
             }
             else
             {
