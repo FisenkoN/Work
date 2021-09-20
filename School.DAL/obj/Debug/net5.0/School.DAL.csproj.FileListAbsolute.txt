@@ -101,7 +101,6 @@ G:\Proj\School.DAL\bin\Debug\net5.0\School.DAL.deps.json
 G:\Proj\School.DAL\bin\Debug\net5.0\School.DAL.runtimeconfig.json
 G:\Proj\School.DAL\bin\Debug\net5.0\School.DAL.runtimeconfig.dev.json
 G:\Proj\School.DAL\bin\Debug\net5.0\School.DAL.dll
-G:\Proj\School.DAL\bin\Debug\net5.0\ref\School.DAL.dll
 G:\Proj\School.DAL\bin\Debug\net5.0\School.DAL.pdb
 G:\Proj\School.DAL\obj\Debug\net5.0\School.DAL.csproj.AssemblyReference.cache
 G:\Proj\School.DAL\obj\Debug\net5.0\School.DAL.GeneratedMSBuildEditorConfig.editorconfig
@@ -112,3 +111,4 @@ G:\Proj\School.DAL\obj\Debug\net5.0\School.DAL.dll
 G:\Proj\School.DAL\obj\Debug\net5.0\ref\School.DAL.dll
 G:\Proj\School.DAL\obj\Debug\net5.0\School.DAL.pdb
 G:\Proj\School.DAL\obj\Debug\net5.0\School.DAL.genruntimeconfig.cache
+G:\Proj\School.DAL\bin\Debug\net5.0\ref\School.DAL.dll
