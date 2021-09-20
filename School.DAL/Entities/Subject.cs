@@ -12,7 +12,9 @@ namespace School.DAL.Entities
             Students = new List<Student>();
         }
 
-        [Required] [MaxLength(30)] public string Name { get; set; }
+        [Required] 
+        [MaxLength(30)]
+        public string Name { get; set; }
 
         public ICollection<Teacher> Teachers { get; set; }
 
