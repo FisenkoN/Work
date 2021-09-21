@@ -14,9 +14,8 @@ namespace School.BLL.Mapper
             _unitOfWork = unitOfWork;
         }
 
-        public ClassDto To(Class c)
-        {
-            return new()
+        public ClassDto To(Class c) =>
+            new()
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -24,11 +23,9 @@ namespace School.BLL.Mapper
                 StudentIds = c.Students
                     .Select(s => s.Id)
             };
-        }
 
-        public StudentDto To(Student s)
-        {
-            return new()
+        public StudentDto To(Student s) =>
+            new()
             {
                 Id = s.Id,
                 Age = s.Age,
@@ -40,11 +37,9 @@ namespace School.BLL.Mapper
                 SubjectIds = s.Subjects
                     .Select(subject => subject.Id)
             };
-        }
 
-        public TeacherDto To(Teacher t)
-        {
-            return new()
+        public TeacherDto To(Teacher t) =>
+            new()
             {
                 Id = t.Id,
                 FirstName = t.FirstName,
@@ -56,22 +51,18 @@ namespace School.BLL.Mapper
                 SubjectIds = t.Subjects?
                     .Select(s => s.Id)
             };
-        }
 
-        public SubjectDto To(Subject s)
-        {
-            return new()
+        public SubjectDto To(Subject s) =>
+            new()
             {
                 Id = s.Id,
                 Name = s.Name,
                 StudentIds = s.Students.Select(z => z.Id),
                 TeacherIds = s.Teachers.Select(t => t.Id)
             };
-        }
 
-        public Subject To(SubjectDto s)
-        {
-            return new()
+        public Subject To(SubjectDto s) =>
+            new()
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -97,11 +88,9 @@ namespace School.BLL.Mapper
                         .ToList()
                     : null
             };
-        }
 
-        public Class To(ClassDto c)
-        {
-            return new()
+        public Class To(ClassDto c) =>
+            new()
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -115,11 +104,9 @@ namespace School.BLL.Mapper
                                 t == i.Id))
                     .ToList()
             };
-        }
 
-        public Student To(StudentDto s)
-        {
-            return new()
+        public Student To(StudentDto s) =>
+            new()
             {
                 Id = s.Id,
                 Age = s.Age,
@@ -137,11 +124,9 @@ namespace School.BLL.Mapper
                                 t == i.Id))
                     .ToList()
             };
-        }
 
-        public Teacher To(TeacherDto t)
-        {
-            return new()
+        public Teacher To(TeacherDto t) =>
+            new()
             {
                 Id = t.Id,
                 Age = t.Age,
@@ -161,6 +146,5 @@ namespace School.BLL.Mapper
                         .ToList()
                     : null
             };
-        }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using School.BLL.Dto;
 using School.BLL.Services;
@@ -10,7 +9,7 @@ namespace School.API.Controllers
     [ApiController]
     public class VisitorController : ControllerBase
     {
-        private VisitorService _service;
+        private readonly VisitorService _service;
 
         public VisitorController(MainService service)
         {
@@ -19,24 +18,18 @@ namespace School.API.Controllers
 
         // GET: api/Visitor/Class
         [HttpGet("Class")]
-        public ActionResult<IEnumerable<ClassDto>> GetClasses()
-        {
-            return new ActionResult<IEnumerable<ClassDto>>(_service.GetClasses());
-        }
+        public ActionResult<IEnumerable<ClassDto>> GetClasses() =>
+            Ok(_service.GetClasses());
 
         // GET: api/Visitor/Subject
         [HttpGet("Subject")]
-        public ActionResult<IEnumerable<SubjectDto>> GetSubjects()
-        {
-            return new ActionResult<IEnumerable<SubjectDto>>(_service.GetSubjects());
-        }
+        public ActionResult<IEnumerable<SubjectDto>> GetSubjects() =>
+            Ok(_service.GetSubjects());
 
         // GET: api/Visitor/Teacher
         [HttpGet("Teacher")]
-        public ActionResult<IEnumerable<TeacherDto>> GetTeachers()
-        {
-            return new ActionResult<IEnumerable<TeacherDto>>(_service.GetTeachers());
-        }
+        public ActionResult<IEnumerable<TeacherDto>> GetTeachers() =>
+            Ok(_service.GetTeachers());
 
         // GET: api/Visitor/Class/5
         [HttpGet("Class/{id}")]
@@ -51,10 +44,8 @@ namespace School.API.Controllers
         
         // GET: api/Visitor/Class/Students/5
         [HttpGet("Class/Students/{id}")]
-        public ActionResult<IEnumerable<string>> GetStudentsClass(int id)
-        {
-            return new ActionResult<IEnumerable<string>>(_service.GetStudents(id));
-        }
+        public ActionResult<IEnumerable<string>> GetStudentsClass(int id) =>
+            Ok(_service.GetStudents(id));
 
         // GET: api/Visitor/Subject/5
         [HttpGet("Subject/{id}")]
@@ -64,7 +55,7 @@ namespace School.API.Controllers
 
             return subject == null
                 ? NotFound()
-                : subject;
+                : Ok(subject);
         }
 
         // GET: api/Visitor/Teacher/5
@@ -75,7 +66,7 @@ namespace School.API.Controllers
 
             return teacher == null
                 ? NotFound()
-                : teacher;
+                : Ok(teacher);
         }
         
         // GET: api/Visitor/GetTeacherClass/5
@@ -85,26 +76,22 @@ namespace School.API.Controllers
             if (id == null)
                 return BadRequest();
 
-            return _service.GetTeachersClass(id);
+            return Ok(_service.GetTeachersClass(id));
         }
         
         // GET: api/Visitor/GetSubjectsForTeacher/5
         [HttpGet("GetSubjectsForTeacher/{id}")]
-        public ActionResult<IEnumerable<string>> GetSubjectsForTeacher(int? id)
-        {
-            return id == null
+        public ActionResult<IEnumerable<string>> GetSubjectsForTeacher(int? id) =>
+            id == null
                 ? BadRequest()
                 : Ok(_service.GetSubjectsForTeacher(id));
-        }
         
         // GET: api/Visitor/StudentsForSubjectId/5
         [HttpGet("StudentsForSubjectId/{id}")]
-        public ActionResult<IEnumerable<string>> StudentsForSubjectId(int? id)
-        {   
-            return id == null
+        public ActionResult<IEnumerable<string>> StudentsForSubjectId(int? id) =>
+            id == null
                 ? BadRequest()
                 : Ok(_service.StudentsForSubjectId(id));
-        }
         
         // GET: api/Visitor/TeachersForSubjectId/5
         [HttpGet("TeachersForSubjectId/{id}")]

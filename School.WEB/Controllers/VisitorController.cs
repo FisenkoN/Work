@@ -20,10 +20,8 @@ namespace School.WEB.Controllers
         }
 
         // GET
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() =>
+            View();
 
         public async Task<IActionResult> GetClasses()
         {

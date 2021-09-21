@@ -20,118 +20,90 @@ namespace School.BLL.Services
             _map = new Map(_unitOfWork);
         }
 
-        public IEnumerable<StudentDto> Students_GetAll()
-        {
-            return from s in _unitOfWork
-                    .Students
-                    .GetAll()
-                select _map.To(s);
-        }
+        public IEnumerable<StudentDto> Students_GetAll() =>
+            from s in _unitOfWork
+                .Students
+                .GetAll()
+            select _map.To(s);
 
-        public IEnumerable<TeacherDto> Teachers_GetAll()
-        {
-            return from s in _unitOfWork
-                    .Teachers
-                    .GetAll()
-                select _map.To(s);
-        }
+        public IEnumerable<TeacherDto> Teachers_GetAll() =>
+            from s in _unitOfWork
+                .Teachers
+                .GetAll()
+            select _map.To(s);
 
-        public IEnumerable<ClassDto> Classes_GetAll()
-        {
-            return from s in _unitOfWork
-                    .Classes
-                    .GetAll()
-                select _map.To(s);
-        }
+        public IEnumerable<ClassDto> Classes_GetAll() =>
+            from s in _unitOfWork
+                .Classes
+                .GetAll()
+            select _map.To(s);
 
-        public ClassDto Classes_GetTeacher(int? teacherId)
-        {
-            return _map.To(_unitOfWork.Classes
+        public ClassDto Classes_GetTeacher(int? teacherId) =>
+            _map.To(_unitOfWork.Classes
                 .GetRelatedData()
                 .FirstOrDefault(c =>
                     c.TeacherId == teacherId));
-        }
 
-        public IEnumerable<SubjectDto> Subjects_GetAll()
-        {
-            return from s in _unitOfWork
-                    .Subjects
-                    .GetAll()
-                select _map.To(s);
-        }
+        public IEnumerable<SubjectDto> Subjects_GetAll() =>
+            from s in _unitOfWork
+                .Subjects
+                .GetAll()
+            select _map.To(s);
 
-        public StudentDto Students_GetForId(int? id)
-        {
-            return _map.To(_unitOfWork
+        public StudentDto Students_GetForId(int? id) =>
+            _map.To(_unitOfWork
                 .Students
                 .GetOneRelated(id));
-        }
 
-        public ClassDto Classes_GetForId(int? id)
-        {
-            return _map.To(_unitOfWork
+        public ClassDto Classes_GetForId(int? id) =>
+            _map.To(_unitOfWork
                 .Classes
                 .GetOneRelated(id));
-        }
 
-        public TeacherDto Teachers_GetForId(int? id)
-        {
-            return _map.To(_unitOfWork
+        public TeacherDto Teachers_GetForId(int? id) =>
+            _map.To(_unitOfWork
                 .Teachers
                 .GetOneRelated(id));
-        }
 
-        public SubjectDto Subjects_GetForId(int? id)
-        {
-            return _map.To(_unitOfWork
+        public SubjectDto Subjects_GetForId(int? id) =>
+            _map.To(_unitOfWork
                 .Subjects
                 .GetOneRelated(id));
-        }
 
-        public IEnumerable<string> Students_GetSubjectsForId(int? id)
-        {
-            return _unitOfWork
+        public IEnumerable<string> Students_GetSubjectsForId(int? id) =>
+            _unitOfWork
                 .Students
                 .GetOneRelated(id)
                 .Subjects
                 .Select(s => s.Name);
-        }
 
-        public IEnumerable<string> Teachers_GetSubjectsForId(int? id)
-        {
-            return _unitOfWork
+        public IEnumerable<string> Teachers_GetSubjectsForId(int? id) =>
+            _unitOfWork
                 .Teachers
                 .GetOneRelated(id)
                 .Subjects
                 .Select(s => s.Name);
-        }
 
-        public IEnumerable<string> Subjects_GetStudentsForId(int? id)
-        {
-            return _unitOfWork
+        public IEnumerable<string> Subjects_GetStudentsForId(int? id) =>
+            _unitOfWork
                 .Subjects
                 .GetOneRelated(id)
                 .Students
                 .Select(s => s.FirstName + " " + s.LastName);
-        }
 
-        public IEnumerable<string> Classes_GetStudentsForId(int? id)
-        {
-            return _unitOfWork
+        public IEnumerable<string> Classes_GetStudentsForId(int? id) =>
+            _unitOfWork
                 .Classes
                 .GetOneRelated(id)
                 .Students
                 .Select(s => s.FirstName + " " + s.LastName);
-        }
 
-        public IEnumerable<string> Subjects_GetTeachersForId(int? id)
-        {
-            return _unitOfWork
+        public IEnumerable<string> Subjects_GetTeachersForId(int? id) =>
+            _unitOfWork
                 .Subjects
                 .GetOneRelated(id)
                 .Teachers
                 .Select(s => s.FirstName + " " + s.LastName);
-        }
 
         public void Student_Delete(int? id)
         {
@@ -165,26 +137,20 @@ namespace School.BLL.Services
                     .Delete(id.Value);
         }
 
-        public void Student_Create(StudentDto studentDto)
-        {
+        public void Student_Create(StudentDto studentDto) =>
             _unitOfWork
                 .Students
                 .Add(_map.To(studentDto));
-        }
 
-        public void Teacher_Create(TeacherDto teacherDto)
-        {
+        public void Teacher_Create(TeacherDto teacherDto) =>
             _unitOfWork
                 .Teachers
                 .Add(_map.To(teacherDto));
-        }
 
-        public void Class_Create(ClassDto classDto)
-        {
+        public void Class_Create(ClassDto classDto) =>
             _unitOfWork
                 .Classes
                 .Add(_map.To(classDto));
-        }
 
         public void Subject_Edit_Name(int? id, string name)
         {
@@ -199,12 +165,10 @@ namespace School.BLL.Services
                 .Update(subject);
         }
 
-        public void Subject_Create(SubjectDto subject)
-        {
+        public void Subject_Create(SubjectDto subject) =>
             _unitOfWork
                 .Subjects
                 .Add(_map.To(subject));
-        }
 
         public void Students_Edit_FirstName(int? id, string firstName)
         {
@@ -245,7 +209,8 @@ namespace School.BLL.Services
                 .Update(student);
         }
 
-        public void Students_Edit_Gender(int? id, GenderDto gender)
+        public void Students_Edit_Gender(int? id,
+            GenderDto gender)
         {
             var student = _unitOfWork
                 .Students
@@ -258,7 +223,8 @@ namespace School.BLL.Services
                 .Update(student);
         }
 
-        public void Students_Edit_Class(int? id, int? classId)
+        public void Students_Edit_Class(int? id,
+            int? classId)
         {
             var student = _unitOfWork
                 .Students
@@ -275,15 +241,13 @@ namespace School.BLL.Services
                 .Update(student);
         }
 
-        public IEnumerable<ClassDto> GetClassWithOutTeacher()
-        {
-            return from c in _unitOfWork
-                    .Classes
-                    .GetRelatedData()
-                    .Where(c =>
-                        c.TeacherId == null && c.Teacher == null)
-                select _map.To(c);
-        }
+        public IEnumerable<ClassDto> GetClassWithOutTeacher() =>
+            from c in _unitOfWork
+                .Classes
+                .GetRelatedData()
+                .Where(c =>
+                    c.TeacherId == null && c.Teacher == null)
+            select _map.To(c);
 
         public void Teachers_Edit_FirstName(int? id, string firstName)
         {
@@ -354,24 +318,22 @@ namespace School.BLL.Services
                 .Update(teacher);
         }
 
-        public IEnumerable<TeacherDto> GetTeachersWithoutClass()
-        {
-            return from t in _unitOfWork
-                    .Teachers
-                    .GetAll()
-                    .Except(
-                        _unitOfWork
-                            .Teachers
-                            .GetAll()
-                            .Where(t =>
-                                _unitOfWork
-                                    .Classes
-                                    .GetRelatedData()
-                                    .ToList()
-                                    .Exists(c =>
-                                        c.TeacherId == t.Id)))
-                select _map.To(t);
-        }
+        public IEnumerable<TeacherDto> GetTeachersWithoutClass() =>
+            from t in _unitOfWork
+                .Teachers
+                .GetAll()
+                .Except(
+                    _unitOfWork
+                        .Teachers
+                        .GetAll()
+                        .Where(t =>
+                            _unitOfWork
+                                .Classes
+                                .GetRelatedData()
+                                .ToList()
+                                .Exists(c =>
+                                    c.TeacherId == t.Id)))
+            select _map.To(t);
 
 
         public void Class_Edit_Name(int? id, string name)
@@ -404,14 +366,11 @@ namespace School.BLL.Services
                 .Update(c);
         }
 
-        public ClassDto GetClassForName(string name)
-        {
-            return _map.To(_unitOfWork
+        public ClassDto GetClassForName(string name) =>
+            _map.To(_unitOfWork
                 .Classes
                 .GetAll()
                 .FirstOrDefault(c => c.Name == name));
-        }
-
 
         public void Class_Edit_Students(int? id, List<int> students)
         {
@@ -426,7 +385,8 @@ namespace School.BLL.Services
                 .Update(@class);
 
             foreach (var i in students)
-                Students_Edit_Class(i, id);
+                Students_Edit_Class(i,
+                    id);
         }
 
         public void Teachers_Edit_Subjects(int? id, List<int> subjects)
@@ -550,7 +510,7 @@ namespace School.BLL.Services
                 .Teachers
                 .Update(teacher);
         }
-        
+
         public void Students_Edit_Image(int? id, string studentImage)
         {
             var student = _unitOfWork

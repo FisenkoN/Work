@@ -20,22 +20,16 @@ namespace School.BLL.Services
             _map = new Map(_unitOfWork);
         }
 
-        public IEnumerable<StudentDto> GetStudents()
-        {
-            return from s in _unitOfWork.Students
-                    .GetAll()
-                select _map.To(s);
-        }
+        public IEnumerable<StudentDto> GetStudents() =>
+            from s in _unitOfWork.Students
+                .GetAll()
+            select _map.To(s);
 
-        public ClassDto GetClassForId(int? id)
-        {
-            return _map.To(_unitOfWork.Classes.GetOneRelated(id));
-        }
+        public ClassDto GetClassForId(int? id) =>
+            _map.To(_unitOfWork.Classes.GetOneRelated(id));
 
-        public StudentDto GetStudentForId(int? id)
-        {
-            return _map.To(_unitOfWork.Students.GetOneRelated(id));
-        }
+        public StudentDto GetStudentForId(int? id) =>
+            _map.To(_unitOfWork.Students.GetOneRelated(id));
 
         public ICollection<StudentDto> GetClassmates(int? id)
         {
@@ -52,9 +46,8 @@ namespace School.BLL.Services
             return new List<StudentDto>();
         }
 
-        public IEnumerable<SubjectDto> GetSubjects(int? id)
-        {
-            return (from subject in _unitOfWork.Subjects
+        public IEnumerable<SubjectDto> GetSubjects(int? id) =>
+            (from subject in _unitOfWork.Subjects
                     .GetAll()
                     .Where(i =>
                         GetStudentForId(id)
@@ -64,7 +57,6 @@ namespace School.BLL.Services
                                 t == i.Id))
                     .ToList()
                 select _map.To(subject)).ToList();
-        }
 
         public TeacherDto GetMyClassTeacher(int? id)
         {

@@ -10,45 +10,17 @@
     <projectFile profileName="School.API">School.API/School.API.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1ef8307-cc6b-4bf6-b7a4-c18968ddea39" name="Changes" comment="Add School.API">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.School/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.School/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="b1ef8307-cc6b-4bf6-b7a4-c18968ddea39" name="Changes" comment="edit StudentController.cs to api interface">
+      <change beforePath="$PROJECT_DIR$/School.API/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/Controllers/AdminController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.API/Controllers/StudentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/Controllers/StudentController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.API/Controllers/VisitorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/Controllers/VisitorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/School.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/School.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/Newtonsoft.Json.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/Newtonsoft.Json.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/ref/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/ref/School.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/ref/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/ref/School.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/School.API.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/School.API.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/Controllers/StudentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Controllers/StudentController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/Mapper/Map.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Mapper/Map.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/Services/AdminService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Services/AdminService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/Services/StudentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Services/StudentService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/Services/VisitorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Services/VisitorService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/Controllers/VisitorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Controllers/VisitorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/ref/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/ref/School.WEB.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/ref/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/ref/School.WEB.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,7 +302,7 @@
       <workItem from="1631786146599" duration="10663000" />
       <workItem from="1631870482927" duration="13091000" />
       <workItem from="1632127659668" duration="19051000" />
-      <workItem from="1632215336320" duration="6386000" />
+      <workItem from="1632215336320" duration="8275000" />
     </task>
     <task id="LOCAL-00001" summary="Some fix">
       <created>1630056334633</created>
@@ -458,7 +430,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632139548304</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="edit StudentController.cs to api interface">
+      <created>1632222712986</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1632222712986</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,6 +487,7 @@
     <MESSAGE value="formatting" />
     <MESSAGE value="last fix" />
     <MESSAGE value="Add School.API" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add School.API" />
+    <MESSAGE value="edit StudentController.cs to api interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit StudentController.cs to api interface" />
   </component>
 </project>

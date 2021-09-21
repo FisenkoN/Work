@@ -20,31 +20,23 @@ namespace School.API.Controllers
 
         // GET: api/Admin/Class
         [HttpGet("Class")]
-        public ActionResult<IEnumerable<ClassDto>> GetClasses()
-        {
-            return new ActionResult<IEnumerable<ClassDto>>(_service.Classes_GetAll());
-        }
+        public ActionResult<IEnumerable<ClassDto>> GetClasses() =>
+            new(_service.Classes_GetAll());
 
         // GET: api/Admin/Student
         [HttpGet("Student")]
-        public ActionResult<IEnumerable<StudentDto>> GetStudents()
-        {
-            return new ActionResult<IEnumerable<StudentDto>>(_service.Students_GetAll());
-        }
+        public ActionResult<IEnumerable<StudentDto>> GetStudents() =>
+            new(_service.Students_GetAll());
 
         // GET: api/Admin/Subject
         [HttpGet("Subject")]
-        public ActionResult<IEnumerable<SubjectDto>> GetSubjects()
-        {
-            return new ActionResult<IEnumerable<SubjectDto>>(_service.Subjects_GetAll());
-        }
+        public ActionResult<IEnumerable<SubjectDto>> GetSubjects() =>
+            new(_service.Subjects_GetAll());
 
         // GET: api/Admin/Teacher
         [HttpGet("Teacher")]
-        public ActionResult<IEnumerable<TeacherDto>> GetTeachers()
-        {
-            return new ActionResult<IEnumerable<TeacherDto>>(_service.Teachers_GetAll());
-        }
+        public ActionResult<IEnumerable<TeacherDto>> GetTeachers() =>
+            new(_service.Teachers_GetAll());
 
         // GET: api/Admin/Class/5
         [HttpGet("Class/{id}")]
@@ -102,8 +94,10 @@ namespace School.API.Controllers
             {
                 _service.Class_Edit_Name(id,
                     @class.Name);
+                
                 _service.Class_Edit_Students(id,
                     @class.StudentIds.ToList());
+                
                 _service.Class_Edit_Teacher(id,
                     @class.TeacherId);
             }
@@ -128,16 +122,22 @@ namespace School.API.Controllers
             {
                 _service.Students_Edit_FirstName(id,
                     student.FirstName);
+                
                 _service.Students_Edit_LastName(id,
                     student.LastName);
+                
                 _service.Students_Edit_Age(id,
                     student.Age);
+                
                 _service.Students_Edit_Gender(id,
                     student.Gender);
+                
                 _service.Students_Edit_Image(id,
                     student.Image);
+                
                 _service.Students_Edit_Subjects(id,
                     student.SubjectIds.ToList());
+                
                 _service.Students_Edit_Class(id,
                     student.ClassId);
             }
@@ -162,8 +162,10 @@ namespace School.API.Controllers
             {
                 _service.Subject_Edit_Name(id,
                     subject.Name);
+
                 _service.Subjects_Edit_Students(id,
                     subject.StudentIds.ToList());
+                    
                 _service.Subjects_Edit_Teachers(id,
                     subject.TeacherIds.ToList());
             }
@@ -188,16 +190,22 @@ namespace School.API.Controllers
             {
                 _service.Teachers_Edit_FirstName(id,
                     teacher.FirstName);
+                
                 _service.Teachers_Edit_LastName(id,
                     teacher.LastName);
+                
                 _service.Teachers_Edit_Age(id,
                     teacher.Age);
+                
                 _service.Teachers_Edit_Gender(id,
                     teacher.Gender);
+                
                 _service.Teachers_Edit_Image(id,
                     teacher.Image);
+                
                 _service.Teachers_Edit_Subjects(id,
                     teacher.SubjectIds.ToList());
+                
                 _service.Teachers_Edit_Class(id,
                     teacher.ClassId);
             }
@@ -271,6 +279,7 @@ namespace School.API.Controllers
         public IActionResult DeleteClass(int id)
         {
             var @class = _service.Classes_GetForId(id);
+            
             if (@class == null)
                 return NotFound();
 
@@ -284,6 +293,7 @@ namespace School.API.Controllers
         public IActionResult DeleteStudent(int id)
         {
             var student = _service.Students_GetForId(id);
+            
             if (student == null)
                 return NotFound();
 
@@ -297,6 +307,7 @@ namespace School.API.Controllers
         public IActionResult DeleteSubject(int id)
         {
             var subject = _service.Subjects_GetForId(id);
+            
             if (subject == null)
                 return NotFound();
 
@@ -310,6 +321,7 @@ namespace School.API.Controllers
         public IActionResult DeleteTeacher(int id)
         {
             var teacher = _service.Teachers_GetForId(id);
+            
             if (teacher == null)
                 return NotFound();
 
@@ -321,25 +333,29 @@ namespace School.API.Controllers
         private bool ClassExists(int id)
         {
             return _service.Classes_GetAll()
-                .Any(e => e.Id == id);
+                .Any(e =>
+                    e.Id == id);
         }
 
         private bool StudentExists(int id)
         {
             return _service.Students_GetAll()
-                .Any(e => e.Id == id);
+                .Any(e => 
+                    e.Id == id);
         }
 
         private bool SubjectExists(int id)
         {
             return _service.Subjects_GetAll()
-                .Any(e => e.Id == id);
+                .Any(e => 
+                    e.Id == id);
         }
 
         private bool TeacherExists(int id)
         {
             return _service.Teachers_GetAll()
-                .Any(e => e.Id == id);
+                .Any(e =>
+                    e.Id == id);
         }
     }
 }
