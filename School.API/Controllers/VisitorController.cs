@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using School.BLL.Dto;
 using School.BLL.Services;
@@ -47,6 +48,13 @@ namespace School.API.Controllers
                 ? NotFound()
                 : @class;
         }
+        
+        // GET: api/Visitor/Class/Students/5
+        [HttpGet("Class/Students/{id}")]
+        public ActionResult<IEnumerable<string>> GetStudentsClass(int id)
+        {
+            return new ActionResult<IEnumerable<string>>(_service.GetStudents(id));
+        }
 
         // GET: api/Visitor/Subject/5
         [HttpGet("Subject/{id}")]
@@ -68,6 +76,43 @@ namespace School.API.Controllers
             return teacher == null
                 ? NotFound()
                 : teacher;
+        }
+        
+        // GET: api/Visitor/GetTeacherClass/5
+        [HttpGet("GetTeacherClass/{id}")]
+        public ActionResult<string> GetTeacherClass(int? id)
+        {
+            if (id == null)
+                return BadRequest();
+
+            return _service.GetTeachersClass(id);
+        }
+        
+        // GET: api/Visitor/GetSubjectsForTeacher/5
+        [HttpGet("GetSubjectsForTeacher/{id}")]
+        public ActionResult<IEnumerable<string>> GetSubjectsForTeacher(int? id)
+        {
+            return id == null
+                ? BadRequest()
+                : Ok(_service.GetSubjectsForTeacher(id));
+        }
+        
+        // GET: api/Visitor/StudentsForSubjectId/5
+        [HttpGet("StudentsForSubjectId/{id}")]
+        public ActionResult<IEnumerable<string>> StudentsForSubjectId(int? id)
+        {   
+            return id == null
+                ? BadRequest()
+                : Ok(_service.StudentsForSubjectId(id));
+        }
+        
+        // GET: api/Visitor/TeachersForSubjectId/5
+        [HttpGet("TeachersForSubjectId/{id}")]
+        public ActionResult<IEnumerable<string>> TeachersForSubjectId(int? id)
+        {   
+            return id == null
+                ? BadRequest()
+                : Ok(_service.TeachersForSubjectId(id));
         }
     }
 }

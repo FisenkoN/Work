@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using School.BLL.Dto;
-using School.BLL.Services;
 
 namespace School.WEB.Controllers
 {
     public class VisitorController : Controller
     {
-        private readonly VisitorService _service;
+        private readonly string _baseUrl;
 
-        public VisitorController(MainService mainService)
+        public VisitorController(IConfiguration configuration)
         {
-            _service = new VisitorService(mainService);
+            _baseUrl = configuration.GetSection("ServiceVisitorAddress")
+                .Value;
         }
 
         // GET
@@ -21,42 +25,69 @@ namespace School.WEB.Controllers
             return View();
         }
 
-        public IActionResult GetClasses()
+        public async Task<IActionResult> GetClasses()
         {
-            return View(_service.GetClasses());
+            var client = new HttpClient();
+            var response = await client.GetAsync(_baseUrl + "/Class");
+
+            if (response.IsSuccessStatusCode)
+                return View(
+                    JsonConvert.DeserializeObject<List<ClassDto>>(
+                        await response.Content.ReadAsStringAsync()));
+
+            return NotFound();
         }
 
-        public IActionResult GetTeachers()
+        public async Task<IActionResult> GetTeachers()
         {
-            return View(_service.GetTeachers());
+            var client = new HttpClient();
+            var response = await client.GetAsync(_baseUrl + "/Teacher");
+
+            if (response.IsSuccessStatusCode)
+                return View(
+                    JsonConvert.DeserializeObject<List<TeacherDto>>(
+                        await response.Content.ReadAsStringAsync()));
+
+            return NotFound();
         }
 
-        public IActionResult GetSubjects()
+        public async Task<IActionResult> GetSubjects()
         {
-            return View(_service.GetSubjects());
+            var client = new HttpClient();
+            var response = await client.GetAsync(_baseUrl + "/Subject");
+
+            if (response.IsSuccessStatusCode)
+                return View(
+                    JsonConvert.DeserializeObject<List<SubjectDto>>(
+                        await response.Content.ReadAsStringAsync()));
+
+            return NotFound();
         }
 
-        public IActionResult ClassDetails(int? id)
+        public async Task<IActionResult> ClassDetails(int? id)
         {
             if (id == null)
                 return BadRequest();
 
+            var client = new HttpClient();
+
+            var response = await client.GetAsync(_baseUrl + $"/Class/{id}");
+
             ClassDto @class;
 
-            try
-            {
-                @class = _service.GetClass(id);
-            }
-            catch (Exception)
-            {
+            if (response.IsSuccessStatusCode)
+                @class = JsonConvert.DeserializeObject<ClassDto>(await response.Content.ReadAsStringAsync());
+            else
                 return NotFound();
-            }
 
             string teacher;
 
             try
             {
-                teacher = _service.GetTeacher(@class.Id)
+                teacher = JsonConvert.DeserializeObject<TeacherDto>(
+                        await (await client.GetAsync(
+                                _baseUrl + $"/Teacher/{id}")).Content
+                            .ReadAsStringAsync())
                     .FullName;
             }
             catch (Exception)
@@ -64,7 +95,10 @@ namespace School.WEB.Controllers
                 teacher = "no teacher";
             }
 
-            var students = _service.GetStudents(@class.Id);
+            var students = JsonConvert.DeserializeObject<List<string>>(
+                await (await client.GetAsync(
+                        _baseUrl + $"/Class/Students/{id}")).Content
+                    .ReadAsStringAsync());
 
             return View(new Tuple<ClassDto, string, IEnumerable<string>>(
                 @class,
@@ -72,34 +106,44 @@ namespace School.WEB.Controllers
                 students));
         }
 
-        public IActionResult TeacherDetails(int? id)
+        public async Task<IActionResult> TeacherDetails(int? id)
         {
             if (id == null)
                 return BadRequest();
 
-            TeacherDto teacher;
+            var client = new HttpClient();
 
+            TeacherDto teacher = null;
             try
             {
-                teacher = _service.GetTeacher(id);
+                teacher = JsonConvert.DeserializeObject<TeacherDto>(
+                    await (await client.GetAsync(
+                            _baseUrl + $"/Teacher/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
-                return NotFound();
+                NotFound();
             }
 
             string @class;
 
             try
             {
-                @class = _service.GetTeachersClass(teacher.Id);
+                @class = JsonConvert.DeserializeObject<string>(
+                    await (await client.GetAsync(
+                            _baseUrl + $"/GetTeacherClass/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
                 @class = null;
             }
 
-            var subjects = _service.GetSubjectsForTeacher(teacher.Id);
+            var subjects = JsonConvert.DeserializeObject<IEnumerable<string>>(
+                await (await client.GetAsync(
+                        _baseUrl + $"/GetSubjectsForTeacher/{id}")).Content
+                    .ReadAsStringAsync());
 
             return View(new Tuple<TeacherDto, string, IEnumerable<string>>(
                 teacher,
@@ -107,30 +151,50 @@ namespace School.WEB.Controllers
                 subjects));
         }
 
-        public IActionResult SubjectDetails(int? id)
+        public async Task<IActionResult> SubjectDetails(int? id)
         {
             if (id == null)
                 return BadRequest();
 
-            SubjectDto subject;
+            var client = new HttpClient();
+
+            SubjectDto form = null;
 
             try
             {
-                subject = _service.GetSubject(id);
+                form = JsonConvert.DeserializeObject<SubjectDto>(
+                    await (await client.GetAsync(
+                            _baseUrl + $"/Subject/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
-                return NotFound();
+                NotFound();
             }
 
-            var teachers = _service.TeachersForSubjectId(subject.Id);
+            IEnumerable<string> students;
 
-            var students = _service.StudentsForSubjectId(subject.Id);
+            try
+            {
+                students = JsonConvert.DeserializeObject<IEnumerable<string>>(
+                    await (await client.GetAsync(
+                            _baseUrl + $"/StudentsForSubjectId/{id}")).Content
+                        .ReadAsStringAsync());
+            }
+            catch (Exception)
+            {
+                students = null;
+            }
+
+            var subjects = JsonConvert.DeserializeObject<IEnumerable<string>>(
+                await (await client.GetAsync(
+                        _baseUrl + $"/TeachersForSubjectId/{id}")).Content
+                    .ReadAsStringAsync());
 
             return View(new Tuple<SubjectDto, IEnumerable<string>, IEnumerable<string>>(
-                subject,
-                teachers,
-                students));
+                form,
+                students,
+                subjects));
         }
     }
 }

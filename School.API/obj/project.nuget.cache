@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "23E7CRY4AttErGyXHYhFifbrdPq01l/oSkgFBAJVIl4yCI6JQZZINVQi62DXq4fBmBlw0zaCqg6qIqkISCjFjQ==",
+  "dgSpecHash": "vlG5gGN6zfi2qSDAE28MsSEpQYrEG+teyJBLahdi64+ZdUPzbg75aZwiJzlYSnS8hAVem1HDl13LxWu3Blnf6Q==",
   "success": true,
   "projectFilePath": "G:\\Proj\\School.API\\School.API.csproj",
   "expectedPackageFiles": [
@@ -72,7 +72,7 @@
     "C:\\Users\\Nazar\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\netstandard.library\\2.0.1\\netstandard.library.2.0.1.nupkg.sha512",
-    "C:\\Users\\Nazar\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Nazar\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
