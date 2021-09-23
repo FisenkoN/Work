@@ -400,3 +400,7 @@ G:\Proj\School.WEB\obj\Debug\net5.0\School.WEB.dll
 G:\Proj\School.WEB\obj\Debug\net5.0\ref\School.WEB.dll
 G:\Proj\School.WEB\obj\Debug\net5.0\School.WEB.pdb
 G:\Proj\School.WEB\obj\Debug\net5.0\School.WEB.genruntimeconfig.cache
+G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Home\ContactUs.cshtml.g.cs
+G:\Proj\School.WEB\bin\Debug\net5.0\MailKit.dll
+G:\Proj\School.WEB\bin\Debug\net5.0\MimeKit.dll
+G:\Proj\School.WEB\bin\Debug\net5.0\BouncyCastle.Crypto.dll

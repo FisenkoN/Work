@@ -20,6 +20,20 @@ namespace School.WEB.Controllers
         {
             return View();
         }
+        
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ContactUs(Contact contact)
+        {
+            EmailService.SendEmailAsync(contact.Email, contact.PhoneNumber, contact.Message, contact.Email);
+
+            return RedirectToAction("Index");
+        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

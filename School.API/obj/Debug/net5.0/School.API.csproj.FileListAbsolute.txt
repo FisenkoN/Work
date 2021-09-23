@@ -159,3 +159,6 @@ G:\Proj\School.API\obj\Debug\net5.0\School.API.dll
 G:\Proj\School.API\obj\Debug\net5.0\ref\School.API.dll
 G:\Proj\School.API\obj\Debug\net5.0\School.API.pdb
 G:\Proj\School.API\obj\Debug\net5.0\School.API.genruntimeconfig.cache
+G:\Proj\School.API\bin\Debug\net5.0\MailKit.dll
+G:\Proj\School.API\bin\Debug\net5.0\MimeKit.dll
+G:\Proj\School.API\bin\Debug\net5.0\BouncyCastle.Crypto.dll

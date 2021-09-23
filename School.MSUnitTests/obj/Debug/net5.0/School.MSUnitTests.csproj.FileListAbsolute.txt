@@ -553,3 +553,8 @@ G:\Proj\School.MSUnitTests\obj\Debug\net5.0\School.MSUnitTests.dll
 G:\Proj\School.MSUnitTests\obj\Debug\net5.0\ref\School.MSUnitTests.dll
 G:\Proj\School.MSUnitTests\obj\Debug\net5.0\School.MSUnitTests.pdb
 G:\Proj\School.MSUnitTests\obj\Debug\net5.0\School.MSUnitTests.genruntimeconfig.cache
+G:\Proj\School.MSUnitTests\bin\Debug\net5.0\MailKit.dll
+G:\Proj\School.MSUnitTests\bin\Debug\net5.0\MimeKit.dll
+G:\Proj\School.MSUnitTests\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+G:\Proj\School.MSUnitTests\bin\Debug\net5.0\System.Security.Cryptography.Pkcs.dll
+G:\Proj\School.MSUnitTests\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
