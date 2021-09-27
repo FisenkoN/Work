@@ -5,7 +5,7 @@ namespace School.BLL.Services
 {
     public class EmailService
     {
-        public static void SendEmailAsync(string email, string phoneNumber, string message, string name)
+        public void SendEmailAsync(string email, string phoneNumber, string message, string name)
         {
             var emailMessage = new MimeMessage();
             
@@ -22,7 +22,7 @@ namespace School.BLL.Services
                 587,
                 false);
             client.Authenticate("nazarii.fisenko@gmail.com",
-                "Nazik1@3Nazik");
+                "password");
             client.Send(emailMessage);
 
             client.Disconnect(true);

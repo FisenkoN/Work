@@ -22,6 +22,11 @@ namespace School.API.Controllers
         [HttpGet("Class")]
         public ActionResult<IEnumerable<ClassDto>> GetClasses() =>
             new(_service.Classes_GetAll());
+        
+        // GET: api/Admin/ClassWithoutTeacher
+        [HttpGet("ClassWithoutTeacher")]
+        public ActionResult<IEnumerable<ClassDto>> GetClassWithoutTeacher() =>
+            new(_service.GetClassWithOutTeacher());
 
         // GET: api/Admin/Student
         [HttpGet("Student")]
@@ -37,6 +42,11 @@ namespace School.API.Controllers
         [HttpGet("Teacher")]
         public ActionResult<IEnumerable<TeacherDto>> GetTeachers() =>
             new(_service.Teachers_GetAll());
+        
+        // GET: api/Admin/TeachersWithoutClass
+        [HttpGet("TeachersWithoutClass")]
+        public ActionResult<IEnumerable<TeacherDto>> GetTeachersWithoutClass() =>
+            new(_service.GetTeachersWithoutClass());
 
         // GET: api/Admin/Class/5
         [HttpGet("Class/{id}")]
@@ -47,6 +57,28 @@ namespace School.API.Controllers
             return @class == null
                 ? NotFound()
                 : @class;
+        }
+        
+        // GET: api/Admin/Classes_GetTeacher/5
+        [HttpGet("Classes_GetTeacher/{id}")]
+        public ActionResult<ClassDto> Classes_GetTeacher(int id)
+        {
+            var @class = _service.Classes_GetTeacher(id);
+
+            return @class == null
+                ? NotFound()
+                : @class;
+        }
+        
+        // GET: api/Admin/Classes_GetTeacher/5
+        [HttpGet("Classes_GetStudentsForId/{id}")]
+        public ActionResult<IEnumerable<string>> Classes_GetStudentsForId(int id)
+        {
+            var students = _service.Classes_GetStudentsForId(id);
+
+            return students == null
+                ? NotFound()
+                : Ok(students);
         }
 
         // GET: api/Admin/Student/5
@@ -59,6 +91,17 @@ namespace School.API.Controllers
                 ? NotFound()
                 : student;
         }
+        
+        // GET: api/Admin/Student/5
+        [HttpGet("Students_GetSubjectsForId/{id}")]
+        public ActionResult<IEnumerable<string>> Students_GetSubjectsForId(int id)
+        {
+            var subjects = _service.Students_GetSubjectsForId(id);
+
+            return subjects == null
+                ? NotFound()
+                : Ok(subjects);
+        }
 
         // GET: api/Admin/Subject/5
         [HttpGet("Subject/{id}")]
@@ -70,6 +113,28 @@ namespace School.API.Controllers
                 ? NotFound()
                 : subject;
         }
+        
+        // GET: api/Admin/Subject/GetStudentsForId/5
+        [HttpGet("Subject/GetStudentsForId/{id}")]
+        public ActionResult<IEnumerable<string>> Subjects_GetStudentsForId(int id)
+        {
+            var students = _service.Subjects_GetStudentsForId(id);
+
+            return students == null
+                ? NotFound()
+                : Ok(students);
+        }
+        
+        // GET: api/Admin/Subject/GetStudentsForId/5
+        [HttpGet("Subject/GetTeachersForId/{id}")]
+        public ActionResult<IEnumerable<string>> Subjects_GetTeachersForId(int id)
+        {
+            var teachers = _service.Subjects_GetTeachersForId(id);
+
+            return teachers == null
+                ? NotFound()
+                : Ok(teachers);
+        }
 
         // GET: api/Admin/Teacher/5
         [HttpGet("Teacher/{id}")]
@@ -80,6 +145,17 @@ namespace School.API.Controllers
             return teacher == null
                 ? NotFound()
                 : teacher;
+        }
+        
+        // GET: api/Admin/Teacher/5
+        [HttpGet("Teacher/GetSubjectsForId/{id}")]
+        public ActionResult<IEnumerable<string>> GetSubjectsForId(int id)
+        {
+            var teacher = _service.Teachers_GetSubjectsForId(id);
+
+            return teacher == null
+                ? NotFound()
+                : Ok(teacher);
         }
 
         // PUT: api/Admin/Class/5

@@ -1,19 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using School.BLL.Dto;
-using School.BLL.Services;
 
 namespace School.WEB.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly AdminService _service;
+        private readonly string _baseUrl;
 
-        public AdminController(MainService service)
+        private readonly HttpClient _client;
+
+        public AdminController(IConfiguration configuration)
         {
-            _service = new AdminService(service);
+            _baseUrl = configuration.GetSection("ServiceAdminAddress")
+                .Value;
+
+            _client = new HttpClient();
         }
 
         // GET
@@ -22,63 +32,89 @@ namespace School.WEB.Controllers
             return View();
         }
 
-        public IActionResult GetTeachers()
+        public async Task<IActionResult> GetTeachers()
         {
-            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
-            
-            var teachers = _service.Teachers_GetAll();
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
 
-            if (!teachers.Any())
-                return NoContent();
+            var response = await _client.GetAsync(_baseUrl + "/Teacher");
 
-            return View(teachers);
+            if (response.IsSuccessStatusCode)
+                return View(
+                    JsonConvert.DeserializeObject<List<TeacherDto>>(
+                        await response.Content.ReadAsStringAsync()));
+
+            return NotFound();
         }
 
-        public IActionResult GetClasses()
+        public async Task<IActionResult> GetClasses()
         {
-            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
 
-            var classes = _service.Classes_GetAll();
+            var response = await _client.GetAsync(_baseUrl + "/Class");
 
-            if (!classes.Any())
-                return NoContent();
+            if (response.IsSuccessStatusCode)
+                return View(
+                    JsonConvert.DeserializeObject<List<ClassDto>>(
+                        await response.Content.ReadAsStringAsync()));
 
-            return View(classes);
+            return NotFound();
         }
 
-        public IActionResult GetStudents()
+        public async Task<IActionResult> GetStudents()
         {
-            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
-            
-            var students = _service.Students_GetAll();
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
 
-            if (!students.Any())
-                return NoContent();
+            var response = await _client.GetAsync(_baseUrl + "/Student");
 
-            return View(students);
+            if (response.IsSuccessStatusCode)
+                return View(
+                    JsonConvert.DeserializeObject<List<StudentDto>>(
+                        await response.Content.ReadAsStringAsync()));
+
+            return NotFound();
         }
 
-        public IActionResult GetSubjects()
+        public async Task<IActionResult> GetSubjects()
         {
-            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
-            
-            var subjects = _service.Subjects_GetAll();
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
 
-            if (!subjects.Any())
-                return NoContent();
+            var response = await _client.GetAsync(_baseUrl + "/Subject");
 
-            return View(subjects);
+            if (response.IsSuccessStatusCode)
+                return View(
+                    JsonConvert.DeserializeObject<List<SubjectDto>>(
+                        await response.Content.ReadAsStringAsync()));
+
+            return NotFound();
         }
 
-        public IActionResult CreateTeacher()
+        public async Task<IActionResult> CreateTeacher()
         {
+            var subjects = JsonConvert.DeserializeObject<IEnumerable<SubjectDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Subject")).Content
+                    .ReadAsStringAsync());
+
+            var classes = JsonConvert.DeserializeObject<IEnumerable<ClassDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/ClassWithoutTeacher")).Content
+                    .ReadAsStringAsync());
+
             ViewData["Classes"] = new SelectList(
-                _service.GetClassWithOutTeacher(),
+                classes,
                 "Id",
                 "Name");
 
             ViewData["Subjects"] = new SelectList(
-                _service.Subjects_GetAll(),
+                subjects,
                 "Id",
                 "Name");
 
@@ -86,49 +122,68 @@ namespace School.WEB.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTeacher(
+        public async Task<IActionResult> CreateTeacher(
             [Bind("FirstName, Image, LastName, ClassId, SubjectIds, Gender, Id, Age")]
             TeacherDto teacherDto)
         {
-            _service.Teacher_Create(teacherDto);
+            var json = JsonConvert.SerializeObject(teacherDto);
+
+            var response = await _client.PostAsync(_baseUrl + $"/Teacher",
+                new StringContent(json,
+                    Encoding.UTF8,
+                    "application/json"));
 
             TempData["Message"] = $"Teacher: {teacherDto.FullName} was created at {DateTime.Now.ToShortTimeString()}";
-            
+
             return RedirectToAction("GetTeachers");
         }
 
-        public IActionResult EditTeacher(int? id)
+        public async Task<IActionResult> EditTeacher(int? id)
         {
             if (id == null)
                 return BadRequest();
 
             TeacherDto teacher;
 
+            var response = await _client.GetAsync(_baseUrl + $"/Teacher/{id}");
+
             try
             {
-                teacher = _service.Teachers_GetForId(id);
+                teacher = JsonConvert.DeserializeObject<TeacherDto>(await response.Content.ReadAsStringAsync());
             }
             catch (Exception)
             {
                 return NotFound();
             }
 
-            var classes = _service.GetClassWithOutTeacher();
+            var classes = JsonConvert.DeserializeObject<IEnumerable<ClassDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/ClassWithoutTeacher")).Content
+                    .ReadAsStringAsync());
 
             try
             {
-                classes = classes.Append(_service.Classes_GetTeacher(teacher.Id));
+                classes = classes.Append(JsonConvert.DeserializeObject<ClassDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Classes_GetTeacher/{teacher.Id}")).Content
+                        .ReadAsStringAsync()));
             }
             catch (Exception)
             {
                 Console.WriteLine();
             }
 
-            var subjects = _service.Subjects_GetAll();
+            var subjects = JsonConvert.DeserializeObject<IEnumerable<SubjectDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Subject")).Content
+                    .ReadAsStringAsync());
 
             try
             {
-                var selectedClass = _service.Classes_GetTeacher(teacher.Id);
+                var selectedClass = JsonConvert.DeserializeObject<ClassDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Classes_GetTeacher/{teacher.Id}")).Content
+                        .ReadAsStringAsync());
 
                 ViewData["Classes"] = new SelectList(classes,
                     "Id",
@@ -151,48 +206,41 @@ namespace School.WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditTeacher(int? id,
+        public async Task<IActionResult> EditTeacher(int? id,
             [Bind("Id, FirstName, LastName,Image, Age, Gender, ClassId, SubjectIds")]
             TeacherDto teacher)
         {
             if (id != teacher.Id)
                 return NotFound();
 
-            _service.Teachers_Edit_FirstName(id,
-                teacher.FirstName);
+            var json = JsonConvert.SerializeObject(teacher);
 
-            _service.Teachers_Edit_LastName(id,
-                teacher.LastName);
+            var response = await _client.PutAsync(_baseUrl + $"/Teacher/{id}",
+                new StringContent(json,
+                    Encoding.UTF8,
+                    "application/json"));
 
-            _service.Teachers_Edit_Age(id,
-                teacher.Age);
+            var t = JsonConvert.DeserializeObject<TeacherDto>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Teacher/{teacher.Id}")).Content
+                    .ReadAsStringAsync());
 
-            _service.Teachers_Edit_Gender(id,
-                teacher.Gender);
-
-            _service.Teachers_Edit_Class(id,
-                teacher.ClassId);
-            
-            _service.Teachers_Edit_Image(id,
-                teacher.Image);
-
-            _service.Teachers_Edit_Subjects(id,
-                teacher.SubjectIds.ToList());
-            
-            TempData["Message"] = $"Teacher: {_service.Teachers_GetForId(id).FullName} was edited at {DateTime.Now.ToShortTimeString()}";
+            TempData["Message"] = $"Teacher: {t.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetTeachers");
         }
 
-        public IActionResult DeleteTeacher(int? id)
+        public async Task<IActionResult> DeleteTeacher(int? id)
         {
             if (id == null)
                 return BadRequest();
 
             try
             {
-                if (_service.Teachers_GetForId(id) == null)
-                    return NotFound();
+                JsonConvert.DeserializeObject<TeacherDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Teacher/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
@@ -201,10 +249,13 @@ namespace School.WEB.Controllers
 
             try
             {
-                _service.Teacher_Delete(id);
-                
+                JsonConvert.DeserializeObject<TeacherDto>(
+                    await (await _client.DeleteAsync(
+                            _baseUrl + $"/Teacher/{id}")).Content
+                        .ReadAsStringAsync());
+
                 TempData["Message"] = $"Teacher with id : {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-                
+
                 return RedirectToAction("GetTeachers");
             }
             catch (Exception)
@@ -213,7 +264,7 @@ namespace School.WEB.Controllers
             }
         }
 
-        public IActionResult DetailsTeacher(int? id)
+        public async Task<IActionResult> DetailsTeacher(int? id)
         {
             if (id == null)
                 return BadRequest();
@@ -222,17 +273,25 @@ namespace School.WEB.Controllers
 
             try
             {
-                teacher = _service.Teachers_GetForId(id);
+                teacher = JsonConvert.DeserializeObject<TeacherDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Teacher/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
                 return NotFound();
             }
 
-            var subjects = _service.Teachers_GetSubjectsForId(teacher.Id);
+            var subjects = JsonConvert.DeserializeObject<IEnumerable<string>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Teacher/GetSubjectsForId/{id}")).Content
+                    .ReadAsStringAsync());
 
-            var @class = _service
-                             .Classes_GetAll()
+            var @class = JsonConvert.DeserializeObject<IEnumerable<ClassDto>>(
+                                 await (await _client.GetAsync(
+                                         _baseUrl + $"/Class")).Content
+                                     .ReadAsStringAsync())
                              .FirstOrDefault(c =>
                                  c.TeacherId == teacher.Id)
                              ?.Name ??
@@ -241,13 +300,23 @@ namespace School.WEB.Controllers
             return View((teacher, @class, subjects));
         }
 
-        public IActionResult CreateStudent()
+        public async Task<IActionResult> CreateStudent()
         {
-            ViewData["Classes"] = new SelectList(_service.Classes_GetAll(),
+            var subjects = JsonConvert.DeserializeObject<IEnumerable<SubjectDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Subject")).Content
+                    .ReadAsStringAsync());
+
+            var classes = JsonConvert.DeserializeObject<IEnumerable<ClassDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Class")).Content
+                    .ReadAsStringAsync());
+
+            ViewData["Classes"] = new SelectList(classes,
                 "Id",
                 "Name");
 
-            ViewData["Subjects"] = new SelectList(_service.Subjects_GetAll(),
+            ViewData["Subjects"] = new SelectList(subjects,
                 "Id",
                 "Name");
 
@@ -255,13 +324,18 @@ namespace School.WEB.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateStudent(
+        public async Task<IActionResult> CreateStudent(
             [Bind("FirstName, LastName, Image, ClassId, SubjectIds, Gender, Id, Age")]
             StudentDto student)
         {
             try
             {
-                _service.Student_Create(student);
+                var json = JsonConvert.SerializeObject(student);
+
+                var response = await _client.PostAsync(_baseUrl + $"/Student",
+                    new StringContent(json,
+                        Encoding.UTF8,
+                        "application/json"));
             }
             catch (Exception)
             {
@@ -269,11 +343,11 @@ namespace School.WEB.Controllers
             }
 
             TempData["Message"] = $"Student: {student.FullName} was created at {DateTime.Now.ToShortTimeString()}";
-            
+
             return RedirectToAction("GetStudents");
         }
 
-        public IActionResult EditStudent(int? id)
+        public async Task<IActionResult> EditStudent(int? id)
         {
             if (id == null)
                 return BadRequest();
@@ -282,16 +356,25 @@ namespace School.WEB.Controllers
 
             try
             {
-                student = _service.Students_GetForId(id);
+                student = JsonConvert.DeserializeObject<StudentDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Student/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
                 return NotFound();
             }
 
-            var classes = _service.Classes_GetAll();
+            var classes = JsonConvert.DeserializeObject<IEnumerable<ClassDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Class")).Content
+                    .ReadAsStringAsync());
 
-            var subjects = _service.Subjects_GetAll();
+            var subjects = JsonConvert.DeserializeObject<IEnumerable<SubjectDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Subject")).Content
+                    .ReadAsStringAsync());
 
             ViewData["Classes"] = new SelectList(classes,
                 "Id",
@@ -306,35 +389,21 @@ namespace School.WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditStudent(int? id,
+        public async Task<IActionResult> EditStudent(int? id,
             [Bind("Id, FirstName, LastName,Image, Age, Gender, ClassId, SubjectIds")]
             StudentDto student)
         {
             if (id != student.Id)
                 return NotFound();
 
-            _service.Students_Edit_FirstName(id,
-                student.FirstName);
-
-            _service.Students_Edit_LastName(id,
-                student.LastName);
-
-            _service.Students_Edit_Age(id,
-                student.Age);
-
-            _service.Students_Edit_Gender(id,
-                student.Gender);
-
-            _service.Students_Edit_Class(id,
-                student.ClassId);
-            
-            _service.Students_Edit_Image(id,
-                student.Image);
-
             try
             {
-                _service.Students_Edit_Subjects(id,
-                    student.SubjectIds.ToList());
+                var json = JsonConvert.SerializeObject(student);
+
+                var response = await _client.PutAsync(_baseUrl + $"/Student/{id}",
+                    new StringContent(json,
+                        Encoding.UTF8,
+                        "application/json"));
             }
             catch (Exception)
             {
@@ -342,18 +411,22 @@ namespace School.WEB.Controllers
             }
 
             TempData["Message"] = $"Student: {student.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
-            
+
             return RedirectToAction("GetStudents");
         }
 
-        public IActionResult DeleteStudent(int? id)
+        public async Task<IActionResult> DeleteStudent(int? id)
         {
             if (id == null)
                 BadRequest();
 
             try
             {
-                if (_service.Students_GetForId(id) == null)
+                if (JsonConvert.DeserializeObject<StudentDto>(
+                        await (await _client.GetAsync(
+                                _baseUrl + $"/Student/{id}")).Content
+                            .ReadAsStringAsync()) ==
+                    null)
                     return NotFound();
             }
             catch (Exception)
@@ -363,11 +436,14 @@ namespace School.WEB.Controllers
 
             try
             {
-                _service.Student_Delete(id);
+                JsonConvert.DeserializeObject<StudentDto>(
+                    await (await _client.DeleteAsync(
+                            _baseUrl + $"/Student/{id}")).Content
+                        .ReadAsStringAsync());
 
                 TempData["Message"] =
                     $"Student: with {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-                
+
                 return RedirectToAction("GetStudents");
             }
             catch (Exception)
@@ -376,7 +452,7 @@ namespace School.WEB.Controllers
             }
         }
 
-        public IActionResult DetailsStudent(int? id)
+        public async Task<IActionResult> DetailsStudent(int? id)
         {
             if (id == null)
                 return BadRequest();
@@ -385,31 +461,49 @@ namespace School.WEB.Controllers
 
             try
             {
-                student = _service.Students_GetForId(id);
+                student = JsonConvert.DeserializeObject<StudentDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Student/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
                 return NotFound();
             }
 
-            var subjects = _service.Students_GetSubjectsForId(student.Id);
+            var subjects = JsonConvert.DeserializeObject<IEnumerable<string>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Students_GetSubjectsForId/{id}")).Content
+                    .ReadAsStringAsync());
 
             var @class = student.ClassId != null
-                ? _service
-                    .Classes_GetForId(student.ClassId)
+                ? JsonConvert.DeserializeObject<ClassDto>(
+                        await (await _client.GetAsync(
+                                _baseUrl + $"/Class/{student.ClassId}")).Content
+                            .ReadAsStringAsync())
                     .Name
                 : "no class";
 
             return View((student, @class, subjects));
         }
 
-        public IActionResult CreateClass()
+        public async Task<IActionResult> CreateClass()
         {
-            ViewData["Students"] = new SelectList(_service.Students_GetAll(),
+            var students = JsonConvert.DeserializeObject<IEnumerable<StudentDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Student")).Content
+                    .ReadAsStringAsync());
+
+            var teachers = JsonConvert.DeserializeObject<IEnumerable<TeacherDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/TeachersWithoutClass")).Content
+                    .ReadAsStringAsync());
+
+            ViewData["Students"] = new SelectList(students,
                 "Id",
                 "FullName");
 
-            ViewData["Teachers"] = new SelectList(_service.GetTeachersWithoutClass(),
+            ViewData["Teachers"] = new SelectList(teachers,
                 "Id",
                 "FullName");
 
@@ -417,13 +511,18 @@ namespace School.WEB.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateClass(
+        public async Task<IActionResult> CreateClass(
             [Bind("Id, Name, StudentIds, TeacherId")]
             ClassDto classDto)
         {
             try
             {
-                _service.Class_Create(classDto);
+                var json = JsonConvert.SerializeObject(classDto);
+
+                var response = await _client.PostAsync(_baseUrl + $"/Class",
+                    new StringContent(json,
+                        Encoding.UTF8,
+                        "application/json"));
             }
             catch (Exception)
             {
@@ -431,17 +530,27 @@ namespace School.WEB.Controllers
             }
 
             TempData["Message"] = $"Class: {classDto.Name} was created at {DateTime.Now.ToShortTimeString()}";
-            
+
             return RedirectToAction("GetClasses");
         }
 
-        public IActionResult CreateSubject()
+        public async Task<IActionResult> CreateSubject()
         {
-            ViewData["Students"] = new SelectList(_service.Students_GetAll(),
+            var students = JsonConvert.DeserializeObject<IEnumerable<StudentDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Student")).Content
+                    .ReadAsStringAsync());
+
+            var teachers = JsonConvert.DeserializeObject<IEnumerable<TeacherDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Teacher")).Content
+                    .ReadAsStringAsync());
+
+            ViewData["Students"] = new SelectList(students,
                 "Id",
                 "FullName");
 
-            ViewData["Teachers"] = new SelectList(_service.Teachers_GetAll(),
+            ViewData["Teachers"] = new SelectList(teachers,
                 "Id",
                 "FullName");
 
@@ -449,18 +558,23 @@ namespace School.WEB.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateSubject(
+        public async Task<IActionResult> CreateSubject(
             [Bind("Id, Name, StudentIds, TeacherIds")]
             SubjectDto subject)
         {
-            _service.Subject_Create(subject);
-            
+            var json = JsonConvert.SerializeObject(subject);
+
+            var response = await _client.PostAsync(_baseUrl + $"/Subject",
+                new StringContent(json,
+                    Encoding.UTF8,
+                    "application/json"));
+
             TempData["Message"] = $"Subject: {subject.Name} was created at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetSubjects");
         }
 
-        public IActionResult EditClass(int? id)
+        public async Task<IActionResult> EditClass(int? id)
         {
             if (id == null)
                 return BadRequest();
@@ -469,20 +583,32 @@ namespace School.WEB.Controllers
 
             try
             {
-                classDto = _service.Classes_GetForId(id);
+                classDto = JsonConvert.DeserializeObject<ClassDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Class/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
                 return NotFound();
             }
 
-            var students = _service.Students_GetAll();
+            var students = JsonConvert.DeserializeObject<IEnumerable<StudentDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Student")).Content
+                    .ReadAsStringAsync());
 
-            var teachers = _service.GetTeachersWithoutClass();
+            var teachers = JsonConvert.DeserializeObject<IEnumerable<TeacherDto>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/TeachersWithoutClass")).Content
+                    .ReadAsStringAsync());
 
             try
             {
-                teachers = teachers.Append(_service.Teachers_GetForId(classDto.TeacherId));
+                teachers = teachers.Append(JsonConvert.DeserializeObject<TeacherDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Teacher/{classDto.TeacherId}")).Content
+                        .ReadAsStringAsync()));
             }
             catch (Exception)
             {
@@ -502,50 +628,55 @@ namespace School.WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditClass(int? id,
+        public async Task<IActionResult> EditClass(int? id,
             [Bind("Id, Name, StudentIds, TeacherId")]
             ClassDto classDto)
         {
             if (id != classDto.Id)
                 return NotFound();
 
-            _service.Class_Edit_Name(id,
-                classDto.Name);
+            var json = JsonConvert.SerializeObject(classDto);
 
-            _service.Class_Edit_Students(id,
-                classDto.StudentIds.ToList());
+            var response = await _client.PutAsync(_baseUrl + $"/Class/{id}",
+                new StringContent(json,
+                    Encoding.UTF8,
+                    "application/json"));
 
-            _service.Class_Edit_Teacher(id,
-                classDto.TeacherId);
-            
             TempData["Message"] = $"Class: {classDto.Name} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetClasses");
         }
 
-        public IActionResult DeleteClass(int? id)
+        public async Task<IActionResult> DeleteClass(int? id)
         {
             if (id == null)
                 return BadRequest();
 
             try
             {
-                if (_service.Classes_GetForId(id) == null)
+                if (JsonConvert.DeserializeObject<ClassDto>(
+                        await (await _client.GetAsync(
+                                _baseUrl + $"/Class/{id}")).Content
+                            .ReadAsStringAsync()) ==
+                    null)
                     return NotFound();
             }
             catch (Exception)
             {
                 return NotFound();
             }
-            
-            _service.Class_Delete(id);
-            
+
+            JsonConvert.DeserializeObject<ClassDto>(
+                await (await _client.DeleteAsync(
+                        _baseUrl + $"/Class/{id}")).Content
+                    .ReadAsStringAsync());
+
             TempData["Message"] = $"Class: with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-                
+
             return RedirectToAction("GetClasses");
         }
 
-        public IActionResult DetailsClass(int? id)
+        public async Task<IActionResult> DetailsClass(int? id)
         {
             if (id == null)
                 return BadRequest();
@@ -554,18 +685,26 @@ namespace School.WEB.Controllers
 
             try
             {
-                @class = _service.Classes_GetForId(id);
+                @class = JsonConvert.DeserializeObject<ClassDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Class/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
                 return NotFound();
             }
 
-            var students = _service.Classes_GetStudentsForId(@class.Id);
+            var students = JsonConvert.DeserializeObject<IEnumerable<string>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Classes_GetStudentsForId/{id}")).Content
+                    .ReadAsStringAsync());
 
             var teacher = @class.TeacherId != null
-                ? _service
-                    .Teachers_GetForId(@class.TeacherId)
+                ? JsonConvert.DeserializeObject<TeacherDto>(
+                        await (await _client.GetAsync(
+                                _baseUrl + $"/Teacher/{@class.TeacherId}")).Content
+                            .ReadAsStringAsync())
                     ?
                     .FullName
                 : "no teacher";
@@ -573,7 +712,7 @@ namespace School.WEB.Controllers
             return View((@class, students, teacher));
         }
 
-        public IActionResult EditSubject(int? id)
+        public async Task<IActionResult> EditSubject(int? id)
         {
             if (id == null)
                 return BadRequest();
@@ -582,7 +721,10 @@ namespace School.WEB.Controllers
 
             try
             {
-                subject = _service.Subjects_GetForId(id);
+                subject = JsonConvert.DeserializeObject<SubjectDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Subject/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
@@ -594,29 +736,37 @@ namespace School.WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditSubject(int? id,
+        public async Task<IActionResult> EditSubject(int? id,
             [Bind("Id, Name, StudentIds, TeacherIds")]
             SubjectDto subject)
         {
             if (id != subject.Id)
                 return NotFound();
 
-            _service.Subject_Edit_Name(id,
-                subject.Name);
-            
+            var json = JsonConvert.SerializeObject(subject);
+
+            var response = await _client.PutAsync(_baseUrl + $"/Subject/{id}",
+                new StringContent(json,
+                    Encoding.UTF8,
+                    "application/json"));
+
             TempData["Message"] = $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetSubjects");
         }
 
-        public IActionResult DeleteSubject(int? id)
+        public async Task<IActionResult> DeleteSubject(int? id)
         {
             if (id == null)
                 return BadRequest();
 
             try
             {
-                if (_service.Subjects_GetForId(id) == null)
+                if (JsonConvert.DeserializeObject<SubjectDto>(
+                        await (await _client.GetAsync(
+                                _baseUrl + $"/Subject/{id}")).Content
+                            .ReadAsStringAsync()) ==
+                    null)
                     return NotFound();
             }
             catch (Exception)
@@ -626,10 +776,13 @@ namespace School.WEB.Controllers
 
             try
             {
-                _service.Subject_Delete(id);
-                
+                JsonConvert.DeserializeObject<SubjectDto>(
+                    await (await _client.DeleteAsync(
+                            _baseUrl + $"/Subject/{id}")).Content
+                        .ReadAsStringAsync());
+
                 TempData["Message"] = $"Subject with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-                
+
                 return RedirectToAction("GetSubjects");
             }
             catch (Exception)
@@ -638,7 +791,7 @@ namespace School.WEB.Controllers
             }
         }
 
-        public IActionResult DetailsSubject(int? id)
+        public async Task<IActionResult> DetailsSubject(int? id)
         {
             if (id == null)
                 return BadRequest();
@@ -647,16 +800,25 @@ namespace School.WEB.Controllers
 
             try
             {
-                subject = _service.Subjects_GetForId(id);
+                subject = JsonConvert.DeserializeObject<SubjectDto>(
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Subject/{id}")).Content
+                        .ReadAsStringAsync());
             }
             catch (Exception)
             {
                 return NotFound();
             }
 
-            var students = _service.Subjects_GetStudentsForId(subject.Id);
+            var students = JsonConvert.DeserializeObject<IEnumerable<string>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Subject/GetStudentsForId/{id}")).Content
+                    .ReadAsStringAsync());
 
-            var teachers = _service.Subjects_GetTeachersForId(subject.Id);
+            var teachers = JsonConvert.DeserializeObject<IEnumerable<string>>(
+                await (await _client.GetAsync(
+                        _baseUrl + $"/Subject/GetTeachersForId/{id}")).Content
+                    .ReadAsStringAsync());
 
             return View((subject, students, teachers));
         }

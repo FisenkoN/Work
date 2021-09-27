@@ -10,7 +10,7 @@ namespace School.WEB.Controllers
         public HomeController(MainService mainService)
         {
         }
-        
+
         public IActionResult Index()
         {
             return View();
@@ -20,7 +20,7 @@ namespace School.WEB.Controllers
         {
             return View();
         }
-        
+
         public IActionResult ContactUs()
         {
             return View();
@@ -29,16 +29,26 @@ namespace School.WEB.Controllers
         [HttpPost]
         public IActionResult ContactUs(Contact contact)
         {
-            EmailService.SendEmailAsync(contact.Email, contact.PhoneNumber, contact.Message, contact.Email);
+            var emailService = new EmailService();
+
+            emailService.SendEmailAsync(contact.Email,
+                contact.PhoneNumber,
+                contact.Message,
+                contact.Email);
 
             return RedirectToAction("Index");
         }
-        
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
+        [ResponseCache(Duration = 0,
+            Location = ResponseCacheLocation.None,
+            NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }

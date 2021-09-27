@@ -14,6 +14,7 @@ namespace School.DAL.Repository
         private SubjectRepository _subjectRepository;
 
         private TeacherRepository _teacherRepository;
+        
         private readonly SchoolDbContext db;
 
         public EfUnitOfWork()

@@ -13,10 +13,14 @@ namespace School.WEB.Controllers
     {
         private readonly string _baseUrl;
 
+        private readonly HttpClient _client;
+
         public VisitorController(IConfiguration configuration)
         {
             _baseUrl = configuration.GetSection("ServiceVisitorAddress")
                 .Value;
+
+            _client = new HttpClient();
         }
 
         // GET
@@ -25,8 +29,7 @@ namespace School.WEB.Controllers
 
         public async Task<IActionResult> GetClasses()
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync(_baseUrl + "/Class");
+            var response = await _client.GetAsync(_baseUrl + "/Class");
 
             if (response.IsSuccessStatusCode)
                 return View(
@@ -38,8 +41,7 @@ namespace School.WEB.Controllers
 
         public async Task<IActionResult> GetTeachers()
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync(_baseUrl + "/Teacher");
+            var response = await _client.GetAsync(_baseUrl + "/Teacher");
 
             if (response.IsSuccessStatusCode)
                 return View(
@@ -51,8 +53,7 @@ namespace School.WEB.Controllers
 
         public async Task<IActionResult> GetSubjects()
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync(_baseUrl + "/Subject");
+            var response = await _client.GetAsync(_baseUrl + "/Subject");
 
             if (response.IsSuccessStatusCode)
                 return View(
@@ -67,9 +68,7 @@ namespace School.WEB.Controllers
             if (id == null)
                 return BadRequest();
 
-            var client = new HttpClient();
-
-            var response = await client.GetAsync(_baseUrl + $"/Class/{id}");
+            var response = await _client.GetAsync(_baseUrl + $"/Class/{id}");
 
             ClassDto @class;
 
@@ -83,7 +82,7 @@ namespace School.WEB.Controllers
             try
             {
                 teacher = JsonConvert.DeserializeObject<TeacherDto>(
-                        await (await client.GetAsync(
+                        await (await _client.GetAsync(
                                 _baseUrl + $"/Teacher/{id}")).Content
                             .ReadAsStringAsync())
                     .FullName;
@@ -94,7 +93,7 @@ namespace School.WEB.Controllers
             }
 
             var students = JsonConvert.DeserializeObject<List<string>>(
-                await (await client.GetAsync(
+                await (await _client.GetAsync(
                         _baseUrl + $"/Class/Students/{id}")).Content
                     .ReadAsStringAsync());
 
@@ -109,13 +108,11 @@ namespace School.WEB.Controllers
             if (id == null)
                 return BadRequest();
 
-            var client = new HttpClient();
-
             TeacherDto teacher = null;
             try
             {
                 teacher = JsonConvert.DeserializeObject<TeacherDto>(
-                    await (await client.GetAsync(
+                    await (await _client.GetAsync(
                             _baseUrl + $"/Teacher/{id}")).Content
                         .ReadAsStringAsync());
             }
@@ -129,7 +126,7 @@ namespace School.WEB.Controllers
             try
             {
                 @class = JsonConvert.DeserializeObject<string>(
-                    await (await client.GetAsync(
+                    await (await _client.GetAsync(
                             _baseUrl + $"/GetTeacherClass/{id}")).Content
                         .ReadAsStringAsync());
             }
@@ -139,7 +136,7 @@ namespace School.WEB.Controllers
             }
 
             var subjects = JsonConvert.DeserializeObject<IEnumerable<string>>(
-                await (await client.GetAsync(
+                await (await _client.GetAsync(
                         _baseUrl + $"/GetSubjectsForTeacher/{id}")).Content
                     .ReadAsStringAsync());
 
@@ -154,14 +151,12 @@ namespace School.WEB.Controllers
             if (id == null)
                 return BadRequest();
 
-            var client = new HttpClient();
-
             SubjectDto form = null;
 
             try
             {
                 form = JsonConvert.DeserializeObject<SubjectDto>(
-                    await (await client.GetAsync(
+                    await (await _client.GetAsync(
                             _baseUrl + $"/Subject/{id}")).Content
                         .ReadAsStringAsync());
             }
@@ -175,7 +170,7 @@ namespace School.WEB.Controllers
             try
             {
                 students = JsonConvert.DeserializeObject<IEnumerable<string>>(
-                    await (await client.GetAsync(
+                    await (await _client.GetAsync(
                             _baseUrl + $"/StudentsForSubjectId/{id}")).Content
                         .ReadAsStringAsync());
             }
@@ -185,7 +180,7 @@ namespace School.WEB.Controllers
             }
 
             var subjects = JsonConvert.DeserializeObject<IEnumerable<string>>(
-                await (await client.GetAsync(
+                await (await _client.GetAsync(
                         _baseUrl + $"/TeachersForSubjectId/{id}")).Content
                     .ReadAsStringAsync());
 
