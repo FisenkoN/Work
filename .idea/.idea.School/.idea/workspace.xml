@@ -11,247 +11,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1ef8307-cc6b-4bf6-b7a4-c18968ddea39" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/School.API/Controllers/BlogController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/BouncyCastle.Crypto.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Humanizer.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/MailKit.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.AspNetCore.Razor.Language.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.Bcl.AsyncInterfaces.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.CodeAnalysis.CSharp.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.CodeAnalysis.Razor.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.CodeAnalysis.Workspaces.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.CodeAnalysis.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.Data.SqlClient.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.Data.Sqlite.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.DotNet.PlatformAbstractions.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.EntityFrameworkCore.Abstractions.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.EntityFrameworkCore.Relational.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.EntityFrameworkCore.SqlServer.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.EntityFrameworkCore.Sqlite.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.EntityFrameworkCore.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.Extensions.DependencyInjection.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.Extensions.DependencyModel.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.Identity.Client.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.IdentityModel.JsonWebTokens.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.IdentityModel.Logging.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.IdentityModel.Protocols.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.IdentityModel.Tokens.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.OpenApi.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.VisualStudio.Web.CodeGeneration.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/MimeKit.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Newtonsoft.Json.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/SQLitePCLRaw.batteries_v2.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/SQLitePCLRaw.core.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/SQLitePCLRaw.nativelibrary.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/SQLitePCLRaw.provider.dynamic_cdecl.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.API.deps.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.API.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.API.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.API.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.API.runtimeconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.BLL.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.BLL.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.DAL.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/School.DAL.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Swashbuckle.AspNetCore.Swagger.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Swashbuckle.AspNetCore.SwaggerGen.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/Swashbuckle.AspNetCore.SwaggerUI.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Composition.AttributedModel.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Composition.Convention.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Composition.Hosting.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Composition.Runtime.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Composition.TypedParts.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Configuration.ConfigurationManager.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Diagnostics.DiagnosticSource.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.IdentityModel.Tokens.Jwt.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Runtime.Caching.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/System.Security.Cryptography.ProtectedData.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/cs/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/cs/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/de/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/de/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/de/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/dotnet-aspnet-codegenerator-design.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/dotnet-ef.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/es/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/es/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/es/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/fr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/fr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/it/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/it/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/it/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ja/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ja/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ko/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ko/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/pl/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/pl/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/pt-BR/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ru/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/ru/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/alpine-x64/native/libe_sqlite3.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/linux-arm/native/libe_sqlite3.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/linux-arm64/native/libe_sqlite3.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/linux-armel/native/libe_sqlite3.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/linux-mips64/native/libe_sqlite3.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/linux-musl-x64/native/libe_sqlite3.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/linux-x64/native/libe_sqlite3.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/linux-x86/native/libe_sqlite3.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/osx-x64/native/libe_sqlite3.dylib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-arm/lib/net5.0/dotnet-aspnet-codegenerator-design.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-arm/native/e_sqlite3.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-arm64/lib/net5.0/dotnet-aspnet-codegenerator-design.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-arm64/native/e_sqlite3.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-x64/native/e_sqlite3.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win-x86/native/e_sqlite3.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/tr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/tr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/web.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/zh-Hans/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/publish/zh-Hant/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/PublishOutputs.36d98c73fd.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.deps.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.BLL/Dto/BlogDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.BLL/Services/BlogServices.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.DAL/Entities/Blog.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.DAL/Interfaces/IBlogRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.DAL/Repository/BlogRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/CreateBlog.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsBlog.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/EditBlog.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/GetBlogs.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/Views/Home/Blog.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/Views/Home/Blogs.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/Views/Home/News.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/CreateBlog.cshtml.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/GetBlogs.cshtml.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/Blog.cshtml.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/Blogs.cshtml.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/News.cshtml.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/School.WEB/wwwroot/css/blogs.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsBlog.cshtml.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/EditBlog.cshtml.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/School.WEB/wwwroot/css/blog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.School/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.School/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/ref/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/ref/School.API.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/ref/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/ref/School.API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/Dto/ClassDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Dto/ClassDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/Dto/StudentDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Dto/StudentDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/Dto/SubjectDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Dto/SubjectDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/Dto/TeacherDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Dto/TeacherDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/Mapper/Map.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Mapper/Map.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/Services/BlogServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Services/BlogServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.BLL/Services/EmailService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Services/EmailService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/ref/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/ref/School.BLL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/ref/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/ref/School.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/DataInitialization/MyDataInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/DataInitialization/MyDataInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/Entities/EntityBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/Entities/EntityBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/Interfaces/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/Interfaces/IUnitOfWork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/Repository/BaseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/Repository/BaseRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/Repository/EfUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/Repository/EfUnitOfWork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/SchoolDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/SchoolDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/ref/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/bin/Debug/net5.0/ref/School.DAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/School.DAL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/ref/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.DAL/obj/Debug/net5.0/ref/School.DAL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Controllers/AdminController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Controllers/HomeController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsClass.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsClass.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsStudent.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsStudent.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsSubject.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsSubject.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsTeacher.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/DetailsTeacher.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Admin/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Admin/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Home/Blog.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Home/Blog.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/Views/Home/ContactUs.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/Views/Home/ContactUs.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/ref/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/ref/School.WEB.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsClass.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsClass.cshtml.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsStudent.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsStudent.cshtml.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsSubject.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsSubject.cshtml.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsTeacher.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/DetailsTeacher.cshtml.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/Index.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Admin/Index.cshtml.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Shared/_Layout.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Shared/_Layout.cshtml.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.RazorCoreGenerate.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.RazorCoreGenerate.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/Blog.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/Blog.cshtml.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/ContactUs.cshtml.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/Razor/Views/Home/ContactUs.cshtml.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/ref/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/ref/School.WEB.dll" afterDir="false" />
@@ -369,7 +160,7 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Service Authentication" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.School.API: IIS Express">
+  <component name="RunManager" selected=".NET Launch Settings Profile.School.WEB: IIS Express">
     <configuration name="Publish School to IIS (1)" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish publish_profile="&lt;no publish profile&gt;" uuid_high="-5553270715270807518" uuid_low="-5984107221970513884" />
       <method v="2" />
@@ -573,7 +364,8 @@
       <workItem from="1632729027917" duration="11060000" />
       <workItem from="1632741444306" duration="2108000" />
       <workItem from="1632744436119" duration="12826000" />
-      <workItem from="1632820648772" duration="6654000" />
+      <workItem from="1632820648772" duration="9014000" />
+      <workItem from="1632830956782" duration="1681000" />
     </task>
     <task id="LOCAL-00001" summary="Some fix">
       <created>1630056334633</created>
@@ -729,7 +521,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632739242635</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="add blog">
+      <created>1632828210532</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1632828210532</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -783,6 +582,7 @@
     <MESSAGE value="fix format" />
     <MESSAGE value=")" />
     <MESSAGE value="Many changes with api in mvc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Many changes with api in mvc" />
+    <MESSAGE value="add blog" />
+    <option name="LAST_COMMIT_MESSAGE" value="add blog" />
   </component>
 </project>

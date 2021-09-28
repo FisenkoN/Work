@@ -49,8 +49,6 @@ namespace School.BLL.Services
 
             blog.Name = blogDto.Name;
             blog.Id = blogDto.Id;
-            blog.CreatedTime = blogDto.CreatedTime;
-            blog.LastUpdatedTime = blogDto.LastUpdatedTime;
             blog.Image = blogDto.Image;
             blog.Text = blogDto.Text;
             blog.Category = blogDto.Category;

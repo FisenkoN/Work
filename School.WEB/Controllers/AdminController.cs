@@ -132,7 +132,7 @@ namespace School.WEB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditBlog(int? id,
-            [Bind("Name, Category, Id, Text, Image")]
+            [Bind("Name, Category, Id, Text, Image, CreatedTime")]
             BlogDto blog)
         {
             if (id != blog.Id)
