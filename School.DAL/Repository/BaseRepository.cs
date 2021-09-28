@@ -28,6 +28,10 @@ namespace School.DAL.Repository
 
         public virtual int Add(T entity)
         {
+            entity.CreatedTime = DateTime.Now;
+            
+            entity.LastUpdatedTime = DateTime.Now;
+            
             _table.Add(entity);
 
             return SaveChanges();
@@ -63,6 +67,8 @@ namespace School.DAL.Repository
         
         public virtual int Update(T entity)
         {
+            entity.LastUpdatedTime = DateTime.Now;
+            
             _table.Update(entity);
 
             return SaveChanges();

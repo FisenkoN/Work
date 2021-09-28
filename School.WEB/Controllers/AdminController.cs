@@ -25,7 +25,7 @@ namespace School.WEB.Controllers
 
             _client = new HttpClient();
         }
-
+            
         // GET
         public IActionResult Index()
         {
@@ -46,6 +46,147 @@ namespace School.WEB.Controllers
                         await response.Content.ReadAsStringAsync()));
 
             return NotFound();
+        }
+        
+        public async Task<IActionResult> GetBlogs()
+        {
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
+
+            var response = await _client.GetAsync("https://localhost:44331/api/Blog");
+
+            if (response.IsSuccessStatusCode)
+                return View(
+                    JsonConvert.DeserializeObject<List<BlogDto>>(
+                        await response.Content.ReadAsStringAsync()));
+
+            return NotFound();
+        }
+        
+        public async Task<IActionResult> DetailsBlog(int? id)
+        {
+            if (id == null)
+                return BadRequest();
+
+            BlogDto blog;
+
+            try
+            {
+                blog = JsonConvert.DeserializeObject<BlogDto>(
+                    await (await _client.GetAsync(
+                             $"https://localhost:44331/api/Blog/{id}")).Content
+                        .ReadAsStringAsync());
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+            return View(blog);
+        }
+        
+        public IActionResult CreateBlog()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> CreateBlog(
+            [Bind("Name, Category, Id, Text, Image")]
+            BlogDto blog)  
+        {
+            var json = JsonConvert.SerializeObject(blog);
+
+            var response = await _client.PostAsync("https://localhost:44331/api/Blog",
+                new StringContent(json,
+                    Encoding.UTF8,
+                    "application/json"));
+
+            TempData["Message"] = $"Blog: {blog.Name} was created at {DateTime.Now.ToShortTimeString()}";
+
+            return RedirectToAction("GetBlogs");
+        }
+        
+         public async Task<IActionResult> EditBlog(int? id) 
+        {
+            if (id == null)
+                return BadRequest();
+
+            BlogDto blog;
+
+            var response = await _client.GetAsync($"https://localhost:44331/api/Blog/{id}");
+
+            try
+            {
+                blog = JsonConvert.DeserializeObject<BlogDto>(await response.Content.ReadAsStringAsync());
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+            return View(blog);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBlog(int? id,
+            [Bind("Name, Category, Id, Text, Image")]
+            BlogDto blog)
+        {
+            if (id != blog.Id)
+                return NotFound();
+
+            var json = JsonConvert.SerializeObject(blog);
+
+            var response = await _client.PutAsync($"https://localhost:44331/api/Blog/{id}",
+                new StringContent(json,
+                    Encoding.UTF8,
+                    "application/json"));
+
+            var b = JsonConvert.DeserializeObject<BlogDto>(
+                await (await _client.GetAsync(
+                        $"https://localhost:44331/api/Blog/{blog.Id}")).Content
+                    .ReadAsStringAsync());
+
+            TempData["Message"] = $"Blog: {b.Name} was edited at {DateTime.Now.ToShortTimeString()}";
+
+            return RedirectToAction("GetBlogs");
+        }
+        
+        public async Task<IActionResult> DeleteBlog(int? id)
+        {
+            if (id == null)
+                return BadRequest();
+
+            try
+            {
+                JsonConvert.DeserializeObject<BlogDto>(
+                    await (await _client.GetAsync(
+                            $"https://localhost:44331/api/Blog/{id}")).Content
+                        .ReadAsStringAsync());
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                JsonConvert.DeserializeObject<TeacherDto>(
+                    await (await _client.DeleteAsync(
+                            $"https://localhost:44331/api/Blog/{id}")).Content
+                        .ReadAsStringAsync());
+
+                TempData["Message"] = $"Blog with id : {id} was deleted at {DateTime.Now.ToShortTimeString()}";
+
+                return RedirectToAction("GetBlogs");
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         public async Task<IActionResult> GetClasses()

@@ -1,0 +1,52 @@
+@model School.BLL.Dto.BlogDto
+
+@{
+    ViewBag.Title = "Blog";
+    Layout = "_Layout";
+}
+
+<h1>Details</h1>
+
+<img height="250" src="@Model.Image" alt="avatar"/>
+
+<div>
+    <h4>Blog</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastUpdatedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastUpdatedTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditBlog" asp-route-id="@Model.Id">Edit</a>
+    <a asp-action="DeleteBlog" asp-route-id="@Model.Id">Delete</a>
+    <a asp-action="GetBlogs">Back to List</a>
+</div>

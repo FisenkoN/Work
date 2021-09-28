@@ -20,6 +20,8 @@ namespace School.BLL.Mapper
                 Id = c.Id,
                 Name = c.Name,
                 TeacherId = c.TeacherId,
+                CreatedTime = c.CreatedTime,
+                LastUpdatedTime = c.LastUpdatedTime,
                 StudentIds = c.Students
                     .Select(s => s.Id)
             };
@@ -33,6 +35,8 @@ namespace School.BLL.Mapper
                 FirstName = s.FirstName,
                 LastName = s.LastName,
                 Gender = (GenderDto)s.Gender,
+                CreatedTime = s.CreatedTime,
+                LastUpdatedTime = s.LastUpdatedTime,
                 Image = s.Image,
                 SubjectIds = s.Subjects
                     .Select(subject => subject.Id)
@@ -47,6 +51,8 @@ namespace School.BLL.Mapper
                 Age = t.Age,
                 Image = t.Image,
                 ClassId = t.ClassId,
+                CreatedTime = t.CreatedTime,
+                LastUpdatedTime = t.LastUpdatedTime,
                 Gender = (GenderDto)t.Gender,
                 SubjectIds = t.Subjects?
                     .Select(s => s.Id)
@@ -57,6 +63,8 @@ namespace School.BLL.Mapper
             {
                 Id = s.Id,
                 Name = s.Name,
+                CreatedTime = s.CreatedTime,
+                LastUpdatedTime = s.LastUpdatedTime,
                 StudentIds = s.Students.Select(z => z.Id),
                 TeacherIds = s.Teachers.Select(t => t.Id)
             };
@@ -66,6 +74,8 @@ namespace School.BLL.Mapper
             {
                 Id = s.Id,
                 Name = s.Name,
+                CreatedTime = s.CreatedTime,
+                LastUpdatedTime = s.LastUpdatedTime,
                 Students = s.StudentIds != null
                     ? _unitOfWork.Students
                         .GetAll()
@@ -95,6 +105,8 @@ namespace School.BLL.Mapper
                 Id = c.Id,
                 Name = c.Name,
                 TeacherId = c.TeacherId,
+                CreatedTime = c.CreatedTime,
+                LastUpdatedTime = c.LastUpdatedTime,
                 Students = _unitOfWork.Students
                     .GetAll()
                     .Where(i =>
@@ -113,6 +125,8 @@ namespace School.BLL.Mapper
                 ClassId = s.ClassId,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
+                CreatedTime = s.CreatedTime,
+                LastUpdatedTime = s.LastUpdatedTime,
                 Image = s.Image,
                 Gender = (Gender)s.Gender,
                 Subjects = _unitOfWork.Subjects
@@ -133,6 +147,8 @@ namespace School.BLL.Mapper
                 ClassId = t.ClassId,
                 FirstName = t.FirstName,
                 Image = t.Image,
+                CreatedTime = t.CreatedTime,
+                LastUpdatedTime = t.LastUpdatedTime,
                 Gender = (Gender)t.Gender,
                 LastName = t.LastName,
                 Subjects = t.SubjectIds != null
@@ -145,6 +161,30 @@ namespace School.BLL.Mapper
                                     s == i.Id))
                         .ToList()
                     : null
+            };
+
+        public Blog To(BlogDto blogDto) =>
+            new()
+            {
+                Id = blogDto.Id,
+                Image = blogDto.Image,
+                Category = blogDto.Category,
+                CreatedTime = blogDto.CreatedTime,
+                LastUpdatedTime = blogDto.LastUpdatedTime,
+                Name = blogDto.Name,
+                Text = blogDto.Text
+            };
+
+        public BlogDto To(Blog blog) =>
+            new()
+            {
+                Id = blog.Id,
+                Image = blog.Image,
+                CreatedTime = blog.CreatedTime,
+                Category = blog.Category,
+                LastUpdatedTime = blog.LastUpdatedTime,
+                Name = blog.Name,
+                Text = blog.Text
             };
     }
 }

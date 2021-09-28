@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace School.BLL.Dto
 {
@@ -21,5 +22,9 @@ namespace School.BLL.Dto
         public string Image { get; set; }   
 
         public IEnumerable<int> SubjectIds { get; set; }
+        
+        public DateTime CreatedTime { get; set; }
+
+        public DateTime LastUpdatedTime { get; set; }
     }
 }

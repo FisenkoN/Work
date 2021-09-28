@@ -14,6 +14,8 @@ namespace School.DAL.Repository
         private SubjectRepository _subjectRepository;
 
         private TeacherRepository _teacherRepository;
+
+        private BlogRepository _blogRepository;
         
         private readonly SchoolDbContext db;
 
@@ -66,5 +68,8 @@ namespace School.DAL.Repository
 
         public ISubjectRepository Subjects =>
             _subjectRepository ??= new SubjectRepository(db);
+        
+        public IBlogRepository Blogs =>
+            _blogRepository ??= new BlogRepository(db);
     }
 }

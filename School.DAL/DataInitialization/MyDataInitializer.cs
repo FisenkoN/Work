@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using School.DAL.Entities;
 
 namespace School.DAL.DataInitialization
@@ -13,6 +14,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Palmer",
                 Gender = Gender.Male,
                 Age = 44,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/24/62/9a/24629a3766888d4339ace8eabdf2e30a.jpg"
             };
             var t2 = new Teacher
@@ -21,6 +24,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Powell",
                 Gender = Gender.Female,
                 Age = 23,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/4a/1d/63/4a1d63fb5c4541e83e06e206b65b8587.jpg"
             };
             var t3 = new Teacher
@@ -29,6 +34,8 @@ namespace School.DAL.DataInitialization
                 LastName = "White",
                 Gender = Gender.Female,
                 Age = 55,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/f8/a9/dd/f8a9dd5024d6ebed33ae33db724d84e3.jpg"
             };
             var t4 = new Teacher
@@ -37,6 +44,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Allison",
                 Gender = Gender.Male,
                 Age = 66,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/85/f7/3c/85f73ca021b9049778b5ef027f6d74ae.jpg"
             };
             var t5 = new Teacher
@@ -45,6 +54,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Fitzgerald",
                 Gender = Gender.Female,
                 Age = 68,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/d6/44/11/d64411f084e68f1099dff5756fcf3011.jpg"
             };
             var t6 = new Teacher
@@ -53,6 +64,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Morrison",
                 Gender = Gender.Female,
                 Age = 20,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/08/74/9b/08749b41d74203ded24925381ae03bc2.jpg"
             };
             var t7 = new Teacher
@@ -61,6 +74,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Ballard",
                 Gender = Gender.Female,
                 Age = 50,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/cb/c2/9c/cbc29c209eebfe595cf52e9411f5c717.jpg"
             };
             var t8 = new Teacher
@@ -69,6 +84,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Torres",
                 Gender = Gender.Female,
                 Age = 41,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/20/c5/e5/20c5e56c764ca60e5ce5d79a87fe2cb3.jpg"
             };
             var t9 = new Teacher
@@ -77,6 +94,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Bennett",
                 Gender = Gender.Female,
                 Age = 21,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/6c/2a/de/6c2ade6217fd53f6ecc6a3cfa4446c5b.jpg"
             };
             var t10 = new Teacher
@@ -85,6 +104,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Lucas",
                 Gender = Gender.Male,
                 Age = 51,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/e2/38/f4/e238f4f89d6666a7e5d9b79da38d5593.jpg"
             };
 
@@ -104,6 +125,8 @@ namespace School.DAL.DataInitialization
             var subj1 = new Subject
             {
                 Name = "Math",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t1,
@@ -114,6 +137,8 @@ namespace School.DAL.DataInitialization
             var subj2 = new Subject
             {
                 Name = "Art",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t2
@@ -123,6 +148,8 @@ namespace School.DAL.DataInitialization
             var subj3 = new Subject
             {
                 Name = "English",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t4,
@@ -133,6 +160,8 @@ namespace School.DAL.DataInitialization
             var subj4 = new Subject
             {
                 Name = "Music",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t2
@@ -142,6 +171,8 @@ namespace School.DAL.DataInitialization
             var subj5 = new Subject
             {
                 Name = "Science",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t1,
@@ -152,6 +183,8 @@ namespace School.DAL.DataInitialization
             var subj6 = new Subject
             {
                 Name = "History",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t10
@@ -161,6 +194,8 @@ namespace School.DAL.DataInitialization
             var subj7 = new Subject
             {
                 Name = "Geography",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t10
@@ -170,6 +205,8 @@ namespace School.DAL.DataInitialization
             var subj8 = new Subject
             {
                 Name = "IT",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t3
@@ -179,6 +216,8 @@ namespace School.DAL.DataInitialization
             var subj9 = new Subject
             {
                 Name = "Biology",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t7
@@ -188,6 +227,8 @@ namespace School.DAL.DataInitialization
             var subj10 = new Subject
             {
                 Name = "Drama",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t8
@@ -197,6 +238,8 @@ namespace School.DAL.DataInitialization
             var subj11 = new Subject
             {
                 Name = "Swimming",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t9
@@ -206,6 +249,8 @@ namespace School.DAL.DataInitialization
             var subj12 = new Subject
             {
                 Name = "Physical education",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teachers = new List<Teacher>
                 {
                     t9
@@ -231,6 +276,8 @@ namespace School.DAL.DataInitialization
             var c1 = new Class
             {
                 Name = "10A",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teacher = t1,
                 TeacherId = t1.Id
             };
@@ -238,6 +285,8 @@ namespace School.DAL.DataInitialization
             var c2 = new Class
             {
                 Name = "10B",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teacher = t6,
                 TeacherId = t6.Id
             };
@@ -245,6 +294,8 @@ namespace School.DAL.DataInitialization
             var c3 = new Class
             {
                 Name = "11A",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teacher = t10,
                 TeacherId = t10.Id
             };
@@ -252,6 +303,8 @@ namespace School.DAL.DataInitialization
             var c4 = new Class
             {
                 Name = "10C",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teacher = t3,
                 TeacherId = t3.Id
             };
@@ -259,6 +312,8 @@ namespace School.DAL.DataInitialization
             var c5 = new Class
             {
                 Name = "11B",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teacher = t2,
                 TeacherId = t2.Id
             };
@@ -266,6 +321,8 @@ namespace School.DAL.DataInitialization
             var c6 = new Class
             {
                 Name = "9A",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Teacher = t9,
                 TeacherId = t9.Id
             };
@@ -355,6 +412,8 @@ namespace School.DAL.DataInitialization
                 Class = c1,
                 ClassId = c1.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://lh3.googleusercontent.com/fife/AAWUweV5qQx8oFqW_5QSK3xjoE7-4Oe0e-i-dIfLdmlsbd2mXvVCUijsoSQl-O2bvAdNZUeQge2KIruU4txsgsM-Ay85CpeRL2Yq1AllZeMkCT1NvMAA74bSfHhUFe8xzzbLFkjqQoKoO0lMtnGTTXILOLhPJ1fMXS-FvfbUENqMdhAgLkrntnU2bPR4pYLzKa5aEiOjxMZ2EHcmEOlLpPa1JnlNFlr9WH2cDruxbCaXcNHZ0FjpB2fjI2dWXY_3_3Jr3dGw4Pggh_WYL2JU5fy3qwuDv1MdtRbNgibTFojQPEVJ_-eGfFaPZBB6wUAvFC81sw7vVF_XyCKTPm0rn8y9UOve_rLGtxhjD7IY79cK8vqE4u4pHWDlSQnVknbzKdDS-liBfvMPDeNrtXROMlV7g1IJyxlkqrVt_6hMfRCTCUZ2bXxwb3ZqqeCO1x6wTGpY3xVXfjX_HR0jlBjX21Zy8iyXjBP4DUERqZHkSqBLsKpEurdxHiNgMy3BgpSpW8gre6jpMIJO0nOATOUXM0okM0g6-bf_N2vt91UbEHLyl0qgDhrjgpIzj_2EDoLbRkvnu51ONU4DFAQjM5z4iZ9KdB1heagb7lBkRoDH_8E6jmgbpU-z0ZHwmeas5psCqwb-zcvQ4DFDPwKHl1eGup3zx9XK1mwW6uJW-7xgu-jZlYjRrBRmDLqF0q6iGtRZixjMcsMf4sNa4dI5jHuPC4E9VC6QtsPR0c8Ddw=w250-h238-p-k-nu-ft"
             };
 
@@ -366,6 +425,8 @@ namespace School.DAL.DataInitialization
                 Class = c1,
                 ClassId = c1.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/fe/1b/c8/fe1bc805ff8ad5f0fe3de50d76c98a10.jpg"
             };
 
@@ -377,6 +438,8 @@ namespace School.DAL.DataInitialization
                 Class = c1,
                 ClassId = c1.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/50/4a/40/504a40337fa40398b3a456095529bcaa.jpg"
             };
 
@@ -388,6 +451,8 @@ namespace School.DAL.DataInitialization
                 Class = c2,
                 ClassId = c2.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/09/7d/3e/097d3ec42955647f62754bf83d5d67c4.jpg"
             };
 
@@ -399,6 +464,8 @@ namespace School.DAL.DataInitialization
                 Class = c2,
                 ClassId = c2.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/8a/df/f2/8adff2075693ad9460ef9dc9899b0d5a.jpg"
             };
 
@@ -411,6 +478,8 @@ namespace School.DAL.DataInitialization
                 Class = c2,
                 ClassId = c2.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/d2/58/bb/d258bbdc60685818768420b9be8efbfb.jpg"
             };
 
@@ -422,6 +491,8 @@ namespace School.DAL.DataInitialization
                 Class = c2,
                 ClassId = c2.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/6b/03/d8/6b03d8981533f204442fb7992d818be9.jpg"
             };
 
@@ -433,6 +504,8 @@ namespace School.DAL.DataInitialization
                 Class = c3,
                 ClassId = c3.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/ea/c9/1f/eac91f81bdd65d82824ef298c064b908.jpg"
             };
 
@@ -444,6 +517,8 @@ namespace School.DAL.DataInitialization
                 Class = c3,
                 ClassId = c3.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/c1/42/f6/c142f62b103a03f82766044e68a62065.jpg"
             };
 
@@ -455,6 +530,8 @@ namespace School.DAL.DataInitialization
                 Class = c3,
                 ClassId = c3.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/03/76/1f/03761fc7a9ac6947f5542547d4cfaa31.jpg"
             };
 
@@ -466,6 +543,8 @@ namespace School.DAL.DataInitialization
                 Class = c3,
                 ClassId = c3.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/c9/8b/28/c98b289dcb856c7e1482dcde8ba4987e.jpg"
             };
 
@@ -477,6 +556,8 @@ namespace School.DAL.DataInitialization
                 Class = c3,
                 ClassId = c3.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/d0/44/37/d04437c6f17436318ca9388afad4f305.jpg"
             };
 
@@ -488,6 +569,8 @@ namespace School.DAL.DataInitialization
                 Class = c4,
                 ClassId = c4.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/e5/ae/83/e5ae835f8e705a203ff4c6dfd9d01faf.jpg"
             };
 
@@ -499,6 +582,8 @@ namespace School.DAL.DataInitialization
                 Class = c4,
                 ClassId = c4.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/44/c6/a0/44c6a0ae9e98e83ea40152b216400457.jpg"
             };
 
@@ -510,6 +595,8 @@ namespace School.DAL.DataInitialization
                 Class = c4,
                 ClassId = c4.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/04/67/28/046728a58d56553e08f6faf837681171.jpg"
             };
 
@@ -521,6 +608,8 @@ namespace School.DAL.DataInitialization
                 Class = c4,
                 ClassId = c4.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/f8/94/81/f89481ccce1d0f1b4d44373985afcb16.jpg"
             };
 
@@ -532,6 +621,8 @@ namespace School.DAL.DataInitialization
                 Class = c4,
                 ClassId = c4.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/2e/44/f3/2e44f3552b32a499b75411bfab6c2d3b.jpg"
             };
 
@@ -543,6 +634,8 @@ namespace School.DAL.DataInitialization
                 Class = c4,
                 ClassId = c4.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/79/a6/d1/79a6d14de47ed1f017ad7adb932c9574.jpg"
             };
 
@@ -554,6 +647,8 @@ namespace School.DAL.DataInitialization
                 Class = c5,
                 ClassId = c5.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/45/75/56/457556342f7242fd51e1e92a6726ad2b.jpg"
             };
 
@@ -565,6 +660,8 @@ namespace School.DAL.DataInitialization
                 Class = c5,
                 ClassId = c5.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/16/6b/da/166bda5198c3b4e8e12a33c845237bd5.jpg"
             };
 
@@ -576,6 +673,8 @@ namespace School.DAL.DataInitialization
                 Class = c5,
                 ClassId = c5.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/98/f6/87/98f6874787c7796f9e90603396d2568c.jpg"
             };
 
@@ -587,6 +686,8 @@ namespace School.DAL.DataInitialization
                 Class = c5,
                 ClassId = c5.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/d1/3a/4c/d13a4c933675dc8addffe1cefbe230fd.jpg"
             };
 
@@ -598,6 +699,8 @@ namespace School.DAL.DataInitialization
                 Class = c5,
                 ClassId = c5.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/ab/9e/53/ab9e53b748f4a45b1aaad922d0788d54.jpg"
             };
 
@@ -609,6 +712,8 @@ namespace School.DAL.DataInitialization
                 Class = c5,
                 ClassId = c5.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/2f/f8/aa/2ff8aadab8f8c579cef07605dac09cfa.jpg"
             };
 
@@ -620,6 +725,8 @@ namespace School.DAL.DataInitialization
                 Class = c5,
                 ClassId = c5.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/6c/ff/06/6cff0629994f5cf5afbe485e684f90dd.jpg"
             };
 
@@ -631,6 +738,8 @@ namespace School.DAL.DataInitialization
                 Class = c6,
                 ClassId = c6.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/2c/53/86/2c53864a5526760365939f604407992e.jpg"
             };
 
@@ -642,6 +751,8 @@ namespace School.DAL.DataInitialization
                 Class = c6,
                 ClassId = c6.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/39/52/73/395273a6b2261c3b4d1f7a9473feeebd.jpg"
             };
 
@@ -653,6 +764,8 @@ namespace School.DAL.DataInitialization
                 Class = c6,
                 ClassId = c6.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/fc/a9/4e/fca94e39e3057545a69754298d1431bc.jpg"
             };
 
@@ -664,6 +777,8 @@ namespace School.DAL.DataInitialization
                 Class = c6,
                 ClassId = c6.Id,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/236x/55/5f/ad/555fad34030f6cd00c63dbc54074133d.jpg"
             };
 
@@ -675,6 +790,8 @@ namespace School.DAL.DataInitialization
                 Class = c6,
                 ClassId = c6.Id,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/fb/93/42/fb93429f0f7a1e968c0f2c2e91526159.jpg"
             };
 
@@ -684,6 +801,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Cina",
                 Age = 11,
                 Gender = Gender.Female,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/a5/d9/2a/a5d92a760dadaa43a59704402abb2ae7.jpg"
             };
 
@@ -693,6 +812,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Opraa",
                 Age = 12,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/94/a1/8b/94a18be3790c298f1649930b64528994.jpg"
             };
 
@@ -702,6 +823,8 @@ namespace School.DAL.DataInitialization
                 LastName = "Bad",
                 Age = 15,
                 Gender = Gender.Male,
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
                 Image = "https://i.pinimg.com/564x/7c/57/47/7c5747448271c2e48c00c5257803a7fd.jpg"
             };
 
@@ -828,6 +951,31 @@ namespace School.DAL.DataInitialization
 
             foreach (var subject in subjPacket3)
                 s33.Subjects.Add(subject);
+
+
+            var blog_1 = new Blog
+            {
+                Category = "Update",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
+                Image = "https://image.shutterstock.com/z/stock-photo-business-woman-holding-tear-paper-with-update-text-1148517125.jpg",
+                Name = "Version 1.0",
+                Text =
+                    "Today we release version 1.0. It's will be first bih update from start this startup. Expect more information later"
+            };
+            
+            var blog_2 = new Blog
+            {
+                Category = "School newspaper",
+                CreatedTime = DateTime.Now,
+                LastUpdatedTime = DateTime.Now,
+                Image = "https://i.guim.co.uk/img/media/f4557d1a4a6fac9c55e930c672433871e875c606/54_0_4033_2422/master/4033.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c8c1161563f30b7007b9246b26b1c81c",
+                Name = "Trip to Barcelona",
+                Text =
+                    "In 24 october our the best class on average for the last year will go to Barcelona"
+            };
+            
+            dbContext.Blogs.AddRange(blog_1, blog_2);
 
 
             dbContext.SaveChanges();

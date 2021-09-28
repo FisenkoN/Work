@@ -1,0 +1,30 @@
+@model IEnumerable<School.BLL.Dto.BlogDto>
+
+@{
+    ViewBag.Title = "Blogs";
+    Layout = "_Layout";
+}
+
+<head>
+    <link rel="stylesheet" href="css/blogs.css">
+</head>
+
+<div class="wrap">
+@foreach (var blog in Model)
+{
+    <div class="post">
+        <div class="feat-img">
+            <img src=@blog.Image alt="logo"/>
+        </div>
+        <article>
+            <header>
+                <h2><a href="#">@blog.Name</a></h2>
+            </header>
+            <p>@blog.Text</p>  
+            <footer>
+                @Html.ActionLink("Read more", "Blog", "Home", new {blog.Id});
+            </footer>
+        </article>
+    </div>
+}
+</div><!--end wrap -->

@@ -404,3 +404,10 @@ G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Home\ContactUs.cshtml.g.cs
 G:\Proj\School.WEB\bin\Debug\net5.0\MailKit.dll
 G:\Proj\School.WEB\bin\Debug\net5.0\MimeKit.dll
 G:\Proj\School.WEB\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Home\News.cshtml.g.cs
+G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Home\Blog.cshtml.g.cs
+G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Home\Blogs.cshtml.g.cs
+G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Admin\CreateBlog.cshtml.g.cs
+G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Admin\GetBlogs.cshtml.g.cs
+G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Admin\DetailsBlog.cshtml.g.cs
+G:\Proj\School.WEB\obj\Debug\net5.0\Razor\Views\Admin\EditBlog.cshtml.g.cs
