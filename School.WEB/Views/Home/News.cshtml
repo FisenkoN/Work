@@ -1,0 +1,86 @@
+@using School.BLL.Dto
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Recently updated students:</h2>
+
+<table class="table" >
+    <thead>
+    <tr>
+        <th>Student full name</th>
+        <th>Last update</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (StudentDto s in ViewBag.Students)
+    {
+        <tr>
+            <td>@s.FullName
+            <td>@s.LastUpdatedTime</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<br/>
+<h2>Recently updated teachers:</h2>
+
+<table class="table" >
+    <thead>
+    <tr>
+        <th>Teacher full name</th>
+        <th>Last update</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (TeacherDto s in ViewBag.Teachers)
+    {
+        <tr>
+            <td>@s.FullName</td>
+            <td>@s.LastUpdatedTime</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<br/>
+<h2>Recently updated classes:</h2>
+
+<table class="table" >
+    <thead>
+    <tr>
+        <th>Class name</th>
+        <th>Last update</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (ClassDto s in ViewBag.Classes)
+    {
+        <tr>
+            <td>@s.Name</td>
+            <td>@s.LastUpdatedTime</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<br/>
+<h2>Recently updated subjects:</h2>
+
+<table class="table" >
+    <thead>
+    <tr>
+        <th>Subjects name</th>
+        <th>Last update</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (SubjectDto s in ViewBag.Subjects)
+    {
+        <tr>
+            <td>@s.Name</td>
+            <td>@s.LastUpdatedTime</td>
+        </tr>
+    }
+    </tbody>
+</table>

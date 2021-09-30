@@ -12,7 +12,7 @@ namespace School.BLL.Services
         public MainService()
         {
             _context = new SchoolDbContext();
-
+            
             MyDataInitializer.RecreateDatabase(_context);
             MyDataInitializer.InitializeData(_context);
         }

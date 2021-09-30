@@ -14,23 +14,26 @@ namespace School.DAL.Repository
         private SubjectRepository _subjectRepository;
 
         private TeacherRepository _teacherRepository;
-        private readonly SchoolDbContext db;
+
+        private BlogRepository _blogRepository;
+
+        private readonly SchoolDbContext _db;
 
         public EfUnitOfWork()
         {
-            db = new SchoolDbContext();
+            _db = new SchoolDbContext();
         }
 
         public EfUnitOfWork(SchoolDbContext dbContext)
         {
-            db = dbContext;
+            _db = dbContext;
         }
 
         public void Save()
         {
             try
             {
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException e)
             {
@@ -55,15 +58,18 @@ namespace School.DAL.Repository
         }
 
         public IStudentRepository Students =>
-            _studentRepository ??= new StudentRepository(db);
+            _studentRepository ??= new StudentRepository(_db);
 
         public ITeacherRepository Teachers =>
-            _teacherRepository ??= new TeacherRepository(db);
+            _teacherRepository ??= new TeacherRepository(_db);
 
         public IClassRepository Classes =>
-            _classRepository ??= new ClassRepository(db);
+            _classRepository ??= new ClassRepository(_db);
 
         public ISubjectRepository Subjects =>
-            _subjectRepository ??= new SubjectRepository(db);
+            _subjectRepository ??= new SubjectRepository(_db);
+
+        public IBlogRepository Blogs =>
+            _blogRepository ??= new BlogRepository(_db);
     }
 }

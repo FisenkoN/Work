@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace School.BLL.Dto
 {
@@ -11,5 +12,9 @@ namespace School.BLL.Dto
         public int? TeacherId { get; set; }
 
         public IEnumerable<int> StudentIds { get; set; }
+
+        public DateTime CreatedTime { get; set; }
+
+        public DateTime LastUpdatedTime { get; set; }
     }
 }

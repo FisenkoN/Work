@@ -28,6 +28,10 @@ namespace School.DAL.Repository
 
         public virtual int Add(T entity)
         {
+            entity.CreatedTime = DateTime.Now;
+            
+            entity.LastUpdatedTime = DateTime.Now;
+            
             _table.Add(entity);
 
             return SaveChanges();
@@ -63,6 +67,8 @@ namespace School.DAL.Repository
         
         public virtual int Update(T entity)
         {
+            entity.LastUpdatedTime = DateTime.Now;
+            
             _table.Update(entity);
 
             return SaveChanges();
@@ -82,12 +88,19 @@ namespace School.DAL.Repository
             return SaveChanges();
         }
 
-        public virtual T GetOne(int? id) =>
-            _table.Find(id);
+        public virtual T GetOne(int? id)
+        {
+            return _table.Find(id);
+        }
 
-        public virtual IQueryable<T> GetSome(Expression<Func<T, bool>> @where) =>
-            _table.Where(where);
+        public virtual IQueryable<T> GetSome(Expression<Func<T, bool>> where)
+        {
+            return _table.Where(where);
+        }
 
-        public virtual List<T> GetAll() => _table.ToList();
+        public virtual List<T> GetAll()
+        {
+            return _table.ToList();
+        }
     }
 }

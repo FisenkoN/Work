@@ -6,7 +6,8 @@ using School.DAL.Interfaces;
 
 namespace School.DAL.Repository
 {
-    public class ClassRepository : BaseRepository<Class>, IClassRepository
+    public class ClassRepository : BaseRepository<Class>,
+        IClassRepository
     {
         public ClassRepository()
         {
@@ -26,7 +27,7 @@ namespace School.DAL.Repository
         public virtual Class GetOneRelated(int? id)
         {
             return GetRelatedData()
-                .First(c => c.Id == id);
+                .FirstOrDefault(c => c.Id == id);
         }
     }
 }

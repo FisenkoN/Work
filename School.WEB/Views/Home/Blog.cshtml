@@ -1,0 +1,27 @@
+@model School.BLL.Dto.BlogDto
+
+@{
+    ViewData["Title"] = "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Name</h1>
+
+<img height="250" src="@Model.Image" alt="avatar"/>
+
+<div>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <br/>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dd>@Model.Text</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Blogs">Back to List</a>
+</div>

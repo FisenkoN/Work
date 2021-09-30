@@ -104,7 +104,8 @@ namespace School.UI
                             if (s != null)
                             {
                                 var @class = s.ClassId != null
-                                    ? studentService.GetClassForId(s.ClassId)?.Name
+                                    ? studentService.GetClassForId(s.ClassId)
+                                        ?.Name
                                     : "no class";
 
                                 Console.WriteLine($"FullName: {s.FullName}\n" +
@@ -112,8 +113,11 @@ namespace School.UI
                                                   $"Class:    {@class}\n" +
                                                   $"Gender:   {s.Gender}\n" +
                                                   "Subjects:           \n" +
-                                                  studentService.GetSubjects(s.Id).Aggregate("\t\t",
-                                                      (current, subject) => current + subject.Name + "\n\t\t")
+                                                  studentService.GetSubjects(s.Id)
+                                                      .Aggregate("\t\t",
+                                                          (current,
+                                                                  subject)
+                                                              => current + subject.Name + "\n\t\t")
                                 );
                             }
                             else
@@ -162,7 +166,8 @@ namespace School.UI
                                             if (s != null)
                                             {
                                                 var @class = s.ClassId != null
-                                                    ? studentService.GetClassForId(s.ClassId)?.Name
+                                                    ? studentService.GetClassForId(s.ClassId)
+                                                        ?.Name
                                                     : "no class";
 
                                                 Console.WriteLine($"FullName: {s.FullName}\n" +
@@ -170,9 +175,11 @@ namespace School.UI
                                                                   $"Class:    {@class}\n" +
                                                                   $"Gender:   {s.Gender}\n" +
                                                                   "Subjects:           \n" +
-                                                                  studentService.GetSubjects(s.Id).Aggregate("\t\t",
-                                                                      (current, subject) =>
-                                                                          current + subject.Name + "\n\t\t")
+                                                                  studentService.GetSubjects(s.Id)
+                                                                      .Aggregate("\t\t",
+                                                                          (current,
+                                                                                  subject) =>
+                                                                              current + subject.Name + "\n\t\t")
                                                 );
                                             }
                                             else
@@ -212,7 +219,8 @@ namespace School.UI
                                                 var firstName = Console.ReadLine();
 
                                                 if (Validation.FirstOrLastName(firstName))
-                                                    studentService.Edit_FirstName(id, firstName);
+                                                    studentService.Edit_FirstName(id,
+                                                        firstName);
                                                 else
                                                     Console.WriteLine("Error, you entered wrong value");
 
@@ -224,7 +232,8 @@ namespace School.UI
                                                 var lastName = Console.ReadLine();
 
                                                 if (Validation.FirstOrLastName(lastName))
-                                                    studentService.Edit_LastName(id, lastName);
+                                                    studentService.Edit_LastName(id,
+                                                        lastName);
                                                 else
                                                     Console.WriteLine("Error, you entered wrong value");
 
@@ -247,7 +256,8 @@ namespace School.UI
                                                 }
 
                                                 if (age is >= 5 and <= 18)
-                                                    studentService.Edit_Age(id, age);
+                                                    studentService.Edit_Age(id,
+                                                        age);
                                                 else
                                                     Console.WriteLine("Error, you entered wrong value");
 
@@ -275,7 +285,8 @@ namespace School.UI
                                                 if (gender != 0 && gender != 1)
                                                     gender = 2;
 
-                                                studentService.Edit_Gender(id, (GenderDto)gender);
+                                                studentService.Edit_Gender(id,
+                                                    (GenderDto)gender);
 
                                                 break;
 
@@ -304,7 +315,8 @@ namespace School.UI
 
                                                 try
                                                 {
-                                                    studentService.Edit_Class(id, classChoice);
+                                                    studentService.Edit_Class(id,
+                                                        classChoice);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -337,14 +349,16 @@ namespace School.UI
                                                         continue;
                                                     }
 
-                                                    if (subId == 0) break;
+                                                    if (subId == 0)
+                                                        break;
 
                                                     subjectIds.Add(subId);
                                                 }
 
                                                 try
                                                 {
-                                                    studentService.Edit_Subjects(id, subjectIds);
+                                                    studentService.Edit_Subjects(id,
+                                                        subjectIds);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -388,7 +402,9 @@ namespace School.UI
 
                         try
                         {
-                            if (studentService.GetClassmates(id)?.Count >= 1)
+                            if (studentService.GetClassmates(id)
+                                    ?.Count >=
+                                1)
                             {
                                 Console.WriteLine("\n\n");
 
@@ -520,7 +536,8 @@ namespace School.UI
 
                                         var @class = student.ClassId != null
                                             ? adminService
-                                                .Classes_GetForId(student.ClassId).Name
+                                                .Classes_GetForId(student.ClassId)
+                                                .Name
                                             : "no class";
 
                                         Console.WriteLine($"Full name:      {student.FullName}\n" +
@@ -659,9 +676,11 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
-                                                    adminService.Students_Edit_FirstName(idEdit, firstNameEdit);
+                                                    adminService.Students_Edit_FirstName(idEdit,
+                                                        firstNameEdit);
 
                                                     Console.WriteLine("First name was edit)");
                                                 }
@@ -687,9 +706,11 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
-                                                    adminService.Students_Edit_LastName(idEdit, lastNameEdit);
+                                                    adminService.Students_Edit_LastName(idEdit,
+                                                        lastNameEdit);
 
                                                     Console.WriteLine("Last name was edit)");
                                                 }
@@ -726,9 +747,11 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
-                                                    adminService.Students_Edit_Age(idEdit, ageEdit);
+                                                    adminService.Students_Edit_Age(idEdit,
+                                                        ageEdit);
 
                                                     Console.WriteLine("Age was edit)");
                                                 }
@@ -768,9 +791,11 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
-                                                    adminService.Students_Edit_Gender(idEdit, (GenderDto)genderEdit);
+                                                    adminService.Students_Edit_Gender(idEdit,
+                                                        (GenderDto)genderEdit);
 
                                                     Console.WriteLine("Gender was edit)");
                                                 }
@@ -810,9 +835,11 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
-                                                    adminService.Students_Edit_Class(idEdit, classId);
+                                                    adminService.Students_Edit_Class(idEdit,
+                                                        classId);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -853,7 +880,8 @@ namespace School.UI
                                                         continue;
                                                     }
 
-                                                    if (subId == 0) break;
+                                                    if (subId == 0)
+                                                        break;
 
                                                     subjectIds.Add(subId);
                                                 }
@@ -868,9 +896,11 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
-                                                    adminService.Students_Edit_Subjects(idEdit, subjectIds);
+                                                    adminService.Students_Edit_Subjects(idEdit,
+                                                        subjectIds);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -942,7 +972,8 @@ namespace School.UI
 
                                     Console.WriteLine();
 
-                                    if (adminService.Classes_GetAll().Any())
+                                    if (adminService.Classes_GetAll()
+                                        .Any())
                                     {
                                         Console.WriteLine("Classes: \n");
 
@@ -998,7 +1029,8 @@ namespace School.UI
                                             break;
                                         }
 
-                                        if (tmp == 0) break;
+                                        if (tmp == 0)
+                                            break;
 
                                         subjects.Add(tmp);
                                     }
@@ -1013,7 +1045,8 @@ namespace School.UI
 
                                         isContinue = Console.ReadLine();
 
-                                        if (isContinue != "y") break;
+                                        if (isContinue != "y")
+                                            break;
 
                                         adminService.Student_Create(new StudentDto
                                         {
@@ -1067,7 +1100,8 @@ namespace School.UI
 
                                         isContinue = Console.ReadLine();
 
-                                        if (isContinue != "y") break;
+                                        if (isContinue != "y")
+                                            break;
 
                                         Console.WriteLine();
 
@@ -1249,11 +1283,13 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
                                                     Console.WriteLine();
 
-                                                    adminService.Subject_Edit_Name(idSubject, nameEditSubject);
+                                                    adminService.Subject_Edit_Name(idSubject,
+                                                        nameEditSubject);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -1293,7 +1329,8 @@ namespace School.UI
                                                         continue;
                                                     }
 
-                                                    if (sId == 0) break;
+                                                    if (sId == 0)
+                                                        break;
 
                                                     sIds.Add(sId);
                                                 }
@@ -1308,11 +1345,13 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
                                                     Console.WriteLine();
 
-                                                    adminService.Subjects_Edit_Students(idSubject, sIds);
+                                                    adminService.Subjects_Edit_Students(idSubject,
+                                                        sIds);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -1351,7 +1390,8 @@ namespace School.UI
                                                         continue;
                                                     }
 
-                                                    if (tId == 0) break;
+                                                    if (tId == 0)
+                                                        break;
 
                                                     tIds.Add(tId);
                                                 }
@@ -1366,11 +1406,13 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
                                                     Console.WriteLine();
 
-                                                    adminService.Subjects_Edit_Teachers(idSubject, tIds);
+                                                    adminService.Subjects_Edit_Teachers(idSubject,
+                                                        tIds);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -1399,7 +1441,8 @@ namespace School.UI
 
                                     isContinue = Console.ReadLine();
 
-                                    if (isContinue != "y") break;
+                                    if (isContinue != "y")
+                                        break;
 
                                     Console.WriteLine();
 
@@ -1435,7 +1478,8 @@ namespace School.UI
                                             continue;
                                         }
 
-                                        if (sId == 0) break;
+                                        if (sId == 0)
+                                            break;
 
                                         studIds.Add(sId);
                                     }
@@ -1465,7 +1509,8 @@ namespace School.UI
                                             continue;
                                         }
 
-                                        if (tId == 0) break;
+                                        if (tId == 0)
+                                            break;
 
                                         teachIds.Add(tId);
                                     }
@@ -1480,7 +1525,8 @@ namespace School.UI
 
                                         isContinue = Console.ReadLine();
 
-                                        if (isContinue != "y") break;
+                                        if (isContinue != "y")
+                                            break;
 
                                         Console.WriteLine();
 
@@ -1535,7 +1581,8 @@ namespace School.UI
 
                                         isContinue = Console.ReadLine();
 
-                                        if (isContinue != "y") break;
+                                        if (isContinue != "y")
+                                            break;
 
                                         Console.WriteLine();
 
@@ -1597,10 +1644,11 @@ namespace School.UI
                                             "\n\n----------------------------------------------------------\n\n");
 
                                         @class = adminService
-                                            .Classes_GetAll()
-                                            .FirstOrDefault(c =>
-                                                c.TeacherId == teacher.Id)
-                                            ?.Name ?? "no class";
+                                                     .Classes_GetAll()
+                                                     .FirstOrDefault(c =>
+                                                         c.TeacherId == teacher.Id)
+                                                     ?.Name ??
+                                                 "no class";
 
                                         Console.WriteLine($"Full name:      {teacher.FullName}\n" +
                                                           $"Age:            {teacher.Age}\n" +
@@ -1654,10 +1702,11 @@ namespace School.UI
                                     }
 
                                     @class = adminService
-                                        .Classes_GetAll()
-                                        .FirstOrDefault(c =>
-                                            c.TeacherId == teacherId)
-                                        ?.Name ?? "no class";
+                                                 .Classes_GetAll()
+                                                 .FirstOrDefault(c =>
+                                                     c.TeacherId == teacherId)
+                                                 ?.Name ??
+                                             "no class";
 
                                     Console.WriteLine($"Full name:      {teachersGetForId.FullName}\n" +
                                                       $"Age:            {teachersGetForId.Age}\n" +
@@ -1741,11 +1790,13 @@ namespace School.UI
 
                                                 isContinue = Console.ReadLine();
 
-                                                if (isContinue != "y") break;
+                                                if (isContinue != "y")
+                                                    break;
 
                                                 Console.WriteLine();
 
-                                                adminService.Teachers_Edit_FirstName(idEdit, fName);
+                                                adminService.Teachers_Edit_FirstName(idEdit,
+                                                    fName);
 
                                                 Console.WriteLine("First name was edit");
 
@@ -1767,11 +1818,13 @@ namespace School.UI
 
                                                 isContinue = Console.ReadLine();
 
-                                                if (isContinue != "y") break;
+                                                if (isContinue != "y")
+                                                    break;
 
                                                 Console.WriteLine();
 
-                                                adminService.Teachers_Edit_LastName(idEdit, lName);
+                                                adminService.Teachers_Edit_LastName(idEdit,
+                                                    lName);
 
                                                 Console.WriteLine("Last name was edit");
 
@@ -1802,11 +1855,13 @@ namespace School.UI
 
                                                 isContinue = Console.ReadLine();
 
-                                                if (isContinue != "y") break;
+                                                if (isContinue != "y")
+                                                    break;
 
                                                 Console.WriteLine();
 
-                                                adminService.Teachers_Edit_Age(idEdit, age);
+                                                adminService.Teachers_Edit_Age(idEdit,
+                                                    age);
 
                                                 Console.WriteLine("Age was edit");
 
@@ -1837,11 +1892,13 @@ namespace School.UI
 
                                                 isContinue = Console.ReadLine();
 
-                                                if (isContinue != "y") break;
+                                                if (isContinue != "y")
+                                                    break;
 
                                                 Console.WriteLine();
 
-                                                adminService.Teachers_Edit_Gender(idEdit, gender);
+                                                adminService.Teachers_Edit_Gender(idEdit,
+                                                    gender);
 
                                                 Console.WriteLine("Gender was edit");
 
@@ -1859,7 +1916,8 @@ namespace School.UI
                                                 if (choiceClassAdd == "1")
                                                 {
                                                     Console.WriteLine();
-                                                    if (adminService.GetClassWithOutTeacher().Any())
+                                                    if (adminService.GetClassWithOutTeacher()
+                                                        .Any())
                                                     {
                                                         foreach (var classDto in adminService.GetClassWithOutTeacher())
                                                             Console.WriteLine($"{classDto.Id}\t\t{classDto.Name}");
@@ -1889,11 +1947,13 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
                                                     Console.WriteLine();
 
-                                                    adminService.Teachers_Edit_Class(idEdit, classId);
+                                                    adminService.Teachers_Edit_Class(idEdit,
+                                                        classId);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -1932,7 +1992,8 @@ namespace School.UI
                                                         break;
                                                     }
 
-                                                    if (subId == 0) break;
+                                                    if (subId == 0)
+                                                        break;
 
                                                     subjectIds.Add(subId);
                                                 } while (true);
@@ -1947,11 +2008,13 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
                                                     Console.WriteLine();
 
-                                                    adminService.Teachers_Edit_Subjects(idEdit, subjectIds);
+                                                    adminService.Teachers_Edit_Subjects(idEdit,
+                                                        subjectIds);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -2017,7 +2080,8 @@ namespace School.UI
                                     {
                                         Console.Write("Enter class:\t");
 
-                                        var classes = adminService.GetClassWithOutTeacher().ToList();
+                                        var classes = adminService.GetClassWithOutTeacher()
+                                            .ToList();
 
                                         if (!classes.Any())
                                         {
@@ -2075,7 +2139,8 @@ namespace School.UI
                                             break;
                                         }
 
-                                        if (subId == 0) break;
+                                        if (subId == 0)
+                                            break;
 
                                         subIds.Add(subId);
                                     } while (true);
@@ -2090,7 +2155,8 @@ namespace School.UI
 
                                         isContinue = Console.ReadLine();
 
-                                        if (isContinue != "y") break;
+                                        if (isContinue != "y")
+                                            break;
 
                                         adminService.Teacher_Create(new TeacherDto
                                         {
@@ -2145,7 +2211,8 @@ namespace School.UI
 
                                         isContinue = Console.ReadLine();
 
-                                        if (isContinue != "y") break;
+                                        if (isContinue != "y")
+                                            break;
 
                                         Console.WriteLine();
 
@@ -2198,7 +2265,8 @@ namespace School.UI
 
                                         var t1 = @class.TeacherId != null
                                             ? adminService
-                                                .Teachers_GetForId(@class.TeacherId)?
+                                                .Teachers_GetForId(@class.TeacherId)
+                                                ?
                                                 .FullName
                                             : "no teacher";
 
@@ -2207,7 +2275,8 @@ namespace School.UI
                                                           "Students:\n");
 
                                         var students1 = adminService
-                                            .Classes_GetStudentsForId(@class.Id).ToList();
+                                            .Classes_GetStudentsForId(@class.Id)
+                                            .ToList();
 
                                         if (students1.Any())
                                             foreach (var student in students1)
@@ -2257,7 +2326,8 @@ namespace School.UI
 
                                     var t = claws.TeacherId != null
                                         ? adminService
-                                            .Teachers_GetForId(claws.TeacherId)?
+                                            .Teachers_GetForId(claws.TeacherId)
+                                            ?
                                             .FullName
                                         : "no teacher";
 
@@ -2266,7 +2336,8 @@ namespace School.UI
                                                       "Students:\n");
 
                                     var students2 = adminService
-                                        .Classes_GetStudentsForId(claws.Id).ToList();
+                                        .Classes_GetStudentsForId(claws.Id)
+                                        .ToList();
 
                                     if (students2.Any())
                                         foreach (var student in students2)
@@ -2342,11 +2413,13 @@ namespace School.UI
 
                                                 isContinue = Console.ReadLine();
 
-                                                if (isContinue != "y") break;
+                                                if (isContinue != "y")
+                                                    break;
 
                                                 Console.WriteLine();
 
-                                                adminService.Class_Edit_Name(idClass, n);
+                                                adminService.Class_Edit_Name(idClass,
+                                                    n);
 
                                                 Console.WriteLine("Name was edit");
 
@@ -2358,7 +2431,9 @@ namespace School.UI
                                                     .GetTeachersWithoutClass()
                                                     .ToList();
 
-                                                if (adminService.Classes_GetForId(idClass).TeacherId != null)
+                                                if (adminService.Classes_GetForId(idClass)
+                                                        .TeacherId !=
+                                                    null)
                                                 {
                                                     var teacherDto = adminService.Teachers_GetForId(idClass);
 
@@ -2393,11 +2468,13 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
                                                     Console.WriteLine();
 
-                                                    adminService.Class_Edit_Teacher(idClass, tId);
+                                                    adminService.Class_Edit_Teacher(idClass,
+                                                        tId);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -2438,7 +2515,8 @@ namespace School.UI
                                                         break;
                                                     }
 
-                                                    if (i == 0) break;
+                                                    if (i == 0)
+                                                        break;
 
                                                     studentIds.Add(i);
                                                 } while (true);
@@ -2453,11 +2531,13 @@ namespace School.UI
 
                                                     isContinue = Console.ReadLine();
 
-                                                    if (isContinue != "y") break;
+                                                    if (isContinue != "y")
+                                                        break;
 
                                                     Console.WriteLine();
 
-                                                    adminService.Class_Edit_Students(idClass, studentIds);
+                                                    adminService.Class_Edit_Students(idClass,
+                                                        studentIds);
                                                 }
                                                 catch (Exception)
                                                 {
@@ -2503,7 +2583,8 @@ namespace School.UI
                                     if (choice == "1")
                                     {
                                         var teachers = adminService
-                                            .GetTeachersWithoutClass().ToList();
+                                            .GetTeachersWithoutClass()
+                                            .ToList();
 
                                         if (teachers.Any())
                                         {
@@ -2548,7 +2629,8 @@ namespace School.UI
                                             break;
                                         }
 
-                                        if (i1 == 0) break;
+                                        if (i1 == 0)
+                                            break;
 
                                         students.Add(i1);
                                     } while (true);
@@ -2563,7 +2645,8 @@ namespace School.UI
 
                                         isContinue = Console.ReadLine();
 
-                                        if (isContinue != "y") break;
+                                        if (isContinue != "y")
+                                            break;
 
                                         adminService.Class_Create(new ClassDto
                                         {
@@ -2580,11 +2663,13 @@ namespace School.UI
                                     }
 
                                     var idClassFoundForName = adminService
-                                        .GetClassForName(name).Id;
+                                        .GetClassForName(name)
+                                        .Id;
 
                                     try
                                     {
-                                        adminService.Class_Edit_Students(idClassFoundForName, students);
+                                        adminService.Class_Edit_Students(idClassFoundForName,
+                                            students);
                                     }
                                     catch (Exception)
                                     {
@@ -2628,7 +2713,8 @@ namespace School.UI
 
                                         isContinue = Console.ReadLine();
 
-                                        if (isContinue != "y") break;
+                                        if (isContinue != "y")
+                                            break;
 
                                         Console.WriteLine();
 
@@ -2696,7 +2782,8 @@ namespace School.UI
                             }
                         } while (id == int.MinValue);
 
-                        if (id == 0) break;
+                        if (id == 0)
+                            break;
 
                         TeacherDto teacher;
 
@@ -2749,7 +2836,8 @@ namespace School.UI
                             }
                         } while (idClass == int.MinValue);
 
-                        if (idClass == 0) break;
+                        if (idClass == 0)
+                            break;
 
                         Console.WriteLine();
 

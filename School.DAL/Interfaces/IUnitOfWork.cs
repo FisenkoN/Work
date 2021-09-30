@@ -7,6 +7,8 @@
         public ITeacherRepository Teachers { get; }
 
         public IClassRepository Classes { get; }
+        
+        public IBlogRepository Blogs { get; }
 
         public ISubjectRepository Subjects { get; }
 

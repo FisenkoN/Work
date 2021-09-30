@@ -7,7 +7,8 @@ using School.DAL.Interfaces;
 
 namespace School.DAL.Repository
 {
-    public class SubjectRepository : BaseRepository<Subject>, ISubjectRepository
+    public class SubjectRepository : BaseRepository<Subject>,
+        ISubjectRepository
     {
         public SubjectRepository(SchoolDbContext db) : base(db)
         {
