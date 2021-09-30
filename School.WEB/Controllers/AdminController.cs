@@ -25,7 +25,7 @@ namespace School.WEB.Controllers
 
             _client = new HttpClient();
         }
-            
+
         // GET
         public IActionResult Index()
         {
@@ -47,7 +47,7 @@ namespace School.WEB.Controllers
 
             return NotFound();
         }
-        
+
         public async Task<IActionResult> GetBlogs()
         {
             if (TempData["Message"] != null)
@@ -63,7 +63,7 @@ namespace School.WEB.Controllers
 
             return NotFound();
         }
-        
+
         public async Task<IActionResult> DetailsBlog(int? id)
         {
             if (id == null)
@@ -75,7 +75,7 @@ namespace School.WEB.Controllers
             {
                 blog = JsonConvert.DeserializeObject<BlogDto>(
                     await (await _client.GetAsync(
-                             $"https://localhost:44331/api/Blog/{id}")).Content
+                            $"https://localhost:44331/api/Blog/{id}")).Content
                         .ReadAsStringAsync());
             }
             catch (Exception)
@@ -85,20 +85,20 @@ namespace School.WEB.Controllers
 
             return View(blog);
         }
-        
+
         public IActionResult CreateBlog()
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> CreateBlog(
             [Bind("Name, Category, Id, Text, Image")]
-            BlogDto blog)  
+            BlogDto blog)
         {
             var json = JsonConvert.SerializeObject(blog);
 
-            var response = await _client.PostAsync("https://localhost:44331/api/Blog",
+            await _client.PostAsync("https://localhost:44331/api/Blog",
                 new StringContent(json,
                     Encoding.UTF8,
                     "application/json"));
@@ -107,8 +107,8 @@ namespace School.WEB.Controllers
 
             return RedirectToAction("GetBlogs");
         }
-        
-         public async Task<IActionResult> EditBlog(int? id) 
+
+        public async Task<IActionResult> EditBlog(int? id)
         {
             if (id == null)
                 return BadRequest();
@@ -140,7 +140,7 @@ namespace School.WEB.Controllers
 
             var json = JsonConvert.SerializeObject(blog);
 
-            var response = await _client.PutAsync($"https://localhost:44331/api/Blog/{id}",
+            await _client.PutAsync($"https://localhost:44331/api/Blog/{id}",
                 new StringContent(json,
                     Encoding.UTF8,
                     "application/json"));
@@ -154,7 +154,7 @@ namespace School.WEB.Controllers
 
             return RedirectToAction("GetBlogs");
         }
-        
+
         public async Task<IActionResult> DeleteBlog(int? id)
         {
             if (id == null)
@@ -269,7 +269,7 @@ namespace School.WEB.Controllers
         {
             var json = JsonConvert.SerializeObject(teacherDto);
 
-            var response = await _client.PostAsync(_baseUrl + $"/Teacher",
+            await _client.PostAsync(_baseUrl + $"/Teacher",
                 new StringContent(json,
                     Encoding.UTF8,
                     "application/json"));
@@ -356,7 +356,7 @@ namespace School.WEB.Controllers
 
             var json = JsonConvert.SerializeObject(teacher);
 
-            var response = await _client.PutAsync(_baseUrl + $"/Teacher/{id}",
+            await _client.PutAsync(_baseUrl + $"/Teacher/{id}",
                 new StringContent(json,
                     Encoding.UTF8,
                     "application/json"));
@@ -473,7 +473,7 @@ namespace School.WEB.Controllers
             {
                 var json = JsonConvert.SerializeObject(student);
 
-                var response = await _client.PostAsync(_baseUrl + $"/Student",
+                await _client.PostAsync(_baseUrl + $"/Student",
                     new StringContent(json,
                         Encoding.UTF8,
                         "application/json"));
@@ -541,7 +541,7 @@ namespace School.WEB.Controllers
             {
                 var json = JsonConvert.SerializeObject(student);
 
-                var response = await _client.PutAsync(_baseUrl + $"/Student/{id}",
+                await _client.PutAsync(_baseUrl + $"/Student/{id}",
                     new StringContent(json,
                         Encoding.UTF8,
                         "application/json"));
@@ -660,7 +660,7 @@ namespace School.WEB.Controllers
             {
                 var json = JsonConvert.SerializeObject(classDto);
 
-                var response = await _client.PostAsync(_baseUrl + $"/Class",
+                await _client.PostAsync(_baseUrl + $"/Class",
                     new StringContent(json,
                         Encoding.UTF8,
                         "application/json"));
@@ -705,7 +705,7 @@ namespace School.WEB.Controllers
         {
             var json = JsonConvert.SerializeObject(subject);
 
-            var response = await _client.PostAsync(_baseUrl + $"/Subject",
+            await _client.PostAsync(_baseUrl + $"/Subject",
                 new StringContent(json,
                     Encoding.UTF8,
                     "application/json"));
@@ -778,7 +778,7 @@ namespace School.WEB.Controllers
 
             var json = JsonConvert.SerializeObject(classDto);
 
-            var response = await _client.PutAsync(_baseUrl + $"/Class/{id}",
+            await _client.PutAsync(_baseUrl + $"/Class/{id}",
                 new StringContent(json,
                     Encoding.UTF8,
                     "application/json"));
@@ -886,7 +886,7 @@ namespace School.WEB.Controllers
 
             var json = JsonConvert.SerializeObject(subject);
 
-            var response = await _client.PutAsync(_baseUrl + $"/Subject/{id}",
+            await _client.PutAsync(_baseUrl + $"/Subject/{id}",
                 new StringContent(json,
                     Encoding.UTF8,
                     "application/json"));

@@ -14,8 +14,9 @@ namespace School.BLL.Mapper
             _unitOfWork = unitOfWork;
         }
 
-        public ClassDto To(Class c) =>
-            new()
+        public static ClassDto To(Class c)
+        {
+            return new ClassDto
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -25,9 +26,11 @@ namespace School.BLL.Mapper
                 StudentIds = c.Students
                     .Select(s => s.Id)
             };
+        }
 
-        public StudentDto To(Student s) =>
-            new()
+        public static StudentDto To(Student s)
+        {
+            return new StudentDto
             {
                 Id = s.Id,
                 Age = s.Age,
@@ -41,9 +44,11 @@ namespace School.BLL.Mapper
                 SubjectIds = s.Subjects
                     .Select(subject => subject.Id)
             };
+        }
 
-        public TeacherDto To(Teacher t) =>
-            new()
+        public static TeacherDto To(Teacher t)
+        {
+            return new TeacherDto
             {
                 Id = t.Id,
                 FirstName = t.FirstName,
@@ -57,9 +62,11 @@ namespace School.BLL.Mapper
                 SubjectIds = t.Subjects?
                     .Select(s => s.Id)
             };
+        }
 
-        public SubjectDto To(Subject s) =>
-            new()
+        public static SubjectDto To(Subject s)
+        {
+            return new SubjectDto
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -68,22 +75,20 @@ namespace School.BLL.Mapper
                 StudentIds = s.Students.Select(z => z.Id),
                 TeacherIds = s.Teachers.Select(t => t.Id)
             };
+        }
 
-        public Subject To(SubjectDto s) =>
-            new()
+        public Subject To(SubjectDto s)
+        {
+            return new Subject
             {
                 Id = s.Id,
                 Name = s.Name,
                 CreatedTime = s.CreatedTime,
                 LastUpdatedTime = s.LastUpdatedTime,
                 Students = s.StudentIds != null
-                    ? _unitOfWork.Students
-                        .GetAll()
-                        .Where(i =>
-                            s.StudentIds
-                                .ToList()
-                                .Exists(t =>
-                                    t == i.Id))
+                    ? _unitOfWork.Students.GetAll()
+                        .Where(i => s.StudentIds.ToList()
+                            .Exists(t => t == i.Id))
                         .ToList()
                     : null,
 
@@ -98,9 +103,11 @@ namespace School.BLL.Mapper
                         .ToList()
                     : null
             };
+        }
 
-        public Class To(ClassDto c) =>
-            new()
+        public Class To(ClassDto c)
+        {
+            return new Class
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -116,9 +123,11 @@ namespace School.BLL.Mapper
                                 t == i.Id))
                     .ToList()
             };
+        }
 
-        public Student To(StudentDto s) =>
-            new()
+        public Student To(StudentDto s)
+        {
+            return new Student
             {
                 Id = s.Id,
                 Age = s.Age,
@@ -138,9 +147,11 @@ namespace School.BLL.Mapper
                                 t == i.Id))
                     .ToList()
             };
+        }
 
-        public Teacher To(TeacherDto t) =>
-            new()
+        public Teacher To(TeacherDto t)
+        {
+            return new Teacher
             {
                 Id = t.Id,
                 Age = t.Age,
@@ -162,9 +173,11 @@ namespace School.BLL.Mapper
                         .ToList()
                     : null
             };
+        }
 
-        public Blog To(BlogDto blogDto) =>
-            new()
+        public static Blog To(BlogDto blogDto)
+        {
+            return new Blog
             {
                 Id = blogDto.Id,
                 Image = blogDto.Image,
@@ -174,9 +187,11 @@ namespace School.BLL.Mapper
                 Name = blogDto.Name,
                 Text = blogDto.Text
             };
+        }
 
-        public BlogDto To(Blog blog) =>
-            new()
+        public static BlogDto To(Blog blog)
+        {
+            return new BlogDto
             {
                 Id = blog.Id,
                 Image = blog.Image,
@@ -186,5 +201,6 @@ namespace School.BLL.Mapper
                 Name = blog.Name,
                 Text = blog.Text
             };
+        }
     }
 }

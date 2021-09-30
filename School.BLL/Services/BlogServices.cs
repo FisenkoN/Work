@@ -19,14 +19,18 @@ namespace School.BLL.Services
             _map = new Map(_unitOfWork);
         }
 
-        public IEnumerable<BlogDto> GetBlogs() =>
-            from b in _unitOfWork
-                .Blogs
-                .GetAll()
-            select _map.To(b);
+        public IEnumerable<BlogDto> GetBlogs()
+        {
+            return from b in _unitOfWork
+                    .Blogs
+                    .GetAll()
+                select Map.To(b);
+        }
 
-        public BlogDto GetBlogForId(int? id) =>
-            _map.To(_unitOfWork.Blogs.GetOne(id));
+        public BlogDto GetBlogForId(int? id)
+        {
+            return Map.To(_unitOfWork.Blogs.GetOne(id));
+        }
 
         public void Delete(int? id)
         {
@@ -35,13 +39,16 @@ namespace School.BLL.Services
                     .Blogs
                     .Delete(id.Value);
         }
-        
-        public void Create(BlogDto blog) =>
+
+        public void Create(BlogDto blog)
+        {
             _unitOfWork
                 .Blogs
-                .Add(_map.To(blog));
-        
-        public void Edit(int? id, BlogDto blogDto)
+                .Add(Map.To(blog));
+        }
+
+        public void Edit(int? id,
+            BlogDto blogDto)
         {
             var blog = _unitOfWork
                 .Blogs

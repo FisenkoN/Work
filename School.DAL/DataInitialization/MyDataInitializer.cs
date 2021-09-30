@@ -414,7 +414,8 @@ namespace School.DAL.DataInitialization
                 Gender = Gender.Female,
                 CreatedTime = DateTime.Now,
                 LastUpdatedTime = DateTime.Now,
-                Image = "https://lh3.googleusercontent.com/fife/AAWUweV5qQx8oFqW_5QSK3xjoE7-4Oe0e-i-dIfLdmlsbd2mXvVCUijsoSQl-O2bvAdNZUeQge2KIruU4txsgsM-Ay85CpeRL2Yq1AllZeMkCT1NvMAA74bSfHhUFe8xzzbLFkjqQoKoO0lMtnGTTXILOLhPJ1fMXS-FvfbUENqMdhAgLkrntnU2bPR4pYLzKa5aEiOjxMZ2EHcmEOlLpPa1JnlNFlr9WH2cDruxbCaXcNHZ0FjpB2fjI2dWXY_3_3Jr3dGw4Pggh_WYL2JU5fy3qwuDv1MdtRbNgibTFojQPEVJ_-eGfFaPZBB6wUAvFC81sw7vVF_XyCKTPm0rn8y9UOve_rLGtxhjD7IY79cK8vqE4u4pHWDlSQnVknbzKdDS-liBfvMPDeNrtXROMlV7g1IJyxlkqrVt_6hMfRCTCUZ2bXxwb3ZqqeCO1x6wTGpY3xVXfjX_HR0jlBjX21Zy8iyXjBP4DUERqZHkSqBLsKpEurdxHiNgMy3BgpSpW8gre6jpMIJO0nOATOUXM0okM0g6-bf_N2vt91UbEHLyl0qgDhrjgpIzj_2EDoLbRkvnu51ONU4DFAQjM5z4iZ9KdB1heagb7lBkRoDH_8E6jmgbpU-z0ZHwmeas5psCqwb-zcvQ4DFDPwKHl1eGup3zx9XK1mwW6uJW-7xgu-jZlYjRrBRmDLqF0q6iGtRZixjMcsMf4sNa4dI5jHuPC4E9VC6QtsPR0c8Ddw=w250-h238-p-k-nu-ft"
+                Image =
+                    "https://lh3.googleusercontent.com/fife/AAWUweV5qQx8oFqW_5QSK3xjoE7-4Oe0e-i-dIfLdmlsbd2mXvVCUijsoSQl-O2bvAdNZUeQge2KIruU4txsgsM-Ay85CpeRL2Yq1AllZeMkCT1NvMAA74bSfHhUFe8xzzbLFkjqQoKoO0lMtnGTTXILOLhPJ1fMXS-FvfbUENqMdhAgLkrntnU2bPR4pYLzKa5aEiOjxMZ2EHcmEOlLpPa1JnlNFlr9WH2cDruxbCaXcNHZ0FjpB2fjI2dWXY_3_3Jr3dGw4Pggh_WYL2JU5fy3qwuDv1MdtRbNgibTFojQPEVJ_-eGfFaPZBB6wUAvFC81sw7vVF_XyCKTPm0rn8y9UOve_rLGtxhjD7IY79cK8vqE4u4pHWDlSQnVknbzKdDS-liBfvMPDeNrtXROMlV7g1IJyxlkqrVt_6hMfRCTCUZ2bXxwb3ZqqeCO1x6wTGpY3xVXfjX_HR0jlBjX21Zy8iyXjBP4DUERqZHkSqBLsKpEurdxHiNgMy3BgpSpW8gre6jpMIJO0nOATOUXM0okM0g6-bf_N2vt91UbEHLyl0qgDhrjgpIzj_2EDoLbRkvnu51ONU4DFAQjM5z4iZ9KdB1heagb7lBkRoDH_8E6jmgbpU-z0ZHwmeas5psCqwb-zcvQ4DFDPwKHl1eGup3zx9XK1mwW6uJW-7xgu-jZlYjRrBRmDLqF0q6iGtRZixjMcsMf4sNa4dI5jHuPC4E9VC6QtsPR0c8Ddw=w250-h238-p-k-nu-ft"
             };
 
             var s2 = new Student
@@ -953,29 +954,32 @@ namespace School.DAL.DataInitialization
                 s33.Subjects.Add(subject);
 
 
-            var blog_1 = new Blog
+            var blog1 = new Blog
             {
                 Category = "Update",
                 CreatedTime = DateTime.Now,
                 LastUpdatedTime = DateTime.Now,
-                Image = "https://image.shutterstock.com/z/stock-photo-business-woman-holding-tear-paper-with-update-text-1148517125.jpg",
+                Image =
+                    "https://image.shutterstock.com/z/stock-photo-business-woman-holding-tear-paper-with-update-text-1148517125.jpg",
                 Name = "Version 1.0",
                 Text =
                     "Today we release version 1.0. It's will be first bih update from start this startup. Expect more information later"
             };
-            
-            var blog_2 = new Blog
+
+            var blog2 = new Blog
             {
                 Category = "School newspaper",
                 CreatedTime = DateTime.Now,
                 LastUpdatedTime = DateTime.Now,
-                Image = "https://i.guim.co.uk/img/media/f4557d1a4a6fac9c55e930c672433871e875c606/54_0_4033_2422/master/4033.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c8c1161563f30b7007b9246b26b1c81c",
+                Image =
+                    "https://i.guim.co.uk/img/media/f4557d1a4a6fac9c55e930c672433871e875c606/54_0_4033_2422/master/4033.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c8c1161563f30b7007b9246b26b1c81c",
                 Name = "Trip to Barcelona",
                 Text =
                     "In 24 october our the best class on average for the last year will go to Barcelona"
             };
-            
-            dbContext.Blogs.AddRange(blog_1, blog_2);
+
+            dbContext.Blogs.AddRange(blog1,
+                blog2);
 
 
             dbContext.SaveChanges();

@@ -8,7 +8,8 @@ using School.DAL.Interfaces;
 
 namespace School.DAL.Repository
 {
-    public class StudentRepository : BaseRepository<Student>, IStudentRepository
+    public class StudentRepository : BaseRepository<Student>,
+        IStudentRepository
     {
         public StudentRepository()
         {
@@ -31,7 +32,6 @@ namespace School.DAL.Repository
                 .ToList()
                 .Find(s => s.Id == id);
         }
-
 
         public override IQueryable<Student> GetSome(Expression<Func<Student, bool>> where)
         {

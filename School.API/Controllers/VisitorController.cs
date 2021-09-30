@@ -18,18 +18,24 @@ namespace School.API.Controllers
 
         // GET: api/Visitor/Class
         [HttpGet("Class")]
-        public ActionResult<IEnumerable<ClassDto>> GetClasses() =>
-            Ok(_service.GetClasses());
+        public ActionResult<IEnumerable<ClassDto>> GetClasses()
+        {
+            return Ok(_service.GetClasses());
+        }
 
         // GET: api/Visitor/Subject
         [HttpGet("Subject")]
-        public ActionResult<IEnumerable<SubjectDto>> GetSubjects() =>
-            Ok(_service.GetSubjects());
+        public ActionResult<IEnumerable<SubjectDto>> GetSubjects()
+        {
+            return Ok(_service.GetSubjects());
+        }
 
         // GET: api/Visitor/Teacher
         [HttpGet("Teacher")]
-        public ActionResult<IEnumerable<TeacherDto>> GetTeachers() =>
-            Ok(_service.GetTeachers());
+        public ActionResult<IEnumerable<TeacherDto>> GetTeachers()
+        {
+            return Ok(_service.GetTeachers());
+        }
 
         // GET: api/Visitor/Class/5
         [HttpGet("Class/{id}")]
@@ -39,13 +45,15 @@ namespace School.API.Controllers
 
             return @class == null
                 ? NotFound()
-                : @class;
+                : Ok(@class);
         }
-        
+
         // GET: api/Visitor/Class/Students/5
         [HttpGet("Class/Students/{id}")]
-        public ActionResult<IEnumerable<string>> GetStudentsClass(int id) =>
-            Ok(_service.GetStudents(id));
+        public ActionResult<IEnumerable<string>> GetStudentsClass(int id)
+        {
+            return Ok(_service.GetStudents(id));
+        }
 
         // GET: api/Visitor/Subject/5
         [HttpGet("Subject/{id}")]
@@ -68,7 +76,7 @@ namespace School.API.Controllers
                 ? NotFound()
                 : Ok(teacher);
         }
-        
+
         // GET: api/Visitor/GetTeacherClass/5
         [HttpGet("GetTeacherClass/{id}")]
         public ActionResult<string> GetTeacherClass(int? id)
@@ -78,25 +86,29 @@ namespace School.API.Controllers
 
             return Ok(_service.GetTeachersClass(id));
         }
-        
+
         // GET: api/Visitor/GetSubjectsForTeacher/5
         [HttpGet("GetSubjectsForTeacher/{id}")]
-        public ActionResult<IEnumerable<string>> GetSubjectsForTeacher(int? id) =>
-            id == null
+        public ActionResult<IEnumerable<string>> GetSubjectsForTeacher(int? id)
+        {
+            return id == null
                 ? BadRequest()
                 : Ok(_service.GetSubjectsForTeacher(id));
-        
+        }
+
         // GET: api/Visitor/StudentsForSubjectId/5
         [HttpGet("StudentsForSubjectId/{id}")]
-        public ActionResult<IEnumerable<string>> StudentsForSubjectId(int? id) =>
-            id == null
+        public ActionResult<IEnumerable<string>> StudentsForSubjectId(int? id)
+        {
+            return id == null
                 ? BadRequest()
                 : Ok(_service.StudentsForSubjectId(id));
-        
+        }
+
         // GET: api/Visitor/TeachersForSubjectId/5
         [HttpGet("TeachersForSubjectId/{id}")]
         public ActionResult<IEnumerable<string>> TeachersForSubjectId(int? id)
-        {   
+        {
             return id == null
                 ? BadRequest()
                 : Ok(_service.TeachersForSubjectId(id));

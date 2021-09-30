@@ -19,42 +19,58 @@ namespace School.API.Controllers
 
         // GET: api/Student/
         [HttpGet]
-        public ActionResult<IEnumerable<StudentDto>> GetStudents() =>
-            Ok(_service.GetStudents());
+        public ActionResult<IEnumerable<StudentDto>> GetStudents()
+        {
+            return Ok(_service.GetStudents());
+        }
 
         // GET: api/Student/5
-        [HttpGet("{id}")]
-        public ActionResult<StudentDto> GetStudent(int? id) =>
-            Ok(_service.GetStudentForId(id));
+        [HttpGet("{id:int}")]
+        public ActionResult<StudentDto> GetStudent(int? id)
+        {
+            return Ok(_service.GetStudentForId(id));
+        }
 
         // GET: api/Student/Class/5
-        [HttpGet("Class/{id}")]
-        public ActionResult<ClassDto> GetClass(int? id) =>
-            Ok(_service.GetClassForId(id));
+        [HttpGet("Class/{id:int}")]
+        public ActionResult<ClassDto> GetClass(int? id)
+        {
+            return Ok(_service.GetClassForId(id));
+        }
 
         // GET: api/Student/GetSubjects
         [HttpGet("GetSubjects")]
-        public ActionResult<IEnumerable<SubjectDto>> GetSubjects() =>
-            Ok(_service.GetSubjects());
-        
+        public ActionResult<IEnumerable<SubjectDto>> GetSubjects()
+        {
+            return Ok(_service.GetSubjects());
+        }
+
         // GET: api/Student/GetClasses
         [HttpGet("GetClasses")]
-        public ActionResult<IEnumerable<ClassDto>> GetClasses() =>
-            Ok(_service.GetClasses());
+        public ActionResult<IEnumerable<ClassDto>> GetClasses()
+        {
+            return Ok(_service.GetClasses());
+        }
 
         // GET: api/Student/GetSubjects/5
         [HttpGet("GetSubjects/{id}")]
-        public ActionResult<IEnumerable<SubjectDto>> GetSubjects(int? id) =>
-            Ok(_service.GetSubjects(id));
+        public ActionResult<IEnumerable<SubjectDto>> GetSubjects(int? id)
+        {
+            return Ok(_service.GetSubjects(id));
+        }
 
         // GET: api/Student/ShowClassmates/5
         [HttpGet("ShowClassmates/{id}")]
-        public ActionResult<ICollection<StudentDto>> ShowClassmates(int? id) =>
-            Ok(_service.GetClassmates(id));
+        public ActionResult<ICollection<StudentDto>> ShowClassmates(int? id)
+        {
+            return Ok(_service.GetClassmates(id));
+        }
 
         [HttpGet("ShowClassTeacher/{id}")]
-        public ActionResult<TeacherDto> ShowClassTeacher(int? id) =>
-            Ok(_service.GetMyClassTeacher(id));
+        public ActionResult<TeacherDto> ShowClassTeacher(int? id)
+        {
+            return Ok(_service.GetMyClassTeacher(id));
+        }
 
         // PUT: api/Student/5
         [HttpPut("{id}")]
@@ -66,22 +82,22 @@ namespace School.API.Controllers
 
             _service.Edit_FirstName(id,
                 student.FirstName);
-            
+
             _service.Edit_LastName(id,
                 student.LastName);
-            
+
             _service.Edit_Age(id,
                 student.Age);
-            
+
             _service.Edit_Gender(id,
                 student.Gender);
-            
+
             _service.Edit_Image(id,
                 student.Image);
-            
+
             _service.Edit_Subjects(id,
                 student.SubjectIds.ToList());
-            
+
             _service.Edit_Class(id,
                 student.ClassId);
 

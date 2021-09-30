@@ -8,7 +8,8 @@ using School.DAL.Interfaces;
 
 namespace School.DAL.Repository
 {
-    public class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
+    public class TeacherRepository : BaseRepository<Teacher>,
+        ITeacherRepository
     {
         public TeacherRepository()
         {

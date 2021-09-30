@@ -11,29 +11,33 @@ namespace School.API.Controllers
     [ApiController]
     public class BlogController : ControllerBase
     {
-        private BlogServices _service;
+        private readonly BlogServices _service;
 
         public BlogController(MainService service)
         {
             _service = new BlogServices(service);
         }
-        
+
         [HttpGet]
         // GET: api/Blog/
-        public ActionResult<IEnumerable<BlogDto>> GetBlogs() =>
-            new(_service.GetBlogs());
-        
+        public ActionResult<IEnumerable<BlogDto>> GetBlogs()
+        {
+            return new ActionResult<IEnumerable<BlogDto>>(_service.GetBlogs());
+        }
+
         // GET: api/Blog/1
-        [HttpGet("{id}")]
-        public ActionResult<BlogDto> GetBlogs(int? id) =>   
-            new(_service.GetBlogForId(id));
-        
+        [HttpGet("{id:int}")]
+        public ActionResult<BlogDto> GetBlogs(int? id)
+        {
+            return new ActionResult<BlogDto>(_service.GetBlogForId(id));
+        }
+
         // POST: api/Blog/
         [HttpPost]
         public ActionResult<BlogDto> GetBlogs(BlogDto blogDto)
         {
             _service.Create(blogDto);
-        
+
             return CreatedAtAction("GetBlogs",
                 new
                 {
@@ -41,15 +45,15 @@ namespace School.API.Controllers
                 },
                 blogDto);
         }
-        
+
         // PUT: api/Blog/5
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public IActionResult PutSubject(int id,
             BlogDto blog)
         {
             if (id != blog.Id)
                 return BadRequest();
-        
+
             try
             {
                 _service.Edit(id,
@@ -60,24 +64,24 @@ namespace School.API.Controllers
                 if (!BlogExists(id))
                     return NotFound();
             }
-        
+
             return NoContent();
         }
-        
+
         // DELETE: api/Blog/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public IActionResult DeleteSubject(int id)
         {
             var blog = _service.GetBlogForId(id);
-            
+
             if (blog == null)
                 return NotFound();
-        
+
             _service.Delete(id);
-        
+
             return NoContent();
         }
-        
+
         private bool BlogExists(int id)
         {
             return _service.GetBlogs()

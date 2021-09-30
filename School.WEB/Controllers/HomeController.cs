@@ -14,7 +14,7 @@ namespace School.WEB.Controllers
     public class HomeController : Controller
     {
         private readonly HttpClient _client;
-        
+
         public HomeController()
         {
             _client = new HttpClient();
@@ -34,11 +34,11 @@ namespace School.WEB.Controllers
         {
             return View();
         }
-        
+
         [HttpGet("Blog")]
         public async Task<IActionResult> Blogs()
         {
-            var response = await _client.GetAsync( "https://localhost:44331/api/Blog");
+            var response = await _client.GetAsync("https://localhost:44331/api/Blog");
 
             if (response.IsSuccessStatusCode)
                 return View(
@@ -47,7 +47,7 @@ namespace School.WEB.Controllers
 
             return NoContent();
         }
-        
+
         [HttpGet("Blog/{id}")]
         public async Task<IActionResult> Blog(int? id)
         {
@@ -57,7 +57,7 @@ namespace School.WEB.Controllers
                 return View(
                     JsonConvert.DeserializeObject<BlogDto>(
                         await response.Content.ReadAsStringAsync()));
-            
+
             return NotFound();
         }
 
@@ -66,31 +66,39 @@ namespace School.WEB.Controllers
             var _baseUrl = "https://localhost:44331/api/Admin";
 
             var lastUpdatedStudents = JsonConvert.DeserializeObject<IEnumerable<StudentDto>>(
-                await (await _client.GetAsync(
-                        _baseUrl + $"/Student")).Content
-                    .ReadAsStringAsync()).OrderByDescending(s => s.LastUpdatedTime).Take(3);
-            
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Student")).Content
+                        .ReadAsStringAsync())
+                .OrderByDescending(s => s.LastUpdatedTime)
+                .Take(3);
+
             var lastUpdatedTeachers = JsonConvert.DeserializeObject<IEnumerable<TeacherDto>>(
-                await (await _client.GetAsync(
-                        _baseUrl + $"/Teacher")).Content
-                    .ReadAsStringAsync()).OrderByDescending(s => s.LastUpdatedTime).Take(3);
-            
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Teacher")).Content
+                        .ReadAsStringAsync())
+                .OrderByDescending(s => s.LastUpdatedTime)
+                .Take(3);
+
             var lastUpdatedClasses = JsonConvert.DeserializeObject<IEnumerable<ClassDto>>(
-                await (await _client.GetAsync(
-                        _baseUrl + $"/Class")).Content
-                    .ReadAsStringAsync()).OrderByDescending(s => s.LastUpdatedTime).Take(3);
-            
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Class")).Content
+                        .ReadAsStringAsync())
+                .OrderByDescending(s => s.LastUpdatedTime)
+                .Take(3);
+
             var lastUpdatedSubjects = JsonConvert.DeserializeObject<IEnumerable<SubjectDto>>(
-                await (await _client.GetAsync(
-                        _baseUrl + $"/Subject")).Content
-                    .ReadAsStringAsync()).OrderByDescending(s => s.LastUpdatedTime).Take(3);
+                    await (await _client.GetAsync(
+                            _baseUrl + $"/Subject")).Content
+                        .ReadAsStringAsync())
+                .OrderByDescending(s => s.LastUpdatedTime)
+                .Take(3);
 
             ViewData["Students"] = lastUpdatedStudents;
-            
+
             ViewData["Teachers"] = lastUpdatedTeachers;
-            
+
             ViewData["Classes"] = lastUpdatedClasses;
-            
+
             ViewData["Subjects"] = lastUpdatedSubjects;
 
             return View();

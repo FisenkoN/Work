@@ -19,64 +19,86 @@ namespace School.BLL.Services
             _map = new Map(_unitOfWork);
         }
 
-        public IEnumerable<ClassDto> GetClasses() =>
-            from c in _unitOfWork.Classes
-                .GetAll()
-            select _map.To(c);
+        public IEnumerable<ClassDto> GetClasses()
+        {
+            return from c in _unitOfWork.Classes
+                    .GetAll()
+                select Map.To(c);
+        }
 
-        public string GetTeachersClass(int? teacherId) =>
-            _unitOfWork.Classes
-                .GetRelatedData()
-                .FirstOrDefault(p =>
-                    p.TeacherId == teacherId)
-                ?.Name ??
-            "no class";
+        public string GetTeachersClass(int? teacherId)
+        {
+            return _unitOfWork.Classes
+                       .GetRelatedData()
+                       .FirstOrDefault(p =>
+                           p.TeacherId == teacherId)
+                       ?.Name ??
+                   "no class";
+        }
 
-        public TeacherDto GetTeacher(int? id) =>
-            _map.To(_unitOfWork.Teachers.GetOneRelated(id));
+        public TeacherDto GetTeacher(int? id)
+        {
+            return Map.To(_unitOfWork.Teachers.GetOneRelated(id));
+        }
 
-        public IEnumerable<string> GetSubjectsForTeacher(int? id) =>
-            _unitOfWork.Teachers
+        public IEnumerable<string> GetSubjectsForTeacher(int? id)
+        {
+            return _unitOfWork.Teachers
                 .GetOneRelated(id)
                 .Subjects
                 .Select(s =>
                     s.Name);
+        }
 
-        public IEnumerable<TeacherDto> GetTeachers() =>
-            from t in _unitOfWork.Teachers
-                .GetAll()
-            select _map.To(t);
+        public IEnumerable<TeacherDto> GetTeachers()
+        {
+            return from t in _unitOfWork.Teachers
+                    .GetAll()
+                select Map.To(t);
+        }
 
-        public SubjectDto GetSubject(int? id) =>
-            _map.To(_unitOfWork.Subjects.GetOneRelated(id));
+        public SubjectDto GetSubject(int? id)
+        {
+            return Map.To(_unitOfWork.Subjects.GetOneRelated(id));
+        }
 
-        public IEnumerable<string> TeachersForSubjectId(int? id) =>
-            _unitOfWork.Subjects
+        public IEnumerable<string> TeachersForSubjectId(int? id)
+        {
+            return _unitOfWork.Subjects
                 .GetOneRelated(id)
                 .Teachers
                 .Select(s =>
                     s.FirstName + " " + s.LastName);
+        }
 
-        public IEnumerable<string> StudentsForSubjectId(int? id) =>
-            _unitOfWork.Subjects
+        public IEnumerable<string> StudentsForSubjectId(int? id)
+        {
+            return _unitOfWork.Subjects
                 .GetOneRelated(id)
                 .Students
                 .Select(s =>
                     s.FirstName + " " + s.LastName);
+        }
 
-        public ClassDto GetClass(int? id) =>
-            _map.To(_unitOfWork.Classes.GetOneRelated(id));
+        public ClassDto GetClass(int? id)
+        {
+            return Map.To(_unitOfWork.Classes.GetOneRelated(id));
+        }
 
-        public IEnumerable<SubjectDto> GetSubjects() =>
-            from s in _unitOfWork.Subjects
-                .GetAll()
-            select _map.To(s);
+        public IEnumerable<SubjectDto> GetSubjects()
+        {
+            return from s in _unitOfWork.Subjects
+                    .GetAll()
+                select Map.To(s);
+        }
 
-        public IEnumerable<string> GetStudents(int? classId) =>
-            _unitOfWork.Classes
+        public IEnumerable<string> GetStudents(int? classId)
+        {
+            return _unitOfWork.Classes
                 .GetOneRelated(classId)
                 .Students
-                .Select(s => 
+                .Select(s =>
                     s.FirstName + " " + s.LastName);
+        }
     }
 }
