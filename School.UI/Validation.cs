@@ -6,7 +6,7 @@ namespace School.UI
     {
         public static bool FirstOrLastName(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
                 return false;
 
             if (name.Any(char.IsDigit))
@@ -18,7 +18,7 @@ namespace School.UI
 
         public static bool ClassName(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
                 return false;
 
             return
@@ -27,7 +27,7 @@ namespace School.UI
 
         public static bool SubjectName(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
                 return false;
 
             if (name.Any(char.IsDigit))

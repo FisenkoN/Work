@@ -53,9 +53,9 @@ namespace School.MSUnitTests
         public void TeacherDelete()
         {
             //Arrange
-            const int idFaceTeacher = 1;
+            const int id = 1;
 
-            _unitOfWork.Setup(unit => unit.Teachers.Delete(idFaceTeacher));
+            _unitOfWork.Setup(unit => unit.Teachers.Delete(id));
 
             _service.Setup(m =>
                     m.UnitOfWork())
@@ -64,7 +64,7 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Teacher_Delete(idFaceTeacher);
+            service.Teacher_Delete(id);
 
             //Assert
             _unitOfWork.Verify(unit => unit.Teachers.Delete(It.IsAny<int>()),
@@ -75,9 +75,9 @@ namespace School.MSUnitTests
         public void ClassDelete()
         {
             //Arrange
-            const int idFaceClass = 1;
+            const int id = 1;
 
-            _unitOfWork.Setup(unit => unit.Classes.Delete(idFaceClass));
+            _unitOfWork.Setup(unit => unit.Classes.Delete(id));
 
             _service.Setup(m =>
                     m.UnitOfWork())
@@ -86,7 +86,7 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Class_Delete(idFaceClass);
+            service.Class_Delete(id);
 
             //Assert
             _unitOfWork.Verify(unit => unit.Classes.Delete(It.IsAny<int>()),
@@ -97,9 +97,9 @@ namespace School.MSUnitTests
         public void SubjectDelete()
         {
             //Arrange
-            const int idFaceSubject = 1;
+            const int id = 1;
 
-            _unitOfWork.Setup(unit => unit.Subjects.Delete(idFaceSubject));
+            _unitOfWork.Setup(unit => unit.Subjects.Delete(id));
 
             _service.Setup(m =>
                     m.UnitOfWork())
@@ -108,7 +108,7 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Subject_Delete(idFaceSubject);
+            service.Subject_Delete(id);
 
             //Assert
             _unitOfWork.Verify(unit => unit.Subjects.Delete(It.IsAny<int>()),
@@ -544,11 +544,11 @@ namespace School.MSUnitTests
         public void StudentsEditFirstName()
         {
             //Arrange
-            const int studentFaceId = 1;
-            const string newFaceFirstName = "newFName";
+            const int id = 1;
+            const string newFName = "newFName";
             var newStudent = GetStudents()
-                .FirstOrDefault(s => s.Id == studentFaceId);
-            _unitOfWork.Setup(unit => unit.Students.GetOne(studentFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Students.GetOne(id))
                 .Returns(newStudent);
             _unitOfWork.Setup(repo => repo.Students.Update(newStudent));
             _service.Setup(m =>
@@ -558,11 +558,11 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Students_Edit_FirstName(studentFaceId,
-                newFaceFirstName);
+            service.Students_Edit_FirstName(id,
+                newFName);
 
             //Assert
-            Assert.IsTrue(Validation.FirstOrLastName(newFaceFirstName));
+            Assert.IsTrue(Validation.FirstOrLastName(newFName));
             _unitOfWork.Verify(unit => unit.Students.GetOne(It.IsAny<int>()),
                 Times.Once);
             _unitOfWork.Verify(unit => unit.Students.Update(It.IsAny<Student>()),
@@ -573,11 +573,11 @@ namespace School.MSUnitTests
         public void StudentsEditLastName()
         {
             //Arrange
-            const int studentFaceId = 1;
-            const string newFaceLastName = "newLName";
+            const int id = 1;
+            const string newLName = "newLName";
             var newStudent = GetStudents()
-                .FirstOrDefault(s => s.Id == studentFaceId);
-            _unitOfWork.Setup(unit => unit.Students.GetOne(studentFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Students.GetOne(id))
                 .Returns(newStudent);
             _unitOfWork.Setup(unit => unit.Students.Update(newStudent));
             _service.Setup(m =>
@@ -587,11 +587,11 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Students_Edit_LastName(studentFaceId,
-                newFaceLastName);
+            service.Students_Edit_LastName(id,
+                newLName);
 
             //Assert
-            Assert.IsTrue(Validation.FirstOrLastName(newFaceLastName));
+            Assert.IsTrue(Validation.FirstOrLastName(newLName));
             _unitOfWork.Verify(unit => unit.Students.GetOne(It.IsAny<int>()),
                 Times.Once);
             _unitOfWork.Verify(unit => unit.Students.Update(It.IsAny<Student>()),
@@ -602,11 +602,11 @@ namespace School.MSUnitTests
         public void StudentsEditAge()
         {
             //Arrange
-            const int studentFaceId = 1;
-            const int newFaceAge = 16;
+            const int id = 1;
+            const int newAge = 16;
             var newStudent = GetStudents()
-                .FirstOrDefault(s => s.Id == studentFaceId);
-            _unitOfWork.Setup(unit => unit.Students.GetOne(studentFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Students.GetOne(id))
                 .Returns(newStudent);
             _unitOfWork.Setup(unit => unit.Students.Update(newStudent));
             _service.Setup(m =>
@@ -616,8 +616,8 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Students_Edit_Age(studentFaceId,
-                newFaceAge);
+            service.Students_Edit_Age(id,
+                newAge);
 
             //Assert
             _unitOfWork.Verify(unit => unit.Students.GetOne(It.IsAny<int>()),
@@ -630,11 +630,11 @@ namespace School.MSUnitTests
         public void StudentsEditGender()
         {
             //Arrange
-            const int studentFaceId = 1;
+            const int id = 1;
             const GenderDto newFaceGender = GenderDto.Female;
             var newStudent = GetStudents()
-                .FirstOrDefault(s => s.Id == studentFaceId);
-            _unitOfWork.Setup(unit => unit.Students.GetOne(studentFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Students.GetOne(id))
                 .Returns(newStudent);
             _unitOfWork.Setup(unit => unit.Students.Update(newStudent));
             _service.Setup(m =>
@@ -644,7 +644,7 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Students_Edit_Gender(studentFaceId,
+            service.Students_Edit_Gender(id,
                 newFaceGender);
 
             //Assert
@@ -658,16 +658,16 @@ namespace School.MSUnitTests
         public void StudentsEditClass()
         {
             //Arrange
-            const int studentFaceId = 1;
-            const int newFaceClassId = 1;
+            const int studentId = 1;
+            const int classId = 1;
             var newStudent = GetStudents()
-                .FirstOrDefault(s => s.Id == studentFaceId);
-            _unitOfWork.Setup(unit => unit.Students.GetOne(studentFaceId))
+                .FirstOrDefault(s => s.Id == studentId);
+            _unitOfWork.Setup(unit => unit.Students.GetOne(studentId))
                 .Returns(newStudent);
             _unitOfWork.Setup(unit => unit.Students.Update(newStudent));
-            _unitOfWork.Setup(unit => unit.Classes.GetOne(newFaceClassId))
+            _unitOfWork.Setup(unit => unit.Classes.GetOne(classId))
                 .Returns(GetClasses()
-                    .FirstOrDefault(c => c.Id == newFaceClassId));
+                    .FirstOrDefault(c => c.Id == classId));
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
@@ -675,8 +675,8 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Students_Edit_Class(studentFaceId,
-                newFaceClassId);
+            service.Students_Edit_Class(studentId,
+                classId);
 
             //Assert
             _unitOfWork.Verify(unit => unit.Classes.GetOne(It.IsAny<int>()),
@@ -691,15 +691,15 @@ namespace School.MSUnitTests
         public void StudentsEditSubjects()
         {
             //Arrange
-            const int studentFaceId = 1;
+            const int id = 1;
             var newFaceListSubjectIds = new List<int>
             {
                 1,
                 2
             };
             var newStudent = GetStudents()
-                .FirstOrDefault(s => s.Id == studentFaceId);
-            _unitOfWork.Setup(unit => unit.Students.GetOneRelated(studentFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Students.GetOneRelated(id))
                 .Returns(newStudent);
             _unitOfWork.Setup(unit => unit.Students.Update(newStudent));
             _unitOfWork.Setup(unit => unit.Subjects.GetOne(It.IsAny<int>()))
@@ -711,7 +711,7 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Students_Edit_Subjects(studentFaceId,
+            service.Students_Edit_Subjects(id,
                 newFaceListSubjectIds);
 
             //Assert
@@ -727,11 +727,11 @@ namespace School.MSUnitTests
         public void TeachersEditFirstName()
         {
             //Arrange
-            const int teacherFaceId = 1;
-            const string newFaceFirstName = "newFName";
+            const int id = 1;
+            const string newFName = "newFName";
             var newTeacher = GetTeachers()
-                .FirstOrDefault(s => s.Id == teacherFaceId);
-            _unitOfWork.Setup(unit => unit.Teachers.GetOne(teacherFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Teachers.GetOne(id))
                 .Returns(newTeacher);
             _unitOfWork.Setup(unit => unit.Teachers.Update(newTeacher));
             _service.Setup(m =>
@@ -741,11 +741,11 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Teachers_Edit_FirstName(teacherFaceId,
-                newFaceFirstName);
+            service.Teachers_Edit_FirstName(id,
+                newFName);
 
             //Assert
-            Assert.IsTrue(Validation.FirstOrLastName(newFaceFirstName));
+            Assert.IsTrue(Validation.FirstOrLastName(newFName));
             _unitOfWork.Verify(unit => unit.Teachers.GetOne(It.IsAny<int>()),
                 Times.Once);
             _unitOfWork.Verify(unit => unit.Teachers.Update(It.IsAny<Teacher>()),
@@ -756,11 +756,11 @@ namespace School.MSUnitTests
         public void TeachersEditLastName()
         {
             //Arrange
-            const int teacherFaceId = 1;
-            const string newFaceLastName = "newLName";
+            const int id = 1;
+            const string newLName = "newLName";
             var newTeacher = GetTeachers()
-                .FirstOrDefault(s => s.Id == teacherFaceId);
-            _unitOfWork.Setup(unit => unit.Teachers.GetOne(teacherFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Teachers.GetOne(id))
                 .Returns(newTeacher);
             _unitOfWork.Setup(unit => unit.Teachers.Update(newTeacher));
             _service.Setup(m =>
@@ -770,11 +770,11 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Teachers_Edit_LastName(teacherFaceId,
-                newFaceLastName);
+            service.Teachers_Edit_LastName(id,
+                newLName);
 
             //Assert
-            Assert.IsTrue(Validation.FirstOrLastName(newFaceLastName));
+            Assert.IsTrue(Validation.FirstOrLastName(newLName));
             _unitOfWork.Verify(unit => unit.Teachers.GetOne(It.IsAny<int>()),
                 Times.Once);
             _unitOfWork.Verify(unit => unit.Teachers.Update(It.IsAny<Teacher>()),
@@ -785,11 +785,11 @@ namespace School.MSUnitTests
         public void TeachersEditAge()
         {
             //Arrange
-            const int teacherFaceId = 1;
-            const int newFaceAge = 16;
+            const int id = 1;
+            const int newAge = 16;
             var newTeacher = GetTeachers()
-                .FirstOrDefault(s => s.Id == teacherFaceId);
-            _unitOfWork.Setup(unit => unit.Teachers.GetOne(teacherFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Teachers.GetOne(id))
                 .Returns(newTeacher);
             _unitOfWork.Setup(unit => unit.Teachers.Update(newTeacher));
             _service.Setup(m =>
@@ -799,8 +799,8 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Teachers_Edit_Age(teacherFaceId,
-                newFaceAge);
+            service.Teachers_Edit_Age(id,
+                newAge);
 
             //Assert
             _unitOfWork.Verify(unit => unit.Teachers.GetOne(It.IsAny<int>()),
@@ -813,11 +813,11 @@ namespace School.MSUnitTests
         public void TeachersEditGender()
         {
             //Arrange
-            const int teacherFaceId = 1;
+            const int id = 1;
             const GenderDto newFaceGender = GenderDto.Female;
             var newTeacher = GetTeachers()
-                .FirstOrDefault(s => s.Id == teacherFaceId);
-            _unitOfWork.Setup(unit => unit.Teachers.GetOne(teacherFaceId))
+                .FirstOrDefault(s => s.Id == id);
+            _unitOfWork.Setup(unit => unit.Teachers.GetOne(id))
                 .Returns(newTeacher);
             _unitOfWork.Setup(unit => unit.Teachers.Update(newTeacher));
             _service.Setup(m =>
@@ -827,7 +827,7 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Teachers_Edit_Gender(teacherFaceId,
+            service.Teachers_Edit_Gender(id,
                 newFaceGender);
 
             //Assert
@@ -841,16 +841,16 @@ namespace School.MSUnitTests
         public void TeachersEditClass()
         {
             //Arrange
-            const int teacherFaceId = 1;
-            const int newFaceClassId = 1;
+            const int teacherId = 1;
+            const int classId = 1;
             var newTeacher = GetTeachers()
-                .FirstOrDefault(s => s.Id == teacherFaceId);
-            _unitOfWork.Setup(unit => unit.Teachers.GetOne(teacherFaceId))
+                .FirstOrDefault(s => s.Id == teacherId);
+            _unitOfWork.Setup(unit => unit.Teachers.GetOne(teacherId))
                 .Returns(newTeacher);
             _unitOfWork.Setup(unit => unit.Teachers.Update(newTeacher));
-            _unitOfWork.Setup(unit => unit.Classes.GetOne(newFaceClassId))
+            _unitOfWork.Setup(unit => unit.Classes.GetOne(classId))
                 .Returns(GetClasses()
-                    .FirstOrDefault(c => c.Id == newFaceClassId));
+                    .FirstOrDefault(c => c.Id == classId));
             _service.Setup(m =>
                     m.UnitOfWork())
                 .Returns(_unitOfWork.Object);
@@ -858,8 +858,8 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Teachers_Edit_Class(teacherFaceId,
-                newFaceClassId);
+            service.Teachers_Edit_Class(teacherId,
+                classId);
 
             //Assert
             _unitOfWork.Verify(unit => unit.Classes.GetOne(It.IsAny<int>()),
@@ -874,16 +874,16 @@ namespace School.MSUnitTests
         public void TeachersEditSubjects()
         {
             //Arrange
-            const int teacherFaceId = 1;
+            const int teacherId = 1;
             var newFaceListSubjectIds = new List<int>
             {
                 1,
                 2
             };
             var newTeacher = GetTeachers()
-                .FirstOrDefault(s => s.Id == teacherFaceId);
+                .FirstOrDefault(s => s.Id == teacherId);
 
-            _unitOfWork.Setup(unit => unit.Teachers.GetOneRelated(teacherFaceId))
+            _unitOfWork.Setup(unit => unit.Teachers.GetOneRelated(teacherId))
                 .Returns(newTeacher);
 
             _unitOfWork.Setup(unit => unit.Teachers.Update(newTeacher));
@@ -898,7 +898,7 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Teachers_Edit_Subjects(teacherFaceId,
+            service.Teachers_Edit_Subjects(teacherId,
                 newFaceListSubjectIds);
 
             //Assert
@@ -914,14 +914,14 @@ namespace School.MSUnitTests
         public void ClassesEditName()
         {
             //Arrange
-            const int classFaceId = 1;
+            const int classId = 1;
 
-            const string newFaceName = "4A";
+            const string newName = "4A";
 
             var newClass = GetClasses()
-                .FirstOrDefault(s => s.Id == classFaceId);
+                .FirstOrDefault(s => s.Id == classId);
 
-            _unitOfWork.Setup(unit => unit.Classes.GetOne(classFaceId))
+            _unitOfWork.Setup(unit => unit.Classes.GetOne(classId))
                 .Returns(newClass);
 
             _unitOfWork.Setup(unit => unit.Classes.Update(newClass));
@@ -933,11 +933,11 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Class_Edit_Name(classFaceId,
-                newFaceName);
+            service.Class_Edit_Name(classId,
+                newName);
 
             //Assert
-            Assert.IsTrue(Validation.ClassName(newFaceName));
+            Assert.IsTrue(Validation.ClassName(newName));
             _unitOfWork.Verify(unit => unit.Classes.GetOne(It.IsAny<int>()),
                 Times.Once);
             _unitOfWork.Verify(unit => unit.Classes.Update(It.IsAny<Class>()),
@@ -948,17 +948,17 @@ namespace School.MSUnitTests
         public void ClassesEditTeacher()
         {
             //Arrange
-            const int classFaceId = 1;
+            const int id = 1;
 
-            const int newFaceTeacherId = 1;
+            const int newTeacherId = 1;
 
             var newClass = GetClasses()
-                .FirstOrDefault(s => s.Id == classFaceId);
+                .FirstOrDefault(s => s.Id == id);
 
-            _unitOfWork.Setup(unit => unit.Classes.GetOne(classFaceId))
+            _unitOfWork.Setup(unit => unit.Classes.GetOne(id))
                 .Returns(newClass);
 
-            _unitOfWork.Setup(unit => unit.Teachers.GetOne(classFaceId))
+            _unitOfWork.Setup(unit => unit.Teachers.GetOne(id))
                 .Returns(new Teacher());
 
             _unitOfWork.Setup(unit => unit.Classes.Update(newClass));
@@ -970,8 +970,8 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Class_Edit_Teacher(classFaceId,
-                newFaceTeacherId);
+            service.Class_Edit_Teacher(id,
+                newTeacherId);
 
             //Assert
             _unitOfWork.Verify(unit => unit.Classes.GetOne(It.IsAny<int>()),
@@ -986,19 +986,19 @@ namespace School.MSUnitTests
         public void ClassesEditStudents()
         {
             //Arrange
-            const int classFaceId = 1;
+            const int id = 1;
             var newStudents = new List<int>
             {
                 1,
                 2
             };
             var newClass = GetClasses()
-                .FirstOrDefault(s => s.Id == classFaceId);
+                .FirstOrDefault(s => s.Id == id);
 
-            _unitOfWork.Setup(unit => unit.Classes.GetOneRelated(classFaceId))
+            _unitOfWork.Setup(unit => unit.Classes.GetOneRelated(id))
                 .Returns(newClass);
 
-            _unitOfWork.Setup(unit => unit.Classes.GetOne(classFaceId))
+            _unitOfWork.Setup(unit => unit.Classes.GetOne(id))
                 .Returns(newClass);
 
             _unitOfWork.Setup(unit => unit.Students.GetOne(It.IsAny<int>()))
@@ -1015,7 +1015,7 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Class_Edit_Students(classFaceId,
+            service.Class_Edit_Students(id,
                 newStudents);
 
             //Assert
@@ -1035,14 +1035,14 @@ namespace School.MSUnitTests
         public void SubjectsEditName()
         {
             //Arrange
-            const int subjectFaceId = 1;
+            const int id = 1;
 
-            const string newFaceName = "newName";
+            const string newName = "newName";
 
             var newSubject = GetSubjects()
-                .FirstOrDefault(s => s.Id == subjectFaceId);
+                .FirstOrDefault(s => s.Id == id);
 
-            _unitOfWork.Setup(unit => unit.Subjects.GetOne(subjectFaceId))
+            _unitOfWork.Setup(unit => unit.Subjects.GetOne(id))
                 .Returns(newSubject);
 
             _unitOfWork.Setup(unit => unit.Subjects.Update(newSubject));
@@ -1054,91 +1054,15 @@ namespace School.MSUnitTests
             var service = new AdminService(_service.Object);
 
             //Act
-            service.Subject_Edit_Name(subjectFaceId,
-                newFaceName);
+            service.Subject_Edit_Name(id,
+                newName);
 
             //Assert
-            Assert.IsTrue(Validation.SubjectName(newFaceName));
+            Assert.IsTrue(Validation.SubjectName(newName));
             _unitOfWork.Verify(unit => unit.Subjects.GetOne(It.IsAny<int>()),
                 Times.Once);
             _unitOfWork.Verify(unit => unit.Subjects.Update(It.IsAny<Subject>()),
                 Times.Once);
-        }
-
-        [TestMethod]
-        public void SubjectsEditTeachers()
-        {
-            //Arrange
-            const int subjectFaceId = 1;
-            var newFaceTeachersList = new List<int>
-            {
-                1,
-                2
-            };
-            var newSubject = GetSubjects()
-                .FirstOrDefault(s => s.Id == subjectFaceId);
-
-            _unitOfWork.Setup(unit => unit.Subjects.GetOne(subjectFaceId))
-                .Returns(newSubject);
-
-            _unitOfWork.Setup(unit => unit.Teachers.GetOne(subjectFaceId))
-                .Returns(new Teacher());
-
-            _unitOfWork.Setup(unit => unit.Subjects.Update(newSubject));
-
-            _service.Setup(m =>
-                    m.UnitOfWork())
-                .Returns(_unitOfWork.Object);
-
-            var service = new AdminService(_service.Object);
-
-            //Act
-            service.Subjects_Edit_Teachers(subjectFaceId,
-                newFaceTeachersList);
-
-            //Assert
-            _unitOfWork.Verify(unit => unit.Subjects.GetOne(It.IsAny<int>()),
-                Times.Exactly(2));
-            _unitOfWork.Verify(unit => unit.Teachers.GetOne(It.IsAny<int>()),
-                Times.Exactly(2));
-            _unitOfWork.Verify(unit => unit.Subjects.Update(It.IsAny<Subject>()),
-                Times.Exactly(2));
-        }
-
-        [TestMethod]
-        public void SubjectsEditStudents()
-        {
-            //Arrange
-            const int subjectFaceId = 1;
-            var newFaceStudentsList = new List<int>
-            {
-                1,
-                2
-            };
-            var newSubject = GetSubjects()
-                .FirstOrDefault(s => s.Id == subjectFaceId);
-            _unitOfWork.Setup(unit => unit.Subjects.GetOne(subjectFaceId))
-                .Returns(newSubject);
-            _unitOfWork.Setup(unit => unit.Students.GetOne(subjectFaceId))
-                .Returns(new Student());
-            _unitOfWork.Setup(unit => unit.Subjects.Update(newSubject));
-            _service.Setup(m =>
-                    m.UnitOfWork())
-                .Returns(_unitOfWork.Object);
-
-            var service = new AdminService(_service.Object);
-
-            //Act
-            service.Subjects_Edit_Students(subjectFaceId,
-                newFaceStudentsList);
-
-            //Assert
-            _unitOfWork.Verify(unit => unit.Subjects.GetOne(It.IsAny<int>()),
-                Times.Exactly(2));
-            _unitOfWork.Verify(unit => unit.Students.GetOne(It.IsAny<int>()),
-                Times.Exactly(2));
-            _unitOfWork.Verify(unit => unit.Subjects.Update(It.IsAny<Subject>()),
-                Times.Exactly(2));
         }
 
         [DataRow("11T")]
