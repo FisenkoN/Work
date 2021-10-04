@@ -10,40 +10,42 @@
     <projectFile profileName="School.API">School.API/School.API.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1ef8307-cc6b-4bf6-b7a4-c18968ddea39" name="Changes" comment="fix format">
+    <list default="true" id="b1ef8307-cc6b-4bf6-b7a4-c18968ddea39" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/PublishOutputs.a69dfff879.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/PublishOutputs.f0c8bcd0a9.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/School.DAL/Entities/AuthBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.School/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.School/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.API.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.API/obj/Debug/net5.0/School.API.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.BLL/Services/MainService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/Services/MainService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/ref/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/bin/Debug/net5.0/ref/School.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/School.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/ref/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.BLL/obj/Debug/net5.0/ref/School.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/AdminServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/AdminServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.MSUnitTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.MSUnitTests.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.MSUnitTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.MSUnitTests.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.UI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.UI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/School.UI.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/ref/School.MSUnitTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/bin/Debug/net5.0/ref/School.MSUnitTests.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/School.MSUnitTests.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/ref/School.MSUnitTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.MSUnitTests/obj/Debug/net5.0/ref/School.MSUnitTests.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.DAL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.DAL.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.DAL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.DAL.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/bin/Debug/net5.0/School.UI.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.UI/obj/Debug/net5.0/School.UI.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/School.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/School.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.BLL.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.Views.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/bin/Debug/net5.0/School.WEB.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.Views.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.dll" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/School.WEB/obj/Debug/net5.0/School.WEB.pdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,6 +161,74 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.School.WEB: IIS Express">
+    <configuration name="Publish School.API to Azure (1)" type="AzureDotNetWebAppPublish" factoryName="Azure Web App">
+      <option name="AZURE_WEB_APP_PROJECT" value="$PROJECT_DIR$/School.API/School.API.csproj" />
+      <option name="AZURE_WEB_APP_SUBSCRIPTION_ID" value="" />
+      <option name="AZURE_WEB_APP_IS_CREATE_APP" value="0" />
+      <option name="AZURE_WEB_APP_ID" value="/subscriptions/6578bf48-b87b-448f-8748-b8406c5b4ee1/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.Web/sites/webapp-211004060953" />
+      <option name="AZURE_WEB_APP_NAME" value="" />
+      <option name="AZURE_WEB_APP_IS_CREATE_RESOURCE_GROUP" value="0" />
+      <option name="AZURE_WEB_APP_RESOURCE_GROUP_NAME" value="" />
+      <option name="AZURE_WEB_APP_OPERATING_SYSTEM" value="WINDOWS" />
+      <option name="AZURE_WEB_APP_IS_CREATE_APP_SERVICE_PLAN" value="0" />
+      <option name="AZURE_WEB_APP_SERVICE_PLAN_ID" value="" />
+      <option name="AZURE_WEB_APP_SERVICE_PLAN_NAME" value="" />
+      <option name="AZURE_WEB_APP_LOCATION" value="eastus" />
+      <option name="AZURE_WEB_APP_PRICING_TIER" value="" />
+      <option name="AZURE_WEB_APP_NET_FRAMEWORK" value="4.7" />
+      <option name="AZURE_WEB_APP_NET_CORE_RUNTIME" value="DOTNETCORE 2.1" />
+      <option name="AZURE_WEB_APP_IS_DEPLOY_TO_SLOT" value="0" />
+      <option name="AZURE_WEB_APP_SLOT_NAME" value="" />
+      <option name="AZURE_SQL_DATABASE_SUBSCRIPTION_ID" value="" />
+      <option name="AZURE_SQL_DATABASE_IS_ENABLED" value="1" />
+      <option name="AZURE_SQL_DATABASE_CONNECTION_STRING_NAME" value="AzureSrt" />
+      <option name="AZURE_SQL_DATABASE_IS_CREATE" value="0" />
+      <option name="AZURE_SQL_DATABASE_ID" value="/subscriptions/6578bf48-b87b-448f-8748-b8406c5b4ee1/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.Sql/servers/sql-server-211004060953/databases/sql_211004060953_db" />
+      <option name="AZURE_SQL_DATABASE_NAME" value="sql_211004060953_db" />
+      <option name="AZURE_SQL_DATABASE_IS_CREATE_RESOURCE_GROUP" value="0" />
+      <option name="AZURE_SQL_DATABASE_RESOURCE_GROUP_NAME" value="" />
+      <option name="AZURE_SQL_DATABASE_IS_CREATE_SQL_SERVER" value="0" />
+      <option name="AZURE_SQL_DATABASE_SQL_SERVER_ID" value="" />
+      <option name="AZURE_SQL_DATABASE_SQL_SERVER_NAME" value="" />
+      <option name="AZURE_SQL_DATABASE_SQL_SERVER_ADMIN_LOGIN" value="fisenko" />
+      <option name="AZURE_SQL_DATABASE_LOCATION" value="westeurope" />
+      <option name="AZURE_SQL_DATABASE_COLLATION" value="SQL_Latin1_General_CP1_CI_AS" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Publish School.API to Azure" type="AzureDotNetWebAppPublish" factoryName="Azure Web App">
+      <option name="AZURE_WEB_APP_PROJECT" value="$PROJECT_DIR$/School.API/School.API.csproj" />
+      <option name="AZURE_WEB_APP_SUBSCRIPTION_ID" value="" />
+      <option name="AZURE_WEB_APP_IS_CREATE_APP" value="0" />
+      <option name="AZURE_WEB_APP_ID" value="/subscriptions/6578bf48-b87b-448f-8748-b8406c5b4ee1/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.Web/sites/SchoolFisenko" />
+      <option name="AZURE_WEB_APP_NAME" value="webapp-211004060522" />
+      <option name="AZURE_WEB_APP_IS_CREATE_RESOURCE_GROUP" value="0" />
+      <option name="AZURE_WEB_APP_RESOURCE_GROUP_NAME" value="DefaultResourceGroup-WEU" />
+      <option name="AZURE_WEB_APP_OPERATING_SYSTEM" value="WINDOWS" />
+      <option name="AZURE_WEB_APP_IS_CREATE_APP_SERVICE_PLAN" value="1" />
+      <option name="AZURE_WEB_APP_SERVICE_PLAN_ID" value="" />
+      <option name="AZURE_WEB_APP_SERVICE_PLAN_NAME" value="appsp-211004060522" />
+      <option name="AZURE_WEB_APP_LOCATION" value="eastus" />
+      <option name="AZURE_WEB_APP_PRICING_TIER" value="" />
+      <option name="AZURE_WEB_APP_NET_FRAMEWORK" value="4.7" />
+      <option name="AZURE_WEB_APP_NET_CORE_RUNTIME" value="DOTNETCORE 5.0" />
+      <option name="AZURE_WEB_APP_IS_DEPLOY_TO_SLOT" value="0" />
+      <option name="AZURE_WEB_APP_SLOT_NAME" value="" />
+      <option name="AZURE_SQL_DATABASE_SUBSCRIPTION_ID" value="" />
+      <option name="AZURE_SQL_DATABASE_IS_ENABLED" value="1" />
+      <option name="AZURE_SQL_DATABASE_CONNECTION_STRING_NAME" value="fisenko" />
+      <option name="AZURE_SQL_DATABASE_IS_CREATE" value="1" />
+      <option name="AZURE_SQL_DATABASE_ID" value="/subscriptions/6578bf48-b87b-448f-8748-b8406c5b4ee1/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.Sql/servers/schoolfisenko/databases/SchoolDb" />
+      <option name="AZURE_SQL_DATABASE_NAME" value="sql_211004060522_db" />
+      <option name="AZURE_SQL_DATABASE_IS_CREATE_RESOURCE_GROUP" value="1" />
+      <option name="AZURE_SQL_DATABASE_RESOURCE_GROUP_NAME" value="rg-211004060522" />
+      <option name="AZURE_SQL_DATABASE_IS_CREATE_SQL_SERVER" value="1" />
+      <option name="AZURE_SQL_DATABASE_SQL_SERVER_ID" value="/subscriptions/6578bf48-b87b-448f-8748-b8406c5b4ee1/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.Sql/servers/schoolfisenko" />
+      <option name="AZURE_SQL_DATABASE_SQL_SERVER_NAME" value="sql-server-211004060522" />
+      <option name="AZURE_SQL_DATABASE_SQL_SERVER_ADMIN_LOGIN" value="fisenko" />
+      <option name="AZURE_SQL_DATABASE_LOCATION" value="eastus" />
+      <option name="AZURE_SQL_DATABASE_COLLATION" value="SQL_Latin1_General_CP1_CI_AS" />
+      <method v="2" />
+    </configuration>
     <configuration name="Publish School to IIS (1)" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish publish_profile="&lt;no publish profile&gt;" uuid_high="-5553270715270807518" uuid_low="-5984107221970513884" />
       <method v="2" />
@@ -314,6 +384,8 @@
       <item itemvalue=".NET Launch Settings Profile.School.WEB: IIS Express" />
       <item itemvalue=".NET Project.School.UI" />
       <item itemvalue=".NET Project.School.UI (1)" />
+      <item itemvalue="Azure - Publish Web App.Publish School.API to Azure" />
+      <item itemvalue="Azure - Publish Web App.Publish School.API to Azure (1)" />
       <item itemvalue="Docker.School.UI/Dockerfile" />
       <item itemvalue="JavaScript Debug.School.WEB: IIS Express JavaScript" />
       <item itemvalue="Publish to IIS.Publish School to IIS" />
@@ -365,6 +437,7 @@
       <workItem from="1632820648772" duration="9014000" />
       <workItem from="1632830956782" duration="1954000" />
       <workItem from="1633005008156" duration="3394000" />
+      <workItem from="1633344041777" duration="1524000" />
     </task>
     <task id="LOCAL-00001" summary="Some fix">
       <created>1630056334633</created>
@@ -541,7 +614,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633339012118</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="final fix">
+      <created>1633341361874</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1633341361874</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +631,7 @@
     <option name="coveragePercentColumnWidth" value="42" />
     <option name="sortOrder" value="DESCENDING" />
     <option name="sortedColumn" value="2" />
-    <option name="symbolColumnWidth" value="136" />
+    <option name="symbolColumnWidth" value="167" />
     <coverage-tree-state>
       <expand />
       <select />
@@ -596,7 +676,8 @@
     <MESSAGE value="add blog" />
     <MESSAGE value="fix" />
     <MESSAGE value="fix format" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix format" />
+    <MESSAGE value="final fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="final fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

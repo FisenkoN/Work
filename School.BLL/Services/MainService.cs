@@ -11,10 +11,10 @@ namespace School.BLL.Services
 
         public MainService()
         {
-            // _context = new SchoolDbContext();
-            //
-            // MyDataInitializer.RecreateDatabase(_context);
-            // MyDataInitializer.InitializeData(_context);
+            _context = new SchoolDbContext();
+            
+            MyDataInitializer.RecreateDatabase(_context);
+            MyDataInitializer.InitializeData(_context);
         }
 
         public virtual IUnitOfWork UnitOfWork()
