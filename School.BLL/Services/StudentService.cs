@@ -11,13 +11,9 @@ namespace School.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        private readonly Map _map;
-
         public StudentService(MainService mainService)
         {
             _unitOfWork = mainService.UnitOfWork();
-
-            _map = new Map(_unitOfWork);
         }
 
         public IEnumerable<StudentDto> GetStudents()

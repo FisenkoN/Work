@@ -8,15 +8,11 @@ namespace School.BLL.Services
 {
     public class BlogServices
     {
-        private readonly Map _map;
-
         private readonly IUnitOfWork _unitOfWork;
 
         public BlogServices(MainService mainService)
         {
             _unitOfWork = mainService.UnitOfWork();
-
-            _map = new Map(_unitOfWork);
         }
 
         public IEnumerable<BlogDto> GetBlogs()
