@@ -50,6 +50,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.15.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools.DotNet": {
               "target": "Package",
               "version": "[2.0.3, )"
@@ -116,6 +120,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.15.0, )"
+            },
             "Microsoft.Data.Sqlite.Core": {
               "target": "Package",
               "version": "[5.0.9, )"
@@ -216,6 +224,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.15.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -225,6 +237,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[2.15.1, )"
             }
           },
           "imports": [

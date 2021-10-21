@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using School.BLL.Services;
 using School.WEB.Models;
 
 namespace School.WEB.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public HomeController(MainService mainService)
@@ -15,7 +17,7 @@ namespace School.WEB.Controllers
         {
             return View();
         }
-
+        
         public IActionResult Privacy()
         {
             return View();
