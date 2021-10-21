@@ -12,7 +12,7 @@ namespace School.BLL.Services
         public MainService()
         {
             _context = new SchoolDbContext();
-
+            
             MyDataInitializer.RecreateDatabase(_context);
             MyDataInitializer.InitializeData(_context);
         }
@@ -22,7 +22,7 @@ namespace School.BLL.Services
             return _context;
         }
 
-        public IUnitOfWork UnitOfWork()
+        public virtual IUnitOfWork UnitOfWork()
         {
             return new EfUnitOfWork(_context);
         }
