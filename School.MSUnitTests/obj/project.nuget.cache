@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pMJM0Q5vLOJM8f67j0Lf+i3Rhnt1gtw1zsUSNzR2mab2JdrWhSyVuf+KgbPDOH8KESFR42mx2XT7FUnCXpNeQg==",
+  "dgSpecHash": "qphyiDA2Ssn5k7OSm9TYvmA/B/Hki6xtksQHrl/4Lo7Tau3pomUAOqoX55t7dkaMvfKkObUYTlGo9b4CZjUtUQ==",
   "success": true,
-  "projectFilePath": "G:\\Proj\\School.MSUnitTests\\School.MSUnitTests.csproj",
+  "projectFilePath": "Z:\\TASKS\\School.MSUnitTests\\School.MSUnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nazar\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",

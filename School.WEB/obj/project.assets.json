@@ -8389,11 +8389,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Proj\\School.WEB\\School.WEB.csproj",
+      "projectUniqueName": "Z:\\TASKS\\School.WEB\\School.WEB.csproj",
       "projectName": "School.WEB",
-      "projectPath": "G:\\Proj\\School.WEB\\School.WEB.csproj",
+      "projectPath": "Z:\\TASKS\\School.WEB\\School.WEB.csproj",
       "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-      "outputPath": "G:\\Proj\\School.WEB\\obj\\",
+      "outputPath": "Z:\\TASKS\\School.WEB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -8416,8 +8416,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "G:\\Proj\\School.BLL\\School.BLL.csproj": {
-              "projectPath": "G:\\Proj\\School.BLL\\School.BLL.csproj"
+            "Z:\\TASKS\\School.BLL\\School.BLL.csproj": {
+              "projectPath": "Z:\\TASKS\\School.BLL\\School.BLL.csproj"
             }
           }
         }

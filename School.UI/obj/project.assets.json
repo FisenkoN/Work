@@ -6974,11 +6974,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Proj\\School.UI\\School.UI.csproj",
+      "projectUniqueName": "Z:\\TASKS\\School.UI\\School.UI.csproj",
       "projectName": "School.UI",
-      "projectPath": "G:\\Proj\\School.UI\\School.UI.csproj",
+      "projectPath": "Z:\\TASKS\\School.UI\\School.UI.csproj",
       "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-      "outputPath": "G:\\Proj\\School.UI\\obj\\",
+      "outputPath": "Z:\\TASKS\\School.UI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -7001,8 +7001,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "G:\\Proj\\School.BLL\\School.BLL.csproj": {
-              "projectPath": "G:\\Proj\\School.BLL\\School.BLL.csproj"
+            "Z:\\TASKS\\School.BLL\\School.BLL.csproj": {
+              "projectPath": "Z:\\TASKS\\School.BLL\\School.BLL.csproj"
             }
           }
         }

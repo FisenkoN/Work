@@ -5,7 +5,7 @@ using School.DAL.Repository;
 
 namespace School.BLL.Services
 {
-    public sealed class MainService
+    public class MainService
     {
         private readonly SchoolDbContext _context;
 

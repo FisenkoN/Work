@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GiuzkWbhYtlyLJtOzQ+F+JJVIpAW/XKNRtRErG3Klfoul0yfDTd8QKe8wWaioU/N9DjZCQTY+kYzLFyeFhbYtA==",
+  "dgSpecHash": "89fC1IrFE0B20Wk7hCEmGLMuuV9pcUfLrWj5OBfTEz5QepPSmhHHaD98lq/NSYBzBrHSJK7P55fEqzjjNmm+rg==",
   "success": true,
-  "projectFilePath": "G:\\Proj\\School.UI\\School.UI.csproj",
+  "projectFilePath": "Z:\\TASKS\\School.UI\\School.UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nazar\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

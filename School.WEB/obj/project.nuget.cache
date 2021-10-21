@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7n5VSctFoAhwjeok878InUDLfP/EY36R5SmKBNmRzCFzB+rECQYtkcl5tXqfCUA9IIoXvxZeK7MgN7ghppAX9g==",
+  "dgSpecHash": "trItpQ7QhVbHC3wowtJYIX4ZRTTLmOjV9wUorx4QXzDXmtXGrG0zN8/cHD78SZhI+LdecretWs6JiwyxQe4duA==",
   "success": true,
-  "projectFilePath": "G:\\Proj\\School.WEB\\School.WEB.csproj",
+  "projectFilePath": "Z:\\TASKS\\School.WEB\\School.WEB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nazar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

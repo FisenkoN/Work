@@ -6954,11 +6954,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Proj\\School.BLL\\School.BLL.csproj",
+      "projectUniqueName": "Z:\\TASKS\\School.BLL\\School.BLL.csproj",
       "projectName": "School.BLL",
-      "projectPath": "G:\\Proj\\School.BLL\\School.BLL.csproj",
+      "projectPath": "Z:\\TASKS\\School.BLL\\School.BLL.csproj",
       "packagesPath": "C:\\Users\\Nazar\\.nuget\\packages\\",
-      "outputPath": "G:\\Proj\\School.BLL\\obj\\",
+      "outputPath": "Z:\\TASKS\\School.BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -6981,8 +6981,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "G:\\Proj\\School.DAL\\School.DAL.csproj": {
-              "projectPath": "G:\\Proj\\School.DAL\\School.DAL.csproj"
+            "Z:\\TASKS\\School.DAL\\School.DAL.csproj": {
+              "projectPath": "Z:\\TASKS\\School.DAL\\School.DAL.csproj"
             }
           }
         }
