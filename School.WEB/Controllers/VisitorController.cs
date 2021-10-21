@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using School.BLL.Dto;
 using School.BLL.Services;
 
 namespace School.WEB.Controllers
 {
+    [Authorize]
     public class VisitorController : Controller
     {
         private readonly VisitorService _service;

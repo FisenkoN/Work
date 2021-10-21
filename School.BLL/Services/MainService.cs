@@ -17,6 +17,11 @@ namespace School.BLL.Services
             MyDataInitializer.InitializeData(_context);
         }
 
+        public SchoolDbContext DbContext()
+        {
+            return _context;
+        }
+
         public IUnitOfWork UnitOfWork()
         {
             return new EfUnitOfWork(_context);

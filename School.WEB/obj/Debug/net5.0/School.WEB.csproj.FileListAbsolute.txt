@@ -601,3 +601,9 @@ Z:\TASKS\School.WEB\obj\Debug\net5.0\School.WEB.dll
 Z:\TASKS\School.WEB\obj\Debug\net5.0\ref\School.WEB.dll
 Z:\TASKS\School.WEB\obj\Debug\net5.0\School.WEB.pdb
 Z:\TASKS\School.WEB\obj\Debug\net5.0\School.WEB.genruntimeconfig.cache
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
+Z:\TASKS\School.WEB\bin\Debug\net5.0\MailKit.dll
+Z:\TASKS\School.WEB\bin\Debug\net5.0\MimeKit.dll
+Z:\TASKS\School.WEB\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\ForgotPassword.cshtml.g.cs

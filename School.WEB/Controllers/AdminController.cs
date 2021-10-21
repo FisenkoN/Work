@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using School.BLL.Dto;
@@ -7,6 +8,7 @@ using School.BLL.Services;
 
 namespace School.WEB.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly AdminService _service;
