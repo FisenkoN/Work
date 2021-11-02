@@ -1,37 +1,42 @@
-﻿@model IEnumerable<School.BLL.Dto.TeacherDto>
+﻿@using School.WEB.Controllers
+@model School.WEB.ViewModels.Visitor.GetTeachers.GetTeachersViewModel
 
 @{
     ViewData["Title"] = "GetTeachers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Classes list</h1>
+<h1>Teachers list</h1>
 
 <table class="table">
     <thead>
     <tr>
-        <th></th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Image
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            FirstName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Age)
+            LastName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            Age
         </th>
-        <th></th>
+        <th>
+            Gender
+        </th>
+        <th>
+            Details
+        </th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Teachers)
     {
         <tr>
             <td>
-                <img height="50" src="@item?.Image" alt="avatar"/>
+                <img height="50" src="@item?.Image" alt="avatar" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -46,12 +51,14 @@
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
-                <a asp-action="TeacherDetails" asp-route-id="@item.Id">Details</a>
+                <a asp-action="@nameof(VisitorController.TeacherDetails)" asp-route-id="@item.Id">
+                    Details
+                </a>
             </td>
         </tr>
     }
     </tbody>
 </table>
 <div>
-    <a asp-action="Index">Back to categories</a>
+    <a asp-action="@nameof(VisitorController.Index)">Back to categories</a>
 </div>

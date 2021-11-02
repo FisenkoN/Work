@@ -701,3 +701,8 @@ Z:\TASKS\School.UI\obj\Debug\net5.0\School.UI.dll
 Z:\TASKS\School.UI\obj\Debug\net5.0\ref\School.UI.dll
 Z:\TASKS\School.UI\obj\Debug\net5.0\School.UI.pdb
 Z:\TASKS\School.UI\obj\Debug\net5.0\School.UI.genruntimeconfig.cache
+Z:\TASKS\School.UI\bin\Debug\net5.0\MailKit.dll
+Z:\TASKS\School.UI\bin\Debug\net5.0\MimeKit.dll
+Z:\TASKS\School.UI\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+Z:\TASKS\School.UI\bin\Debug\net5.0\System.Security.Cryptography.Pkcs.dll
+Z:\TASKS\School.UI\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll

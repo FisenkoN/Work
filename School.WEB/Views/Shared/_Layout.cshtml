@@ -34,11 +34,25 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav flex-grow-3">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">LogOut</a>
-                    </li>
-                </ul>
+                @{
+                    System.Diagnostics.Debug.Assert(User.Identity != null, "User.Identity != null");
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav flex-grow-3">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">LogOut</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav flex-grow-3">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        </ul>
+                    }
+                }
             </div>
         </div>
     </nav>

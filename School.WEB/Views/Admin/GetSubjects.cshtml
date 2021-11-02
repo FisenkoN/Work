@@ -1,4 +1,5 @@
-﻿@model IEnumerable<School.BLL.Dto.SubjectDto>
+﻿@using School.WEB.Controllers
+@model School.WEB.ViewModels.Admin.GetSubjects.GetSubjectsViewModel
 
 @{
     ViewData["Title"] = "GetSubjects";
@@ -6,7 +7,7 @@
 }
 
 <td>
-    <a asp-action="CreateSubject">Create</a>
+    <a asp-action="@nameof(AdminController.CreateSubject)">Create</a>
 </td>
 
 <h1>Subjects list</h1>
@@ -15,33 +16,29 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Subjects)
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="EditSubject" asp-route-id="@item.Id">Edit</a>
-            </td>
-            <td>
-                <a asp-action="DeleteSubject" asp-route-id="@item.Id">Delete</a>
-            </td>
-            <td>
-                <a asp-action="DetailsSubject" asp-route-id="@item.Id">Details</a>
+                <a asp-action="@nameof(AdminController.EditSubject)" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="@nameof(AdminController.DeleteSubject)" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="@nameof(AdminController.DetailsSubject)" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
     }
     </tbody>
 </table>
 <div>
-    <a asp-action="Index">Back to Admin form</a>
+    <a asp-action="@nameof(AdminController.Index)">Back to Admin form</a>
 </div>
 
 @if (!string.IsNullOrEmpty(ViewBag.Message))

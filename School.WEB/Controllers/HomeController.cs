@@ -1,23 +1,23 @@
 ﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using School.BLL.Services;
-using School.WEB.Models;
+using School.WEB.Data;
+using School.WEB.ViewModels;
 
 namespace School.WEB.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
-        public HomeController(MainService mainService)
+        public HomeController(SchoolDbContext context)
         {
         }
         
+        // [HttpGet("[action]")]
         public IActionResult Index()
         {
             return View();
         }
         
+        [HttpGet("[action]")]
         public IActionResult Privacy()
         {
             return View();

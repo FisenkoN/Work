@@ -8,29 +8,29 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
-using School.BLL.Services;
-using School.DAL;
-using School.DAL.Entities;
+using School.WEB.Data;
 using School.WEB.Models;
+using School.WEB.ViewModels.Account;
 
 namespace School.WEB.Controllers
 {
+    [Route("[controller]")]
     public class AccountController : Controller
     {
         private readonly SchoolDbContext _db;
 
-        public AccountController(MainService mainService)
+        public AccountController(SchoolDbContext schoolDbContext)
         {
-            _db = mainService.DbContext();
+            _db = schoolDbContext;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public IActionResult Login()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
@@ -53,13 +53,13 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
@@ -92,13 +92,13 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public IActionResult ForgotPassword()
         {
             return View();
         }
         
-        [HttpPost]
+        [HttpPost("[action]")]
         public IActionResult ForgotPassword(string email)
         {
             var password = _db.Users.FirstOrDefault(u => u.Email == email)?.Password;
@@ -151,6 +151,7 @@ namespace School.WEB.Controllers
                 new ClaimsPrincipal(id));
         }
 
+        [HttpGet("[action]")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

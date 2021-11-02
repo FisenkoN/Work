@@ -1,5 +1,4 @@
-﻿@using School.DAL.Entities
-@model (School.BLL.Dto.ClassDto form, IEnumerable<string> students, string teacher)
+﻿@model School.WEB.ViewModels.Admin.DetailsClass.DetailsClassViewModel
 
 @{
     ViewBag.Title = "title";
@@ -13,34 +12,27 @@
     <hr/>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Item1.Name)
+            Name
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Item1.Name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
             <p>Teacher</p>
         </dt>
         <dd class="col-sm-10">
-            @if (Model.Item3 != null)
-            {
-                @Html.ActionLink(Model.Item3, "DetailsTeacher", "Admin", new {Id = Model.Item1.TeacherId})
-            }
-            else
-            {
-                <p>no teacher</p>
-            }
+            @Html.DisplayFor(model => model.TeacherName)
         </dd>
         <dt class="col-sm-2">
             <p>Students</p>
         </dt>
         <dd class="col-sm-10">
-            @Html.ListBox("students", new SelectList(Model.Item2))
+            @Html.ListBox("students", new SelectList(Model.StudentNames))
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="EditClass" asp-route-id="@Model.Item1.Id">Edit</a>
-    <a asp-action="DeleteClass" asp-route-id="@Model.Item1.Id">Delete</a>
+    <a asp-action="EditClass" asp-route-id="@Model.Id">Edit</a>
+    <a asp-action="DeleteClass" asp-route-id="@Model.Id">Delete</a>
     <a asp-action="GetClasses">Back to List</a>
 </div>

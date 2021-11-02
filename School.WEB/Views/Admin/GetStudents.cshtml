@@ -1,4 +1,5 @@
-﻿@model IEnumerable<School.BLL.Dto.StudentDto>
+﻿@using School.WEB.Controllers
+@model School.WEB.ViewModels.Admin.GetStudents.GetStudentsViewModel
 
 @{
     ViewData["Title"] = "GetStudents";
@@ -6,7 +7,7 @@
 }
 
 <td>
-    <a asp-action="CreateStudent">Create</a>
+    <a asp-action="@nameof(AdminController.CreateStudent)">Create</a>
 </td>
 
 <h1>Students list</h1>
@@ -16,22 +17,22 @@
     <tr>
         <th></th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            FirstName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            LastName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Age)
+            Age
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            Gender
         </th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Students)
     {
         <tr>
             <td>
@@ -50,20 +51,16 @@
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
-                <a asp-action="EditStudent" asp-route-id="@item.Id">Edit</a>
-            </td>
-            <td>
-                <a asp-action="DeleteStudent" asp-route-id="@item.Id">Delete</a>
-            </td>
-            <td>
-                <a asp-action="DetailsStudent" asp-route-id="@item.Id">Details</a>
+                <a asp-action="@nameof(AdminController.EditStudent)" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="@nameof(AdminController.DeleteStudent)" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="@nameof(AdminController.DetailsStudent)" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
     }
     </tbody>
 </table>
 <div>
-    <a asp-action="Index">Back to Admin form</a>
+    <a asp-action="@nameof(AdminController.Index)">Back to Admin form</a>
 </div>
 
 @if (!string.IsNullOrEmpty(ViewBag.Message))

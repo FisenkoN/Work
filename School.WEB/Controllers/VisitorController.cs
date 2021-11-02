@@ -1,138 +1,117 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using School.BLL.Dto;
-using School.BLL.Services;
+using School.WEB.Data.Repository;
+using School.WEB.ViewModels.Visitor.ClassDetails;
+using School.WEB.ViewModels.Visitor.GetClasses;
+using School.WEB.ViewModels.Visitor.GetSubjects;
+using School.WEB.ViewModels.Visitor.GetTeachers;
+using School.WEB.ViewModels.Visitor.SubjectDetails;
+using School.WEB.ViewModels.Visitor.TeacherDetails;
 
 namespace School.WEB.Controllers
 {
-    [Authorize]
+    [Route("[controller]")]
     public class VisitorController : Controller
     {
-        private readonly VisitorService _service;
+        private readonly ITeacherRepository _teacherRepository;
+        private readonly ISubjectRepository _subjectRepository;
+        private readonly IClassRepository _classRepository;
 
-        public VisitorController(MainService mainService)
+        public VisitorController(ITeacherRepository teacherRepository,
+            IClassRepository classRepository,
+            ISubjectRepository subjectRepository)
         {
-            _service = new VisitorService(mainService);
+            _teacherRepository = teacherRepository;
+            _subjectRepository = subjectRepository;
+            _classRepository = classRepository;
         }
 
-        // GET
+        [HttpGet("[action]")]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult GetClasses()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetClasses()
         {
-            return View(_service.GetClasses());
+            var classes = await _classRepository.GetAll();
+
+            var model = new GetClassesViewModel(classes);
+
+            return View(model);
         }
 
-        public IActionResult GetTeachers()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetTeachers()
         {
-            return View(_service.GetTeachers());
+            var teachers = await _teacherRepository.GetAll();
+
+            var model = new GetTeachersViewModel(teachers);
+
+            return View(model);
         }
 
-        public IActionResult GetSubjects()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetSubjects()
         {
-            return View(_service.GetSubjects());
+            var subjects = await _subjectRepository.GetAll();
+
+            var model = new GetSubjectsViewModel(subjects);
+
+            return View(model);
         }
 
-        public IActionResult ClassDetails(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> ClassDetails(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var @class = await _classRepository.GetOneRelated(id);
 
-            ClassDto @class;
-
-            try
-            {
-                @class = _service.GetClass(id);
-            }
-            catch (Exception)
+            if (@class == null)
             {
                 return NotFound();
             }
 
-            string teacher;
+            var model = new ClassDetailsViewModel(@class);
 
-            try
-            {
-                teacher = _service.GetTeacher(@class.Id)
-                    .FullName;
-            }
-            catch (Exception)
-            {
-                teacher = "no teacher";
-            }
-
-            var students = _service.GetStudents(@class.Id);
-
-            return View(new Tuple<ClassDto, string, IEnumerable<string>>(
-                @class,
-                teacher,
-                students));
+            return View(model);
         }
 
-        public IActionResult TeacherDetails(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> TeacherDetails(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var teacher = await _teacherRepository.GetOneRelated(id);
 
-            TeacherDto teacher;
-
-            try
-            {
-                teacher = _service.GetTeacher(id);
-            }
-            catch (Exception)
+            if (teacher == null)
             {
                 return NotFound();
             }
 
-            string @class;
+            var className = _classRepository.GetRelatedData()
+                                .FirstOrDefault(p => p.TeacherId == teacher.Id)
+                                ?.Name ??
+                            "no class";
 
-            try
-            {
-                @class = _service.GetTeachersClass(teacher.Id);
-            }
-            catch (Exception)
-            {
-                @class = null;
-            }
+            var model = new TeacherDetailsViewModel(teacher,
+                className);
 
-            var subjects = _service.GetSubjectsForTeacher(teacher.Id);
-
-            return View(new Tuple<TeacherDto, string, IEnumerable<string>>(
-                teacher,
-                @class,
-                subjects));
+            return View(model);
         }
 
-        public IActionResult SubjectDetails(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> SubjectDetails(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var subject = await _subjectRepository.GetOneRelated(id);
 
-            SubjectDto subject;
-
-            try
-            {
-                subject = _service.GetSubject(id);
-            }
-            catch (Exception)
+            if (subject == null)
             {
                 return NotFound();
             }
 
-            var teachers = _service.TeachersForSubjectId(subject.Id);
+            var model = new SubjectDetailsModelView(subject);
 
-            var students = _service.StudentsForSubjectId(subject.Id);
-
-            return View(new Tuple<SubjectDto, IEnumerable<string>, IEnumerable<string>>(
-                subject,
-                teachers,
-                students));
+            return View(model);
         }
     }
 }

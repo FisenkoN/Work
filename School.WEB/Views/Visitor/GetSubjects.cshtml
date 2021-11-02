@@ -1,35 +1,40 @@
-﻿@model IEnumerable<School.BLL.Dto.SubjectDto>
+﻿@using School.WEB.Controllers
+@model School.WEB.ViewModels.Visitor.GetSubjects.GetSubjectsViewModel
 
 @{
     ViewData["Title"] = "GetSubjects";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Classes list</h1>
+<h1>Subjects list</h1>
 
 <table class="table">
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </th>
-        <th></th>
+        <th>
+            Details
+        </th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Subjects)
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="SubjectDetails" asp-route-id="@item.Id">Details</a>
+                <a asp-action="@nameof(VisitorController.SubjectDetails)" asp-route-id="@item.Id">
+                    Details
+                </a>
             </td>
         </tr>
     }
     </tbody>
 </table>
 <div>
-    <a asp-action="Index">Back to categories</a>
+    <a asp-action="@nameof(VisitorController.Index)">Back to categories</a>
 </div>

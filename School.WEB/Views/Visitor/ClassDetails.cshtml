@@ -1,4 +1,5 @@
-﻿@model Tuple<School.BLL.Dto.ClassDto, string, IEnumerable<string>>
+﻿@using School.WEB.Controllers
+@model School.WEB.ViewModels.Visitor.ClassDetails.ClassDetailsViewModel
 
 @{
     ViewData["Title"] = "ClassDetails";
@@ -12,26 +13,30 @@
     <hr/>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Item1.Name)
+            Name
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Item1.Name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
             <p>Teacher</p>
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Item2)
+            @Html.DisplayFor(model => model.TeacherName)
         </dd>
         <dt class="col-sm-2">
             <p>Students</p>
         </dt>
         <dd class="col-sm-10">
-            @Html.ListBox("students", new SelectList(Model.Item3))
+            @Html.ListBox("students", new SelectList(Model.StudentNames))
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="GetClasses">Back to List</a>
-    <a asp-action="Index">Back to categories</a>
+    <a asp-action="@nameof(VisitorController.GetClasses)">
+        Back to List
+    </a>
+    <a asp-action="@nameof(VisitorController.Index)">
+        Back to categories
+    </a>
 </div>

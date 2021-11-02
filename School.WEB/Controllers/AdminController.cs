@@ -1,136 +1,215 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using School.BLL.Dto;
-using School.BLL.Services;
+using Microsoft.EntityFrameworkCore;
+using School.WEB.Data.Repository;
+using School.WEB.Models;
+using School.WEB.ViewModels.Admin.CreateClass;
+using School.WEB.ViewModels.Admin.CreateStudent;
+using School.WEB.ViewModels.Admin.CreateSubject;
+using School.WEB.ViewModels.Admin.CreateTeacher;
+using School.WEB.ViewModels.Admin.DetailsClass;
+using School.WEB.ViewModels.Admin.DetailsStudent;
+using School.WEB.ViewModels.Admin.DetailsSubject;
+using School.WEB.ViewModels.Admin.DetailsTeacher;
+using School.WEB.ViewModels.Admin.EditClass;
+using School.WEB.ViewModels.Admin.EditStudent;
+using School.WEB.ViewModels.Admin.EditSubject;
+using School.WEB.ViewModels.Admin.EditTeacher;
+using School.WEB.ViewModels.Admin.GetClasses;
+using School.WEB.ViewModels.Admin.GetStudents;
+using School.WEB.ViewModels.Admin.GetSubjects;
+using School.WEB.ViewModels.Admin.GetTeachers;
 
 namespace School.WEB.Controllers
 {
     [Authorize]
+    [Route("[controller]")]
     public class AdminController : Controller
     {
-        private readonly AdminService _service;
+        private readonly IStudentRepository _studentRepository;
+        private readonly IClassRepository _classRepository;
+        private readonly ISubjectRepository _subjectRepository;
+        private readonly ITeacherRepository _teacherRepository;
 
-        public AdminController(MainService service)
+        public AdminController(IStudentRepository studentRepository,
+            ITeacherRepository teacherRepository,
+            ISubjectRepository subjectRepository,
+            IClassRepository classRepository)
         {
-            _service = new AdminService(service);
+            _studentRepository = studentRepository;
+            _classRepository = classRepository;
+            _subjectRepository = subjectRepository;
+            _teacherRepository = teacherRepository;
         }
 
-        // GET
+        [HttpGet("[action]")]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult GetTeachers()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetTeachers()
         {
-            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
-            
-            var teachers = _service.Teachers_GetAll();
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
 
-            if (!teachers.Any())
-                return NoContent();
+            var teachers = await _teacherRepository.GetAll();
 
-            return View(teachers);
+            var model = new GetTeachersViewModel(teachers);
+
+            return View(model);
         }
 
-        public IActionResult GetClasses()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetClasses()
         {
-            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
 
-            var classes = _service.Classes_GetAll();
+            var classes = await _classRepository.GetAll();
 
-            if (!classes.Any())
-                return NoContent();
+            var model = new GetClassesViewModel(classes);
 
-            return View(classes);
+            return View(model);
         }
 
-        public IActionResult GetStudents()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetStudents()
         {
-            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
-            
-            var students = _service.Students_GetAll();
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
 
-            if (!students.Any())
-                return NoContent();
+            var students = await _studentRepository.GetAll();
 
-            return View(students);
+            var model = new GetStudentsViewModel(students);
+
+            return View(model);
         }
 
-        public IActionResult GetSubjects()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetSubjects()
         {
-            if (TempData["Message"] != null) ViewBag.Message = TempData["Message"].ToString();
-            
-            var subjects = _service.Subjects_GetAll();
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
 
-            if (!subjects.Any())
-                return NoContent();
+            var subjects = await _subjectRepository.GetAll();
 
-            return View(subjects);
+            var model = new GetSubjectsViewModel(subjects);
+
+            return View(model);
         }
 
-        public IActionResult CreateTeacher()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> CreateTeacher()
         {
-            ViewData["Classes"] = new SelectList(
-                _service.GetClassWithOutTeacher(),
+            var subjects = await _subjectRepository.GetAll();
+
+            var classes = _classRepository.GetRelatedData()
+                .Where(c =>
+                    c.TeacherId == null && c.Teacher == null);
+
+            ViewData["Classes"] = new SelectList(classes,
                 "Id",
                 "Name");
 
-            ViewData["Subjects"] = new SelectList(
-                _service.Subjects_GetAll(),
+            ViewData["Subjects"] = new SelectList(subjects,
                 "Id",
                 "Name");
 
             return View();
         }
 
-        [HttpPost]
-        public IActionResult CreateTeacher(
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateTeacher(
             [Bind("FirstName, Image, LastName, ClassId, SubjectIds, Gender, Id, Age")]
-            TeacherDto teacherDto)
+            CreateTeacherViewModel teacher)
         {
-            _service.Teacher_Create(teacherDto);
+            if (!ModelState.IsValid)
+            {
+                var subjects = await _subjectRepository.GetAll();
 
-            TempData["Message"] = $"Teacher: {teacherDto.FullName} was created at {DateTime.Now.ToShortTimeString()}";
+                var classes = _classRepository.GetRelatedData()
+                    .Where(c =>
+                        c.TeacherId == null && c.Teacher == null);
+
+                ViewData["Classes"] = new SelectList(classes,
+                    "Id",
+                    "Name");
+
+                ViewData["Subjects"] = new SelectList(subjects,
+                    "Id",
+                    "Name");
+
+                return View(teacher);
+            }
             
+            await _teacherRepository.Add(new Teacher
+            {
+                Age = teacher.Age,
+                ClassId = teacher.ClassId,
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Gender = teacher.Gender,
+                Image = teacher.Image,
+                Subjects = teacher.SubjectIds != null
+                    ? _subjectRepository
+                        .GetAll()
+                        .Result
+                        .Where(i =>
+                            teacher.SubjectIds
+                                .ToList()
+                                .Exists(s =>
+                                    s == i.Id))
+                        .ToList()
+                    : null
+            });
+
+            TempData["Message"] =
+                $"Teacher: {teacher.FirstName + " " + teacher.LastName} was created at {DateTime.Now.ToShortTimeString()}";
+
             return RedirectToAction("GetTeachers");
         }
 
-        public IActionResult EditTeacher(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> EditTeacher(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var teacher = await _teacherRepository.GetOneRelated(id);
 
-            TeacherDto teacher;
-
-            try
-            {
-                teacher = _service.Teachers_GetForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-
-            var classes = _service.GetClassWithOutTeacher();
+            var classes = await _classRepository.GetRelatedData()
+                .Where(c =>
+                    c.TeacherId == null && c.Teacher == null)
+                .ToListAsync();
 
             try
             {
-                classes = classes.Append(_service.Classes_GetTeacher(teacher.Id));
+                var c = _classRepository.GetRelatedData()
+                    .FirstOrDefault(c =>
+                        c.TeacherId == id);
+                
+                if(c!=null)
+                    classes.Add(c);
             }
             catch (Exception)
             {
                 Console.WriteLine();
             }
 
-            var subjects = _service.Subjects_GetAll();
+            var subjects = await _subjectRepository.GetAll();
 
             try
             {
-                var selectedClass = _service.Classes_GetTeacher(teacher.Id);
+                var selectedClass = _classRepository.GetRelatedData()
+                    .FirstOrDefault(c =>
+                        c.TeacherId == id);
 
                 ViewData["Classes"] = new SelectList(classes,
                     "Id",
@@ -148,152 +227,143 @@ namespace School.WEB.Controllers
                 "Id",
                 "Name");
 
-            return View(teacher);
+
+            var model = new EditTeacherViewModel(teacher);
+
+            return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult EditTeacher(int? id,
-            [Bind("Id, FirstName, LastName,Image, Age, Gender, ClassId, SubjectIds")]
-            TeacherDto teacher)
+        public async Task<IActionResult> EditTeacher(int id,
+            [Bind("Id, FirstName, LastName, Image, Age, Gender, ClassId, SubjectIds")]
+            EditTeacherViewModel editTeacherViewModel)
         {
-            if (id != teacher.Id)
-                return NotFound();
-
-            _service.Teachers_Edit_FirstName(id,
-                teacher.FirstName);
-
-            _service.Teachers_Edit_LastName(id,
-                teacher.LastName);
-
-            _service.Teachers_Edit_Age(id,
-                teacher.Age);
-
-            _service.Teachers_Edit_Gender(id,
-                teacher.Gender);
-
-            _service.Teachers_Edit_Class(id,
-                teacher.ClassId);
+            if (!ModelState.IsValid) return View(editTeacherViewModel);
             
-            _service.Teachers_Edit_Image(id,
-                teacher.Image);
+            var teacher = await _teacherRepository.GetOne(id);
 
-            _service.Teachers_Edit_Subjects(id,
-                teacher.SubjectIds.ToList());
-            
-            TempData["Message"] = $"Teacher: {_service.Teachers_GetForId(id).FullName} was edited at {DateTime.Now.ToShortTimeString()}";
+            teacher.FirstName = editTeacherViewModel.FirstName;
+            teacher.LastName = editTeacherViewModel.LastName;
+            teacher.Age = editTeacherViewModel.Age;
+            teacher.Gender = editTeacherViewModel.Gender;
+            teacher.Image = editTeacherViewModel.Image;
+
+            await _teacherRepository.Update(teacher);
+
+            teacher = await _teacherRepository.GetOne(id);
+
+            teacher.ClassId = editTeacherViewModel.ClassId;
+
+            teacher.Class = await _classRepository.GetOne(editTeacherViewModel.ClassId);
+
+            await _teacherRepository.Update(teacher);
+
+            teacher = await _teacherRepository.GetOneRelated(id);
+
+            teacher.Subjects.Clear();
+
+            await _teacherRepository.Update(teacher);
+
+            teacher = await _teacherRepository.GetOneRelated(id);
+
+            foreach (var t in editTeacherViewModel.SubjectIds)
+                teacher.Subjects
+                    .Add(await _subjectRepository
+                        .GetOne(t));
+
+            await _teacherRepository.Update(teacher);
+
+            TempData["Message"] = $"Teacher: {_teacherRepository.GetOne(id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetTeachers");
         }
 
-        public IActionResult DeleteTeacher(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DeleteTeacher(int id)
         {
-            if (id == null)
-                return BadRequest();
+            await _teacherRepository.Delete(id);
 
-            try
-            {
-                if (_service.Teachers_GetForId(id) == null)
-                    return NotFound();
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            TempData["Message"] = $"Teacher with id : {id} was deleted at {DateTime.Now.ToShortTimeString()}";
 
-            try
-            {
-                _service.Teacher_Delete(id);
-                
-                TempData["Message"] = $"Teacher with id : {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-                
-                return RedirectToAction("GetTeachers");
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return RedirectToAction("GetTeachers");
+
         }
 
-        public IActionResult DetailsTeacher(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DetailsTeacher(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var teacher = await _teacherRepository.GetOneRelated(id);
 
-            TeacherDto teacher;
-
-            try
-            {
-                teacher = _service.Teachers_GetForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-
-            var subjects = _service.Teachers_GetSubjectsForId(teacher.Id);
-
-            var @class = _service
-                             .Classes_GetAll()
+            var @class = _classRepository
+                             .GetAll()
+                             .Result
                              .FirstOrDefault(c =>
                                  c.TeacherId == teacher.Id)
                              ?.Name ??
                          "no class";
 
-            return View((teacher, @class, subjects));
+            var model = new DetailsTeacherViewModel(teacher,
+                @class);
+
+            return View(model);
         }
 
-        public IActionResult CreateStudent()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> CreateStudent()
         {
-            ViewData["Classes"] = new SelectList(_service.Classes_GetAll(),
+            ViewData["Classes"] = new SelectList(await _classRepository.GetAll(),
                 "Id",
                 "Name");
 
-            ViewData["Subjects"] = new SelectList(_service.Subjects_GetAll(),
+            ViewData["Subjects"] = new SelectList(await _subjectRepository.GetAll(),
                 "Id",
                 "Name");
 
             return View();
         }
 
-        [HttpPost]
-        public IActionResult CreateStudent(
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateStudent(
             [Bind("FirstName, LastName, Image, ClassId, SubjectIds, Gender, Id, Age")]
-            StudentDto student)
+            CreateStudentViewModel createStudentViewModel)
         {
-            try
-            {
-                _service.Student_Create(student);
-            }
-            catch (Exception)
-            {
-                return BadRequest("You entered wrong value. Every students must have subject");
-            }
-
-            TempData["Message"] = $"Student: {student.FullName} was created at {DateTime.Now.ToShortTimeString()}";
+            if (!ModelState.IsValid) return View(createStudentViewModel);
             
+            await _studentRepository.Add(new Student
+            {
+                Age = createStudentViewModel.Age,
+                ClassId = createStudentViewModel.ClassId,
+                LastName = createStudentViewModel.LastName,
+                Gender = createStudentViewModel.Gender,
+                FirstName = createStudentViewModel.FirstName,
+                Image = createStudentViewModel.Image,
+                Subjects = _subjectRepository
+                    .GetAll()
+                    .Result
+                    .Where(i =>
+                        createStudentViewModel.SubjectIds
+                            .ToList()
+                            .Exists(t =>
+                                t == i.Id))
+                    .ToList()
+            });
+
+            TempData["Message"] =
+                $"Student: {createStudentViewModel.FirstName + " " + createStudentViewModel.LastName} was created at {DateTime.Now.ToShortTimeString()}";
+
             return RedirectToAction("GetStudents");
         }
 
-        public IActionResult EditStudent(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> EditStudent(int id)
         {
-            if (id == null)
-                return BadRequest();
 
-            StudentDto student;
+            var student = await _studentRepository.GetOneRelated(id);
 
-            try
-            {
-                student = _service.Students_GetForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            var classes = await _classRepository.GetAll();
 
-            var classes = _service.Classes_GetAll();
-
-            var subjects = _service.Subjects_GetAll();
+            var subjects = await _subjectRepository.GetAll();
 
             ViewData["Classes"] = new SelectList(classes,
                 "Id",
@@ -303,193 +373,235 @@ namespace School.WEB.Controllers
                 "Id",
                 "Name");
 
-            return View(student);
+            var model = new EditStudentViewModel(student);
+
+            return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult EditStudent(int? id,
-            [Bind("Id, FirstName, LastName,Image, Age, Gender, ClassId, SubjectIds")]
-            StudentDto student)
+        public async Task<IActionResult> EditStudent(int id,
+            [Bind("Id, FirstName, LastName, Image, Age, Gender, ClassId, SubjectIds")]
+            EditStudentViewModel editStudentViewModel)
         {
-            if (id != student.Id)
-                return NotFound();
+            var student = await _studentRepository.GetOne(id);
 
-            _service.Students_Edit_FirstName(id,
-                student.FirstName);
+            student.FirstName = editStudentViewModel.FirstName;
+            student.LastName = editStudentViewModel.LastName;
+            student.Image = editStudentViewModel.Image;
+            student.Age = editStudentViewModel.Age;
+            student.Gender = editStudentViewModel.Gender;
 
-            _service.Students_Edit_LastName(id,
-                student.LastName);
+            await _studentRepository.Update(student);
 
-            _service.Students_Edit_Age(id,
-                student.Age);
+            student = await _studentRepository.GetOne(id);
 
-            _service.Students_Edit_Gender(id,
-                student.Gender);
+            student.ClassId = editStudentViewModel.ClassId;
 
-            _service.Students_Edit_Class(id,
-                student.ClassId);
-            
-            _service.Students_Edit_Image(id,
-                student.Image);
+            student.Class = await _classRepository.GetOne(editStudentViewModel.ClassId);
+
+            await _studentRepository.Update(student);
 
             try
             {
-                _service.Students_Edit_Subjects(id,
-                    student.SubjectIds.ToList());
+                student = await _studentRepository.GetOneRelated(id);
+
+                student.Subjects.Clear();
+
+                await _studentRepository.Update(student);
+
+                student = await _studentRepository.GetOneRelated(id);
+
+                foreach (var t in editStudentViewModel.SubjectIds)
+                    student.Subjects
+                        .Add(await _subjectRepository
+                            .GetOne(t));
+
+                await _studentRepository.Update(student);
             }
             catch (Exception)
             {
                 return RedirectToAction("GetStudents");
             }
 
-            TempData["Message"] = $"Student: {student.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
-            
+            TempData["Message"] =
+                $"Student: {student.FirstName + " " + student.LastName} was edited at {DateTime.Now.ToShortTimeString()}";
+
             return RedirectToAction("GetStudents");
         }
 
-        public IActionResult DeleteStudent(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DeleteStudent(int id)
         {
-            if (id == null)
-                BadRequest();
+            await _studentRepository.Delete(id);
 
-            try
-            {
-                if (_service.Students_GetForId(id) == null)
-                    return NotFound();
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            TempData["Message"] = $"Student: with {id} was deleted at {DateTime.Now.ToShortTimeString()}";
 
-            try
-            {
-                _service.Student_Delete(id);
-
-                TempData["Message"] =
-                    $"Student: with {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-                
-                return RedirectToAction("GetStudents");
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return RedirectToAction("GetStudents");
         }
 
-        public IActionResult DetailsStudent(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DetailsStudent(int id)
         {
-            if (id == null)
-                return BadRequest();
-
-            StudentDto student;
-
-            try
-            {
-                student = _service.Students_GetForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-
-            var subjects = _service.Students_GetSubjectsForId(student.Id);
+            var student = await _studentRepository.GetOneRelated(id);
 
             var @class = student.ClassId != null
-                ? _service
-                    .Classes_GetForId(student.ClassId)
+                ? _classRepository.GetOneRelated(student.ClassId)
+                    .Result
                     .Name
                 : "no class";
 
-            return View((student, @class, subjects));
+            var model = new DetailsStudentViewModel(student,
+                @class);
+
+            return View(model);
         }
 
-        public IActionResult CreateClass()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> CreateClass()
         {
-            ViewData["Students"] = new SelectList(_service.Students_GetAll(),
+            var teachers = _teacherRepository
+                .GetAll()
+                .Result
+                .Except(
+                    _teacherRepository
+                        .GetAll()
+                        .Result
+                        .Where(t =>
+                            _classRepository
+                                .GetRelatedData()
+                                .ToList()
+                                .Exists(c =>
+                                    c.TeacherId == t.Id)));
+
+
+            ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
                 "Id",
                 "FullName");
 
-            ViewData["Teachers"] = new SelectList(_service.GetTeachersWithoutClass(),
+            ViewData["Teachers"] = new SelectList(
+                teachers,
                 "Id",
                 "FullName");
 
             return View();
         }
 
-        [HttpPost]
-        public IActionResult CreateClass(
-            [Bind("Id, Name, StudentIds, TeacherId")]
-            ClassDto classDto)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateClass(
+            [Bind("Name, StudentIds, TeacherId")]
+            CreateClassViewModel createClassViewModel)
         {
-            try
-            {
-                _service.Class_Create(classDto);
-            }
-            catch (Exception)
-            {
-                return BadRequest("Every class must have one or more students");
-            }
+            if (!ModelState.IsValid) return View(createClassViewModel);
 
-            TempData["Message"] = $"Class: {classDto.Name} was created at {DateTime.Now.ToShortTimeString()}";
-            
+            await _classRepository.Add(new Class
+            {
+                Name = createClassViewModel.Name,
+                TeacherId = createClassViewModel.TeacherId,
+                Students = _studentRepository
+                    .GetAll()
+                    .Result
+                    .Where(i =>
+                        createClassViewModel.StudentIds
+                            .ToList()
+                            .Exists(t =>
+                                t == i.Id))
+                    .ToList()
+            });
+
+            TempData["Message"] =
+                $"Class: {createClassViewModel.Name} was created at {DateTime.Now.ToShortTimeString()}";
+
             return RedirectToAction("GetClasses");
+
         }
 
-        public IActionResult CreateSubject()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> CreateSubject()
         {
-            ViewData["Students"] = new SelectList(_service.Students_GetAll(),
+            ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
                 "Id",
                 "FullName");
 
-            ViewData["Teachers"] = new SelectList(_service.Teachers_GetAll(),
+            ViewData["Teachers"] = new SelectList(await _teacherRepository.GetAll(),
                 "Id",
                 "FullName");
 
             return View();
         }
 
-        [HttpPost]
-        public IActionResult CreateSubject(
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateSubject(
             [Bind("Id, Name, StudentIds, TeacherIds")]
-            SubjectDto subject)
+            CreateSubjectViewModel createSubjectViewModel)
         {
-            _service.Subject_Create(subject);
-            
-            TempData["Message"] = $"Subject: {subject.Name} was created at {DateTime.Now.ToShortTimeString()}";
+            if (!ModelState.IsValid) 
+            {
+                ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
+                    "Id",
+                    "FullName");
+
+                ViewData["Teachers"] = new SelectList(await _teacherRepository.GetAll(),
+                    "Id",
+                    "FullName");
+                return View(createSubjectViewModel);
+            }
+
+            await _subjectRepository.Add(new Subject
+            {
+                Name = createSubjectViewModel.Name,
+                Students = createSubjectViewModel.StudentIds != null
+                    ? _studentRepository
+                        .GetAll()
+                        .Result
+                        .Where(i =>
+                            createSubjectViewModel.StudentIds
+                                .ToList()
+                                .Exists(t =>
+                                    t == i.Id))
+                        .ToList()
+                    : null,
+                Teachers = createSubjectViewModel.TeacherIds != null
+                    ? _teacherRepository
+                        .GetAll()
+                        .Result
+                        .Where(i =>
+                            createSubjectViewModel.TeacherIds
+                                .ToList()
+                                .Exists(t =>
+                                    t == i.Id))
+                        .ToList()
+                    : null
+            });
+
+            TempData["Message"] =
+                $"Subject: {createSubjectViewModel.Name} was created at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetSubjects");
         }
 
-        public IActionResult EditClass(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> EditClass(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var @class = await _classRepository.GetOneRelated(id);
 
-            ClassDto classDto;
+            var students = await _studentRepository.GetAll();
 
-            try
-            {
-                classDto = _service.Classes_GetForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            var teachers = _teacherRepository
+                .GetAll()
+                .Result
+                .Except(
+                    _teacherRepository
+                        .GetAll()
+                        .Result
+                        .Where(t =>
+                            _classRepository
+                                .GetRelatedData()
+                                .ToList()
+                                .Exists(c =>
+                                    c.TeacherId == t.Id)));
 
-            var students = _service.Students_GetAll();
-
-            var teachers = _service.GetTeachersWithoutClass();
-
-            try
-            {
-                teachers = teachers.Append(_service.Teachers_GetForId(classDto.TeacherId));
-            }
-            catch (Exception)
-            {
-                Console.WriteLine();
-            }
+            teachers = teachers.Append(await _teacherRepository.GetOne(@class.TeacherId));
 
             ViewData["Students"] = new SelectList(students,
                 "Id",
@@ -499,168 +611,138 @@ namespace School.WEB.Controllers
                 "Id",
                 "FullName");
 
-            return View(classDto);
+            var model = new EditClassViewModel(@class);
+
+            return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult EditClass(int? id,
+        public async Task<IActionResult> EditClass(int id,
             [Bind("Id, Name, StudentIds, TeacherId")]
-            ClassDto classDto)
+            EditClassViewModel editClassViewModel)
         {
-            if (id != classDto.Id)
+            if (id != editClassViewModel.Id)
                 return NotFound();
 
-            _service.Class_Edit_Name(id,
-                classDto.Name);
+            var form = await _classRepository.GetOne(id);
 
-            _service.Class_Edit_Students(id,
-                classDto.StudentIds.ToList());
+            form.Name = editClassViewModel.Name;
 
-            _service.Class_Edit_Teacher(id,
-                classDto.TeacherId);
-            
-            TempData["Message"] = $"Class: {classDto.Name} was edited at {DateTime.Now.ToShortTimeString()}";
+            form.TeacherId = editClassViewModel.TeacherId;
+
+            form.Teacher = await _teacherRepository.GetOne(editClassViewModel.TeacherId);
+
+            await _classRepository.Update(form);
+
+            form = await _classRepository.GetOneRelated(id);
+
+            form.Students.Clear();
+
+            await _classRepository.Update(form);
+
+            foreach (var i in editClassViewModel.StudentIds)
+            {
+                var student = await _studentRepository.GetOne(i);
+
+                student.ClassId = id;
+
+                student.Class = await _classRepository.GetOne(id);
+
+                await _studentRepository.Update(student);
+            }
+
+
+            TempData["Message"] = $"Class: {editClassViewModel.Name} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetClasses");
         }
 
-        public IActionResult DeleteClass(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DeleteClass(int id)
         {
-            if (id == null)
-                return BadRequest();
+            await _classRepository.Delete(id);
 
-            try
-            {
-                if (_service.Classes_GetForId(id) == null)
-                    return NotFound();
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-            
-            _service.Class_Delete(id);
-            
             TempData["Message"] = $"Class: with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-                
+
             return RedirectToAction("GetClasses");
         }
 
-        public IActionResult DetailsClass(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DetailsClass(int id)
         {
-            if (id == null)
-                return BadRequest();
-
-            ClassDto @class;
-
-            try
-            {
-                @class = _service.Classes_GetForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-
-            var students = _service.Classes_GetStudentsForId(@class.Id);
+            var @class = await _classRepository.GetOneRelated(id);
 
             var teacher = @class.TeacherId != null
-                ? _service
-                    .Teachers_GetForId(@class.TeacherId)
+                ? _teacherRepository.GetOneRelated(@class.TeacherId)
+                    .Result
                     ?
                     .FullName
                 : "no teacher";
 
-            return View((@class, students, teacher));
+            var model = new DetailsClassViewModel(@class,
+                teacher);
+
+            return View(model);
         }
 
-        public IActionResult EditSubject(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> EditSubject(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var subject = await _subjectRepository.GetOneRelated(id);
 
-            SubjectDto subject;
+            var model = new EditSubjectViewModel(subject);
 
-            try
-            {
-                subject = _service.Subjects_GetForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-
-            return View(subject);
+            return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult EditSubject(int? id,
-            [Bind("Id, Name, StudentIds, TeacherIds")]
-            SubjectDto subject)
+        public async Task<IActionResult> EditSubject(int? id,
+            [Bind("Id, Name")] EditSubjectViewModel editSubjectViewModel)
         {
-            if (id != subject.Id)
-                return NotFound();
+            var subject = await _subjectRepository.GetOne(id);
 
-            _service.Subject_Edit_Name(id,
-                subject.Name);
-            
+            subject.Name = editSubjectViewModel.Name;
+
+            await _subjectRepository.Update(subject);
+
             TempData["Message"] = $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}";
 
             return RedirectToAction("GetSubjects");
         }
 
-        public IActionResult DeleteSubject(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DeleteSubject(int id)
         {
-            if (id == null)
-                return BadRequest();
+            await _subjectRepository.Delete(id);
 
-            try
-            {
-                if (_service.Subjects_GetForId(id) == null)
-                    return NotFound();
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            TempData["Message"] = $"Subject with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
 
-            try
-            {
-                _service.Subject_Delete(id);
-                
-                TempData["Message"] = $"Subject with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-                
-                return RedirectToAction("GetSubjects");
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
+            return RedirectToAction("GetSubjects");
         }
 
-        public IActionResult DetailsSubject(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DetailsSubject(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var subject = await _subjectRepository.GetOneRelated(id);
 
-            SubjectDto subject;
+            var students = _subjectRepository.GetOneRelated(id)
+                .Result
+                .Students
+                .Select(s => s.FullName);
 
-            try
-            {
-                subject = _service.Subjects_GetForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            var teachers = _subjectRepository
+                .GetOneRelated(id)
+                .Result
+                .Teachers
+                .Select(s => s.FullName);
 
-            var students = _service.Subjects_GetStudentsForId(subject.Id);
+            var model = new DetailsSubjectViewModel(subject,
+                students,
+                teachers);
 
-            var teachers = _service.Subjects_GetTeachersForId(subject.Id);
-
-            return View((subject, students, teachers));
+            return View(model);
         }
     }
 }

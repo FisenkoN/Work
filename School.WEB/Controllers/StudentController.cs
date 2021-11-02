@@ -1,79 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using School.BLL.Dto;
-using School.BLL.Services;
+using School.WEB.Data.Repository;
+using School.WEB.ViewModels.Student.Edit;
+using School.WEB.ViewModels.Student.Index;
+using School.WEB.ViewModels.Student.ShowClassmates;
+using School.WEB.ViewModels.Student.ShowClassTeacher;
+using School.WEB.ViewModels.Student.StudentDetails;
 
 namespace School.WEB.Controllers
 {
     [Authorize]
+    [Route("[controller]")]
     public class StudentController : Controller
     {
-        private readonly StudentService _service;
+        private readonly IStudentRepository _studentRepository;
+        private readonly IClassRepository _classRepository;
+        private readonly ISubjectRepository _subjectRepository;
+        private readonly ITeacherRepository _teacherRepository;
 
-        public StudentController(MainService service)
+
+        public StudentController(IStudentRepository studentRepository,
+            ITeacherRepository teacherRepository,
+            ISubjectRepository subjectRepository,
+            IClassRepository classRepository)
         {
-            _service = new StudentService(service);
+            _studentRepository = studentRepository;
+            _classRepository = classRepository;
+            _subjectRepository = subjectRepository;
+            _teacherRepository = teacherRepository;
         }
 
-        // GET
-        public IActionResult Index()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Index()
         {
-            return View(_service.GetStudents());
+            var students = await _studentRepository.GetAll();
+
+            var model = new IndexViewModel(students);
+
+            return View(model);
         }
 
-        public IActionResult StudentDetails(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> StudentDetails(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var student = await _studentRepository.GetOneRelated(id);
 
-            StudentDto student;
-
-            try
-            {
-                student = _service.GetStudentForId(id);
-            }
-            catch (Exception)
+            if (student == null)
             {
                 return NotFound();
             }
 
-            var @class = student.ClassId != null
-                ? _service.GetClassForId(student.ClassId)
-                    ?.Name
-                : "no class";
+            var @class = await _classRepository.GetOne(student?.ClassId);
+            
+            var model = new StudentDetailsViewModel(student, @class);
 
-            var subjects = _service.GetSubjects(student.Id);
-
-            var subjectNames = subjects.Select(s => s.Name);
-
-            return View(new Tuple<StudentDto, string, IEnumerable<string>>(student,
-                @class,
-                subjectNames));
+            return View(model);
         }
 
-        public IActionResult Edit(int? id)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-                return BadRequest();
 
-            StudentDto student;
+            var student = await _studentRepository.GetOneRelated(id);
 
-            try
-            {
-                student = _service.GetStudentForId(id);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
+            var classes = await _classRepository.GetAll();
 
-            var classes = _service.GetClasses();
-
-            var subjects = _service.GetSubjects();
+            var subjects = await _subjectRepository.GetAll();
 
             ViewData["Classes"] = new SelectList(classes,
                 "Id",
@@ -83,84 +78,123 @@ namespace School.WEB.Controllers
                 "Id",
                 "Name");
 
-            return View(student);
+            var model = new EditViewModel(student);
+
+            return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int? id,
-            [Bind("Id, FirstName, LastName, Age, Image, Gender, ClassId, SubjectIds")]
-            StudentDto student)
+        public async Task<IActionResult> Edit(int id,[Bind("Id, FirstName, LastName, Age, Gender, ClassId, Image, SubjectIds")] EditViewModel studentModel)
         {
-            if (id != student.Id)
+            if (id != studentModel.Id)
                 return NotFound();
 
-            _service.Edit_FirstName(id,
-                student.FirstName);
+            if (!ModelState.IsValid)
+            {
+                var classes = await _classRepository.GetAll();
 
-            _service.Edit_LastName(id,
-                student.LastName);
+                var subjects = await _subjectRepository.GetAll();
 
-            _service.Edit_Age(id,
-                student.Age);
+                ViewData["Classes"] = new SelectList(classes,
+                    "Id",
+                    "Name");
 
-            _service.Edit_Gender(id,
-                student.Gender);
+                ViewData["Subjects"] = new SelectList(subjects,
+                    "Id",
+                    "Name");
+                
+                return View(studentModel);
+            }
 
-            _service.Edit_Class(id,
-                student.ClassId);
+            var student = await _studentRepository.GetOne(id);
+
+            student.FirstName = studentModel.FirstName;
             
-            _service.Edit_Image(id,
-                student.Image);
+            student.LastName = studentModel.LastName;
+            
+            student.Age = studentModel.Age;
+            
+            student.Image = studentModel.Image;
+            
+            student.Gender = studentModel.Gender;
 
-            _service.Edit_Subjects(id,
-                student.SubjectIds.ToList());
+            await _studentRepository.Update(student);
+                
+            student = await _studentRepository.GetOne(id);
+
+            student.ClassId = studentModel.ClassId;
+
+            student.Class = await _classRepository.GetOne(studentModel.ClassId);
+
+            await _studentRepository.Update(student);
+            
+            student = await _studentRepository.GetOneRelated(id);
+
+            student.Subjects.Clear();
+
+            await _studentRepository.Update(student);
+
+            student = await _studentRepository.GetOneRelated(id);
+
+            foreach (var subjectId in studentModel.SubjectIds)
+                student.Subjects.Add(await _subjectRepository.GetOne(subjectId));
+
+            await _studentRepository.Update(student);
 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult ShowClassmates(int? id)
+        [HttpGet("[action]/{id}")]
+        public IActionResult ShowClassmates(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var classId = _studentRepository.GetOneRelated(id).Result.ClassId;
 
-            ICollection<StudentDto> classmates;
-
-            try
+            if (classId != null)
             {
-                classmates = _service.GetClassmates(id);
-            }
-            catch (Exception)
-            {
-                return NoContent();
-            }
+                var students = _studentRepository
+                    .GetSome(s =>
+                        s.ClassId == classId)
+                    .ToList();
 
-            if (classmates.Count == 0)
-                return NoContent();
-
-            return View(classmates);
+                var model = new ShowClassmatesViewModel(students);
+            
+                return View(model);
+            }
+            
+            TempData["Message"] = "This students doesn't have a class";
+            
+            return RedirectToAction("Index");
         }
 
-        public IActionResult ShowClassTeacher(int? id)
+        [HttpGet("[action]/{id}")]
+        public IActionResult ShowClassTeacher(int id)
         {
-            if (id == null)
-                return BadRequest();
+            var classId = _studentRepository.GetOneRelated(id)
+                .Result.ClassId;
 
-            TeacherDto teacher;
-
-            try
+            if (classId != null)
             {
-                teacher = _service.GetMyClassTeacher(id);
-            }
-            catch (Exception)
-            {
-                return NoContent();
-            }
+                var teacher = _teacherRepository
+                    .GetSome(t => t.Id ==
+                                  _classRepository
+                                      .GetOne(classId)
+                                      .Result
+                                      .TeacherId)
+                    ?
+                    .FirstOrDefault();
 
-            if (teacher == null)
-                return NoContent();
+                if (teacher == null)
+                    return NotFound();
 
-            return View(teacher);
+                var model = new ShowClassTeacherViewModel(teacher);
+                
+                return View(model);
+            }
+            
+            TempData["Message"] = "This students doesn't have a class";
+            
+            return RedirectToAction("Index");
         }
     }
 }

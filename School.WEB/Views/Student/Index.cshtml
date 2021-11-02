@@ -1,4 +1,5 @@
-﻿@model IEnumerable<School.BLL.Dto.StudentDto>
+﻿@using School.WEB.Controllers
+@model School.WEB.ViewModels.Student.Index.IndexViewModel
 
 @{
     ViewData["Title"] = "Classes";
@@ -10,17 +11,15 @@
 <table class="table">
     <thead>
     <tr>
-        <th></th>
+        <th>Image</th>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
+            Full Name
         </th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>Details / Classmates / ClassTeacher</th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Students)
     {
         <tr>
             <td>
@@ -30,15 +29,23 @@
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                <a asp-action="StudentDetails" asp-route-id="@item.Id">Details</a>
-            </td>
-            <td>
-                <a asp-action="ShowClassmates" asp-route-id="@item.Id">Show classmates</a>
-            </td>
-            <td>
-                <a asp-action="ShowClassTeacher" asp-route-id="@item.Id">Show class teacher</a>
+                <a asp-action="@nameof(StudentController.StudentDetails)" asp-route-id="@item.Id">
+                    Details
+                </a>
+                <a asp-action="@nameof(StudentController.ShowClassmates)" asp-route-id="@item.Id">
+                    Show classmates
+                </a>
+                <a asp-action="@nameof(StudentController.ShowClassTeacher)" asp-route-id="@item.Id">
+                    Show class teacher
+                </a>
             </td>
         </tr>
     }
     </tbody>
 </table>
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.Message");
+    </script>
+}

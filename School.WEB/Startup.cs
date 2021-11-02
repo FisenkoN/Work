@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using School.BLL.Services;
+using School.WEB.Data;
+using School.WEB.Data.Repository;
 
 namespace School.WEB
 {
@@ -16,22 +18,28 @@ namespace School.WEB
         {
             _configuration = configuration;
         }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => //CookieAuthenticationOptions
+                .AddCookie(options => 
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
+
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
+            
+            services.AddDbContext<SchoolDbContext>(
+                options => options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
+
+            services.AddSingleton<IStudentRepository, StudentRepository>();
+            services.AddSingleton<ITeacherRepository, TeacherRepository>();
+            services.AddSingleton<ISubjectRepository, SubjectRepository>();
+            services.AddSingleton<IClassRepository, ClassRepository>();
             
             services.AddControllersWithViews();
-            
-            services.AddSingleton<MainService>();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -41,7 +49,7 @@ namespace School.WEB
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                
                 app.UseHsts();
             }
 
