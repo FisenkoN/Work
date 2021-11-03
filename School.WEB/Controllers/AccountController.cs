@@ -34,11 +34,11 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+                return View(model);
 
-            var user = await _db.Users.FirstOrDefaultAsync(u =>
-                u.Email == model.Email && u.Password == model.Password);
-            
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+
             if (user != null)
             {
                 await Authenticate(model.Email);
@@ -67,7 +67,7 @@ namespace School.WEB.Controllers
                 return View(model);
 
             var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-            
+
             if (user == null)
             {
                 _db.Users.Add(new User
@@ -75,7 +75,7 @@ namespace School.WEB.Controllers
                     Email = model.Email,
                     Password = model.Password
                 });
-                
+
                 await _db.SaveChangesAsync();
 
                 await Authenticate(model.Email);
@@ -97,40 +97,41 @@ namespace School.WEB.Controllers
         {
             return View();
         }
-        
+
         [HttpPost("[action]")]
         public IActionResult ForgotPassword(string email)
         {
-            var password = _db.Users.FirstOrDefault(u => u.Email == email)?.Password;
-            
+            var password = _db.Users.FirstOrDefault(u => u.Email == email)
+                ?.Password;
+
             var emailMessage = new MimeMessage();
-            
+
             emailMessage.From.Add(new MailboxAddress("Admin",
                 "nazarii.fisenko@gmail.com"));
-            
+
             emailMessage.To.Add(new MailboxAddress("User",
                 email));
-            
+
             emailMessage.Subject = "ContactUs";
 
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
                 Text = $"Please, don't forget password. You password is {password}"
             };
-            
+
             using var client = new SmtpClient();
-            
+
             client.Connect("smtp.gmail.com",
                 587,
                 false);
-            
+
             client.Authenticate("nazarii.fisenko@gmail.com",
                 "[password]");
-            
+
             client.Send(emailMessage);
-            
+
             client.Disconnect(true);
-            
+
             return RedirectToAction("Login");
         }
 

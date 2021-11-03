@@ -8,12 +8,11 @@ namespace School.WEB.ViewModels.Admin.EditSubject
         public int Id { get; set; }
 
         [Required] 
-        [MaxLength(30)]
+        [StringLength(30, ErrorMessage = "LastName cannot be longer than 30 and shorter than 3 characters", MinimumLength = 3)]
         public string Name { get; set; }
 
         public EditSubjectViewModel()
         {
-            
         }
 
         public EditSubjectViewModel(Subject subject)

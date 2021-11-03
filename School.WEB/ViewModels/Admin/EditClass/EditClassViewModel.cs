@@ -11,7 +11,7 @@ namespace School.WEB.ViewModels.Admin.EditClass
         public int Id { get; set; }
 
         [Required(ErrorMessage = "It's required value!")]
-        [StringLength(10, ErrorMessage = "Name cannot be longer than 10 characters.")]
+        [StringLength(10, ErrorMessage = "Name cannot be longer than 10 and shorter than 2 characters", MinimumLength = 2)]
         public string Name { get; set; }
 
         public IEnumerable<int> StudentIds { get; set; }

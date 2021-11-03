@@ -7,11 +7,11 @@ namespace School.WEB.Models
     public class Student : EntityBase
     {
         [Required]
-        [StringLength(20, ErrorMessage = "FirstName cannot be longer than 20 characters.")]
+        [StringLength(20, ErrorMessage = "FirstName cannot be longer than 20 and shorter than 2 characters", MinimumLength = 2)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(20, ErrorMessage = "LastName cannot be longer than 20 characters.")]
+        [StringLength(20, ErrorMessage = "LastName cannot be longer than 20 and shorter than 2 characters", MinimumLength = 2)]
         public string LastName { get; set; }
 
         [Range(5, 18, ErrorMessage = "Age must be more then 5 and less then 18")]
@@ -28,6 +28,7 @@ namespace School.WEB.Models
 
         public ICollection<Subject> Subjects { get; set; }
 
+        [RegularExpression(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$", ErrorMessage = "Incorrect image url")]
         public string Image { get; set; }
         
         public Student()

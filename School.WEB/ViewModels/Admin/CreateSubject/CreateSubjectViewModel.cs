@@ -6,8 +6,7 @@ namespace School.WEB.ViewModels.Admin.CreateSubject
     public class CreateSubjectViewModel
     {
         [Required] 
-        [MaxLength(30)]
-        [MinLength(3)]
+        [StringLength(30, ErrorMessage = "LastName cannot be longer than 30 and shorter than 3 characters", MinimumLength = 3)]
         public string Name { get; set; }
 
         public IEnumerable<int> StudentIds { get; set; }

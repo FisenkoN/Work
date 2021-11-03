@@ -6,7 +6,7 @@ namespace School.WEB.Models
     public class Subject : EntityBase
     {
         [Required] 
-        [MaxLength(30)]
+        [StringLength(30, ErrorMessage = "Name cannot be longer than 30 and shorter than 3 characters", MinimumLength = 3)]
         public string Name { get; set; }
 
         public ICollection<Teacher> Teachers { get; set; }

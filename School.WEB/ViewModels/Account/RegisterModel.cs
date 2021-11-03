@@ -4,6 +4,7 @@ namespace School.WEB.ViewModels.Account
 {
     public class RegisterModel
     {
+        [EmailAddress]
         [Required(ErrorMessage ="No email specified")]
         public string Email { get; set; }
          

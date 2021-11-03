@@ -7,11 +7,11 @@ namespace School.WEB.ViewModels.Admin.CreateStudent
     public class CreateStudentViewModel
     {
         [Required]
-        [StringLength(20, ErrorMessage = "FirstName cannot be longer than 20 characters.")]
+        [StringLength(20, ErrorMessage = "FirstName cannot be longer than 20 and shorter than 2 characters", MinimumLength = 2)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(20, ErrorMessage = "LastName cannot be longer than 20 characters.")]
+        [StringLength(20, ErrorMessage = "LastName cannot be longer than 20 and shorter than 2 characters", MinimumLength = 2)]
         public string LastName { get; set; }
 
         [Required]
@@ -21,8 +21,9 @@ namespace School.WEB.ViewModels.Admin.CreateStudent
         [Required]
         public Gender Gender { get; set; }
 
+        [RegularExpression(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$", ErrorMessage = "Incorrect image url")]
         public string Image { get; set; }
-
+        
         public int? ClassId { get; set; }
 
         public IEnumerable<int> SubjectIds { get; set; }

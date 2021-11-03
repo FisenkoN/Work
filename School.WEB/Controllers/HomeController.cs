@@ -11,7 +11,7 @@ namespace School.WEB.Controllers
         {
         }
         
-        // [HttpGet("[action]")]
+        //[HttpGet("[action]")]
         public IActionResult Index()
         {
             return View();

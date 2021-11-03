@@ -239,7 +239,53 @@ namespace School.WEB.Controllers
             [Bind("Id, FirstName, LastName, Image, Age, Gender, ClassId, SubjectIds")]
             EditTeacherViewModel editTeacherViewModel)
         {
-            if (!ModelState.IsValid) return View(editTeacherViewModel);
+            if (!ModelState.IsValid)
+            {
+                var classes = await _classRepository.GetRelatedData()
+                    .Where(c =>
+                        c.TeacherId == null && c.Teacher == null)
+                    .ToListAsync();
+
+                try
+                {
+                    var c = _classRepository.GetRelatedData()
+                        .FirstOrDefault(c =>
+                            c.TeacherId == id);
+                
+                    if(c!=null)
+                        classes.Add(c);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine();
+                }
+
+                var subjects = await _subjectRepository.GetAll();
+
+                try
+                {
+                    var selectedClass = _classRepository.GetRelatedData()
+                        .FirstOrDefault(c =>
+                            c.TeacherId == id);
+
+                    ViewData["Classes"] = new SelectList(classes,
+                        "Id",
+                        "Name",
+                        selectedClass);
+                }
+                catch (Exception)
+                {
+                    ViewData["Classes"] = new SelectList(classes,
+                        "Id",
+                        "Name");
+                }
+
+                ViewData["Subjects"] = new SelectList(subjects,
+                    "Id",
+                    "Name");
+                
+                return View(editTeacherViewModel);
+            }
             
             var teacher = await _teacherRepository.GetOne(id);
 
@@ -328,7 +374,18 @@ namespace School.WEB.Controllers
             [Bind("FirstName, LastName, Image, ClassId, SubjectIds, Gender, Id, Age")]
             CreateStudentViewModel createStudentViewModel)
         {
-            if (!ModelState.IsValid) return View(createStudentViewModel);
+            if (!ModelState.IsValid)
+            {
+                ViewData["Classes"] = new SelectList(await _classRepository.GetAll(),
+                    "Id",
+                    "Name");
+
+                ViewData["Subjects"] = new SelectList(await _subjectRepository.GetAll(),
+                    "Id",
+                    "Name");
+                
+                return View(createStudentViewModel);
+            }
             
             await _studentRepository.Add(new Student
             {
@@ -384,6 +441,23 @@ namespace School.WEB.Controllers
             [Bind("Id, FirstName, LastName, Image, Age, Gender, ClassId, SubjectIds")]
             EditStudentViewModel editStudentViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                var classes = await _classRepository.GetAll();
+
+                var subjects = await _subjectRepository.GetAll();
+
+                ViewData["Classes"] = new SelectList(classes,
+                    "Id",
+                    "Name");
+
+                ViewData["Subjects"] = new SelectList(subjects,
+                    "Id",
+                    "Name");
+                
+                return View(editStudentViewModel);
+            }
+            
             var student = await _studentRepository.GetOne(id);
 
             student.FirstName = editStudentViewModel.FirstName;
@@ -492,7 +566,34 @@ namespace School.WEB.Controllers
             [Bind("Name, StudentIds, TeacherId")]
             CreateClassViewModel createClassViewModel)
         {
-            if (!ModelState.IsValid) return View(createClassViewModel);
+            if (!ModelState.IsValid)
+            {
+                var teachers = _teacherRepository
+                    .GetAll()
+                    .Result
+                    .Except(
+                        _teacherRepository
+                            .GetAll()
+                            .Result
+                            .Where(t =>
+                                _classRepository
+                                    .GetRelatedData()
+                                    .ToList()
+                                    .Exists(c =>
+                                        c.TeacherId == t.Id)));
+
+
+                ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
+                    "Id",
+                    "FullName");
+
+                ViewData["Teachers"] = new SelectList(
+                    teachers,
+                    "Id",
+                    "FullName");
+                
+                return View(createClassViewModel);
+            }
 
             await _classRepository.Add(new Class
             {

@@ -11,7 +11,7 @@ namespace School.WEB.Models
         [EmailAddress]
         public string Email { get; set; }
         
-        [PasswordPropertyText]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

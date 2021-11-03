@@ -5,6 +5,7 @@ namespace School.WEB.ViewModels.Account
     public class LoginModel
     {
         [Required(ErrorMessage = "No email specified")]
+        [EmailAddress]
         public string Email { get; set; }
          
         [Required(ErrorMessage = "No password specified")]
