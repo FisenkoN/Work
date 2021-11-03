@@ -10,10 +10,6 @@ namespace School.WEB.Data.Repository
 {
     public class StudentRepository : BaseRepository<Student>, IStudentRepository
     {
-        public StudentRepository()
-        {
-        }
-
         public StudentRepository(SchoolDbContext db) : base(db)
         {
         }

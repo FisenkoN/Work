@@ -7,10 +7,6 @@ namespace School.WEB.Data.Repository
 {
     public class ClassRepository : BaseRepository<Class>, IClassRepository
     {
-        public ClassRepository()
-        {
-        }
-
         public ClassRepository(SchoolDbContext dbContext) : base(dbContext)
         {
         }
@@ -25,7 +21,7 @@ namespace School.WEB.Data.Repository
         public virtual async Task<Class> GetOneRelated(int? id)
         {
             return await GetRelatedData()
-                .FirstAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
     }
 }

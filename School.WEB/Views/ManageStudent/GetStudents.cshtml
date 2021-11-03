@@ -1,0 +1,81 @@
+﻿@using School.WEB.Controllers
+@model School.WEB.ViewModels.ManageStudent.GetStudents.GetStudentsViewModel
+
+@{
+    ViewData["Title"] = "GetStudents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<td>
+    <a asp-action="@nameof(ManageStudentController.CreateStudent)">
+        Create
+    </a>
+</td>
+
+<h1>Students list</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+            Gender
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Students)
+    {
+        <tr>
+            <td>
+                <img height="50" src="@item.Image" alt="avatar"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                <a asp-action="@nameof(ManageStudentController.EditStudent)" asp-route-id="@item.Id">
+                    Edit
+                </a>
+                <a asp-action="@nameof(ManageStudentController.DeleteStudent)" asp-route-id="@item.Id">
+                    Delete
+                </a>
+                <a asp-action="@nameof(ManageStudentController.DetailsStudent)" asp-route-id="@item.Id">
+                    Details
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div>
+    <a asp-action="@nameof(AdminController.Index)">
+        Back to Admin form
+    </a>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.Message");
+    </script>
+}

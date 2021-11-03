@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using School.WEB.Models;
 
 namespace School.WEB.Data.Repository
@@ -21,65 +20,24 @@ namespace School.WEB.Data.Repository
             _table = db.Set<T>();
         }
 
-        protected BaseRepository()
-        {
-            
-        }
-
-        public virtual async Task<int> Add(T entity)
+        public virtual async Task Add(T entity)
         {
             await _table.AddAsync(entity);
-
-            return await SaveChanges();
         }
 
-        private async Task<int> SaveChanges()
+        public async Task SaveChanges()
         {
-            try
-            {
-                return await DbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-            catch (RetryLimitExceededException e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-            catch (DbUpdateException e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
+            await DbContext.SaveChangesAsync();
         }
         
-        public virtual Task<int> Update(T entity)
+        public virtual void Update(T entity)
         {
             _table.Update(entity);
-
-            return SaveChanges();
         }
 
-        public virtual async Task<int> Delete(int id)
-        {
-            await Delete(_table.FirstOrDefault(t => t.Id == id));
-
-            return await SaveChanges();
-        }
-
-        public virtual async Task<int> Delete(T entity)
+        public virtual void Delete(T entity)
         {
             DbContext.Entry(entity).State = EntityState.Deleted;
-
-            return await SaveChanges();
         }
 
         public virtual async Task<T> GetOne(int? id)

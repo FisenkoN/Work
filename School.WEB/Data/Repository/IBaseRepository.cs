@@ -9,15 +9,15 @@ namespace School.WEB.Data.Repository
 {
     public interface IBaseRepository<T> where T : EntityBase, new()
     {
-        Task<int> Add(T entity);
+        Task Add(T entity);
 
-        Task<int> Update(T entity);
-
-        Task<int> Delete(int id);
-
-        Task<int> Delete(T entity);
+        void Update(T entity);
+        
+        void Delete(T entity);
 
         Task<T> GetOne(int? id);
+
+        Task SaveChanges();
 
         IQueryable<T> GetSome(Expression<Func<T, bool>> where);
 

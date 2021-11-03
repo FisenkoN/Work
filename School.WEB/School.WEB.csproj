@@ -25,4 +25,11 @@
       <PackageReference Include="MimeKit" Version="2.15.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="ViewModels\ManageClass" />
+      <Folder Include="ViewModels\ManageStudent" />
+      <Folder Include="ViewModels\ManageSubject" />
+      <Folder Include="ViewModels\ManageTeacher" />
+    </ItemGroup>
+
 </Project>

@@ -10,10 +10,6 @@ namespace School.WEB.Data.Repository
 {
     public class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
     {
-        public TeacherRepository()
-        {
-        }
-
         public TeacherRepository(SchoolDbContext db) : base(db)
         {
         }

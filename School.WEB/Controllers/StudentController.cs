@@ -119,7 +119,8 @@ namespace School.WEB.Controllers
             
             student.Gender = studentModel.Gender;
 
-            await _studentRepository.Update(student);
+            _studentRepository.Update(student);
+            await _studentRepository.SaveChanges();
                 
             student = await _studentRepository.GetOne(id);
 
@@ -127,20 +128,28 @@ namespace School.WEB.Controllers
 
             student.Class = await _classRepository.GetOne(studentModel.ClassId);
 
-            await _studentRepository.Update(student);
+            _studentRepository.Update(student);
+
+            await _studentRepository.SaveChanges();
             
             student = await _studentRepository.GetOneRelated(id);
 
             student.Subjects.Clear();
 
-            await _studentRepository.Update(student);
+            _studentRepository.Update(student);
+            
+            await _studentRepository.SaveChanges();
 
             student = await _studentRepository.GetOneRelated(id);
 
             foreach (var subjectId in studentModel.SubjectIds)
+            {
                 student.Subjects.Add(await _subjectRepository.GetOne(subjectId));
+                await _studentRepository.SaveChanges();
+            }
 
-            await _studentRepository.Update(student);
+            _studentRepository.Update(student);
+            await _studentRepository.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }

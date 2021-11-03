@@ -13,10 +13,6 @@ namespace School.WEB.Data.Repository
         {
         }
 
-        public SubjectRepository()
-        {
-        }
-
         public virtual IIncludableQueryable<Subject, ICollection<Teacher>> GetRelatedData()
         {
             return DbContext.Subjects
