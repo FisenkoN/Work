@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using School.WEB.Extensions;
 
 namespace School.WEB.Models
 {
@@ -29,7 +30,7 @@ namespace School.WEB.Models
 
         public ICollection<Subject> Subjects { get; set; }
 
-        [RegularExpression(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$", ErrorMessage = "Incorrect image url")]
+        [RegularExpression(RegexPattern.Url, ErrorMessage = "Incorrect image url")]
         public string Image { get; set; }
         
         public Teacher()

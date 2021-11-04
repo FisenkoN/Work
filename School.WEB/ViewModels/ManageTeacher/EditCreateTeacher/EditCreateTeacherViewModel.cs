@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using School.WEB.Extensions;
 using School.WEB.Models;
 
-namespace School.WEB.ViewModels.ManageTeacher.EditTeacher
+namespace School.WEB.ViewModels.ManageTeacher.EditCreateTeacher
 {
-    public class EditTeacherViewModel
+    public class EditCreateTeacherViewModel
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]
@@ -18,7 +18,7 @@ namespace School.WEB.ViewModels.ManageTeacher.EditTeacher
         [StringLength(20, ErrorMessage = "LastName cannot be longer than 20 and shorter than 2 characters", MinimumLength = 2)]
         public string LastName { get; set; }
 
-        [RegularExpression(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$", ErrorMessage = "Incorrect image url")]
+        [RegularExpression(RegexPattern.Url, ErrorMessage = "Incorrect image url")]
         public string Image { get; set; }
 
         [Range(18, 80, ErrorMessage = "Age must be more then 18 and less then 80")]
@@ -31,12 +31,12 @@ namespace School.WEB.ViewModels.ManageTeacher.EditTeacher
 
         public IEnumerable<int> SubjectIds { get; set; }
 
-        public EditTeacherViewModel()
+        public EditCreateTeacherViewModel()
         {
             
         }
 
-        public EditTeacherViewModel(Teacher teacher)
+        public EditCreateTeacherViewModel(Teacher teacher)
         {
             Id = teacher.Id;
             FirstName = teacher.FirstName;

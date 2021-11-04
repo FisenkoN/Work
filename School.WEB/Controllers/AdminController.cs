@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace School.WEB.Controllers
 {
     [Authorize]
-    [Route("manage")]
+    [Route("Manage")]
     public class AdminController : Controller
     {
         public AdminController()

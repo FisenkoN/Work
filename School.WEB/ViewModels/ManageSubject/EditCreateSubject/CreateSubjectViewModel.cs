@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace School.WEB.ViewModels.ManageSubject.CreateSubject
+namespace School.WEB.ViewModels.ManageSubject.EditCreateSubject
 {
     public class CreateSubjectViewModel
     {

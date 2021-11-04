@@ -5,66 +5,51 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using School.WEB.Data.Repository;
+using School.WEB.Extensions;
 using School.WEB.Models;
-using School.WEB.ViewModels.ManageSubject.CreateSubject;
 using School.WEB.ViewModels.ManageSubject.DetailsSubject;
-using School.WEB.ViewModels.ManageSubject.EditSubject;
+using School.WEB.ViewModels.ManageSubject.EditCreateSubject;
 using School.WEB.ViewModels.ManageSubject.GetSubjects;
 
 namespace School.WEB.Controllers
 {
     [Authorize]
     [Route("[controller]")]
-    public class ManageSubjectController:Controller
+    public class ManageSubjectController : Controller
 
     {
-    private readonly IStudentRepository _studentRepository;
-    private readonly ISubjectRepository _subjectRepository;
-    private readonly ITeacherRepository _teacherRepository;
+        private readonly IStudentRepository _studentRepository;
+        private readonly ISubjectRepository _subjectRepository;
+        private readonly ITeacherRepository _teacherRepository;
 
-    public ManageSubjectController(IStudentRepository studentRepository,
-        ISubjectRepository subjectRepository, ITeacherRepository teacherRepository)
-    {
-        _studentRepository = studentRepository;
-        _subjectRepository = subjectRepository;
-        _teacherRepository = teacherRepository;
-    }
-
-    [HttpGet("[action]")]
-    public async Task<IActionResult> GetSubjects()
-    {
-        if (TempData["Message"] != null)
-            ViewBag.Message = TempData["Message"]
-                .ToString();
-
-        var subjects = await _subjectRepository.GetAll();
-
-        var model = new GetSubjectsViewModel(subjects);
-
-        return View(model);
-    }
-
-    [HttpGet("[action]")]
-    public async Task<IActionResult> CreateSubject()
-    {
-        ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
-            "Id",
-            "FullName");
-
-        ViewData["Teachers"] = new SelectList(await _teacherRepository.GetAll(),
-            "Id",
-            "FullName");
-
-        return View();
-    }
-
-    [HttpPost("[action]")]
-    public async Task<IActionResult> CreateSubject(
-        [Bind("Id, Name, StudentIds, TeacherIds")]
-        CreateSubjectViewModel createSubjectViewModel)
-    {
-        if (!ModelState.IsValid)
+        public ManageSubjectController(IStudentRepository studentRepository,
+            ISubjectRepository subjectRepository,
+            ITeacherRepository teacherRepository)
         {
+            _studentRepository = studentRepository;
+            _subjectRepository = subjectRepository;
+            _teacherRepository = teacherRepository;
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetSubjects()
+        {
+            if (TempData["Message"] != null)
+                ViewBag.Message = TempData["Message"]
+                    .ToString();
+
+            var subjects = await _subjectRepository.GetAll();
+
+            var model = new GetSubjectsViewModel(subjects);
+
+            return View(model);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> CreateSubject()
+        {
+            var model = new CreateSubjectViewModel();
+
             ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
                 "Id",
                 "FullName");
@@ -72,112 +57,120 @@ namespace School.WEB.Controllers
             ViewData["Teachers"] = new SelectList(await _teacherRepository.GetAll(),
                 "Id",
                 "FullName");
-            return View(createSubjectViewModel);
+
+            return View(model);
         }
 
-        await _subjectRepository.Add(new Subject
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateSubject(
+            CreateSubjectViewModel model)
         {
-            Name = createSubjectViewModel.Name,
-            Students = createSubjectViewModel.StudentIds != null
-                ? _studentRepository
-                    .GetAll()
-                    .Result
-                    .Where(i =>
-                        createSubjectViewModel.StudentIds
-                            .ToList()
-                            .Exists(t =>
-                                t == i.Id))
-                    .ToList()
-                : null,
-            Teachers = createSubjectViewModel.TeacherIds != null
-                ? _teacherRepository
-                    .GetAll()
-                    .Result
-                    .Where(i =>
-                        createSubjectViewModel.TeacherIds
-                            .ToList()
-                            .Exists(t =>
-                                t == i.Id))
-                    .ToList()
-                : null
-        });
+            if (ModelState.IsValid)
+            {
+                await _subjectRepository.Add(new Subject().To(model,
+                    _studentRepository,
+                    _teacherRepository));
 
-        await _subjectRepository.SaveChanges();
+                await _subjectRepository.SaveChanges();
 
-        TempData["Message"] =
-            $"Subject: {createSubjectViewModel.Name} was created at {DateTime.Now.ToShortTimeString()}";
+                TempData["Message"] =
+                    $"Subject: {model.Name} was created at {DateTime.Now.ToShortTimeString()}";
 
-        return RedirectToAction("GetSubjects");
-    }
-    
-    [HttpGet("[action]/{id}")]
-    public async Task<IActionResult> EditSubject(int id)
-    {
-        var subject = await _subjectRepository.GetOneRelated(id);
+                return RedirectToAction("GetSubjects");
+            }
 
-        var model = new EditSubjectViewModel(subject);
+            ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
+                "Id",
+                "FullName");
 
-        return View(model);
-    }
-
-    [HttpPost("[action]/{id}")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditSubject(int? id,
-        [Bind("Id, Name")] EditSubjectViewModel editSubjectViewModel)
-    {
-        var subject = await _subjectRepository.GetOne(id);
-
-        subject.Name = editSubjectViewModel.Name;
-
-        _subjectRepository.Update(subject);
-
-        await _subjectRepository.SaveChanges();
-
-        TempData["Message"] = $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}";
-
-        return RedirectToAction("GetSubjects");
-    }
-
-    [HttpGet("[action]/{id}")]
-    public async Task<IActionResult> DeleteSubject(int id)
-    {
-        var subject = await _subjectRepository.GetOne(id);
-
-        if (subject == null)
-        {
-            return NotFound();
+            ViewData["Teachers"] = new SelectList(await _teacherRepository.GetAll(),
+                "Id",
+                "FullName");
+            return View(model);
         }
 
-        _subjectRepository.Delete(subject);
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> EditSubject(int id)
+        {
+            var subject = await _subjectRepository.GetOneRelated(id);
 
-        await _subjectRepository.SaveChanges();
+            if (subject == null)
+            {
+                return NotFound();
+            }
 
-        TempData["Message"] = $"Subject with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
+            var model = new EditSubjectViewModel(subject);
 
-        return RedirectToAction("GetSubjects");
-    }
+            return View(model);
+        }
 
-    [HttpGet("[action]/{id}")]
-    public async Task<IActionResult> DetailsSubject(int id)
-    {
-        var subject = await _subjectRepository.GetOneRelated(id);
+        [HttpPost("[action]/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSubject(EditSubjectViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var subject = await _subjectRepository.GetOne(model.Id);
 
-        var students = _subjectRepository.GetOneRelated(id)
-            .Result
-            .Students
-            .Select(s => s.FullName);
+                subject.Name = model.Name;
 
-        var teachers = _subjectRepository
-            .GetOneRelated(id)
-            .Result
-            .Teachers
-            .Select(s => s.FullName);
+                _subjectRepository.Update(subject);
 
-        var model = new DetailsSubjectViewModel(subject,
-            students,
-            teachers);
+                await _subjectRepository.SaveChanges();
 
-        return View(model);
-    }
+                TempData["Message"] = $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}";
+                
+                return RedirectToAction("GetSubjects");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DeleteSubject(int id)
+        {
+            var subject = await _subjectRepository.GetOne(id);
+
+            if (subject == null)
+            {
+                return NotFound();
+            }
+
+            _subjectRepository.Delete(subject);
+
+            await _subjectRepository.SaveChanges();
+
+            TempData["Message"] = $"Subject with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}";
+
+            return RedirectToAction("GetSubjects");
+        }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> DetailsSubject(int id)
+        {
+            var subject = await _subjectRepository.GetOneRelated(id);
+
+            if (subject == null)
+            {
+                return NotFound();
+            }
+
+            var students = _subjectRepository.GetOneRelated(id)
+                .Result
+                .Students
+                .Select(s => s.FullName);
+
+            var teachers = _subjectRepository
+                .GetOneRelated(id)
+                .Result
+                .Teachers
+                .Select(s => s.FullName);
+
+            var model = new DetailsSubjectViewModel(subject,
+                students,
+                teachers);
+
+            return View(model);
+        }
     }
 }

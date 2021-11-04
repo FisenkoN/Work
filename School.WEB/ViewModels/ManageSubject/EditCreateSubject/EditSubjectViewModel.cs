@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using School.WEB.Models;
 
-namespace School.WEB.ViewModels.ManageSubject.EditSubject
+namespace School.WEB.ViewModels.ManageSubject.EditCreateSubject
 {
     public class EditSubjectViewModel
     {
+        [Required]
         public int Id { get; set; }
 
         [Required] 

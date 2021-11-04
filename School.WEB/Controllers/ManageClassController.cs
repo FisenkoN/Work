@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using School.WEB.Data.Repository;
+using School.WEB.Extensions;
 using School.WEB.Models;
-using School.WEB.ViewModels.ManageClass.CreateClass;
 using School.WEB.ViewModels.ManageClass.DetailsClass;
-using School.WEB.ViewModels.ManageClass.EditClass;
+using School.WEB.ViewModels.ManageClass.EditCreateClass;
 using School.WEB.ViewModels.ManageClass.GetClasses;
 
 namespace School.WEB.Controllers
@@ -20,8 +20,7 @@ namespace School.WEB.Controllers
         private readonly IStudentRepository _studentRepository;
         private readonly IClassRepository _classRepository;
         private readonly ITeacherRepository _teacherRepository;
-
-
+        
         public ManageClassController(IStudentRepository studentRepository, IClassRepository classRepository, ITeacherRepository teacherRepository)
         {
             _studentRepository = studentRepository;
@@ -42,10 +41,53 @@ namespace School.WEB.Controllers
 
             return View(model);
         }
-        
+
         [HttpGet("[action]")]
         public async Task<IActionResult> CreateClass()
         {
+            var model = new EditCreateClassViewModel();
+
+            var teachers = _teacherRepository
+                .GetAll()
+                .Result
+                .Except(
+                    _teacherRepository
+                        .GetAll()
+                        .Result
+                        .Where(t =>
+                            _classRepository
+                                .GetRelatedData()
+                                .ToList()
+                                .Exists(c =>
+                                    c.TeacherId == t.Id)));
+
+            ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
+                "Id",
+                "FullName");
+
+            ViewData["Teachers"] = new SelectList(
+                teachers,
+                "Id",
+                "FullName");
+
+            return View(model);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateClass(EditCreateClassViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _classRepository.Add(new Class().To(model, _studentRepository));
+            
+                await _classRepository.SaveChanges();
+
+                TempData["Message"] =
+                    $"Class: {model.Name} was created at {DateTime.Now.ToShortTimeString()}";
+
+                return RedirectToAction("GetClasses");
+            }
+            
             var teachers = _teacherRepository
                 .GetAll()
                 .Result
@@ -69,72 +111,19 @@ namespace School.WEB.Controllers
                 teachers,
                 "Id",
                 "FullName");
-
-            return View();
-        }
-
-        [HttpPost("[action]")]
-        public async Task<IActionResult> CreateClass(
-            [Bind("Name, StudentIds, TeacherId")]
-            CreateClassViewModel createClassViewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                var teachers = _teacherRepository
-                    .GetAll()
-                    .Result
-                    .Except(
-                        _teacherRepository
-                            .GetAll()
-                            .Result
-                            .Where(t =>
-                                _classRepository
-                                    .GetRelatedData()
-                                    .ToList()
-                                    .Exists(c =>
-                                        c.TeacherId == t.Id)));
-
-
-                ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
-                    "Id",
-                    "FullName");
-
-                ViewData["Teachers"] = new SelectList(
-                    teachers,
-                    "Id",
-                    "FullName");
                 
-                return View(createClassViewModel);
-            }
-
-            await _classRepository.Add(new Class
-            {
-                Name = createClassViewModel.Name,
-                TeacherId = createClassViewModel.TeacherId,
-                Students = _studentRepository
-                    .GetAll()
-                    .Result
-                    .Where(i =>
-                        createClassViewModel.StudentIds
-                            .ToList()
-                            .Exists(t =>
-                                t == i.Id))
-                    .ToList()
-            });
-            
-            await _classRepository.SaveChanges();
-
-            TempData["Message"] =
-                $"Class: {createClassViewModel.Name} was created at {DateTime.Now.ToShortTimeString()}";
-
-            return RedirectToAction("GetClasses");
-
+            return View(model);
         }
         
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> EditClass(int id)
         {
             var @class = await _classRepository.GetOneRelated(id);
+
+            if (@class == null)
+            {
+                return NotFound();
+            }
 
             var students = await _studentRepository.GetAll();
 
@@ -162,57 +151,84 @@ namespace School.WEB.Controllers
                 "Id",
                 "FullName");
 
-            var model = new EditClassViewModel(@class);
+            var model = new EditCreateClassViewModel(@class);
 
             return View(model);
         }
 
         [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditClass(int id,
-            [Bind("Id, Name, StudentIds, TeacherId")]
-            EditClassViewModel editClassViewModel)
+        public async Task<IActionResult> EditClass(EditCreateClassViewModel model)
         {
-            if (id != editClassViewModel.Id)
-                return NotFound();
-
-            var form = await _classRepository.GetOne(id);
-
-            form.Name = editClassViewModel.Name;
-
-            form.TeacherId = editClassViewModel.TeacherId;
-
-            form.Teacher = await _teacherRepository.GetOne(editClassViewModel.TeacherId);
-
-            _classRepository.Update(form);
-
-            await _classRepository.SaveChanges();
-
-            form = await _classRepository.GetOneRelated(id);
-
-            form.Students.Clear();
-
-            _classRepository.Update(form);
-            
-            await _classRepository.SaveChanges();
-
-            foreach (var i in editClassViewModel.StudentIds)
+            if (ModelState.IsValid)
             {
-                var student = await _studentRepository.GetOne(i);
+                var form = await _classRepository.GetOne(model.Id);
 
-                student.ClassId = id;
+                form.Name = model.Name;
 
-                student.Class = await _classRepository.GetOne(id);
+                form.TeacherId = model.TeacherId;
 
-                _studentRepository.Update(student);
+                form.Teacher = await _teacherRepository.GetOne(model.TeacherId);
+
+                _classRepository.Update(form);
+
+                await _classRepository.SaveChanges();
+
+                form = await _classRepository.GetOneRelated(form.Id);
+
+                form.Students.Clear();
+
+                _classRepository.Update(form);
+            
+                await _classRepository.SaveChanges();
+
+                foreach (var i in model.StudentIds)
+                {
+                    var student = await _studentRepository.GetOne(i);
+
+                    student.ClassId = form.Id;
+
+                    student.Class = await _classRepository.GetOne(form.Id);
+
+                    _studentRepository.Update(student);
                 
-                await _studentRepository.SaveChanges();
+                    await _studentRepository.SaveChanges();
+                }
+                
+                TempData["Message"] = $"Class: {model.Name} was edited at {DateTime.Now.ToShortTimeString()}";
+                
+                return RedirectToAction("GetClasses");
             }
+            
+            var @class = await _classRepository.GetOne(model.Id);
+            
+            var students = await _studentRepository.GetAll();
 
+            var teachers = _teacherRepository
+                .GetAll()
+                .Result
+                .Except(
+                    _teacherRepository
+                        .GetAll()
+                        .Result
+                        .Where(t =>
+                            _classRepository
+                                .GetRelatedData()
+                                .ToList()
+                                .Exists(c =>
+                                    c.TeacherId == t.Id)));
 
-            TempData["Message"] = $"Class: {editClassViewModel.Name} was edited at {DateTime.Now.ToShortTimeString()}";
+            teachers = teachers.Append(await _teacherRepository.GetOne(@class.TeacherId));
 
-            return RedirectToAction("GetClasses");
+            ViewData["Students"] = new SelectList(students,
+                "Id",
+                "FullName");
+
+            ViewData["Teachers"] = new SelectList(teachers,
+                "Id",
+                "FullName");
+
+            return View(model);
         }
 
         [HttpGet("[action]/{id}")]
@@ -238,6 +254,11 @@ namespace School.WEB.Controllers
         public async Task<IActionResult> DetailsClass(int id)
         {
             var @class = await _classRepository.GetOneRelated(id);
+
+            if (@class == null)
+            {
+                return NotFound();
+            }
 
             var teacher = @class.TeacherId != null
                 ? _teacherRepository.GetOneRelated(@class.TeacherId)

@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using School.WEB.Data.Repository;
+using School.WEB.Extensions;
 using School.WEB.Models;
-using School.WEB.ViewModels.ManageTeacher.CreateTeacher;
 using School.WEB.ViewModels.ManageTeacher.DetailsTeacher;
-using School.WEB.ViewModels.ManageTeacher.EditTeacher;
+using School.WEB.ViewModels.ManageTeacher.EditCreateTeacher;
 using School.WEB.ViewModels.ManageTeacher.GetTeachers;
 
 namespace School.WEB.Controllers
@@ -46,6 +46,8 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> CreateTeacher()
         {
+            var model = new EditCreateTeacherViewModel();
+            
             var subjects = await _subjectRepository.GetAll();
 
             var classes = _classRepository.GetRelatedData()
@@ -60,66 +62,50 @@ namespace School.WEB.Controllers
                 "Id",
                 "Name");
 
-            return View();
+            return View(model);
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateTeacher(
-            [Bind("FirstName, Image, LastName, ClassId, SubjectIds, Gender, Id, Age")]
-            CreateTeacherViewModel teacher)
+        public async Task<IActionResult> CreateTeacher(EditCreateTeacherViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var subjects = await _subjectRepository.GetAll();
+                await _teacherRepository.Add(new Teacher().To(model, _subjectRepository));
 
-                var classes = _classRepository.GetRelatedData()
-                    .Where(c =>
-                        c.TeacherId == null && c.Teacher == null);
+                await _teacherRepository.SaveChanges();
 
-                ViewData["Classes"] = new SelectList(classes,
-                    "Id",
-                    "Name");
+                TempData["Message"] =
+                    $"Teacher: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}";
 
-                ViewData["Subjects"] = new SelectList(subjects,
-                    "Id",
-                    "Name");
-
-                return View(teacher);
+                return RedirectToAction("GetTeachers");
             }
-            
-            await _teacherRepository.Add(new Teacher
-            {
-                Age = teacher.Age,
-                ClassId = teacher.ClassId,
-                FirstName = teacher.FirstName,
-                LastName = teacher.LastName,
-                Gender = teacher.Gender,
-                Image = teacher.Image,
-                Subjects = teacher.SubjectIds != null
-                    ? _subjectRepository
-                        .GetAll()
-                        .Result
-                        .Where(i =>
-                            teacher.SubjectIds
-                                .ToList()
-                                .Exists(s =>
-                                    s == i.Id))
-                        .ToList()
-                    : null
-            });
 
-            await _teacherRepository.SaveChanges();
+            var subjects = await _subjectRepository.GetAll();
 
-            TempData["Message"] =
-                $"Teacher: {teacher.FirstName + " " + teacher.LastName} was created at {DateTime.Now.ToShortTimeString()}";
+            var classes = _classRepository.GetRelatedData()
+                .Where(c =>
+                    c.TeacherId == null && c.Teacher == null);
 
-            return RedirectToAction("GetTeachers");
+            ViewData["Classes"] = new SelectList(classes,
+                "Id",
+                "Name");
+
+            ViewData["Subjects"] = new SelectList(subjects,
+                "Id",
+                "Name");
+
+            return View(model);
         }
 
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> EditTeacher(int id)
         {
             var teacher = await _teacherRepository.GetOneRelated(id);
+
+            if (teacher == null)
+            {
+                return NotFound();
+            }
 
             var classes = await _classRepository.GetRelatedData()
                 .Where(c =>
@@ -165,109 +151,107 @@ namespace School.WEB.Controllers
                 "Name");
 
 
-            var model = new EditTeacherViewModel(teacher);
+            var model = new EditCreateTeacherViewModel(teacher);
 
             return View(model);
         }
 
         [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditTeacher(int id,
-            [Bind("Id, FirstName, LastName, Image, Age, Gender, ClassId, SubjectIds")]
-            EditTeacherViewModel editTeacherViewModel)
+        public async Task<IActionResult> EditTeacher(EditCreateTeacherViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var classes = await _classRepository.GetRelatedData()
-                    .Where(c =>
-                        c.TeacherId == null && c.Teacher == null)
-                    .ToListAsync();
+                var teacher = await _teacherRepository.GetOne(model.Id);
 
-                try
-                {
-                    var c = _classRepository.GetRelatedData()
-                        .FirstOrDefault(c =>
-                            c.TeacherId == id);
+                teacher.FirstName = model.FirstName;
+                teacher.LastName = model.LastName;
+                teacher.Age = model.Age;
+                teacher.Gender = model.Gender;
+                teacher.Image = model.Image;
+
+                _teacherRepository.Update(teacher);
+
+                await _teacherRepository.SaveChanges();
+
+                teacher = await _teacherRepository.GetOne(model.Id);
+
+                teacher.ClassId = model.ClassId;
+
+                teacher.Class = await _classRepository.GetOne(model.ClassId);
+
+                _teacherRepository.Update(teacher);
+            
+                await _teacherRepository.SaveChanges();
+
+                teacher = await _teacherRepository.GetOneRelated(model.Id);
+
+                teacher.Subjects.Clear();
+
+                _teacherRepository.Update(teacher);
+            
+                await _teacherRepository.SaveChanges();
+
+                teacher = await _teacherRepository.GetOneRelated(model.Id);
+
+                foreach (var t in model.SubjectIds)
+                    teacher.Subjects
+                        .Add(await _subjectRepository
+                            .GetOne(t));
+
+                _teacherRepository.Update(teacher);
+            
+                await _teacherRepository.SaveChanges();
+
+                TempData["Message"] = $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
+
+                return RedirectToAction("GetTeachers");
+            }
+
+            var classes = await _classRepository.GetRelatedData()
+                .Where(c =>
+                    c.TeacherId == null && c.Teacher == null)
+                .ToListAsync();
+
+            try
+            {
+                var c = _classRepository.GetRelatedData()
+                    .FirstOrDefault(c =>
+                        c.TeacherId == model.Id);
                 
-                    if(c!=null)
-                        classes.Add(c);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine();
-                }
+                if(c!=null)
+                    classes.Add(c);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine();
+            }
 
-                var subjects = await _subjectRepository.GetAll();
+            var subjects = await _subjectRepository.GetAll();
 
-                try
-                {
-                    var selectedClass = _classRepository.GetRelatedData()
-                        .FirstOrDefault(c =>
-                            c.TeacherId == id);
+            try
+            {
+                var selectedClass = _classRepository.GetRelatedData()
+                    .FirstOrDefault(c =>
+                        c.TeacherId == model.Id);
 
-                    ViewData["Classes"] = new SelectList(classes,
-                        "Id",
-                        "Name",
-                        selectedClass);
-                }
-                catch (Exception)
-                {
-                    ViewData["Classes"] = new SelectList(classes,
-                        "Id",
-                        "Name");
-                }
-
-                ViewData["Subjects"] = new SelectList(subjects,
+                ViewData["Classes"] = new SelectList(classes,
+                    "Id",
+                    "Name",
+                    selectedClass);
+            }
+            catch (Exception)
+            {
+                ViewData["Classes"] = new SelectList(classes,
                     "Id",
                     "Name");
-                
-                return View(editTeacherViewModel);
             }
-            
-            var teacher = await _teacherRepository.GetOne(id);
 
-            teacher.FirstName = editTeacherViewModel.FirstName;
-            teacher.LastName = editTeacherViewModel.LastName;
-            teacher.Age = editTeacherViewModel.Age;
-            teacher.Gender = editTeacherViewModel.Gender;
-            teacher.Image = editTeacherViewModel.Image;
-
-            _teacherRepository.Update(teacher);
-
-            await _teacherRepository.SaveChanges();
-
-            teacher = await _teacherRepository.GetOne(id);
-
-            teacher.ClassId = editTeacherViewModel.ClassId;
-
-            teacher.Class = await _classRepository.GetOne(editTeacherViewModel.ClassId);
-
-            _teacherRepository.Update(teacher);
-            
-            await _teacherRepository.SaveChanges();
-
-            teacher = await _teacherRepository.GetOneRelated(id);
-
-            teacher.Subjects.Clear();
-
-            _teacherRepository.Update(teacher);
-            
-            await _teacherRepository.SaveChanges();
-
-            teacher = await _teacherRepository.GetOneRelated(id);
-
-            foreach (var t in editTeacherViewModel.SubjectIds)
-                teacher.Subjects
-                    .Add(await _subjectRepository
-                        .GetOne(t));
-
-            _teacherRepository.Update(teacher);
-            
-            await _teacherRepository.SaveChanges();
-
-            TempData["Message"] = $"Teacher: {_teacherRepository.GetOne(id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
-
-            return RedirectToAction("GetTeachers");
+            ViewData["Subjects"] = new SelectList(subjects,
+                "Id",
+                "Name");
+                
+            return View(model);
         }
 
         [HttpGet("[action]/{id}")]
@@ -294,6 +278,11 @@ namespace School.WEB.Controllers
         public async Task<IActionResult> DetailsTeacher(int id)
         {
             var teacher = await _teacherRepository.GetOneRelated(id);
+
+            if (teacher == null)
+            {
+                return NotFound();
+            }
 
             var @class = _classRepository
                              .GetAll()

@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using School.WEB.Models;
 
-namespace School.WEB.ViewModels.ManageClass.EditClass
+namespace School.WEB.ViewModels.ManageClass.EditCreateClass
 {
-    public class EditClassViewModel
+    public class EditCreateClassViewModel
     {
-        [Required]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "It's required value!")]
@@ -18,12 +17,12 @@ namespace School.WEB.ViewModels.ManageClass.EditClass
 
         public int? TeacherId { get; set; }
 
-        public EditClassViewModel()
+        public EditCreateClassViewModel()
         {
             
         }
 
-        public EditClassViewModel(Class @class)
+        public EditCreateClassViewModel(Class @class)
         {
             Id = @class.Id;
             Name = @class.Name;
