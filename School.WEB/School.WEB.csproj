@@ -23,6 +23,7 @@
       </PackageReference>
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
       <PackageReference Include="MimeKit" Version="2.15.1" />
+      <PackageReference Include="OperationResultCore" Version="3.0.0" />
     </ItemGroup>
 
     <ItemGroup>

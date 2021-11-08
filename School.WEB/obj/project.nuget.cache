@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "eU7Om8OzMbqI5BGrlBiRPcGqZ2NVgroVpmSy+ZvmK415szvbZrNlEJliiGflb1RH7IFL6EM9IzhUzIp4AVmD0w==",
+  "dgSpecHash": "rdUuVQCTGD2U23PYmLeUyz8pu//uclTBWwz/dYJIQYSszmD/3OsbOL6jajP96hYJGzQwA5tG6WIX9ivZd6gyJg==",
   "success": true,
   "projectFilePath": "Z:\\TASKS\\School.WEB\\School.WEB.csproj",
   "expectedPackageFiles": [
@@ -56,6 +56,7 @@
     "C:\\Users\\Nazar\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\mimekit\\2.15.1\\mimekit.2.15.1.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Nazar\\.nuget\\packages\\operationresultcore\\3.0.0\\operationresultcore.3.0.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\portable.bouncycastle\\1.8.10\\portable.bouncycastle.1.8.10.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Nazar\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",

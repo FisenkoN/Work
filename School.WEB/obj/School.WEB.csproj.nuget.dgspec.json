@@ -71,6 +71,10 @@
             "MimeKit": {
               "target": "Package",
               "version": "[2.15.1, )"
+            },
+            "OperationResultCore": {
+              "target": "Package",
+              "version": "[3.0.0, )"
             }
           },
           "imports": [
