@@ -16,19 +16,21 @@ namespace School.WEB.Controllers
 {
     [Authorize]
     [Route("[controller]")]
-    public class ManageTeacherController:Controller
+    public class ManageTeacherController : Controller
     {
         private readonly IClassRepository _classRepository;
         private readonly ISubjectRepository _subjectRepository;
         private readonly ITeacherRepository _teacherRepository;
 
-        public ManageTeacherController(IClassRepository classRepository, ISubjectRepository subjectRepository, ITeacherRepository teacherRepository)
+        public ManageTeacherController(IClassRepository classRepository,
+            ISubjectRepository subjectRepository,
+            ITeacherRepository teacherRepository)
         {
             _classRepository = classRepository;
             _subjectRepository = subjectRepository;
             _teacherRepository = teacherRepository;
         }
-        
+
         [HttpGet("[action]")]
         public async Task<IActionResult> GetTeachers()
         {
@@ -42,12 +44,12 @@ namespace School.WEB.Controllers
 
             return View(model);
         }
-        
+
         [HttpGet("[action]")]
         public async Task<IActionResult> CreateTeacher()
         {
             var model = new EditCreateTeacherViewModel();
-            
+
             var subjects = await _subjectRepository.GetAll();
 
             var classes = _classRepository.GetRelatedData()
@@ -70,7 +72,8 @@ namespace School.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _teacherRepository.Add(new Teacher().To(model, _subjectRepository));
+                await _teacherRepository.Add(new Teacher().To(model,
+                    _subjectRepository));
 
                 await _teacherRepository.SaveChanges();
 
@@ -117,8 +120,8 @@ namespace School.WEB.Controllers
                 var c = _classRepository.GetRelatedData()
                     .FirstOrDefault(c =>
                         c.TeacherId == id);
-                
-                if(c!=null)
+
+                if (c != null)
                     classes.Add(c);
             }
             catch (Exception)
@@ -181,7 +184,7 @@ namespace School.WEB.Controllers
                 teacher.Class = await _classRepository.GetOne(model.ClassId);
 
                 _teacherRepository.Update(teacher);
-            
+
                 await _teacherRepository.SaveChanges();
 
                 teacher = await _teacherRepository.GetOneRelated(model.Id);
@@ -189,7 +192,7 @@ namespace School.WEB.Controllers
                 teacher.Subjects.Clear();
 
                 _teacherRepository.Update(teacher);
-            
+
                 await _teacherRepository.SaveChanges();
 
                 teacher = await _teacherRepository.GetOneRelated(model.Id);
@@ -200,10 +203,11 @@ namespace School.WEB.Controllers
                             .GetOne(t));
 
                 _teacherRepository.Update(teacher);
-            
+
                 await _teacherRepository.SaveChanges();
 
-                TempData["Message"] = $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
+                TempData["Message"] =
+                    $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
 
                 return RedirectToAction("GetTeachers");
             }
@@ -218,8 +222,8 @@ namespace School.WEB.Controllers
                 var c = _classRepository.GetRelatedData()
                     .FirstOrDefault(c =>
                         c.TeacherId == model.Id);
-                
-                if(c!=null)
+
+                if (c != null)
                     classes.Add(c);
             }
             catch (Exception)
@@ -250,7 +254,7 @@ namespace School.WEB.Controllers
             ViewData["Subjects"] = new SelectList(subjects,
                 "Id",
                 "Name");
-                
+
             return View(model);
         }
 
@@ -263,7 +267,7 @@ namespace School.WEB.Controllers
             {
                 return NotFound();
             }
-            
+
             _teacherRepository.Delete(teacher);
 
             await _teacherRepository.SaveChanges();

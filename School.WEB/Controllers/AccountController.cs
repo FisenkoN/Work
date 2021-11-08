@@ -1,14 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MimeKit;
-using School.WEB.Data;
+using School.WEB.Data.Repository;
 using School.WEB.Models;
 using School.WEB.ViewModels.Account;
 
@@ -17,11 +15,11 @@ namespace School.WEB.Controllers
     [Route("[controller]")]
     public class AccountController : Controller
     {
-        private readonly SchoolDbContext _db;
+        private readonly IAuthRepository _authRepository;
 
-        public AccountController(SchoolDbContext schoolDbContext)
+        public AccountController(IAuthRepository authRepository)
         {
-            _db = schoolDbContext;
+            _authRepository = authRepository;
         }
 
         [HttpGet("[action]")]
@@ -34,22 +32,22 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
-
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                await Authenticate(model.Email);
+                var user = await _authRepository.Get(model.Email, model.Password);
 
-                return RedirectToAction("Index",
-                    "Home");
+                if (user != null)
+                {
+                    await Authenticate(model.Email);
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError("", "Incorrect login or password");
+
+                return View(model);
             }
-
-            ModelState.AddModelError("",
-                "Incorrect login or password");
-
+            
             return View(model);
         }
 
@@ -63,32 +61,35 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-
-            if (user == null)
+            if (ModelState.IsValid)
             {
-                _db.Users.Add(new User
+                var user = await _authRepository.Get(model.Email,
+                    model.Password);
+
+                if (user == null)
                 {
-                    Email = model.Email,
-                    Password = model.Password
-                });
+                    await _authRepository.Add(new User
+                    {
+                        Email = model.Email,
+                        Password = model.Password
+                    });
 
-                await _db.SaveChangesAsync();
+                    await _authRepository.SaveChanges();
 
-                await Authenticate(model.Email);
+                    await Authenticate(model.Email);
 
-                return RedirectToAction("Index",
-                    "Home");
+                    return RedirectToAction("Index",
+                        "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("",
+                        "Incorrect login or password");
+                }
+
+                return View(model);
             }
-            else
-            {
-                ModelState.AddModelError("",
-                    "Incorrect login or password");
-            }
-
+            
             return View(model);
         }
 
@@ -99,10 +100,14 @@ namespace School.WEB.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult ForgotPassword(string email)
+        public async Task<IActionResult> ForgotPassword(string email)
         {
-            var password = _db.Users.FirstOrDefault(u => u.Email == email)
-                ?.Password;
+            var user = await _authRepository.GetWhenForgotPassword(email);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             var emailMessage = new MimeMessage();
 
@@ -116,21 +121,21 @@ namespace School.WEB.Controllers
 
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = $"Please, don't forget password. You password is {password}"
+                Text = $"Please, don't forget password. You password is {user.Password}"
             };
 
             using var client = new SmtpClient();
 
-            client.Connect("smtp.gmail.com",
+            await client.ConnectAsync("smtp.gmail.com",
                 587,
                 false);
 
-            client.Authenticate("nazarii.fisenko@gmail.com",
+            await client.AuthenticateAsync("nazarii.fisenko@gmail.com",
                 "[password]");
 
-            client.Send(emailMessage);
+            await client.SendAsync(emailMessage);
 
-            client.Disconnect(true);
+            await client.DisconnectAsync(true);
 
             return RedirectToAction("Login");
         }

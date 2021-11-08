@@ -12,7 +12,7 @@ namespace School.WEB.Data.Repository
         Task Add(T entity);
 
         void Update(T entity);
-        
+
         void Delete(T entity);
 
         Task<T> GetOne(int? id);

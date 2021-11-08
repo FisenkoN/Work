@@ -1,17 +1,16 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using School.WEB.Data;
 using School.WEB.ViewModels;
 
 namespace School.WEB.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(SchoolDbContext context)
+        public HomeController()
         {
+            
         }
         
-        //[HttpGet("[action]")]
         public IActionResult Index()
         {
             return View();

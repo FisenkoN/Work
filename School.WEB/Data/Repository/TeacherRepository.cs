@@ -8,7 +8,8 @@ using School.WEB.Models;
 
 namespace School.WEB.Data.Repository
 {
-    public class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
+    public class TeacherRepository : BaseRepository<Teacher>,
+        ITeacherRepository
     {
         public TeacherRepository(SchoolDbContext db) : base(db)
         {

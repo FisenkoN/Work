@@ -5,7 +5,8 @@ using School.WEB.Models;
 
 namespace School.WEB.Data.Repository
 {
-    public class ClassRepository : BaseRepository<Class>, IClassRepository
+    public class ClassRepository : BaseRepository<Class>,
+        IClassRepository
     {
         public ClassRepository(SchoolDbContext dbContext) : base(dbContext)
         {

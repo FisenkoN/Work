@@ -29,7 +29,7 @@ namespace School.WEB.Data.Repository
         {
             await DbContext.SaveChangesAsync();
         }
-        
+
         public virtual void Update(T entity)
         {
             _table.Update(entity);
@@ -37,7 +37,8 @@ namespace School.WEB.Data.Repository
 
         public virtual void Delete(T entity)
         {
-            DbContext.Entry(entity).State = EntityState.Deleted;
+            DbContext.Entry(entity)
+                .State = EntityState.Deleted;
         }
 
         public virtual async Task<T> GetOne(int? id)
@@ -50,7 +51,7 @@ namespace School.WEB.Data.Repository
             return _table.Where(where);
         }
 
-        public virtual async  Task<List<T>> GetAll()
+        public virtual async Task<List<T>> GetAll()
         {
             return await _table.ToListAsync();
         }

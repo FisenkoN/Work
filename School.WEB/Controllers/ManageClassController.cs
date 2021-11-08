@@ -15,19 +15,21 @@ namespace School.WEB.Controllers
 {
     [Authorize]
     [Route("[controller]")]
-    public class ManageClassController:Controller
+    public class ManageClassController : Controller
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IClassRepository _classRepository;
         private readonly ITeacherRepository _teacherRepository;
-        
-        public ManageClassController(IStudentRepository studentRepository, IClassRepository classRepository, ITeacherRepository teacherRepository)
+
+        public ManageClassController(IStudentRepository studentRepository,
+            IClassRepository classRepository,
+            ITeacherRepository teacherRepository)
         {
             _studentRepository = studentRepository;
             _classRepository = classRepository;
             _teacherRepository = teacherRepository;
         }
-        
+
         [HttpGet("[action]")]
         public async Task<IActionResult> GetClasses()
         {
@@ -78,8 +80,10 @@ namespace School.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _classRepository.Add(new Class().To(model, _studentRepository));
-            
+                await _classRepository.Add(
+                    new Class()
+                        .To(model, _studentRepository));
+
                 await _classRepository.SaveChanges();
 
                 TempData["Message"] =
@@ -87,7 +91,7 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetClasses");
             }
-            
+
             var teachers = _teacherRepository
                 .GetAll()
                 .Result
@@ -111,10 +115,10 @@ namespace School.WEB.Controllers
                 teachers,
                 "Id",
                 "FullName");
-                
+
             return View(model);
         }
-        
+
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> EditClass(int id)
         {
@@ -179,7 +183,7 @@ namespace School.WEB.Controllers
                 form.Students.Clear();
 
                 _classRepository.Update(form);
-            
+
                 await _classRepository.SaveChanges();
 
                 foreach (var i in model.StudentIds)
@@ -191,17 +195,17 @@ namespace School.WEB.Controllers
                     student.Class = await _classRepository.GetOne(form.Id);
 
                     _studentRepository.Update(student);
-                
+
                     await _studentRepository.SaveChanges();
                 }
-                
+
                 TempData["Message"] = $"Class: {model.Name} was edited at {DateTime.Now.ToShortTimeString()}";
-                
+
                 return RedirectToAction("GetClasses");
             }
-            
+
             var @class = await _classRepository.GetOne(model.Id);
-            
+
             var students = await _studentRepository.GetAll();
 
             var teachers = _teacherRepository
@@ -240,7 +244,7 @@ namespace School.WEB.Controllers
             {
                 return NotFound();
             }
-            
+
             _classRepository.Delete(@class);
 
             await _classRepository.SaveChanges();

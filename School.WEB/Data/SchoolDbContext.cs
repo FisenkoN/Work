@@ -7,23 +7,23 @@ namespace School.WEB.Data
     public sealed class SchoolDbContext : DbContext
     {
         public DbSet<Student> Students { get; set; }
-        
+
         public DbSet<Teacher> Teachers { get; set; }
-        
+
         public DbSet<Subject> Subjects { get; set; }
-        
+
         public DbSet<Class> Classes { get; set; }
 
         public DbSet<User> Users { get; set; }
-        
+
         public SchoolDbContext()
         {
             Database.EnsureDeleted();
             Database.EnsureCreated();
-            
+
             InitializeData();
         }
-        
+
         private void InitializeData()
         {
             var t1 = new Teacher
@@ -374,7 +374,8 @@ namespace School.WEB.Data
                 Class = c1,
                 ClassId = c1.Id,
                 Gender = Gender.Female,
-                Image = "https://lh3.googleusercontent.com/fife/AAWUweV5qQx8oFqW_5QSK3xjoE7-4Oe0e-i-dIfLdmlsbd2mXvVCUijsoSQl-O2bvAdNZUeQge2KIruU4txsgsM-Ay85CpeRL2Yq1AllZeMkCT1NvMAA74bSfHhUFe8xzzbLFkjqQoKoO0lMtnGTTXILOLhPJ1fMXS-FvfbUENqMdhAgLkrntnU2bPR4pYLzKa5aEiOjxMZ2EHcmEOlLpPa1JnlNFlr9WH2cDruxbCaXcNHZ0FjpB2fjI2dWXY_3_3Jr3dGw4Pggh_WYL2JU5fy3qwuDv1MdtRbNgibTFojQPEVJ_-eGfFaPZBB6wUAvFC81sw7vVF_XyCKTPm0rn8y9UOve_rLGtxhjD7IY79cK8vqE4u4pHWDlSQnVknbzKdDS-liBfvMPDeNrtXROMlV7g1IJyxlkqrVt_6hMfRCTCUZ2bXxwb3ZqqeCO1x6wTGpY3xVXfjX_HR0jlBjX21Zy8iyXjBP4DUERqZHkSqBLsKpEurdxHiNgMy3BgpSpW8gre6jpMIJO0nOATOUXM0okM0g6-bf_N2vt91UbEHLyl0qgDhrjgpIzj_2EDoLbRkvnu51ONU4DFAQjM5z4iZ9KdB1heagb7lBkRoDH_8E6jmgbpU-z0ZHwmeas5psCqwb-zcvQ4DFDPwKHl1eGup3zx9XK1mwW6uJW-7xgu-jZlYjRrBRmDLqF0q6iGtRZixjMcsMf4sNa4dI5jHuPC4E9VC6QtsPR0c8Ddw=w250-h238-p-k-nu-ft"
+                Image =
+                    "https://lh3.googleusercontent.com/fife/AAWUweV5qQx8oFqW_5QSK3xjoE7-4Oe0e-i-dIfLdmlsbd2mXvVCUijsoSQl-O2bvAdNZUeQge2KIruU4txsgsM-Ay85CpeRL2Yq1AllZeMkCT1NvMAA74bSfHhUFe8xzzbLFkjqQoKoO0lMtnGTTXILOLhPJ1fMXS-FvfbUENqMdhAgLkrntnU2bPR4pYLzKa5aEiOjxMZ2EHcmEOlLpPa1JnlNFlr9WH2cDruxbCaXcNHZ0FjpB2fjI2dWXY_3_3Jr3dGw4Pggh_WYL2JU5fy3qwuDv1MdtRbNgibTFojQPEVJ_-eGfFaPZBB6wUAvFC81sw7vVF_XyCKTPm0rn8y9UOve_rLGtxhjD7IY79cK8vqE4u4pHWDlSQnVknbzKdDS-liBfvMPDeNrtXROMlV7g1IJyxlkqrVt_6hMfRCTCUZ2bXxwb3ZqqeCO1x6wTGpY3xVXfjX_HR0jlBjX21Zy8iyXjBP4DUERqZHkSqBLsKpEurdxHiNgMy3BgpSpW8gre6jpMIJO0nOATOUXM0okM0g6-bf_N2vt91UbEHLyl0qgDhrjgpIzj_2EDoLbRkvnu51ONU4DFAQjM5z4iZ9KdB1heagb7lBkRoDH_8E6jmgbpU-z0ZHwmeas5psCqwb-zcvQ4DFDPwKHl1eGup3zx9XK1mwW6uJW-7xgu-jZlYjRrBRmDLqF0q6iGtRZixjMcsMf4sNa4dI5jHuPC4E9VC6QtsPR0c8Ddw=w250-h238-p-k-nu-ft"
             };
 
             var s2 = new Student
@@ -856,7 +857,7 @@ namespace School.WEB.Data
         {
             Database.EnsureDeleted();
             Database.EnsureCreated();
-            
+
             InitializeData();
         }
     }

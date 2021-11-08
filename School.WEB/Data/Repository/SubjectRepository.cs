@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -7,7 +6,8 @@ using School.WEB.Models;
 
 namespace School.WEB.Data.Repository
 {
-    public class SubjectRepository : BaseRepository<Subject>, ISubjectRepository
+    public class SubjectRepository : BaseRepository<Subject>,
+        ISubjectRepository
     {
         public SubjectRepository(SchoolDbContext db) : base(db)
         {

@@ -119,7 +119,7 @@ namespace School.WEB.Controllers
                 await _subjectRepository.SaveChanges();
 
                 TempData["Message"] = $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}";
-                
+
                 return RedirectToAction("GetSubjects");
             }
 

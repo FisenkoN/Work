@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,19 +14,21 @@ namespace School.WEB.Controllers
 {
     [Authorize]
     [Route("[controller]")]
-    public class ManageStudentController:Controller
+    public class ManageStudentController : Controller
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IClassRepository _classRepository;
         private readonly ISubjectRepository _subjectRepository;
-        
-        public ManageStudentController(IStudentRepository studentRepository, IClassRepository classRepository, ISubjectRepository subjectRepository)
+
+        public ManageStudentController(IStudentRepository studentRepository,
+            IClassRepository classRepository,
+            ISubjectRepository subjectRepository)
         {
             _studentRepository = studentRepository;
             _classRepository = classRepository;
             _subjectRepository = subjectRepository;
         }
-        
+
         [HttpGet("[action]")]
         public async Task<IActionResult> GetStudents()
         {
@@ -41,12 +42,12 @@ namespace School.WEB.Controllers
 
             return View(model);
         }
-        
+
         [HttpGet("[action]")]
         public async Task<IActionResult> CreateStudent()
         {
             var model = new EditCreateStudentViewModel();
-            
+
             ViewData["Classes"] = new SelectList(await _classRepository.GetAll(),
                 "Id",
                 "Name");
@@ -63,7 +64,8 @@ namespace School.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _studentRepository.Add(new Student().To(model, _subjectRepository));
+                await _studentRepository.Add(new Student().To(model,
+                    _subjectRepository));
 
                 await _studentRepository.SaveChanges();
 
@@ -72,7 +74,7 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetStudents");
             }
-            
+
             ViewData["Classes"] = new SelectList(await _classRepository.GetAll(),
                 "Id",
                 "Name");
@@ -80,7 +82,7 @@ namespace School.WEB.Controllers
             ViewData["Subjects"] = new SelectList(await _subjectRepository.GetAll(),
                 "Id",
                 "Name");
-                
+
             return View(model);
         }
 
@@ -114,7 +116,7 @@ namespace School.WEB.Controllers
         [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditStudent(EditCreateStudentViewModel model)
-        {   
+        {
             if (ModelState.IsValid)
             {
                 var student = await _studentRepository.GetOne(model.Id);
@@ -126,7 +128,7 @@ namespace School.WEB.Controllers
                 student.Gender = model.Gender;
 
                 _studentRepository.Update(student);
-            
+
                 await _studentRepository.SaveChanges();
 
                 student = await _studentRepository.GetOne(model.Id);
@@ -134,9 +136,9 @@ namespace School.WEB.Controllers
                 student.ClassId = model.ClassId;
 
                 student.Class = await _classRepository.GetOne(model.ClassId);
-            
+
                 _studentRepository.Update(student);
-            
+
                 await _studentRepository.SaveChanges();
 
                 try
@@ -146,7 +148,7 @@ namespace School.WEB.Controllers
                     student.Subjects.Clear();
 
                     _studentRepository.Update(student);
-                
+
                     await _studentRepository.SaveChanges();
 
                     student = await _studentRepository.GetOneRelated(model.Id);
@@ -157,7 +159,7 @@ namespace School.WEB.Controllers
                                 .GetOne(t));
 
                     _studentRepository.Update(student);
-                
+
                     await _studentRepository.SaveChanges();
                 }
                 catch (Exception)
@@ -170,7 +172,7 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetStudents");
             }
-            
+
             var classes = await _classRepository.GetAll();
 
             var subjects = await _subjectRepository.GetAll();
@@ -182,7 +184,7 @@ namespace School.WEB.Controllers
             ViewData["Subjects"] = new SelectList(subjects,
                 "Id",
                 "Name");
-                
+
             return View(model);
         }
 
@@ -195,9 +197,9 @@ namespace School.WEB.Controllers
             {
                 return NotFound();
             }
-            
+
             _studentRepository.Delete(student);
-            
+
             await _studentRepository.SaveChanges();
 
             TempData["Message"] = $"Student: with {id} was deleted at {DateTime.Now.ToShortTimeString()}";

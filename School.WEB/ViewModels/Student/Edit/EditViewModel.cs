@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using School.WEB.Extensions;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.Student.Edit
@@ -26,7 +27,7 @@ namespace School.WEB.ViewModels.Student.Edit
         
         public int? ClassId { get; set; }
 
-        [RegularExpression(@"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$", ErrorMessage = "Incorrect image url")]
+        [RegularExpression(RegexPattern.Url, ErrorMessage = "Incorrect image url")]
         public string Image { get; set; }
 
         public IEnumerable<int> SubjectIds { get; set; }

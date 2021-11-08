@@ -54,8 +54,9 @@ namespace School.WEB.Controllers
             }
 
             var @class = await _classRepository.GetOne(student?.ClassId);
-            
-            var model = new StudentDetailsViewModel(student, @class);
+
+            var model = new StudentDetailsViewModel(student,
+                @class);
 
             return View(model);
         }
@@ -65,6 +66,11 @@ namespace School.WEB.Controllers
         {
 
             var student = await _studentRepository.GetOneRelated(id);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
 
             var classes = await _classRepository.GetAll();
 
@@ -85,79 +91,79 @@ namespace School.WEB.Controllers
 
         [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,[Bind("Id, FirstName, LastName, Age, Gender, ClassId, Image, SubjectIds")] EditViewModel studentModel)
+        public async Task<IActionResult> Edit(EditViewModel model)
         {
-            if (id != studentModel.Id)
-                return NotFound();
-
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var classes = await _classRepository.GetAll();
+                var student = await _studentRepository.GetOne(model.Id);
 
-                var subjects = await _subjectRepository.GetAll();
+                student.FirstName = model.FirstName;
 
-                ViewData["Classes"] = new SelectList(classes,
-                    "Id",
-                    "Name");
+                student.LastName = model.LastName;
 
-                ViewData["Subjects"] = new SelectList(subjects,
-                    "Id",
-                    "Name");
-                
-                return View(studentModel);
-            }
+                student.Age = model.Age;
 
-            var student = await _studentRepository.GetOne(id);
+                student.Image = model.Image;
 
-            student.FirstName = studentModel.FirstName;
-            
-            student.LastName = studentModel.LastName;
-            
-            student.Age = studentModel.Age;
-            
-            student.Image = studentModel.Image;
-            
-            student.Gender = studentModel.Gender;
+                student.Gender = model.Gender;
 
-            _studentRepository.Update(student);
-            await _studentRepository.SaveChanges();
-                
-            student = await _studentRepository.GetOne(id);
+                _studentRepository.Update(student);
 
-            student.ClassId = studentModel.ClassId;
-
-            student.Class = await _classRepository.GetOne(studentModel.ClassId);
-
-            _studentRepository.Update(student);
-
-            await _studentRepository.SaveChanges();
-            
-            student = await _studentRepository.GetOneRelated(id);
-
-            student.Subjects.Clear();
-
-            _studentRepository.Update(student);
-            
-            await _studentRepository.SaveChanges();
-
-            student = await _studentRepository.GetOneRelated(id);
-
-            foreach (var subjectId in studentModel.SubjectIds)
-            {
-                student.Subjects.Add(await _subjectRepository.GetOne(subjectId));
                 await _studentRepository.SaveChanges();
+
+                student = await _studentRepository.GetOne(model.Id);
+
+                student.ClassId = model.ClassId;
+
+                student.Class = await _classRepository.GetOne(model.ClassId);
+
+                _studentRepository.Update(student);
+
+                await _studentRepository.SaveChanges();
+
+                student = await _studentRepository.GetOneRelated(model.Id);
+
+                student.Subjects.Clear();
+
+                _studentRepository.Update(student);
+
+                await _studentRepository.SaveChanges();
+
+                student = await _studentRepository.GetOneRelated(model.Id);
+
+                foreach (var subjectId in model.SubjectIds)
+                {
+                    student.Subjects.Add(await _subjectRepository.GetOne(subjectId));
+                    await _studentRepository.SaveChanges();
+                }
+
+                _studentRepository.Update(student);
+
+                await _studentRepository.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
             }
 
-            _studentRepository.Update(student);
-            await _studentRepository.SaveChanges();
+            var classes = await _classRepository.GetAll();
 
-            return RedirectToAction(nameof(Index));
+            var subjects = await _subjectRepository.GetAll();
+
+            ViewData["Classes"] = new SelectList(classes,
+                "Id",
+                "Name");
+
+            ViewData["Subjects"] = new SelectList(subjects,
+                "Id",
+                "Name");
+
+            return View(model);
         }
 
         [HttpGet("[action]/{id}")]
         public IActionResult ShowClassmates(int id)
         {
-            var classId = _studentRepository.GetOneRelated(id).Result.ClassId;
+            var classId = _studentRepository.GetOneRelated(id)
+                .Result.ClassId;
 
             if (classId != null)
             {
@@ -167,12 +173,12 @@ namespace School.WEB.Controllers
                     .ToList();
 
                 var model = new ShowClassmatesViewModel(students);
-            
+
                 return View(model);
             }
-            
+
             TempData["Message"] = "This students doesn't have a class";
-            
+
             return RedirectToAction("Index");
         }
 
@@ -197,12 +203,12 @@ namespace School.WEB.Controllers
                     return NotFound();
 
                 var model = new ShowClassTeacherViewModel(teacher);
-                
+
                 return View(model);
             }
-            
+
             TempData["Message"] = "This students doesn't have a class";
-            
+
             return RedirectToAction("Index");
         }
     }
