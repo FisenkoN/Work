@@ -1,14 +1,14 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using School.WEB.Data;
 using School.WEB.ViewModels;
 
 namespace School.WEB.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        public HomeController(SchoolDbContext dbContext)
         {
-            
         }
         
         public IActionResult Index()

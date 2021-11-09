@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using School.WEB.Data.Repository;
+using School.WEB.Extensions;
 using School.WEB.ViewModels.Student.Edit;
 using School.WEB.ViewModels.Student.Index;
 using School.WEB.ViewModels.Student.ShowClassmates;
@@ -22,7 +24,8 @@ namespace School.WEB.Controllers
         private readonly ITeacherRepository _teacherRepository;
 
 
-        public StudentController(IStudentRepository studentRepository,
+        public StudentController(
+            IStudentRepository studentRepository,
             ITeacherRepository teacherRepository,
             ISubjectRepository subjectRepository,
             IClassRepository classRepository)
@@ -36,6 +39,11 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> Index()
         {
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
+            
             var students = await _studentRepository.GetAll();
 
             var model = new IndexViewModel(students);
@@ -93,6 +101,11 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditViewModel model)
         {
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
+            
             if (ModelState.IsValid)
             {
                 var student = await _studentRepository.GetOne(model.Id);
@@ -140,6 +153,9 @@ namespace School.WEB.Controllers
                 _studentRepository.Update(student);
 
                 await _studentRepository.SaveChanges();
+                
+                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
+                    $"Student: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction(nameof(Index));
             }
@@ -155,6 +171,9 @@ namespace School.WEB.Controllers
             ViewData["Subjects"] = new SelectList(subjects,
                 "Id",
                 "Name");
+            
+            ViewBag.Result =
+                OperationResult<string>.CreateFailure("The student was not created because the model is not valid");
 
             return View(model);
         }

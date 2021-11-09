@@ -46,9 +46,9 @@ namespace School.WEB.Data.Repository
             return await _table.FindAsync(id);
         }
 
-        public virtual IQueryable<T> GetSome(Expression<Func<T, bool>> @where)
+        public virtual IQueryable<T> GetSome(Expression<Func<T, bool>> predicate)
         {
-            return _table.Where(where);
+            return _table.Where(predicate);
         }
 
         public virtual async Task<List<T>> GetAll()

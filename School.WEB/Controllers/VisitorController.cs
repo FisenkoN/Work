@@ -18,7 +18,8 @@ namespace School.WEB.Controllers
         private readonly ISubjectRepository _subjectRepository;
         private readonly IClassRepository _classRepository;
 
-        public VisitorController(ITeacherRepository teacherRepository,
+        public VisitorController(
+            ITeacherRepository teacherRepository,
             IClassRepository classRepository,
             ISubjectRepository subjectRepository)
         {
@@ -89,9 +90,8 @@ namespace School.WEB.Controllers
             }
 
             var className = _classRepository.GetRelatedData()
-                                .FirstOrDefault(p => p.TeacherId == teacher.Id)
-                                ?.Name ??
-                            "no class";
+                                .FirstOrDefault(p => p.TeacherId == teacher.Id)?.Name
+                            ?? "no class";
 
             var model = new TeacherDetailsViewModel(teacher,
                 className);

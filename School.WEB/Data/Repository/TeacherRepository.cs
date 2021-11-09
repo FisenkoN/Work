@@ -28,10 +28,10 @@ namespace School.WEB.Data.Repository
                 .FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public override IQueryable<Teacher> GetSome(Expression<Func<Teacher, bool>> where)
+        public override IQueryable<Teacher> GetSome(Expression<Func<Teacher, bool>> predicate)
         {
             return GetRelatedData()
-                .Where(where)
+                .Where(predicate)
                 .Select(t => t);
         }
     }

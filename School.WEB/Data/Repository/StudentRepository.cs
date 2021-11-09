@@ -30,10 +30,10 @@ namespace School.WEB.Data.Repository
         }
 
 
-        public override IQueryable<Student> GetSome(Expression<Func<Student, bool>> where)
+        public override IQueryable<Student> GetSome(Expression<Func<Student, bool>> predicate)
         {
             return GetRelatedData()
-                .Where(where);
+                .Where(predicate);
         }
     }
 }

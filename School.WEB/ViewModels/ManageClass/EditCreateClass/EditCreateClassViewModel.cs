@@ -19,7 +19,6 @@ namespace School.WEB.ViewModels.ManageClass.EditCreateClass
 
         public EditCreateClassViewModel()
         {
-            
         }
 
         public EditCreateClassViewModel(Class @class)

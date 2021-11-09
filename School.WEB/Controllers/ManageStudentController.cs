@@ -20,7 +20,8 @@ namespace School.WEB.Controllers
         private readonly IClassRepository _classRepository;
         private readonly ISubjectRepository _subjectRepository;
 
-        public ManageStudentController(IStudentRepository studentRepository,
+        public ManageStudentController(
+            IStudentRepository studentRepository,
             IClassRepository classRepository,
             ISubjectRepository subjectRepository)
         {
@@ -32,9 +33,10 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetStudents()
         {
-            if (TempData["Message"] != null)
-                ViewBag.Message = TempData["Message"]
-                    .ToString();
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
 
             var students = await _studentRepository.GetAll();
 
@@ -62,15 +64,20 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateStudent(EditCreateStudentViewModel model)
         {
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
+            
             if (ModelState.IsValid)
             {
                 await _studentRepository.Add(new Student().To(model,
                     _subjectRepository));
 
                 await _studentRepository.SaveChanges();
-
-                TempData["Message"] =
-                    $"Student: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}";
+                
+                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
+                    $"Student: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction("GetStudents");
             }
@@ -82,6 +89,9 @@ namespace School.WEB.Controllers
             ViewData["Subjects"] = new SelectList(await _subjectRepository.GetAll(),
                 "Id",
                 "Name");
+
+            ViewBag.Result =
+                OperationResult<string>.CreateFailure("The student was not created because the model is not valid");
 
             return View(model);
         }
@@ -117,6 +127,11 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditStudent(EditCreateStudentViewModel model)
         {
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
+            
             if (ModelState.IsValid)
             {
                 var student = await _studentRepository.GetOne(model.Id);
@@ -167,8 +182,8 @@ namespace School.WEB.Controllers
                     return RedirectToAction("GetStudents");
                 }
 
-                TempData["Message"] =
-                    $"Student: {student.FirstName + " " + student.LastName} was edited at {DateTime.Now.ToShortTimeString()}";
+                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
+                    $"Student: {student.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction("GetStudents");
             }
@@ -184,6 +199,9 @@ namespace School.WEB.Controllers
             ViewData["Subjects"] = new SelectList(subjects,
                 "Id",
                 "Name");
+
+            ViewBag.Result = OperationResult<string>.CreateFailure(
+                $"Student: {model.FirstName + " " + model.LastName} wasn't edited, because model is not valid");
 
             return View(model);
         }
@@ -201,9 +219,20 @@ namespace School.WEB.Controllers
             _studentRepository.Delete(student);
 
             await _studentRepository.SaveChanges();
+            
+            student = await _studentRepository.GetOne(id);
 
-            TempData["Message"] = $"Student: with {id} was deleted at {DateTime.Now.ToShortTimeString()}";
-
+            if (@student == null)
+            {
+                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
+                    $"Student: with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}"));
+            }
+            else
+            {
+                TempData.Put("Result", OperationResult<string>.CreateFailure(
+                    $"Student: with id: {id} wasn't deleted"));
+            }
+            
             return RedirectToAction("GetStudents");
         }
 

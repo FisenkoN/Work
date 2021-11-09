@@ -4,7 +4,7 @@ using School.WEB.Models;
 
 namespace School.WEB.Data.Repository
 {
-    public class AuthRepository:IAuthRepository
+    public class AuthRepository : IAuthRepository
     {
         private readonly SchoolDbContext _db;
 
@@ -13,7 +13,8 @@ namespace School.WEB.Data.Repository
             _db = db;
         }
 
-        public async Task<User> Get(string email, string password)
+        public async Task<User> Get(string email,
+            string password)
         {
             return await _db.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
         }

@@ -22,7 +22,8 @@ namespace School.WEB.Controllers
         private readonly ISubjectRepository _subjectRepository;
         private readonly ITeacherRepository _teacherRepository;
 
-        public ManageTeacherController(IClassRepository classRepository,
+        public ManageTeacherController(
+            IClassRepository classRepository,
             ISubjectRepository subjectRepository,
             ITeacherRepository teacherRepository)
         {
@@ -34,9 +35,10 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetTeachers()
         {
-            if (TempData["Message"] != null)
-                ViewBag.Message = TempData["Message"]
-                    .ToString();
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
 
             var teachers = await _teacherRepository.GetAll();
 
@@ -70,6 +72,11 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateTeacher(EditCreateTeacherViewModel model)
         {
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
+            
             if (ModelState.IsValid)
             {
                 await _teacherRepository.Add(new Teacher().To(model,
@@ -77,8 +84,8 @@ namespace School.WEB.Controllers
 
                 await _teacherRepository.SaveChanges();
 
-                TempData["Message"] =
-                    $"Teacher: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}";
+                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
+                    $"Teacher: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction("GetTeachers");
             }
@@ -96,6 +103,9 @@ namespace School.WEB.Controllers
             ViewData["Subjects"] = new SelectList(subjects,
                 "Id",
                 "Name");
+
+            ViewBag.Result =
+                OperationResult<string>.CreateFailure("The teacher was not created because the model is not valid");
 
             return View(model);
         }
@@ -163,6 +173,11 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditTeacher(EditCreateTeacherViewModel model)
         {
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
+            
             if (ModelState.IsValid)
             {
                 var teacher = await _teacherRepository.GetOne(model.Id);
@@ -206,8 +221,8 @@ namespace School.WEB.Controllers
 
                 await _teacherRepository.SaveChanges();
 
-                TempData["Message"] =
-                    $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}";
+                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
+                    $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction("GetTeachers");
             }
@@ -255,6 +270,9 @@ namespace School.WEB.Controllers
                 "Id",
                 "Name");
 
+            ViewBag.Result = OperationResult<string>.CreateFailure(
+                $"Teacher: {model.FirstName + " " + model.LastName} wasn't edited, because model is not valid");
+
             return View(model);
         }
 
@@ -271,8 +289,19 @@ namespace School.WEB.Controllers
             _teacherRepository.Delete(teacher);
 
             await _teacherRepository.SaveChanges();
+            
+            teacher = await _teacherRepository.GetOne(id);
 
-            TempData["Message"] = $"Teacher with id : {id} was deleted at {DateTime.Now.ToShortTimeString()}";
+            if (teacher == null)
+            {
+                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
+                    $"Teacher: with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}"));
+            }
+            else
+            {
+                TempData.Put("Result", OperationResult<string>.CreateFailure(
+                    $"Teacher: with id: {id} wasn't deleted"));
+            }
 
             return RedirectToAction("GetTeachers");
 

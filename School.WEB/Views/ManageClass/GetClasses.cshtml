@@ -1,5 +1,26 @@
-﻿@using School.WEB.Controllers
-@model School.WEB.ViewModels.ManageClass.GetClasses.GetClassesViewModel
+﻿@model School.WEB.ViewModels.ManageClass.GetClasses.GetClassesViewModel
+@using School.WEB.Controllers
+@using School.WEB.Extensions
+
+@{ var operation = (OperationResult<string>)ViewBag.Result;}
+
+@if (operation != null)
+{
+    var statusMessageClass = operation.Success ? "success" : "danger";
+    
+    <div class="alert alert-@statusMessageClass js-alert-operation-result" role="alert">
+        @operation.Result
+    </div>
+    
+    if (operation.Success)
+    {
+        <script type="text/javascript">
+            setTimeout(function () {
+                document.getElementsByClassName('js-alert-operation-result')[0].remove()
+            }, 8000);
+        </script>
+    }
+}
 
 @{
     ViewData["Title"] = "GetClasses";
@@ -46,14 +67,7 @@
     </tbody>
 </table>
 <div>
-    <a asp-action="@nameof(AdminController.Index)">
+    <a asp-action="@nameof(AdminController.Index)" asp-controller="Admin">
         Back to Admin form
     </a>
 </div>
-
-@if (!string.IsNullOrEmpty(ViewBag.Message))
-{
-    <script type="text/javascript">
-        alert("@ViewBag.Message");
-    </script>
-}

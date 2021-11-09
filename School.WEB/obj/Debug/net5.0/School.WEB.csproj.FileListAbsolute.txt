@@ -582,4 +582,3 @@ Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\ManageTeacher\DetailsTeacher.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\ManageTeacher\EditTeacher.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\ManageTeacher\GetTeachers.cshtml.g.cs
 Z:\TASKS\School.WEB\bin\Debug\net5.0\Calabonga.OperationResults.dll
-Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Shared\_Admin.cshtml.g.cs
