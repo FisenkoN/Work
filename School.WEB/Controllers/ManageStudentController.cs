@@ -71,15 +71,17 @@ namespace School.WEB.Controllers
             
             if (ModelState.IsValid)
             {
-                await _studentRepository.Add(new Student().To(model,
-                    _subjectRepository));
+                await _studentRepository
+                    .Add(new Student()
+                        .To(model, _subjectRepository));
 
                 await _studentRepository.SaveChanges();
                 
-                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
-                    $"Student: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
+                TempData
+                    .Put("Result", OperationResult<string>
+                        .CreateSuccessResult($"Student: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetStudents");
+                return RedirectToAction("GetStudents", "ManageStudent");
             }
 
             ViewData["Classes"] = new SelectList(await _classRepository.GetAll(),
@@ -110,11 +112,13 @@ namespace School.WEB.Controllers
 
             var subjects = await _subjectRepository.GetAll();
 
-            ViewData["Classes"] = new SelectList(classes,
+            ViewData["Classes"] = new SelectList(
+                classes,
                 "Id",
                 "Name");
 
-            ViewData["Subjects"] = new SelectList(subjects,
+            ViewData["Subjects"] = new SelectList(
+                subjects,
                 "Id",
                 "Name");
 
@@ -179,13 +183,13 @@ namespace School.WEB.Controllers
                 }
                 catch (Exception)
                 {
-                    return RedirectToAction("GetStudents");
+                    return RedirectToAction("GetStudents", "ManageStudent");
                 }
 
                 TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
                     $"Student: {student.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetStudents");
+                return RedirectToAction("GetStudents", "ManageStudent");
             }
 
             var classes = await _classRepository.GetAll();
@@ -233,7 +237,7 @@ namespace School.WEB.Controllers
                     $"Student: with id: {id} wasn't deleted"));
             }
             
-            return RedirectToAction("GetStudents");
+            return RedirectToAction("GetStudents", "ManageStudent");
         }
 
         [HttpGet("[action]/{id}")]

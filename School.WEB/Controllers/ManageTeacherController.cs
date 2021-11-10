@@ -87,7 +87,7 @@ namespace School.WEB.Controllers
                 TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
                     $"Teacher: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetTeachers");
+                return RedirectToAction("GetTeachers", "ManageTeacher");
             }
 
             var subjects = await _subjectRepository.GetAll();
@@ -224,7 +224,7 @@ namespace School.WEB.Controllers
                 TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
                     $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetTeachers");
+                return RedirectToAction("GetTeachers", "ManageTeacher");
             }
 
             var classes = await _classRepository.GetRelatedData()
@@ -303,7 +303,7 @@ namespace School.WEB.Controllers
                     $"Teacher: with id: {id} wasn't deleted"));
             }
 
-            return RedirectToAction("GetTeachers");
+            return RedirectToAction("GetTeachers", "ManageTeacher");
 
         }
 

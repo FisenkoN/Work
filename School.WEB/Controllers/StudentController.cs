@@ -155,7 +155,7 @@ namespace School.WEB.Controllers
                 await _studentRepository.SaveChanges();
                 
                 TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
-                    $"Student: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
+                    $"Student: {model.FirstName + " " + model.LastName} was edit at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction(nameof(Index));
             }
@@ -164,16 +164,18 @@ namespace School.WEB.Controllers
 
             var subjects = await _subjectRepository.GetAll();
 
-            ViewData["Classes"] = new SelectList(classes,
+            ViewData["Classes"] = new SelectList(
+                classes,
                 "Id",
                 "Name");
 
-            ViewData["Subjects"] = new SelectList(subjects,
+            ViewData["Subjects"] = new SelectList(
+                subjects,
                 "Id",
                 "Name");
             
             ViewBag.Result =
-                OperationResult<string>.CreateFailure("The student was not created because the model is not valid");
+                OperationResult<string>.CreateFailure("The student was not edited because the model is not valid");
 
             return View(model);
         }
@@ -196,7 +198,8 @@ namespace School.WEB.Controllers
                 return View(model);
             }
 
-            TempData["Message"] = "This students doesn't have a class";
+            TempData.Put("Result", OperationResult<string>.CreateFailure(
+                "This student doesn't have classmates"));
 
             return RedirectToAction("Index");
         }
@@ -226,7 +229,8 @@ namespace School.WEB.Controllers
                 return View(model);
             }
 
-            TempData["Message"] = "This students doesn't have a class";
+            TempData.Put("Result", OperationResult<string>.CreateFailure(
+                "This student doesn't have a class"));
 
             return RedirectToAction("Index");
         }

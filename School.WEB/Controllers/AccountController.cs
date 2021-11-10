@@ -45,7 +45,9 @@ namespace School.WEB.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("", "Incorrect login or password");
+                ModelState.AddModelError(
+                    "", 
+                    "Incorrect login or password");
 
                 return View(model);
             }
@@ -67,11 +69,13 @@ namespace School.WEB.Controllers
             {
                 ViewBag.Result = OperationResult<string>.CreateFailure(
                     "Password and confirmation are different");
+                
                 return View();
             }
             if (ModelState.IsValid)
             {
-                var user = await _authRepository.Get(model.Email,
+                var user = await _authRepository.Get(
+                    model.Email,
                     model.Password);
 
                 if (user == null)
@@ -86,16 +90,17 @@ namespace School.WEB.Controllers
 
                     await Authenticate(model.Email);
                     
-                    TempData.Put("Result",
-                        OperationResult<string>.CreateSuccessResult(
-                            $"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
+                    TempData.Put(
+                        "Result",
+                        OperationResult<string>
+                            .CreateSuccessResult($"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
 
-                    return RedirectToAction("Index",
-                        "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("",
+                    ModelState.AddModelError(
+                        "",
                         "Incorrect login or password");
                 }
 
@@ -123,10 +128,12 @@ namespace School.WEB.Controllers
 
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress("Admin",
+            emailMessage.From.Add(new MailboxAddress(
+                "Admin",
                 "nazarii.fisenko@gmail.com"));
 
-            emailMessage.To.Add(new MailboxAddress("User",
+            emailMessage.To.Add(new MailboxAddress(
+                "User",
                 email));
 
             emailMessage.Subject = "ContactUs";
@@ -138,11 +145,13 @@ namespace School.WEB.Controllers
 
             using var client = new SmtpClient();
 
-            await client.ConnectAsync("smtp.gmail.com",
+            await client.ConnectAsync(
+                "smtp.gmail.com",
                 587,
                 false);
 
-            await client.AuthenticateAsync("nazarii.fisenko@gmail.com",
+            await client.AuthenticateAsync(
+                "nazarii.fisenko@gmail.com",
                 "[password]");
 
             await client.SendAsync(emailMessage);
@@ -156,25 +165,27 @@ namespace School.WEB.Controllers
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType,
-                    userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };
 
-            var id = new ClaimsIdentity(claims,
+            var id = new ClaimsIdentity(
+                claims,
                 "ApplicationCookie",
                 ClaimsIdentity.DefaultNameClaimType,
                 ClaimsIdentity.DefaultRoleClaimType);
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(id));
         }
 
         [HttpGet("[action]")]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login",
-                "Account");
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme); 
+            
+            return RedirectToAction("Login", "Account");
         }
     }
 }

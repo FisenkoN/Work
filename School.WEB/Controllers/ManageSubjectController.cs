@@ -52,11 +52,13 @@ namespace School.WEB.Controllers
         {
             var model = new CreateSubjectViewModel();
 
-            ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
+            ViewData["Students"] = new SelectList(
+                await _studentRepository.GetAll(),
                 "Id",
                 "FullName");
 
-            ViewData["Teachers"] = new SelectList(await _teacherRepository.GetAll(),
+            ViewData["Teachers"] = new SelectList(
+                await _teacherRepository.GetAll(),
                 "Id",
                 "FullName");
 
@@ -74,24 +76,29 @@ namespace School.WEB.Controllers
             
             if (ModelState.IsValid)
             {
-                await _subjectRepository.Add(new Subject().To(model,
-                    _studentRepository,
-                    _teacherRepository));
-
+                await _subjectRepository.Add(
+                    new Subject()
+                        .To(
+                            model, 
+                            _studentRepository, 
+                            _teacherRepository));
+                
                 await _subjectRepository.SaveChanges();
 
                 TempData.Put("Result",
                     OperationResult<string>.CreateSuccessResult(
                         $"Subject: {model.Name} was created at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetSubjects");
+                return RedirectToAction("GetSubjects", "ManageSubject");
             }
 
-            ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
+            ViewData["Students"] = new SelectList(
+                await _studentRepository.GetAll(),
                 "Id",
                 "FullName");
 
-            ViewData["Teachers"] = new SelectList(await _teacherRepository.GetAll(),
+            ViewData["Teachers"] = new SelectList(
+                await _teacherRepository.GetAll(),
                 "Id",
                 "FullName");
 
@@ -139,7 +146,7 @@ namespace School.WEB.Controllers
                     OperationResult<string>.CreateSuccessResult(
                         $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetSubjects");
+                return RedirectToAction("GetSubjects", "ManageSubject");
             }
 
             ViewBag.Result = OperationResult<string>.CreateFailure(
@@ -173,11 +180,11 @@ namespace School.WEB.Controllers
             else
             {
                 TempData.Put("Result",
-                    OperationResult<string>.CreateSuccessResult(
-                        $"Subject with id: {id} was deleted"));
+                    OperationResult<string>.CreateFailure(
+                        $"Subject with id: {id} wasn't deleted"));
             }
 
-            return RedirectToAction("GetSubjects");
+            return RedirectToAction("GetSubjects", "ManageSubject");
         }
 
         [HttpGet("[action]/{id}")]
@@ -201,7 +208,8 @@ namespace School.WEB.Controllers
                 .Teachers
                 .Select(s => s.FullName);
 
-            var model = new DetailsSubjectViewModel(subject,
+            var model = new DetailsSubjectViewModel(
+                subject,
                 students,
                 teachers);
 

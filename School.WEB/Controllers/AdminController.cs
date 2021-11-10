@@ -9,7 +9,6 @@ namespace School.WEB.Controllers
     {
         public AdminController()
         {
-            
         }
 
         [HttpGet("[action]")]

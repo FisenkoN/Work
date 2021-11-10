@@ -98,7 +98,7 @@ namespace School.WEB.Controllers
                     OperationResult<string>.CreateSuccessResult(
                         $"Class: {model.Name} was created at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetClasses");
+                return RedirectToAction("GetClasses", "ManageClass");
             }
 
             var teachers = _teacherRepository
@@ -220,7 +220,7 @@ namespace School.WEB.Controllers
                     OperationResult<string>.CreateSuccessResult(
                         $"Class: {model.Name} was edited at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetClasses");
+                return RedirectToAction("GetClasses", "ManageClass");
             }
 
             var @class = await _classRepository.GetOne(model.Id);
@@ -286,7 +286,7 @@ namespace School.WEB.Controllers
                         $"Class: with id: {id} wasn't deleted"));
             }
 
-            return RedirectToAction("GetClasses");
+            return RedirectToAction("GetClasses", "ManageClass");
         }
 
         [HttpGet("[action]/{id}")]
@@ -301,12 +301,12 @@ namespace School.WEB.Controllers
 
             var teacher = @class.TeacherId != null
                 ? _teacherRepository.GetOneRelated(@class.TeacherId)
-                    .Result
-                    ?
+                    .Result?
                     .FullName
                 : "no teacher";
 
-            var model = new DetailsClassViewModel(@class,
+            var model = new DetailsClassViewModel(
+                @class,
                 teacher);
 
             return View(model);
