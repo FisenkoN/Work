@@ -14,12 +14,7 @@ namespace School.WEB.Extensions
         {
             tempData.TryGetValue(key, out var o);
 
-            if (o == null)
-                return null;
-
-            var r = JsonConvert.DeserializeObject<T>(o.ToString());
-
-            return r;
+            return o == null ? null : JsonConvert.DeserializeObject<T>(o.ToString());
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using School.WEB.Data.Repository;
+using School.WEB.Extensions;
 using School.WEB.Models;
 using School.WEB.ViewModels.Account;
 
@@ -61,6 +63,12 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
+            if (model.Password != model.ConfirmPassword)
+            {
+                ViewBag.Result = OperationResult<string>.CreateFailure(
+                    "Password and confirmation are different");
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 var user = await _authRepository.Get(model.Email,
@@ -77,6 +85,10 @@ namespace School.WEB.Controllers
                     await _authRepository.SaveChanges();
 
                     await Authenticate(model.Email);
+                    
+                    TempData.Put("Result",
+                        OperationResult<string>.CreateSuccessResult(
+                            $"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
 
                     return RedirectToAction("Index",
                         "Home");

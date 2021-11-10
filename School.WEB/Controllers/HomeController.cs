@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using School.WEB.Data;
+using School.WEB.Extensions;
 using School.WEB.ViewModels;
 
 namespace School.WEB.Controllers
@@ -13,6 +14,11 @@ namespace School.WEB.Controllers
         
         public IActionResult Index()
         {
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+            }
+            
             return View();
         }
         
