@@ -2,8 +2,7 @@
 
 namespace School.WEB.Data.Repository
 {
-    public interface ITeacherRepository : IBaseRepository<Teacher>,
-        IRelated<Teacher, Class>
+    public interface ITeacherRepository : IBaseRepository<Teacher>, IRelated<Teacher, Class>
     {
     }
 }

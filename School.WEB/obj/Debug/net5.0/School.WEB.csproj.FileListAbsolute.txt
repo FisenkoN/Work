@@ -526,7 +526,6 @@ Z:\TASKS\School.WEB\obj\Debug\net5.0\School.WEB.MvcApplicationPartsAssemblyInfo.
 Z:\TASKS\School.WEB\obj\Debug\net5.0\School.WEB.RazorAssemblyInfo.cache
 Z:\TASKS\School.WEB\obj\Debug\net5.0\School.WEB.RazorAssemblyInfo.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\staticwebassets\School.WEB.StaticWebAssets.Manifest.cache
-Z:\TASKS\School.WEB\obj\Debug\net5.0\staticwebassets\School.WEB.StaticWebAssets.xml
 Z:\TASKS\School.WEB\obj\Debug\net5.0\scopedcss\bundle\School.WEB.styles.css
 Z:\TASKS\School.WEB\obj\Debug\net5.0\School.WEB.TagHelpers.input.cache
 Z:\TASKS\School.WEB\obj\Debug\net5.0\School.WEB.TagHelpers.output.cache
@@ -582,3 +581,4 @@ Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\ManageTeacher\DetailsTeacher.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\ManageTeacher\EditTeacher.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\ManageTeacher\GetTeachers.cshtml.g.cs
 Z:\TASKS\School.WEB\bin\Debug\net5.0\Calabonga.OperationResults.dll
+Z:\TASKS\School.WEB\obj\Debug\net5.0\staticwebassets\School.WEB.StaticWebAssets.xml

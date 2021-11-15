@@ -8,21 +8,20 @@ using School.WEB.Models;
 
 namespace School.WEB.Data.Repository
 {
-    public class TeacherRepository : BaseRepository<Teacher>,
-        ITeacherRepository
+    public sealed class TeacherRepository : BaseRepository<Teacher>, ITeacherRepository
     {
         public TeacherRepository(SchoolDbContext db) : base(db)
         {
         }
 
-        public virtual IIncludableQueryable<Teacher, Class> GetRelatedData()
+        public IIncludableQueryable<Teacher, Class> GetRelatedData()
         {
             return DbContext.Teachers
                 .Include(t => t.Subjects)
                 .Include(t => t.Class);
         }
 
-        public virtual async Task<Teacher> GetOneRelated(int? id)
+        public async Task<Teacher> GetOneRelated(int? id)
         {
             return await GetRelatedData()
                 .FirstOrDefaultAsync(s => s.Id == id);

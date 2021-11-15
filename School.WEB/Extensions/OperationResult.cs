@@ -18,12 +18,18 @@ namespace School.WEB.Extensions
 
         public static OperationResult<TResult> CreateSuccessResult(TResult result)
         {
-            return new OperationResult<TResult> { Success = true, Result = result};
+            return new OperationResult<TResult>
+            {
+                Success = true, Result = result
+            };
         }
 
         public static OperationResult<TResult> CreateFailure(TResult nonSuccessMessage)
         {
-            return new OperationResult<TResult> { Success = false, Result = nonSuccessMessage};
+            return new OperationResult<TResult>
+            {
+                Success = false, Result = nonSuccessMessage
+            };
         }
     }
 }

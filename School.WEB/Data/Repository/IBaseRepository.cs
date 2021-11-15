@@ -19,7 +19,7 @@ namespace School.WEB.Data.Repository
 
         Task SaveChanges();
 
-        IQueryable<T> GetSome(Expression<Func<T, bool>> where);
+        IQueryable<T> GetSome(Expression<Func<T, bool>> predicate);
 
         Task<List<T>> GetAll();
     }
