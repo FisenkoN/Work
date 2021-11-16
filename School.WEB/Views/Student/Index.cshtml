@@ -1,30 +1,12 @@
-﻿@using School.WEB.Controllers
-@model School.WEB.ViewModels.Student.Index.IndexViewModel
-@using School.WEB.Extensions
-
-@{ var operation = (OperationResult<string>)ViewBag.Result;}
-
-@if (operation != null)
-{
-    var statusMessageClass = operation.Success ? "success" : "danger";
-    
-    <div class="alert alert-@statusMessageClass js-alert-operation-result" role="alert">
-        @operation.Result
-    </div>
-
-    <script type="text/javascript">
-        setTimeout(function () 
-        {
-            document.getElementsByClassName('js-alert-operation-result')[0].remove()
-        },
-         8000);
-    </script>
-}
+﻿@model School.WEB.ViewModels.Student.Index.IndexViewModel
+@using School.WEB.Controllers
 
 @{
     ViewData["Title"] = "Classes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<partial name="_OperationMessage" for="@Model.OperationResult"/>
 
 <h1>It's all student. Please edit only your data</h1>
 
@@ -63,9 +45,3 @@
     }
     </tbody>
 </table>
-@if (!string.IsNullOrEmpty(ViewBag.Message))
-{
-    <script type="text/javascript">
-        alert("@ViewBag.Message");
-    </script>
-}

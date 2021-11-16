@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace School.WEB.ViewModels.Student.Index
 {
-    public class IndexViewModel
+    public class IndexViewModel : OperationResultViewModel
     {
         public IEnumerable<StudentModel> Students { get; set; }
 

@@ -1,0 +1,19 @@
+@model School.WEB.Extensions.OperationResult
+
+@if (Model != null)
+{
+    var statusMessageClass = Model.IsSuccess ? "success" : "danger";
+    
+    <div class="alert alert-@statusMessageClass js-alert-operation-result" role="alert">
+        @Model.Message
+    </div>
+    
+    if (Model.IsSuccess)
+    {
+        <script type="text/javascript">
+            setTimeout(function () {
+                document.getElementsByClassName('js-alert-operation-result')[0].remove()
+            }, 8000);
+        </script>
+    }
+}

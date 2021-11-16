@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace School.WEB.ViewModels.ManageStudent.GetStudents
 {
-    public class GetStudentsViewModel
+    public class GetStudentsViewModel : OperationResultViewModel
     {
         public IEnumerable<StudentModel> Students { get; set; }
 

@@ -36,22 +36,30 @@ namespace School.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _authRepository.Get(model.Email, model.Password);
+                var user = await _authRepository.Get(
+                    model.Email,
+                    model.Password);
 
                 if (user != null)
                 {
                     await Authenticate(model.Email);
+                    
+                    TempData.Put(
+                        "Result",
+                        new OperationResult(
+                            true,
+                            $"User {model.Email} was sign in system at {DateTime.Now.ToShortTimeString()}"));
 
                     return RedirectToAction("Index", "Home");
                 }
 
                 ModelState.AddModelError(
-                    "", 
+                    "",
                     "Incorrect login or password");
 
                 return View(model);
             }
-            
+
             return View(model);
         }
 
@@ -65,13 +73,6 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            if (model.Password != model.ConfirmPassword)
-            {
-                ViewBag.Result = OperationResult<string>.CreateFailure(
-                    "Password and confirmation are different");
-                
-                return View();
-            }
             if (ModelState.IsValid)
             {
                 var user = await _authRepository.Get(
@@ -89,24 +90,23 @@ namespace School.WEB.Controllers
                     await _authRepository.SaveChanges();
 
                     await Authenticate(model.Email);
-                    
+
                     TempData.Put(
                         "Result",
-                        OperationResult<string>
-                            .CreateSuccessResult($"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
+                        new OperationResult(
+                            true,
+                            $"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
 
                     return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ModelState.AddModelError(
-                        "",
-                        "Incorrect login or password");
-                }
+
+                ModelState.AddModelError(
+                    "",
+                    "Incorrect login or password");
 
                 return View(model);
             }
-            
+
             return View(model);
         }
 
@@ -158,14 +158,15 @@ namespace School.WEB.Controllers
 
             await client.DisconnectAsync(true);
 
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Account");
         }
 
         private async Task Authenticate(string userName)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, 
+                    userName)
             };
 
             var id = new ClaimsIdentity(
@@ -183,8 +184,8 @@ namespace School.WEB.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme); 
-            
+                CookieAuthenticationDefaults.AuthenticationScheme);
+
             return RedirectToAction("Login", "Account");
         }
     }

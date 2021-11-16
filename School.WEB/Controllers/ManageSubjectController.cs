@@ -35,14 +35,14 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetSubjects()
         {
-            if (TempData["Result"] != null)
-            {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
-            }
-
             var subjects = await _subjectRepository.GetAll();
 
             var model = new GetSubjectsViewModel(subjects);
+
+            if (TempData["Result"] != null)
+            {
+                model.OperationResult = TempData.Get<OperationResult>("Result");
+            }
 
             return View(model);
         }
@@ -51,14 +51,18 @@ namespace School.WEB.Controllers
         public async Task<IActionResult> CreateSubject()
         {
             var model = new CreateSubjectViewModel();
+            
+            var students = await _studentRepository.GetAll();
+            
+            var teachers = await _teacherRepository.GetAll();
 
             ViewData["Students"] = new SelectList(
-                await _studentRepository.GetAll(),
+                students,
                 "Id",
                 "FullName");
 
             ViewData["Teachers"] = new SelectList(
-                await _teacherRepository.GetAll(),
+                teachers,
                 "Id",
                 "FullName");
 
@@ -66,45 +70,51 @@ namespace School.WEB.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateSubject(
-            CreateSubjectViewModel model)
+        public async Task<IActionResult> CreateSubject(CreateSubjectViewModel model)
         {
             if (TempData["Result"] != null)
             {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+                model.OperationResult = TempData.Get<OperationResult>("Result");
             }
-            
+
             if (ModelState.IsValid)
             {
                 await _subjectRepository.Add(
                     new Subject()
                         .To(
-                            model, 
-                            _studentRepository, 
+                            model,
+                            _studentRepository,
                             _teacherRepository));
-                
+
                 await _subjectRepository.SaveChanges();
 
                 TempData.Put("Result",
-                    OperationResult<string>.CreateSuccessResult(
+                    new OperationResult(
+                        true,
                         $"Subject: {model.Name} was created at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetSubjects", "ManageSubject");
+                return RedirectToAction("GetSubjects",
+                    "ManageSubject");
             }
+            
+            var students = await _studentRepository.GetAll();
+            
+            var teachers = await _teacherRepository.GetAll();
 
             ViewData["Students"] = new SelectList(
-                await _studentRepository.GetAll(),
+                students,
                 "Id",
                 "FullName");
 
             ViewData["Teachers"] = new SelectList(
-                await _teacherRepository.GetAll(),
+                teachers,
                 "Id",
                 "FullName");
 
-            ViewBag.Result = OperationResult<string>.CreateFailure(
+            model.OperationResult = new OperationResult(
+                false,
                 "The subject was not created because the model is not valid");
-            
+
             return View(model);
         }
 
@@ -127,11 +137,6 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditSubject(EditSubjectViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
-            }
-            
             if (ModelState.IsValid)
             {
                 var subject = await _subjectRepository.GetOne(model.Id);
@@ -143,15 +148,13 @@ namespace School.WEB.Controllers
                 await _subjectRepository.SaveChanges();
 
                 TempData.Put("Result",
-                    OperationResult<string>.CreateSuccessResult(
+                    new OperationResult(
+                        true,
                         $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction("GetSubjects", "ManageSubject");
             }
-
-            ViewBag.Result = OperationResult<string>.CreateFailure(
-                $"Subject: {model.Name} wasn't edited, because model is not valid");
-
+            
             return View(model);
         }
 
@@ -168,19 +171,21 @@ namespace School.WEB.Controllers
             _subjectRepository.Delete(subject);
 
             await _subjectRepository.SaveChanges();
-            
+
             subject = await _subjectRepository.GetOne(id);
 
             if (subject == null)
             {
                 TempData.Put("Result",
-                    OperationResult<string>.CreateSuccessResult(
+                    new OperationResult(
+                        true,
                         $"Subject with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}"));
             }
             else
             {
                 TempData.Put("Result",
-                    OperationResult<string>.CreateFailure(
+                    new OperationResult(
+                        false,
                         $"Subject with id: {id} wasn't deleted"));
             }
 

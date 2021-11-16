@@ -1,31 +1,12 @@
-﻿@using School.WEB.Controllers
-@model School.WEB.ViewModels.ManageClass.EditCreateClass.EditCreateClassViewModel
-@using School.WEB.Extensions
-
-@{ var operation = (OperationResult<string>)ViewBag.Result;}
-
-@if (operation != null)
-{
-    var statusMessageClass = operation.Success ? "success" : "danger";
-    
-    <div class="alert alert-@statusMessageClass js-alert-operation-result" role="alert">
-        @operation.Result
-    </div>
-    
-    if (operation.Success)
-    {
-        <script type="text/javascript">
-            setTimeout(function () {
-                document.getElementsByClassName('js-alert-operation-result')[0].remove()
-            }, 8000);
-        </script>
-    }
-}
+﻿@model School.WEB.ViewModels.ManageClass.EditCreateClass.EditCreateClassViewModel
+@using School.WEB.Controllers
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<partial name="_OperationMessage" for="@Model.OperationResult"/>
 
 <h1>Edit</h1>
 
@@ -37,21 +18,24 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control"/>
+                <input asp-for="Name" required class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            @{
-                if ((ViewBag.Teachers as SelectList)!.Any())
-                {
-                    <div class="form-group">
-                        <label asp-for="TeacherId" class="control-label"></label>
-                        <select asp-for="TeacherId" class="form-control" asp-items="ViewBag.Teachers"></select>
-                    </div>
-                }
+            @if ((ViewBag.Teachers as SelectList)!.Any())
+            {
+                <div class="form-group">
+                    <label asp-for="TeacherId" class="control-label"></label>
+                    <select asp-for="TeacherId" class="form-control" asp-items="ViewBag.Teachers"></select>
+                </div>
             }
             <div class="form-group">
                 <label asp-for="StudentIds" class="control-label"></label>
                 <select asp-for="StudentIds" class="form-control" multiple="multiple" asp-items="ViewBag.Students"></select>
+            </div>
+            <div>
+                <a asp-action="@nameof(ManageClassController.GetClasses)">
+                    Back to List
+                </a>
             </div>
             <input type="hidden" asp-for="Id"/>
             <div class="form-group">
@@ -59,10 +43,4 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="@nameof(ManageClassController.GetClasses)">
-        Back to List
-    </a>
 </div>

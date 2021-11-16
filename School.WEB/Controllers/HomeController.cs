@@ -11,17 +11,17 @@ namespace School.WEB.Controllers
         public HomeController(SchoolDbContext dbContext)
         {
         }
-        
+
         public IActionResult Index()
         {
             if (TempData["Result"] != null)
             {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+                ViewBag.Result = TempData.Get<OperationResult>("Result");
             }
-            
+
             return View();
         }
-        
+
         [HttpGet("[action]")]
         public IActionResult Privacy()
         {
@@ -31,7 +31,10 @@ namespace School.WEB.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }

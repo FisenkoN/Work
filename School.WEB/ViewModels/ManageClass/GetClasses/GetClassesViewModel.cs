@@ -4,7 +4,7 @@ using School.WEB.Models;
 
 namespace School.WEB.ViewModels.ManageClass.GetClasses
 {
-    public class GetClassesViewModel
+    public class GetClassesViewModel : OperationResultViewModel
     {
         public IEnumerable<ClassModel> Classes { get; set; }
 

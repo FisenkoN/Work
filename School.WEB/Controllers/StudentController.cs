@@ -39,14 +39,14 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> Index()
         {
-            if (TempData["Result"] != null)
-            {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
-            }
-            
             var students = await _studentRepository.GetAll();
 
             var model = new IndexViewModel(students);
+            
+            if (TempData["Result"] != null)
+            {
+                model.OperationResult = TempData.Get<OperationResult>("Result");
+            }
 
             return View(model);
         }
@@ -84,11 +84,13 @@ namespace School.WEB.Controllers
 
             var subjects = await _subjectRepository.GetAll();
 
-            ViewData["Classes"] = new SelectList(classes,
+            ViewData["Classes"] = new SelectList(
+                classes,
                 "Id",
                 "Name");
 
-            ViewData["Subjects"] = new SelectList(subjects,
+            ViewData["Subjects"] = new SelectList(
+                subjects,
                 "Id",
                 "Name");
 
@@ -103,7 +105,7 @@ namespace School.WEB.Controllers
         {
             if (TempData["Result"] != null)
             {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+                ViewBag.Result = TempData.Get<OperationResult>("Result");
             }
             
             if (ModelState.IsValid)
@@ -154,7 +156,9 @@ namespace School.WEB.Controllers
 
                 await _studentRepository.SaveChanges();
                 
-                TempData.Put("Result", OperationResult<string>.CreateSuccessResult(
+                TempData.Put("Result", 
+                    new OperationResult(
+                    true,
                     $"Student: {model.FirstName + " " + model.LastName} was edit at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction(nameof(Index));
@@ -174,8 +178,10 @@ namespace School.WEB.Controllers
                 "Id",
                 "Name");
             
-            ViewBag.Result =
-                OperationResult<string>.CreateFailure("The student was not edited because the model is not valid");
+            model.OperationResult =
+                new OperationResult(
+                    false,
+                    "The student was not edited because the model is not valid");
 
             return View(model);
         }
@@ -198,8 +204,10 @@ namespace School.WEB.Controllers
                 return View(model);
             }
 
-            TempData.Put("Result", OperationResult<string>.CreateFailure(
-                "This student doesn't have classmates"));
+            TempData.Put("Result", 
+                new OperationResult( 
+                    false,
+                    "This student doesn't have classmates"));
 
             return RedirectToAction("Index");
         }
@@ -229,8 +237,10 @@ namespace School.WEB.Controllers
                 return View(model);
             }
 
-            TempData.Put("Result", OperationResult<string>.CreateFailure(
-                "This student doesn't have a class"));
+            TempData.Put("Result", new 
+                OperationResult(
+                    false, 
+                    "This student doesn't have a class"));
 
             return RedirectToAction("Index");
         }

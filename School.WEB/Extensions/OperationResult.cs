@@ -4,32 +4,18 @@ using Newtonsoft.Json;
 namespace School.WEB.Extensions
 {
     [Serializable]
-    public class OperationResult<TResult>
+    public class OperationResult
     {
-        private OperationResult ()
-        {
-        }
-
         [JsonProperty]
-        public bool Success { get; private set; }
+        public string Message { get; set; }
         
         [JsonProperty]
-        public TResult Result { get; private set; }
-
-        public static OperationResult<TResult> CreateSuccessResult(TResult result)
+        public bool IsSuccess { get; set; }
+        
+        public OperationResult(bool isSuccess, string message)
         {
-            return new OperationResult<TResult>
-            {
-                Success = true, Result = result
-            };
-        }
-
-        public static OperationResult<TResult> CreateFailure(TResult nonSuccessMessage)
-        {
-            return new OperationResult<TResult>
-            {
-                Success = false, Result = nonSuccessMessage
-            };
+            IsSuccess = isSuccess;
+            Message = message;
         }
     }
 }

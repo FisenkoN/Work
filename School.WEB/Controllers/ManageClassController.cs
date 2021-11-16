@@ -34,14 +34,14 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetClasses()
         {
-            if (TempData["Result"] != null)
-            {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
-            }
-
             var classes = await _classRepository.GetAll();
 
             var model = new GetClassesViewModel(classes);
+
+            if (TempData["Result"] != null)
+            {
+                model.OperationResult = TempData.Get<OperationResult>("Result");
+            }
 
             return View(model);
         }
@@ -65,7 +65,10 @@ namespace School.WEB.Controllers
                                 .Exists(c =>
                                     c.TeacherId == t.Id)));
 
-            ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
+            var students = await _studentRepository.GetAll();
+
+            ViewData["Students"] = new SelectList(
+                students,
                 "Id",
                 "FullName");
 
@@ -82,20 +85,20 @@ namespace School.WEB.Controllers
         {
             if (TempData["Result"] != null)
             {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+                model.OperationResult = TempData.Get<OperationResult>("Result");
             }
 
             if (ModelState.IsValid)
             {
                 await _classRepository.Add(
                     new Class()
-                        .To(model,
-                            _studentRepository));
+                        .To(model, _studentRepository));
 
                 await _classRepository.SaveChanges();
 
                 TempData.Put("Result",
-                    OperationResult<string>.CreateSuccessResult(
+                    new OperationResult(
+                        true,
                         $"Class: {model.Name} was created at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction("GetClasses", "ManageClass");
@@ -115,8 +118,10 @@ namespace School.WEB.Controllers
                                 .Exists(c =>
                                     c.TeacherId == t.Id)));
 
+            var students = await _studentRepository.GetAll();
 
-            ViewData["Students"] = new SelectList(await _studentRepository.GetAll(),
+            ViewData["Students"] = new SelectList(
+                students,
                 "Id",
                 "FullName");
 
@@ -125,8 +130,10 @@ namespace School.WEB.Controllers
                 "Id",
                 "FullName");
 
-            ViewBag.Result =
-                OperationResult<string>.CreateFailure("The class was not created because the model is not valid");
+            model.OperationResult =
+                new OperationResult(
+                    false,
+                    "The class was not created because the model is not valid");
 
             return View(model);
         }
@@ -159,11 +166,13 @@ namespace School.WEB.Controllers
 
             teachers = teachers.Append(await _teacherRepository.GetOne(@class.TeacherId));
 
-            ViewData["Students"] = new SelectList(students,
+            ViewData["Students"] = new SelectList(
+                students,
                 "Id",
                 "FullName");
 
-            ViewData["Teachers"] = new SelectList(teachers,
+            ViewData["Teachers"] = new SelectList(
+                teachers,
                 "Id",
                 "FullName");
 
@@ -178,7 +187,7 @@ namespace School.WEB.Controllers
         {
             if (TempData["Result"] != null)
             {
-                ViewBag.Result = TempData.Get<OperationResult<string>>("Result");
+                model.OperationResult = TempData.Get<OperationResult>("Result");
             }
 
             if (ModelState.IsValid)
@@ -217,7 +226,8 @@ namespace School.WEB.Controllers
                 }
 
                 TempData.Put("Result",
-                    OperationResult<string>.CreateSuccessResult(
+                    new OperationResult(
+                        true,
                         $"Class: {model.Name} was edited at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction("GetClasses", "ManageClass");
@@ -251,7 +261,8 @@ namespace School.WEB.Controllers
                 "Id",
                 "FullName");
 
-            ViewBag.Result = OperationResult<string>.CreateFailure(
+            model.OperationResult = new OperationResult(
+                false,
                 $"Class: {model.Name} wasn't edited, because model is not valid");
 
             return View(model);
@@ -276,17 +287,20 @@ namespace School.WEB.Controllers
             if (@class == null)
             {
                 TempData.Put("Result",
-                    OperationResult<string>.CreateSuccessResult(
+                    new OperationResult(
+                        true,
                         $"Class: with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}"));
             }
             else
             {
                 TempData.Put("Result",
-                    OperationResult<string>.CreateFailure(
+                    new OperationResult(
+                        false,
                         $"Class: with id: {id} wasn't deleted"));
             }
 
-            return RedirectToAction("GetClasses", "ManageClass");
+            return RedirectToAction("GetClasses",
+                "ManageClass");
         }
 
         [HttpGet("[action]/{id}")]

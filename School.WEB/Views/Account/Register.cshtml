@@ -1,30 +1,11 @@
 @model School.WEB.ViewModels.Account.RegisterModel
-@using School.WEB.Extensions
-
-@{ var operation = (OperationResult<string>)ViewBag.Result;}
-
-@if (operation != null)
-{
-    var statusMessageClass = operation.Success ? "success" : "danger";
-    
-    <div class="alert alert-@statusMessageClass js-alert-operation-result" role="alert">
-        @operation.Result
-    </div>
-    
-    if (operation.Success)
-    {
-        <script type="text/javascript">
-            setTimeout(function () {
-                document.getElementsByClassName('js-alert-operation-result')[0].remove()
-            }, 8000);
-        </script>
-    }
-}
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+
+<partial name="_OperationMessage" for="@Model.OperationResult"/>
 
 <h2>Registration</h2>
  
@@ -33,17 +14,17 @@
     <div>
         <div>
             <label asp-for="Email">Enter Email</label><br />
-            <input type="text" asp-for="Email" />
+            <input type="text" required asp-for="Email" />
             <span asp-validation-for="Email"></span>
         </div>
         <div>
             <label asp-for="Password">Enter password</label><br />
-            <input asp-for="Password" />
+            <input asp-for="Password" required/>
             <span asp-validation-for="Password"></span>
         </div>
         <div>
             <label asp-for="ConfirmPassword">Repeat password</label><br />
-            <input asp-for="ConfirmPassword" />
+            <input asp-for="ConfirmPassword" required/>
             <span asp-validation-for="ConfirmPassword" />
         </div>
         <div>

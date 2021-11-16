@@ -4,7 +4,7 @@ using School.WEB.Models;
 
 namespace School.WEB.ViewModels.ManageSubject.GetSubjects
 {
-    public class GetSubjectsViewModel
+    public class GetSubjectsViewModel : OperationResultViewModel
     {
         public IEnumerable<SubjectModel> Subjects { get; set; }
 

@@ -1,16 +1,18 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.ManageClass.EditCreateClass
 {
-    public class EditCreateClassViewModel
+    public class EditCreateClassViewModel : OperationResultViewModel
     {
         public int Id { get; set; }
 
         [Required(ErrorMessage = "It's required value!")]
         [StringLength(10, ErrorMessage = "Name cannot be longer than 10 and shorter than 2 characters", MinimumLength = 2)]
+        [DisplayName("Name")]
         public string Name { get; set; }
 
         public IEnumerable<int> StudentIds { get; set; }

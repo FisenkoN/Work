@@ -10,7 +10,11 @@ namespace School.WEB.Extensions
 {
     public static class PocoModelsExtension
     {
-        public static Subject To(this Subject subject, CreateSubjectViewModel model, IStudentRepository studentRepository, ITeacherRepository teacherRepository)
+        public static Subject To(
+            this Subject subject,
+            CreateSubjectViewModel model,
+            IStudentRepository studentRepository,
+            ITeacherRepository teacherRepository)
         {
             subject.Name = model.Name;
             subject.Students = model.StudentIds != null
@@ -38,25 +42,33 @@ namespace School.WEB.Extensions
 
             return subject;
         }
-        
-        public static Class To(this Class @class, EditCreateClassViewModel model, IStudentRepository repository)
+
+        public static Class To(
+            this Class @class,
+            EditCreateClassViewModel model,
+            IStudentRepository repository)
         {
             @class.Name = model.Name;
             @class.TeacherId = model.TeacherId;
-            @class.Students = repository
-                .GetAll()
-                .Result
-                .Where(i =>
-                    model.StudentIds
-                        .ToList()
-                        .Exists(t =>
-                            t == i.Id))
-                .ToList();
+            @class.Students = model.StudentIds != null
+                ? repository
+                    .GetAll()
+                    .Result
+                    .Where(i =>
+                        model.StudentIds
+                            .ToList()
+                            .Exists(t =>
+                                t == i.Id))
+                    .ToList()
+                : null;
 
             return @class;
         }
 
-        public static Student To(this Student student, EditCreateStudentViewModel model, ISubjectRepository subjectRepository)
+        public static Student To(
+            this Student student,
+            EditCreateStudentViewModel model,
+            ISubjectRepository subjectRepository)
         {
             student.Age = model.Age;
             student.ClassId = model.ClassId;
@@ -64,20 +76,25 @@ namespace School.WEB.Extensions
             student.Gender = model.Gender;
             student.FirstName = model.FirstName;
             student.Image = model.Image;
-            student.Subjects = subjectRepository
-                .GetAll()
-                .Result
-                .Where(i =>
-                    model.SubjectIds
-                        .ToList()
-                        .Exists(t =>
-                            t == i.Id))
-                .ToList();
+            student.Subjects = model.SubjectIds != null
+                ? subjectRepository
+                    .GetAll()
+                    .Result
+                    .Where(i =>
+                        model.SubjectIds
+                            .ToList()
+                            .Exists(t =>
+                                t == i.Id))
+                    .ToList()
+                : null;
 
             return student;
         }
 
-        public static Teacher To(this Teacher teacher, EditCreateTeacherViewModel model, ISubjectRepository subjectRepository)
+        public static Teacher To(
+            this Teacher teacher,
+            EditCreateTeacherViewModel model,
+            ISubjectRepository subjectRepository)
         {
             teacher.Age = model.Age;
             teacher.ClassId = model.ClassId;
