@@ -9,9 +9,10 @@ namespace School.WEB.ViewModels.ManageSubject.EditCreateSubject
         [Required]
         public int Id { get; set; }
 
-        [Required] 
-        [StringLength(30, ErrorMessage = "LastName cannot be longer than 30 and shorter than 3 characters", MinimumLength = 3)]
+        [Required]
         [DisplayName("Name")]
+        [StringLength(30)]
+        [MinLength(3 ,ErrorMessage = "Name cannot be shorter than 3 characters" )]
         public string Name { get; set; }
 
         public EditSubjectViewModel()

@@ -10,13 +10,16 @@ namespace School.WEB.ViewModels.ManageClass.EditCreateClass
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "It's required value!")]
-        [StringLength(10, ErrorMessage = "Name cannot be longer than 10 and shorter than 2 characters", MinimumLength = 2)]
+        [Required]
+        [StringLength(5)]
+        [MinLength(2, ErrorMessage = "Name cannot be shorter than 2 characters" )]
         [DisplayName("Name")]
         public string Name { get; set; }
 
+        [DisplayName("Students")]
         public IEnumerable<int> StudentIds { get; set; }
 
+        [DisplayName("Teacher")]
         public int? TeacherId { get; set; }
 
         public EditCreateClassViewModel()

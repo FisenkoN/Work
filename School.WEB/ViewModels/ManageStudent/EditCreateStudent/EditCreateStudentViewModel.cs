@@ -12,13 +12,15 @@ namespace School.WEB.ViewModels.ManageStudent.EditCreateStudent
         public int Id { get; set; }
 
         [Required]
-        [StringLength(20, ErrorMessage = "FirstName cannot be longer than 20 and shorter than 2 characters", MinimumLength = 2)]
-        [DisplayName("First Name")]
+        [DisplayName("First name")]
+        [StringLength(20)]
+        [MinLength(2, ErrorMessage = "First name cannot be shorter than 2 characters" )]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(20, ErrorMessage = "LastName cannot be longer than 20 and shorter than 2 characters", MinimumLength = 2)]
-        [DisplayName("Last Name")]
+        [DisplayName("Last name")]
+        [StringLength(20)]
+        [MinLength(2, ErrorMessage = "Last name cannot be shorter than 2 characters" )]
         public string LastName { get; set; }
 
         [RegularExpression(RegexPattern.Url, ErrorMessage = "Incorrect image url")]
@@ -33,8 +35,10 @@ namespace School.WEB.ViewModels.ManageStudent.EditCreateStudent
         [DisplayName("Gender")]
         public Gender Gender { get; set; }
 
+        [DisplayName("Class")]
         public int? ClassId { get; set; }
 
+        [DisplayName("Subjects")]
         public IEnumerable<int> SubjectIds { get; set; }
 
         public EditCreateStudentViewModel()

@@ -189,8 +189,10 @@ namespace School.WEB.Controllers
         [HttpGet("[action]/{id}")]
         public IActionResult ShowClassmates(int id)
         {
-            var classId = _studentRepository.GetOneRelated(id)
-                .Result.ClassId;
+            var classId = _studentRepository
+                .GetOneRelated(id)
+                .Result
+                .ClassId;
 
             if (classId != null)
             {
@@ -215,8 +217,10 @@ namespace School.WEB.Controllers
         [HttpGet("[action]/{id}")]
         public IActionResult ShowClassTeacher(int id)
         {
-            var classId = _studentRepository.GetOneRelated(id)
-                .Result.ClassId;
+            var classId = _studentRepository
+                .GetOneRelated(id)
+                .Result
+                .ClassId;
 
             if (classId != null)
             {
@@ -237,8 +241,8 @@ namespace School.WEB.Controllers
                 return View(model);
             }
 
-            TempData.Put("Result", new 
-                OperationResult(
+            TempData.Put("Result", 
+                new OperationResult(
                     false, 
                     "This student doesn't have a class"));
 

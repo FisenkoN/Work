@@ -6,13 +6,16 @@ namespace School.WEB.ViewModels.ManageSubject.EditCreateSubject
 {
     public class CreateSubjectViewModel : OperationResultViewModel
     {
-        [Required] 
-        [StringLength(30, ErrorMessage = "LastName cannot be longer than 30 and shorter than 3 characters", MinimumLength = 3)]
+        [Required]
         [DisplayName("Name")]
+        [StringLength(30)]
+        [MinLength(3 ,ErrorMessage = "Name cannot be shorter than 3 characters" )]
         public string Name { get; set; }
 
+        [DisplayName("Students")]
         public IEnumerable<int> StudentIds { get; set; }
 
+        [DisplayName("Teachers")]
         public IEnumerable<int> TeacherIds { get; set; }
     }
 }
