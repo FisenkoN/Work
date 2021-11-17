@@ -74,11 +74,6 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateTeacher(EditCreateTeacherViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                model.OperationResult = TempData.Get<OperationResult>("Result");
-            }
-            
             if (ModelState.IsValid)
             {
                 await _teacherRepository
@@ -94,27 +89,6 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetTeachers", "ManageTeacher");
             }
-
-            var subjects = await _subjectRepository.GetAll();
-
-            var classes = _classRepository.GetRelatedData()
-                .Where(c =>
-                    c.TeacherId == null && c.Teacher == null);
-
-            ViewData["Classes"] = new SelectList(
-                classes,
-                "Id",
-                "Name");
-
-            ViewData["Subjects"] = new SelectList(
-                subjects,
-                "Id",
-                "Name");
-
-            model.OperationResult =
-               new OperationResult(
-                   false,
-                   "The teacher was not created because the model is not valid");
 
             return View(model);
         }
@@ -184,11 +158,6 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditTeacher(EditCreateTeacherViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                model.OperationResult = TempData.Get<OperationResult>("Result");
-            }
-            
             if (ModelState.IsValid)
             {
                 var teacher = await _teacherRepository.GetOne(model.Id);
@@ -239,57 +208,6 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetTeachers", "ManageTeacher");
             }
-
-            var classes = await _classRepository.GetRelatedData()
-                .Where(c =>
-                    c.TeacherId == null && c.Teacher == null)
-                .ToListAsync();
-
-            try
-            {
-                var c = _classRepository.GetRelatedData()
-                    .FirstOrDefault(c =>
-                        c.TeacherId == model.Id);
-
-                if (c != null)
-                    classes.Add(c);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine();
-            }
-
-            var subjects = await _subjectRepository.GetAll();
-
-            try
-            {
-                var selectedClass = _classRepository.GetRelatedData()
-                    .FirstOrDefault(c =>
-                        c.TeacherId == model.Id);
-
-                ViewData["Classes"] = new SelectList(
-                    classes,
-                    "Id",
-                    "Name",
-                    selectedClass);
-            }
-            catch (Exception)
-            {
-                ViewData["Classes"] = new SelectList(
-                    classes,
-                    "Id",
-                    "Name");
-            }
-
-            ViewData["Subjects"] = new SelectList(
-                subjects,
-                "Id",
-                "Name");
-
-            model.OperationResult = 
-                new OperationResult(
-                false,
-                $"Teacher: {model.FirstName + " " + model.LastName} wasn't edited, because model is not valid");
 
             return View(model);
         }

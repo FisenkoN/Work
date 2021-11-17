@@ -72,11 +72,6 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateSubject(CreateSubjectViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                model.OperationResult = TempData.Get<OperationResult>("Result");
-            }
-
             if (ModelState.IsValid)
             {
                 await _subjectRepository.Add(
@@ -96,24 +91,6 @@ namespace School.WEB.Controllers
                 return RedirectToAction("GetSubjects",
                     "ManageSubject");
             }
-            
-            var students = await _studentRepository.GetAll();
-            
-            var teachers = await _teacherRepository.GetAll();
-
-            ViewData["Students"] = new SelectList(
-                students,
-                "Id",
-                "FullName");
-
-            ViewData["Teachers"] = new SelectList(
-                teachers,
-                "Id",
-                "FullName");
-
-            model.OperationResult = new OperationResult(
-                false,
-                "The subject was not created because the model is not valid");
 
             return View(model);
         }

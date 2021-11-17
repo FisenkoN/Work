@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using School.WEB.Data.Repository;
 using School.WEB.Extensions;
@@ -103,10 +104,7 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                ViewBag.Result = TempData.Get<OperationResult>("Result");
-            }
+            ModelState["ClassId"].ValidationState = ModelValidationState.Valid;
             
             if (ModelState.IsValid)
             {
@@ -163,25 +161,6 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-
-            var classes = await _classRepository.GetAll();
-
-            var subjects = await _subjectRepository.GetAll();
-
-            ViewData["Classes"] = new SelectList(
-                classes,
-                "Id",
-                "Name");
-
-            ViewData["Subjects"] = new SelectList(
-                subjects,
-                "Id",
-                "Name");
-            
-            model.OperationResult =
-                new OperationResult(
-                    false,
-                    "The student was not edited because the model is not valid");
 
             return View(model);
         }

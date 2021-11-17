@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using School.WEB.Data.Repository;
 using School.WEB.Extensions;
@@ -83,11 +84,8 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateClass(EditCreateClassViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                model.OperationResult = TempData.Get<OperationResult>("Result");
-            }
-
+            ModelState["TeacherId"].ValidationState = ModelValidationState.Valid;
+            
             if (ModelState.IsValid)
             {
                 await _classRepository.Add(
@@ -103,37 +101,6 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetClasses", "ManageClass");
             }
-
-            var teachers = _teacherRepository
-                .GetAll()
-                .Result
-                .Except(
-                    _teacherRepository
-                        .GetAll()
-                        .Result
-                        .Where(t =>
-                            _classRepository
-                                .GetRelatedData()
-                                .ToList()
-                                .Exists(c =>
-                                    c.TeacherId == t.Id)));
-
-            var students = await _studentRepository.GetAll();
-
-            ViewData["Students"] = new SelectList(
-                students,
-                "Id",
-                "FullName");
-
-            ViewData["Teachers"] = new SelectList(
-                teachers,
-                "Id",
-                "FullName");
-
-            model.OperationResult =
-                new OperationResult(
-                    false,
-                    "The class was not created because the model is not valid");
 
             return View(model);
         }
@@ -185,11 +152,6 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditClass(EditCreateClassViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                model.OperationResult = TempData.Get<OperationResult>("Result");
-            }
-
             if (ModelState.IsValid)
             {
                 var form = await _classRepository.GetOne(model.Id);
@@ -232,38 +194,6 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetClasses", "ManageClass");
             }
-
-            var @class = await _classRepository.GetOne(model.Id);
-
-            var students = await _studentRepository.GetAll();
-
-            var teachers = _teacherRepository
-                .GetAll()
-                .Result
-                .Except(
-                    _teacherRepository
-                        .GetAll()
-                        .Result
-                        .Where(t =>
-                            _classRepository
-                                .GetRelatedData()
-                                .ToList()
-                                .Exists(c =>
-                                    c.TeacherId == t.Id)));
-
-            teachers = teachers.Append(await _teacherRepository.GetOne(@class.TeacherId));
-
-            ViewData["Students"] = new SelectList(students,
-                "Id",
-                "FullName");
-
-            ViewData["Teachers"] = new SelectList(teachers,
-                "Id",
-                "FullName");
-
-            model.OperationResult = new OperationResult(
-                false,
-                $"Class: {model.Name} wasn't edited, because model is not valid");
 
             return View(model);
         }

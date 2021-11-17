@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using School.WEB.Data.Repository;
 using School.WEB.Extensions;
@@ -70,11 +71,8 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateStudent(EditCreateStudentViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                model.OperationResult = TempData.Get<OperationResult>("Result");
-            }
-
+            ModelState["ClassId"].ValidationState = ModelValidationState.Valid;
+            
             if (ModelState.IsValid)
             {
                 await _studentRepository
@@ -91,25 +89,6 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetStudents", "ManageStudent");
             }
-            
-            var classes = await _classRepository.GetAll();
-            
-            var subjects = await _subjectRepository.GetAll();
-
-            ViewData["Classes"] = new SelectList(
-                classes,
-                "Id",
-                "Name");
-
-            ViewData["Subjects"] = new SelectList(
-                subjects,
-                "Id",
-                "Name");
-
-            model.OperationResult =
-                new OperationResult(
-                    false,
-                    "The student was not created because the model is not valid");
 
             return View(model);
         }
@@ -147,11 +126,8 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditStudent(EditCreateStudentViewModel model)
         {
-            if (TempData["Result"] != null)
-            {
-                model.OperationResult = TempData.Get<OperationResult>("Result");
-            }
-
+            ModelState["ClassId"].ValidationState = ModelValidationState.Valid;
+            
             if (ModelState.IsValid)
             {
                 var student = await _studentRepository.GetOne(model.Id);
@@ -209,24 +185,6 @@ namespace School.WEB.Controllers
 
                 return RedirectToAction("GetStudents", "ManageStudent");
             }
-
-            var classes = await _classRepository.GetAll();
-
-            var subjects = await _subjectRepository.GetAll();
-
-            ViewData["Classes"] = new SelectList(
-                classes,
-                "Id",
-                "Name");
-
-            ViewData["Subjects"] = new SelectList(
-                subjects,
-                "Id",
-                "Name");
-
-            model.OperationResult = new OperationResult(
-                false,
-                $"Student: {model.FirstName + " " + model.LastName} wasn't edited, because model is not valid");
 
             return View(model);
         }
