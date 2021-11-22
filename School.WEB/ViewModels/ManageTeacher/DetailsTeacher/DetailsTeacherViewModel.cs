@@ -12,8 +12,6 @@ namespace School.WEB.ViewModels.ManageTeacher.DetailsTeacher
 
         public string LastName { get; set; }
 
-        public string FullName =>  FirstName + " " + LastName;
-
         public int Age { get; set; }
 
         public Gender Gender { get; set; }

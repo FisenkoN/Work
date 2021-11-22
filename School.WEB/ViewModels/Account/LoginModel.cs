@@ -4,7 +4,7 @@ using School.WEB.Extensions;
 
 namespace School.WEB.ViewModels.Account
 {
-    public class LoginModel
+    public class LoginModel : OperationResultViewModel
     {
         [Required(ErrorMessage = "No email specified")]
         [EmailAddress]

@@ -18,8 +18,8 @@ namespace School.WEB.ViewModels.Visitor.SubjectDetails
         {
             Id = subject.Id;
             Name = subject.Name;
-            TeacherNames = subject.Teachers.Select(t => t.FirstName + " " + t.LastName);
-            StudentNames = subject.Students.Select(s => s.FirstName + " " + s.LastName);
+            TeacherNames = subject.Teachers.Select(t => t.FullName);
+            StudentNames = subject.Students.Select(s => s.FullName);
         }
     }
 }

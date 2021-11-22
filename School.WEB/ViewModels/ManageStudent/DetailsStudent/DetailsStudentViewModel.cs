@@ -10,8 +10,6 @@ namespace School.WEB.ViewModels.ManageStudent.DetailsStudent
 
         public string FirstName { get; set; }
         
-        public string FullName =>  FirstName + " " + LastName;
-
         public string LastName { get; set; }
 
         public int Age { get; set; }

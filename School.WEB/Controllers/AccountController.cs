@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
@@ -27,7 +28,14 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public IActionResult Login()
         {
-            return View();
+            var model = new LoginModel();
+            
+            if (TempData["Result"] != null)
+            {
+                model.OperationResult = TempData.Get<OperationResult>("Result");
+            }
+            
+            return View(model);
         }
 
         [HttpPost("[action]")]
@@ -123,7 +131,13 @@ namespace School.WEB.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                TempData.Put(
+                    "Result",
+                    new OperationResult(
+                        false,
+                        $"We couldn't find your account, you may have made a mistake in your email"));
+
+                return RedirectToAction("Index", "Home");
             }
 
             var emailMessage = new MimeMessage();
@@ -152,11 +166,17 @@ namespace School.WEB.Controllers
 
             await client.AuthenticateAsync(
                 "nazarii.fisenko@gmail.com",
-                "[password]");
-
+                await GetPassword());
+            
             await client.SendAsync(emailMessage);
 
             await client.DisconnectAsync(true);
+            
+            TempData.Put(
+                "Result",
+                new OperationResult(
+                    true,
+                    $"The password has been sent to your e-mail"));
 
             return RedirectToAction("Login", "Account");
         }
@@ -187,6 +207,15 @@ namespace School.WEB.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction("Login", "Account");
+        }
+
+        private async Task<string> GetPassword()
+        {
+            const string path = @"password.txt";
+            
+            using var sr = new StreamReader(path);
+
+            return await sr.ReadToEndAsync();
         }
     }
 }

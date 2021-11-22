@@ -25,7 +25,8 @@ namespace School.WEB.Models
 
         public int? ClassId { get; set; }
 
-        [ForeignKey("ClassId")] public Class Class { get; set; }
+        [ForeignKey("ClassId")] 
+        public Class Class { get; set; }
 
         public ICollection<Subject> Subjects { get; set; }
 

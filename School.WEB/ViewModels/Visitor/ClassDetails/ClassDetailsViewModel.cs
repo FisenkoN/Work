@@ -18,8 +18,8 @@ namespace School.WEB.ViewModels.Visitor.ClassDetails
         {
             Id = @class.Id;
             Name = @class.Name;
-            TeacherName = @class.Teacher.FirstName + " " + @class.Teacher.LastName;
-            StudentNames = @class.Students.Select(s => s.FirstName + " " + s.LastName);
+            TeacherName = @class.Teacher.FullName;
+            StudentNames = @class.Students.Select(s => s.FullName);
         }
     }
 }
