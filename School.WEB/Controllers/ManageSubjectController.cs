@@ -13,7 +13,7 @@ using School.WEB.ViewModels.ManageSubject.GetSubjects;
 
 namespace School.WEB.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [Route("[controller]")]
     public class ManageSubjectController : Controller
 

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace School.WEB.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [Route("Manage")]
     public class AdminController : Controller
     {

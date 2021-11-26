@@ -15,7 +15,7 @@ using School.WEB.ViewModels.Student.StudentDetails;
 
 namespace School.WEB.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin, student, teacher")]
     [Route("[controller]")]
     public class StudentController : Controller
     {

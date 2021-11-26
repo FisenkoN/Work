@@ -21,10 +21,12 @@ namespace School.WEB.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthRepository _authRepository;
+        private readonly IRoleRepository _roleRepository;
 
-        public AccountController(IAuthRepository authRepository)
+        public AccountController(IAuthRepository authRepository, IRoleRepository roleRepository)
         {
             _authRepository = authRepository;
+            _roleRepository = roleRepository;
         }
 
         [HttpGet("[action]")]
@@ -52,7 +54,7 @@ namespace School.WEB.Controllers
 
                 if (user != null)
                 {
-                    await Authenticate(model.Email);
+                    await Authenticate(await _authRepository.Get(model.Email, model.Password));
                     
                     TempData.Put(
                         "Result",
@@ -100,12 +102,13 @@ namespace School.WEB.Controllers
                         await _authRepository.Add(new User
                         {
                             Email = model.Email,
-                            Password = model.Password
+                            Password = model.Password,
+                            Role = await _roleRepository.Get("student")
                         });
                         
                         await _authRepository.SaveChanges();
 
-                        await Authenticate(model.Email);
+                        await Authenticate(await _authRepository.Get(model.Email, model.Password));
 
                         TempData.Put(
                             "Result",
@@ -201,12 +204,12 @@ namespace School.WEB.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(User user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, 
-                    userName)
+                new(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
             };
 
             var id = new ClaimsIdentity(

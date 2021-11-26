@@ -14,7 +14,7 @@ using School.WEB.ViewModels.ManageClass.GetClasses;
 
 namespace School.WEB.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [Route("[controller]")]
     public class ManageClassController : Controller
     {

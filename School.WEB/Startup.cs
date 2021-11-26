@@ -25,6 +25,7 @@ namespace School.WEB
                 .AddCookie(options => 
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
 
             var connectionString = _configuration.GetConnectionString("DefaultConnection");
@@ -37,6 +38,7 @@ namespace School.WEB
             services.AddSingleton<ISubjectRepository, SubjectRepository>();
             services.AddSingleton<IClassRepository, ClassRepository>();
             services.AddSingleton<IAuthRepository, AuthRepository>();
+            services.AddSingleton<IRoleRepository, RoleRepository>();
             
             services.AddControllersWithViews();
         }

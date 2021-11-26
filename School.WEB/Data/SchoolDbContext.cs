@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using School.WEB.Models;
 
@@ -15,6 +16,8 @@ namespace School.WEB.Data
         public DbSet<Class> Classes { get; set; }
 
         public DbSet<User> Users { get; set; }
+        
+        public DbSet<Role> Roles { get; set; }
 
         public SchoolDbContext()
         {
@@ -26,6 +29,14 @@ namespace School.WEB.Data
 
         private void InitializeData()
         {
+            var adminRole = new Role { Name = "admin" };
+            var studentRole = new Role { Name = "student" };
+            var teacherRole = new Role { Name = "teacher" };
+
+            Roles.AddRange(adminRole, studentRole, teacherRole);
+
+            SaveChanges();
+            
             var t1 = new Teacher
             {
                 FirstName = "Billie",
@@ -848,7 +859,26 @@ namespace School.WEB.Data
 
             foreach (var subject in subjPacket3)
                 s33.Subjects.Add(subject);
-
+            
+            SaveChanges();
+            
+            var admin = new User()
+            {
+                Email = "nazarfesenko6@gmail.com",
+                Password = "Nazar1@3Nazar",
+                Role = Roles.FirstOrDefault(r => r.Name == "admin"),
+                RoleId = Roles.FirstOrDefault(r => r.Name == "admin")?.Id
+            };
+            
+            var student = new User()
+            {
+                Email = "nazarfesenk@gmail.com",
+                Password = "Nazard1@3Nazar",
+                Role = Roles.FirstOrDefault(r => r.Name == "student"),
+                RoleId = Roles.FirstOrDefault(r => r.Name == "student")?.Id
+            };
+            
+            Users.AddRange(admin,student);
 
             SaveChanges();
         }
