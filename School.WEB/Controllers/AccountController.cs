@@ -7,6 +7,7 @@ using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using School.WEB.Data.Repository;
 using School.WEB.Extensions;
@@ -74,6 +75,11 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public IActionResult Register()
         {
+            if (TempData["Result"] != null)
+            {
+                ViewBag.Result = TempData.Get<OperationResult>("Result");
+            }
+            
             return View();
         }
 
@@ -88,25 +94,38 @@ namespace School.WEB.Controllers
                     model.Password);
 
                 if (user == null)
-                {
-                    await _authRepository.Add(new User
+                    try
                     {
-                        Email = model.Email,
-                        Password = model.Password
-                    });
+                        await _authRepository.Add(new User
+                        {
+                            Email = model.Email,
+                            Password = model.Password
+                        });
+                        
+                        await _authRepository.SaveChanges();
 
-                    await _authRepository.SaveChanges();
+                        await Authenticate(model.Email);
 
-                    await Authenticate(model.Email);
-
-                    TempData.Put(
-                        "Result",
-                        new OperationResult(
-                            true,
-                            $"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
-
-                    return RedirectToAction("Index", "Home");
-                }
+                        TempData.Put(
+                            "Result",
+                            new OperationResult(
+                                true,
+                                $"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
+                        
+                        return RedirectToAction("Index", "Home");
+                    }
+                    catch (DbUpdateException)
+                    {
+                        _authRepository.CleanLocal();
+                        
+                        TempData.Put(
+                            "Result",
+                            new OperationResult(
+                                false,
+                                $"Email {model.Email} is already registered"));
+                        
+                        return RedirectToAction("Register", "Account");
+                    }
 
                 ModelState.AddModelError(
                     "",

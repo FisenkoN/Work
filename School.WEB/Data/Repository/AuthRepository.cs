@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using School.WEB.Models;
@@ -11,6 +12,11 @@ namespace School.WEB.Data.Repository
         public AuthRepository(SchoolDbContext db)
         {
             _db = db;
+        }
+
+        public void CleanLocal()
+        {
+            _db.Users.Local.Remove(_db.Users.Local.First());
         }
 
         public async Task<User> Get(string email, string password)

@@ -1,11 +1,13 @@
+@using School.WEB.Extensions
 @model School.WEB.ViewModels.Account.RegisterModel
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
+    var operation = ViewBag.Result as OperationResult;
 }
 
-<partial name="_OperationMessage" for="@Model.OperationResult"/>
+<partial name="_OperationMessage" for="@operation"/>
 
 <h2>Registration</h2>
  

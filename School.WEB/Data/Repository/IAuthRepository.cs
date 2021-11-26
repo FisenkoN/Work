@@ -9,6 +9,8 @@ namespace School.WEB.Data.Repository
         
         Task<User> GetWhenForgotPassword(string email);
 
+        void CleanLocal();
+
         Task Add(User user);
 
         Task SaveChanges();
