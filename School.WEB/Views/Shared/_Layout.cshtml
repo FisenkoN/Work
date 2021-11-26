@@ -44,6 +44,7 @@
                         @{
                             if (User.Identity.IsAuthenticated)
                             {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ChangePassword">Change password</a>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">LogOut</a>
                             }
                             else

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
@@ -226,6 +227,57 @@ namespace School.WEB.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction("Login", "Account");
+        }
+
+        [Authorize]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> ChangePassword()
+        {
+            var model = new ChangePasswordModel { Email = User.Identity.Name };
+            
+            if (TempData["Result"] != null)
+            {
+                model.OperationResult = TempData.Get<OperationResult>("Result");
+            }
+            
+            return View(model);
+        }
+        
+        [Authorize]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _authRepository.Get(model.Email, model.OldPassword);
+
+                if (user != null)
+                {
+                    user.Password = model.NewPassword;
+                    
+                    _authRepository.Update(user);
+
+                    await _authRepository.SaveChanges();
+                    
+                    TempData.Put(
+                        "Result",
+                        new OperationResult(
+                            true,
+                            $"Password was changed"));
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                TempData.Put(
+                    "Result",
+                    new OperationResult(
+                        false,
+                        $"Password wasn't changed. You entered wrong old password!"));
+                    
+                return RedirectToAction("ChangePassword", "Account");
+            }
+
+            return View();
         }
 
         private async Task<string> GetPassword()

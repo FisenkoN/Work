@@ -11,6 +11,8 @@ namespace School.WEB.Data.Repository
 
         void CleanLocal();
 
+        void Update(User user);
+
         Task Add(User user);
 
         Task SaveChanges();

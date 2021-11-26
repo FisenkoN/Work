@@ -19,6 +19,11 @@ namespace School.WEB.Data.Repository
             _db.Users.Local.Remove(_db.Users.Local.First());
         }
 
+        public void Update(User user)
+        {
+            _db.Users.Update(user);
+        }
+
         public async Task<User> Get(string email, string password)
         {
             return await _db.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
