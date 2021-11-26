@@ -584,3 +584,4 @@ Z:\TASKS\School.WEB\bin\Debug\net5.0\Calabonga.OperationResults.dll
 Z:\TASKS\School.WEB\obj\Debug\net5.0\staticwebassets\School.WEB.StaticWebAssets.xml
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Shared\_OperationMessage.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\ChangePassword.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\StudentProfile.cshtml.g.cs

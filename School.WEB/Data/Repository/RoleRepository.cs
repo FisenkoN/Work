@@ -17,5 +17,10 @@ namespace School.WEB.Data.Repository
         {
             return await _db.Roles.FirstOrDefaultAsync(r => r.Name == name);
         }
+
+        public async Task<Role> Get(int id)
+        {
+            return await _db.Roles.FirstOrDefaultAsync(r => r.Id == id);
+        }
     }
 }

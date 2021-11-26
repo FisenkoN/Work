@@ -7,7 +7,9 @@ namespace School.WEB.Data.Repository
     {
         Task<User> Get(string email, string password);
         
-        Task<User> GetWhenForgotPassword(string email);
+        Task<User> Get(string email);
+        
+        Task<User> Get(int id);
 
         void CleanLocal();
 

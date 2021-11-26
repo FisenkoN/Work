@@ -29,9 +29,14 @@ namespace School.WEB.Data.Repository
             return await _db.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
         }
 
-        public async Task<User> GetWhenForgotPassword(string email)
+        public async Task<User> Get(string email)
         {
             return await _db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+        
+        public async Task<User> Get(int id)
+        {
+            return await _db.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task Add(User user)

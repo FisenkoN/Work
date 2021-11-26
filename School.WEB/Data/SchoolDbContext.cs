@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using School.WEB.Controllers;
 using School.WEB.Models;
 
 namespace School.WEB.Data
@@ -18,6 +19,8 @@ namespace School.WEB.Data
         public DbSet<User> Users { get; set; }
         
         public DbSet<Role> Roles { get; set; }
+        
+        public DbSet<Admin> Admins { get; set; }
 
         public SchoolDbContext()
         {
@@ -879,8 +882,63 @@ namespace School.WEB.Data
             };
             
             Users.AddRange(admin,student);
+            
+            SaveChanges();
+
+            var stud = Students.FirstOrDefault(s => s.Id == 1);
+
+            stud.User = Users.FirstOrDefault(u => u.Email == "nazarfesenk@gmail.com");
+
+            stud.UserId = Users.FirstOrDefault(u => u.Email == "nazarfesenk@gmail.com").Id;
+
+            var adminUser = new Admin
+            {
+                Age = 20,
+                FirstName = "Nazarii",
+                LastName = "Fisenko",
+                User = Users.FirstOrDefault(u => u.Email == "nazarfesenko6@gmail.com"),
+                UserId = Users.FirstOrDefault(u => u.Email == "nazarfesenko6@gmail.com").Id,
+            };
+            
+            Admins.Add(adminUser);
 
             SaveChanges();
+
+            var a = Users.FirstOrDefault(u => u.Email == "nazarfesenko6@gmail.com");
+
+            a.Admin = Admins.FirstOrDefault();
+
+            a.AdminId = Admins.FirstOrDefault().Id;
+            
+            var s = Users.FirstOrDefault(u => u.Email == "nazarfesenk@gmail.com");
+
+            s.Student = Students.Find(1);
+            
+            s.StudentId = Students.Find(1).Id;
+
+            SaveChanges();
+        }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<User>()
+                .HasOne(u => u.Admin)
+                .WithOne(a => a.User)
+                .HasForeignKey<Admin>(p => p.UserId);
+            
+            modelBuilder
+                .Entity<User>()
+                .HasOne(u => u.Student)
+                .WithOne(a => a.User)
+                .HasForeignKey<Student>(p => p.UserId);
+            
+            modelBuilder
+                .Entity<User>()
+                .HasOne(u => u.Teacher)
+                .WithOne(a => a.User)
+                .HasForeignKey<Teacher>(p => p.UserId);
+                
         }
 
         public SchoolDbContext(DbContextOptions options) : base(options)

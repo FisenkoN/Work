@@ -8,7 +8,6 @@ namespace School.WEB.Models
     public class User : EntityBase
     {
         [EmailAddress]
-        
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
@@ -18,5 +17,17 @@ namespace School.WEB.Models
         public int? RoleId { get; set; }
         
         public Role Role { get; set; }
+
+        public int? AdminId { get; set; }
+
+        public Admin Admin { get; set; }
+
+        public int? TeacherId { get; set; }
+        
+        public Teacher Teacher { get; set; }
+
+        public int? StudentId { get; set; }
+
+        public Student Student { get; set; }
     }
 }

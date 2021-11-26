@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
@@ -22,11 +23,27 @@ namespace School.WEB.Controllers
     {
         private readonly IAuthRepository _authRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IStudentRepository _studentRepository;
+        private readonly IClassRepository _classRepository;
+        private readonly ISubjectRepository _subjectRepository;
+        private readonly ITeacherRepository _teacherRepository;
 
-        public AccountController(IAuthRepository authRepository, IRoleRepository roleRepository)
+        public AccountController(
+            IAuthRepository authRepository, 
+            IRoleRepository roleRepository,
+            IStudentRepository studentRepository,
+            ISubjectRepository subjectRepository,
+            ITeacherRepository teacherRepository,
+            IClassRepository classRepository)
         {
             _authRepository = authRepository;
             _roleRepository = roleRepository;
+            _studentRepository = studentRepository;
+            _studentRepository = studentRepository;
+            _studentRepository = studentRepository;
+            _classRepository = classRepository;
+            _teacherRepository = teacherRepository;
+            _subjectRepository = subjectRepository;
         }
 
         [HttpGet("[action]")]
@@ -150,7 +167,7 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> ForgotPassword(string email)
         {
-            var user = await _authRepository.GetWhenForgotPassword(email);
+            var user = await _authRepository.Get(email);
 
             if (user == null)
             {
@@ -290,6 +307,68 @@ namespace School.WEB.Controllers
             using var sr = new StreamReader(path);
 
             return await sr.ReadToEndAsync();
+        }
+
+        [Authorize]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _authRepository.Get(User.Identity?.Name);
+
+            if (user.StudentId != null)
+                return RedirectToAction("StudentProfile", "Account", new {id = user.StudentId});
+            
+            if (user.TeacherId != null)
+                return RedirectToAction("StudentProfile", "Account", new {id = user.StudentId});
+            
+            if (user.AdminId != null) 
+                return RedirectToAction("StudentProfile", "Account", new {id = user.StudentId});
+
+            TempData.Put(
+                "Result",
+                new OperationResult(
+                    false,
+                    $"This user is not synchronized with any account"));
+
+            return RedirectToAction("Index", "Home");
+        }
+        
+        [Authorize(Roles = "student")]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> StudentProfile(int id)
+        {
+            var student = await _studentRepository.GetOneRelated(id);
+
+            var className = (await _classRepository.GetOne(student.ClassId))?.Name ?? "no class";
+
+            var subjectNames = student.Subjects.Select(s => s.Name);
+
+            var user = await _authRepository.Get(student.UserId.Value);
+
+            var role = await _roleRepository.Get(user.RoleId.Value);
+
+            var model = new StudentProfileModel(student, className, subjectNames, user, role);
+
+            return View(model);
+        }
+        
+        [Authorize(Roles = "student")]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> AdminProfile(int id)
+        {
+            var student = await _studentRepository.GetOneRelated(id);
+
+            var className = (await _classRepository.GetOne(student.ClassId))?.Name ?? "no class";
+
+            var subjectNames = student.Subjects.Select(s => s.Name);
+
+            var user = await _authRepository.Get(student.UserId.Value);
+
+            var role = await _roleRepository.Get(user.RoleId.Value);
+
+            var model = new StudentProfileModel(student, className, subjectNames, user, role);
+
+            return View(model);
         }
     }
 }

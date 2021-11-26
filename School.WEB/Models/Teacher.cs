@@ -33,6 +33,10 @@ namespace School.WEB.Models
         [RegularExpression(RegexPattern.Url, ErrorMessage = "Incorrect image url")]
         public string Image { get; set; }
         
+        public int? UserId { get; set; }
+
+        public User User { get; set; }
+        
         public Teacher()
         {
             Subjects = new List<Subject>();
