@@ -536,11 +536,6 @@ Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Student\Edit.cshtml.g.cs
-Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Student\Index.cshtml.g.cs
-Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Student\ShowClassmates.cshtml.g.cs
-Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Student\ShowClassTeacher.cshtml.g.cs
-Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Student\StudentDetails.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Visitor\ClassDetails.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Visitor\GetClasses.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Visitor\GetSubjects.cshtml.g.cs
@@ -587,3 +582,7 @@ Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\ChangePassword.cshtml.g
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\StudentProfile.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\AdminProfile.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\TeacherProfile.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Teacher\Index.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Teacher\ShowClassmates.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Teacher\ShowClassTeacher.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Teacher\StudentDetails.cshtml.g.cs

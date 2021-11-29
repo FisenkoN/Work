@@ -103,6 +103,8 @@ namespace School.WEB.Extensions
             teacher.FirstName = model.FirstName;
             teacher.LastName = model.LastName;
             teacher.Gender = model.Gender;
+            teacher.User = model.User;
+            teacher.UserId = model.UserId;
             teacher.Image = model.Image;
             teacher.Subjects = model.SubjectIds != null
                 ? subjectRepository

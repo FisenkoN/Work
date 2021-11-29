@@ -21,15 +21,21 @@ namespace School.WEB.Controllers
         private readonly IClassRepository _classRepository;
         private readonly ISubjectRepository _subjectRepository;
         private readonly ITeacherRepository _teacherRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
 
         public ManageTeacherController(
             IClassRepository classRepository,
             ISubjectRepository subjectRepository,
-            ITeacherRepository teacherRepository)
+            ITeacherRepository teacherRepository,
+            IUserRepository userRepository,
+            IRoleRepository roleRepository)
         {
             _classRepository = classRepository;
             _subjectRepository = subjectRepository;
             _teacherRepository = teacherRepository;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
 
         [Authorize(Roles = "admin")]
@@ -50,7 +56,7 @@ namespace School.WEB.Controllers
 
         [Authorize(Roles = "admin, teacher")]
         [HttpGet("[action]")]
-        public async Task<IActionResult> CreateTeacher()
+        public async Task<IActionResult> CreateTeacher(string email = "no")
         {
             var model = new EditCreateTeacherViewModel();
 
@@ -59,6 +65,15 @@ namespace School.WEB.Controllers
             var classes = _classRepository.GetRelatedData()
                 .Where(c =>
                     c.TeacherId == null && c.Teacher == null);
+            
+            if (email != "no")
+            {
+                var user = await _userRepository.GetForEmail(email);
+
+                model.User = user;
+
+                model.UserId = user.Id;
+            }
 
             ViewData["Classes"] = new SelectList(
                 classes,
@@ -84,13 +99,31 @@ namespace School.WEB.Controllers
                         .To(model, _subjectRepository));
 
                 await _teacherRepository.SaveChanges();
+                
+                var u = await _userRepository.GetOne(model.UserId);
+
+                var t = await _teacherRepository.GetOneRelated(
+                    _teacherRepository.GetAll()
+                        .Result
+                        .Count);
+
+                u.TeacherId = t.Id;
+
+                u.Teacher = t;
+
+                await _userRepository.SaveChanges();
 
                 TempData.Put("Result", 
                     new OperationResult(
                         true, 
                         $"Teacher: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetTeachers", "ManageTeacher");
+                return _roleRepository.GetForEmail(User.Identity.Name)
+                    .Result.Name == "admin"
+                    ? RedirectToAction("GetTeachers", 
+                        "ManageTeacher")
+                    : RedirectToAction("Index",
+                        "Home");
             }
 
             return View(model);
@@ -211,7 +244,12 @@ namespace School.WEB.Controllers
                         true,
                         $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetTeachers", "ManageTeacher");
+                return _roleRepository.GetForEmail(User.Identity.Name)
+                    .Result.Name == "admin"
+                    ? RedirectToAction("GetTeachers", 
+                        "ManageTeacher")
+                    : RedirectToAction("Index",
+                        "Home");
             }
 
             return View(model);
@@ -229,6 +267,13 @@ namespace School.WEB.Controllers
             }
 
             _teacherRepository.Delete(teacher);
+
+            _userRepository.Delete(
+                _userRepository.GetOne(
+                    _teacherRepository.GetOneRelated(id)
+                        .Result
+                        .UserId)
+                    .Result);
 
             await _teacherRepository.SaveChanges();
             

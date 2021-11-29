@@ -58,11 +58,11 @@ namespace School.WEB.Controllers
         public async Task<IActionResult> CreateStudent(string email = "no")
         {
             var model = new EditCreateStudentViewModel();
-            
+
             var classes = await _classRepository.GetAll();
-            
+
             var subjects = await _subjectRepository.GetAll();
-            
+
             if (email != "no")
             {
                 var user = await _userRepository.GetForEmail(email);
@@ -89,8 +89,9 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateStudent(EditCreateStudentViewModel model)
         {
-            ModelState["ClassId"].ValidationState = ModelValidationState.Valid;
-            
+            ModelState["ClassId"]
+                .ValidationState = ModelValidationState.Valid;
+
             if (ModelState.IsValid)
             {
                 await _studentRepository
@@ -99,13 +100,31 @@ namespace School.WEB.Controllers
 
                 await _studentRepository.SaveChanges();
 
+                var u = await _userRepository.GetOne(model.UserId);
+
+                var s = await _studentRepository.GetOneRelated(
+                    _studentRepository.GetAll()
+                    .Result
+                    .Count);
+
+                u.StudentId = s.Id;
+
+                u.Student = s;
+
+                await _userRepository.SaveChanges();
+
                 TempData
                     .Put("Result",
                         new OperationResult(
                             true,
                             $"Student: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetStudents", "ManageStudent");
+                return _roleRepository.GetForEmail(User.Identity.Name)
+                    .Result.Name == "admin"
+                    ? RedirectToAction("GetStudents",
+                        "ManageStudent")
+                    : RedirectToAction("Index",
+                        "Home");
             }
 
             return View(model);
@@ -147,7 +166,7 @@ namespace School.WEB.Controllers
         public async Task<IActionResult> EditStudent(EditCreateStudentViewModel model)
         {
             ModelState["ClassId"].ValidationState = ModelValidationState.Valid;
-            
+
             if (ModelState.IsValid)
             {
                 var student = await _studentRepository.GetOne(model.Id);
@@ -157,6 +176,16 @@ namespace School.WEB.Controllers
                 student.Image = model.Image;
                 student.Age = model.Age;
                 student.Gender = model.Gender;
+
+                _studentRepository.Update(student);
+
+                await _studentRepository.SaveChanges();
+                
+                student = await _studentRepository.GetOne(model.Id);
+
+                student.UserId = model.UserId;
+
+                student.User = await _userRepository.GetOne(model.UserId);
 
                 _studentRepository.Update(student);
 
@@ -203,14 +232,12 @@ namespace School.WEB.Controllers
                         true,
                         $"Student: {student.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
 
-                if (_roleRepository.GetForEmail(User.Identity.Name).Result.Name == "admin")
-                {
-                    return RedirectToAction("GetStudents", "ManageStudent");
-                }
-                else
-                {
-                    return RedirectToAction("StudentProfile", "Account", new { id = student.Id });
-                }
+                return _roleRepository.GetForEmail(User.Identity.Name)
+                           .Result.Name == "admin"
+                    ? RedirectToAction("GetStudents", 
+                        "ManageStudent")
+                    : RedirectToAction("Index",
+                        "Home");
             }
 
             return View(model);

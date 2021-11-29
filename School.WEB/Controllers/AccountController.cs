@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
@@ -114,6 +115,8 @@ namespace School.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
         {
+            ModelState["Role"].ValidationState = ModelValidationState.Valid;
+            
             if (ModelState.IsValid)
             {
                 var user = await _authRepository.Get(
@@ -127,7 +130,9 @@ namespace School.WEB.Controllers
                         {
                             Email = model.Email,
                             Password = model.Password,
-                            Role = await _roleRepository.Get("student")
+                            Role = model.Role == null
+                                ? await _roleRepository.Get("student")
+                                : await _roleRepository.Get(model.Role.Value)
                         });
                         
                         await _authRepository.SaveChanges();
@@ -152,7 +157,7 @@ namespace School.WEB.Controllers
                             }
                             case 3:
                             {
-                                return RedirectToAction("CreateTeacher", "ManageTeacher");
+                                return RedirectToAction("CreateTeacher", "ManageTeacher", new {email = model.Email});
                             }
                         }
                     }
@@ -175,9 +180,9 @@ namespace School.WEB.Controllers
 
                 return View(model);
             }
-
+            
             ViewData["Roles"] = new SelectList(
-                await _roleRepository.GetAll(),
+                (await _roleRepository.GetAll()).Where(r=>r.Name != "admin"),
                 "Id",
                 "Name");
             

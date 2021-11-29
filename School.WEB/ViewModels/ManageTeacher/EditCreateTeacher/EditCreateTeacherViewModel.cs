@@ -37,6 +37,10 @@ namespace School.WEB.ViewModels.ManageTeacher.EditCreateTeacher
 
         [DisplayName("Class")]
         public int? ClassId { get; set; }
+        
+        public int? UserId { get; set; }
+        
+        public User User { get; set; }
 
         [DisplayName("Subjects")]
         public IEnumerable<int> SubjectIds { get; set; }
@@ -52,6 +56,8 @@ namespace School.WEB.ViewModels.ManageTeacher.EditCreateTeacher
             FirstName = teacher.FirstName;
             LastName = teacher.LastName;
             Image = teacher.Image;
+            User = teacher.User;
+            UserId = teacher.UserId;
             Age = teacher.Age;
             Gender = teacher.Gender;
             ClassId = teacher.ClassId;

@@ -5,4 +5,75 @@
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<h1>Details</h1>
+
+<img height="250" src="@Model.Image" alt="avatar"/>
+
+<div>
+    <h4>Teacher</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            First Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            Last Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            Age
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class="col-sm-2">
+            Gender
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            Password
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class="col-sm-2">
+            Role
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoleName)
+        </dd>
+        <dt class="col-sm-2">
+            <p>Class</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClassName)
+        </dd>
+        <dt class="col-sm-2">
+            <p>Subjects</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.ListBox("subjects", new SelectList(Model.SubjectNames))
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditTeacher" asp-controller="ManageTeacher" asp-route-id="@Model.Id">
+        Edit
+    </a>
+    <a asp-action="Index" asp-controller="Home">
+        Back to List
+    </a>
+</div>

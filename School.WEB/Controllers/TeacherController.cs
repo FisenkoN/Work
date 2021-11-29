@@ -1,13 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using School.WEB.Data.Repository;
 using School.WEB.Extensions;
-using School.WEB.ViewModels.Student.Edit;
 using School.WEB.ViewModels.Student.Index;
 using School.WEB.ViewModels.Student.ShowClassmates;
 using School.WEB.ViewModels.Student.ShowClassTeacher;
@@ -15,25 +11,22 @@ using School.WEB.ViewModels.Student.StudentDetails;
 
 namespace School.WEB.Controllers
 {
-    [Authorize(Roles = "admin, student, teacher")]
+    [Authorize(Roles = "teacher")]
     [Route("[controller]")]
-    public class StudentController : Controller
+    public class TeacherController : Controller
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IClassRepository _classRepository;
-        private readonly ISubjectRepository _subjectRepository;
         private readonly ITeacherRepository _teacherRepository;
 
 
-        public StudentController(
+        public TeacherController(
             IStudentRepository studentRepository,
             ITeacherRepository teacherRepository,
-            ISubjectRepository subjectRepository,
             IClassRepository classRepository)
         {
             _studentRepository = studentRepository;
             _classRepository = classRepository;
-            _subjectRepository = subjectRepository;
             _teacherRepository = teacherRepository;
         }
 
@@ -66,101 +59,6 @@ namespace School.WEB.Controllers
 
             var model = new StudentDetailsViewModel(student,
                 @class);
-
-            return View(model);
-        }
-
-        [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> Edit(int id)
-        {
-
-            var student = await _studentRepository.GetOneRelated(id);
-
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            var classes = await _classRepository.GetAll();
-
-            var subjects = await _subjectRepository.GetAll();
-
-            ViewData["Classes"] = new SelectList(
-                classes,
-                "Id",
-                "Name");
-
-            ViewData["Subjects"] = new SelectList(
-                subjects,
-                "Id",
-                "Name");
-
-            var model = new EditViewModel(student);
-
-            return View(model);
-        }
-
-        [HttpPost("[action]/{id}")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EditViewModel model)
-        {
-            ModelState["ClassId"].ValidationState = ModelValidationState.Valid;
-            
-            if (ModelState.IsValid)
-            {
-                var student = await _studentRepository.GetOne(model.Id);
-
-                student.FirstName = model.FirstName;
-
-                student.LastName = model.LastName;
-
-                student.Age = model.Age;
-
-                student.Image = model.Image;
-
-                student.Gender = model.Gender;
-
-                _studentRepository.Update(student);
-
-                await _studentRepository.SaveChanges();
-
-                student = await _studentRepository.GetOne(model.Id);
-
-                student.ClassId = model.ClassId;
-
-                student.Class = await _classRepository.GetOne(model.ClassId);
-
-                _studentRepository.Update(student);
-
-                await _studentRepository.SaveChanges();
-
-                student = await _studentRepository.GetOneRelated(model.Id);
-
-                student.Subjects.Clear();
-
-                _studentRepository.Update(student);
-
-                await _studentRepository.SaveChanges();
-
-                student = await _studentRepository.GetOneRelated(model.Id);
-
-                foreach (var subjectId in model.SubjectIds)
-                {
-                    student.Subjects.Add(await _subjectRepository.GetOne(subjectId));
-                    await _studentRepository.SaveChanges();
-                }
-
-                _studentRepository.Update(student);
-
-                await _studentRepository.SaveChanges();
-                
-                TempData.Put("Result", 
-                    new OperationResult(
-                    true,
-                    $"Student: {model.FirstName + " " + model.LastName} was edit at {DateTime.Now.ToShortTimeString()}"));
-
-                return RedirectToAction(nameof(Index));
-            }
 
             return View(model);
         }

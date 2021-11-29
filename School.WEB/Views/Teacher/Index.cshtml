@@ -31,13 +31,13 @@
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                <a asp-action="@nameof(StudentController.StudentDetails)" asp-route-id="@item.Id">
+                <a asp-action="@nameof(TeacherController.StudentDetails)" asp-route-id="@item.Id">
                     Details
                 </a>
-                <a asp-action="@nameof(StudentController.ShowClassmates)" asp-route-id="@item.Id">
+                <a asp-action="@nameof(TeacherController.ShowClassmates)" asp-route-id="@item.Id">
                     Show classmates
                 </a>
-                <a asp-action="@nameof(StudentController.ShowClassTeacher)" asp-route-id="@item.Id">
+                <a asp-action="@nameof(TeacherController.ShowClassTeacher)" asp-route-id="@item.Id">
                     Show class teacher
                 </a>
             </td>
