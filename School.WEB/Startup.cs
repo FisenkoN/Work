@@ -38,6 +38,8 @@ namespace School.WEB
             services.AddSingleton<ISubjectRepository, SubjectRepository>();
             services.AddSingleton<IClassRepository, ClassRepository>();
             services.AddSingleton<IAuthRepository, AuthRepository>();
+            services.AddSingleton<IAdminRepository, AdminRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IRoleRepository, RoleRepository>();
             
             services.AddControllersWithViews();

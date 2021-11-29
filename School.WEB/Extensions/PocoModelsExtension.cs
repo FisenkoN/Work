@@ -71,6 +71,8 @@ namespace School.WEB.Extensions
             ISubjectRepository subjectRepository)
         {
             student.Age = model.Age;
+            student.User = model.User;
+            student.UserId = model.UserId;
             student.ClassId = model.ClassId;
             student.LastName = model.LastName;
             student.Gender = model.Gender;

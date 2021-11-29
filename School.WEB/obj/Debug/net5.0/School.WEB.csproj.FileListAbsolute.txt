@@ -585,3 +585,5 @@ Z:\TASKS\School.WEB\obj\Debug\net5.0\staticwebassets\School.WEB.StaticWebAssets.
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Shared\_OperationMessage.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\ChangePassword.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\StudentProfile.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\AdminProfile.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Account\TeacherProfile.cshtml.g.cs

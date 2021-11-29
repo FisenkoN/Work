@@ -13,24 +13,31 @@ using School.WEB.ViewModels.ManageStudent.GetStudents;
 
 namespace School.WEB.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     [Route("[controller]")]
     public class ManageStudentController : Controller
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IClassRepository _classRepository;
         private readonly ISubjectRepository _subjectRepository;
+        private readonly IRoleRepository _roleRepository;
+        private readonly IUserRepository _userRepository;
 
         public ManageStudentController(
             IStudentRepository studentRepository,
             IClassRepository classRepository,
-            ISubjectRepository subjectRepository)
+            ISubjectRepository subjectRepository,
+            IRoleRepository roleRepository,
+            IUserRepository userRepository)
         {
             _studentRepository = studentRepository;
             _classRepository = classRepository;
             _subjectRepository = subjectRepository;
+            _roleRepository = roleRepository;
+            _userRepository = userRepository;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("[action]")]
         public async Task<IActionResult> GetStudents()
         {
@@ -46,14 +53,24 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, student")]
         [HttpGet("[action]")]
-        public async Task<IActionResult> CreateStudent()
+        public async Task<IActionResult> CreateStudent(string email = "no")
         {
             var model = new EditCreateStudentViewModel();
             
             var classes = await _classRepository.GetAll();
             
             var subjects = await _subjectRepository.GetAll();
+            
+            if (email != "no")
+            {
+                var user = await _userRepository.GetForEmail(email);
+
+                model.User = user;
+
+                model.UserId = user.Id;
+            }
 
             ViewData["Classes"] = new SelectList(
                 classes,
@@ -68,6 +85,7 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, student")]
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateStudent(EditCreateStudentViewModel model)
         {
@@ -93,6 +111,7 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, student")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> EditStudent(int id)
         {
@@ -122,6 +141,7 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, student")]
         [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditStudent(EditCreateStudentViewModel model)
@@ -183,12 +203,20 @@ namespace School.WEB.Controllers
                         true,
                         $"Student: {student.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetStudents", "ManageStudent");
+                if (_roleRepository.GetForEmail(User.Identity.Name).Result.Name == "admin")
+                {
+                    return RedirectToAction("GetStudents", "ManageStudent");
+                }
+                else
+                {
+                    return RedirectToAction("StudentProfile", "Account", new { id = student.Id });
+                }
             }
 
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
@@ -223,6 +251,7 @@ namespace School.WEB.Controllers
             return RedirectToAction("GetStudents", "ManageStudent");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> DetailsStudent(int id)
         {

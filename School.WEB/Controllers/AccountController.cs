@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using School.WEB.Data.Repository;
@@ -25,8 +26,8 @@ namespace School.WEB.Controllers
         private readonly IRoleRepository _roleRepository;
         private readonly IStudentRepository _studentRepository;
         private readonly IClassRepository _classRepository;
-        private readonly ISubjectRepository _subjectRepository;
         private readonly ITeacherRepository _teacherRepository;
+        private readonly IAdminRepository _adminRepository;
 
         public AccountController(
             IAuthRepository authRepository, 
@@ -34,7 +35,8 @@ namespace School.WEB.Controllers
             IStudentRepository studentRepository,
             ISubjectRepository subjectRepository,
             ITeacherRepository teacherRepository,
-            IClassRepository classRepository)
+            IClassRepository classRepository,
+            IAdminRepository adminRepository)
         {
             _authRepository = authRepository;
             _roleRepository = roleRepository;
@@ -43,7 +45,7 @@ namespace School.WEB.Controllers
             _studentRepository = studentRepository;
             _classRepository = classRepository;
             _teacherRepository = teacherRepository;
-            _subjectRepository = subjectRepository;
+            _adminRepository = adminRepository;
         }
 
         [HttpGet("[action]")]
@@ -93,12 +95,17 @@ namespace School.WEB.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
             if (TempData["Result"] != null)
             {
                 ViewBag.Result = TempData.Get<OperationResult>("Result");
             }
+            
+            ViewData["Roles"] = new SelectList(
+                 (await _roleRepository.GetAll()).Where(r=>r.Name != "admin"),
+                "Id",
+                "Name");
             
             return View();
         }
@@ -132,8 +139,22 @@ namespace School.WEB.Controllers
                             new OperationResult(
                                 true,
                                 $"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
-                        
-                        return RedirectToAction("Index", "Home");
+
+                        switch (model.Role)
+                        {
+                            case null:
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
+                            case 2:
+                            {
+                                return RedirectToAction("CreateStudent", "ManageStudent", new {email = model.Email});
+                            }
+                            case 3:
+                            {
+                                return RedirectToAction("CreateTeacher", "ManageTeacher");
+                            }
+                        }
                     }
                     catch (DbUpdateException)
                     {
@@ -155,6 +176,11 @@ namespace School.WEB.Controllers
                 return View(model);
             }
 
+            ViewData["Roles"] = new SelectList(
+                await _roleRepository.GetAll(),
+                "Id",
+                "Name");
+            
             return View(model);
         }
 
@@ -319,10 +345,10 @@ namespace School.WEB.Controllers
                 return RedirectToAction("StudentProfile", "Account", new {id = user.StudentId});
             
             if (user.TeacherId != null)
-                return RedirectToAction("StudentProfile", "Account", new {id = user.StudentId});
+                return RedirectToAction("TeacherProfile", "Account", new {id = user.TeacherId});
             
             if (user.AdminId != null) 
-                return RedirectToAction("StudentProfile", "Account", new {id = user.StudentId});
+                return RedirectToAction("AdminProfile", "Account", new {id = user.AdminId});
 
             TempData.Put(
                 "Result",
@@ -352,21 +378,42 @@ namespace School.WEB.Controllers
             return View(model);
         }
         
-        [Authorize(Roles = "student")]
+        [Authorize(Roles = "admin")]
         [HttpGet("[action]")]
         public async Task<IActionResult> AdminProfile(int id)
         {
-            var student = await _studentRepository.GetOneRelated(id);
+            var admin = await _adminRepository.GetOne(id);
 
-            var className = (await _classRepository.GetOne(student.ClassId))?.Name ?? "no class";
-
-            var subjectNames = student.Subjects.Select(s => s.Name);
-
-            var user = await _authRepository.Get(student.UserId.Value);
+            var user = await _authRepository.Get(admin.UserId.Value);
 
             var role = await _roleRepository.Get(user.RoleId.Value);
 
-            var model = new StudentProfileModel(student, className, subjectNames, user, role);
+            var model = new AdminProfileModel(admin, user, role);
+
+            return View(model);
+        }
+        
+        [Authorize(Roles = "teacher")]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> TeacherProfile(int id)
+        {
+            var teacher = await _teacherRepository.GetOneRelated(id);
+
+            var className = _classRepository
+                             .GetAll()
+                             .Result
+                             .FirstOrDefault(c =>
+                                 c.TeacherId == teacher.Id)
+                             ?.Name ??
+                         "no class";
+
+            var subjectNames = teacher.Subjects.Select(s => s.Name);
+
+            var user = await _authRepository.Get(teacher.UserId.Value);
+
+            var role = await _roleRepository.Get(user.RoleId.Value);
+
+            var model = new TeacherProfileModel(teacher, className, subjectNames, user, role);
 
             return View(model);
         }

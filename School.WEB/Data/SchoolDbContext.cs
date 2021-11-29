@@ -895,6 +895,7 @@ namespace School.WEB.Data
             {
                 Age = 20,
                 FirstName = "Nazarii",
+                Image = "https://media-exp1.licdn.com/dms/image/C5603AQHEaLAxeB5oWg/profile-displayphoto-shrink_800_800/0/1554927223815?e=1643846400&v=beta&t=EUznmUt3Qy2mp1bZLjP61up0M_1o2VgOZpekwvBC8Lo",
                 LastName = "Fisenko",
                 User = Users.FirstOrDefault(u => u.Email == "nazarfesenko6@gmail.com"),
                 UserId = Users.FirstOrDefault(u => u.Email == "nazarfesenko6@gmail.com").Id,

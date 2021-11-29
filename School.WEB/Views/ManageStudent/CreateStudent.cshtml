@@ -51,6 +51,8 @@
                 <input asp-for="Image" class="form-control"/>
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="User"/>
+            <input type="hidden" asp-for="UserId"/>
             <div>
                 <a asp-action="@nameof(ManageStudentController.GetStudents)">
                     Back to List

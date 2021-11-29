@@ -71,13 +71,10 @@
     </dl>
 </div>
 <div>
-    <a asp-action="@nameof(ManageStudentController.EditStudent)" asp-controller="Admin" asp-route-id="@Model.Id">
+    <a asp-action="@nameof(ManageStudentController.EditStudent)" asp-controller="ManageStudent" asp-route-id="@Model.Id">
         Edit
     </a>
-    <a asp-action="@nameof(ManageStudentController.DeleteStudent)" asp-route-id="@Model.Id">
-        Delete
-    </a>
-    <a asp-action="@nameof(ManageStudentController.GetStudents)">
-        Back to List
+    <a asp-action="@nameof(HomeController.Index)">
+        Back to main
     </a>
 </div>

@@ -14,7 +14,7 @@ using School.WEB.ViewModels.ManageTeacher.GetTeachers;
 
 namespace School.WEB.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     [Route("[controller]")]
     public class ManageTeacherController : Controller
     {
@@ -32,6 +32,7 @@ namespace School.WEB.Controllers
             _teacherRepository = teacherRepository;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("[action]")]
         public async Task<IActionResult> GetTeachers()
         {
@@ -47,6 +48,7 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, teacher")]
         [HttpGet("[action]")]
         public async Task<IActionResult> CreateTeacher()
         {
@@ -71,6 +73,7 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, teacher")]
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateTeacher(EditCreateTeacherViewModel model)
         {
@@ -93,6 +96,7 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, teacher")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> EditTeacher(int id)
         {
@@ -154,6 +158,7 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, teacher")]
         [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditTeacher(EditCreateTeacherViewModel model)
@@ -212,6 +217,7 @@ namespace School.WEB.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> DeleteTeacher(int id)
         {
@@ -247,6 +253,7 @@ namespace School.WEB.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> DetailsTeacher(int id)
         {

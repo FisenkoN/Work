@@ -22,5 +22,7 @@ namespace School.WEB.ViewModels.Account
         [Compare("Password", ErrorMessage = "Invalid password")]
         [DisplayName("ConfirmPassword")]
         public string ConfirmPassword { get; set; }
+        
+        public int? Role { get; set; }
     }
 }
