@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using School.WEB.Models;
-using School.WEB.ViewModels.Visitor.TeacherDetails;
 
 namespace School.WEB.ViewModels.ManageSubject.DetailsSubject
 {

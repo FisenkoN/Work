@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualBasic.CompilerServices;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.ManageTeacher.DetailsTeacher

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.Student.StudentDetails

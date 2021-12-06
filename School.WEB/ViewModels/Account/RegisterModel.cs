@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using School.WEB.Extensions;
 
 namespace School.WEB.ViewModels.Account
 {

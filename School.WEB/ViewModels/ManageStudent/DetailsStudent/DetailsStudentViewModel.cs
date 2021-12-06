@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.ManageStudent.DetailsStudent
