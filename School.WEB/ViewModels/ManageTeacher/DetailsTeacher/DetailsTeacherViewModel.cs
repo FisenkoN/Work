@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualBasic.CompilerServices;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.ManageTeacher.DetailsTeacher
@@ -16,21 +17,29 @@ namespace School.WEB.ViewModels.ManageTeacher.DetailsTeacher
 
         public Gender Gender { get; set; }
 
-        public string ClassName { get; set; }
+        public ClassModel Class { get; set; }
+        
+        public IEnumerable<ClassModel> Classes { get; set; }
 
         public string Image { get; set; }
 
-        public IEnumerable<string> SubjectNames { get; set; }
+        public SubjectModel Subject { get; set; }
 
-        public DetailsTeacherViewModel(Teacher teacher, string className)
+        public DetailsTeacherViewModel(Teacher teacher, ClassModel @class, SubjectModel subject)
         {
             Id = teacher.Id;
             FirstName = teacher.FirstName;
             LastName = teacher.LastName;
             Age = teacher.Age;
             Gender = teacher.Gender;
-            ClassName = className;
-            SubjectNames = teacher.Subjects.Select(s => s.Name);
+            Class = @class;
+            Classes = from c in teacher.Classes
+                select new ClassModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                };
+            Subject = subject;
             Image = teacher.Image;
         }
     }

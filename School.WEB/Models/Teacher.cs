@@ -25,17 +25,22 @@ namespace School.WEB.Models
 
         [ForeignKey("ClassId")]
         public Class Class { get; set; }
+        
+        public ICollection<Class> Classes { get; set; }
 
         public string FullName => FirstName + " " + LastName;
 
-        public ICollection<Subject> Subjects { get; set; }
+        public int? SubjectId { get; set; }
+        
+        [ForeignKey("SubjectId")]
+        public Subject Subject { get; set; }
 
         [RegularExpression(RegexPattern.Url, ErrorMessage = "Incorrect image url")]
         public string Image { get; set; }
         
         public Teacher()
         {
-            Subjects = new List<Subject>();
+            Classes = new List<Class>();
         }
     }
 }

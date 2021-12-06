@@ -38,7 +38,7 @@ namespace School.WEB.Controllers
             var teachers = await _teacherRepository.GetAll();
 
             var model = new GetTeachersViewModel(teachers);
-            
+
             if (TempData["Result"] != null)
             {
                 model.OperationResult = TempData.Get<OperationResult>("Result");
@@ -54,9 +54,16 @@ namespace School.WEB.Controllers
 
             var subjects = await _subjectRepository.GetAll();
 
-            var classes = _classRepository.GetRelatedData()
+            var classes = await _classRepository.GetAll();
+
+            var classesWithoutClassTeacher = _classRepository.GetRelatedData()
                 .Where(c =>
                     c.TeacherId == null && c.Teacher == null);
+
+            ViewData["ClassesWithoutClassTeacher"] = new SelectList(
+                classesWithoutClassTeacher,
+                "Id",
+                "Name");
 
             ViewData["Classes"] = new SelectList(
                 classes,
@@ -78,13 +85,14 @@ namespace School.WEB.Controllers
             {
                 await _teacherRepository
                     .Add(new Teacher()
-                        .To(model, _subjectRepository));
+                        .To(model,
+                            _classRepository));
 
                 await _teacherRepository.SaveChanges();
 
-                TempData.Put("Result", 
+                TempData.Put("Result",
                     new OperationResult(
-                        true, 
+                        true,
                         $"Teacher: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
                 return RedirectToAction("GetTeachers", "ManageTeacher");
@@ -103,7 +111,7 @@ namespace School.WEB.Controllers
                 return NotFound();
             }
 
-            var classes = await _classRepository.GetRelatedData()
+            var classesWithoutClassTeacher = await _classRepository.GetRelatedData()
                 .Where(c =>
                     c.TeacherId == null && c.Teacher == null)
                 .ToListAsync();
@@ -115,7 +123,7 @@ namespace School.WEB.Controllers
                         c.TeacherId == id);
 
                 if (c != null)
-                    classes.Add(c);
+                    classesWithoutClassTeacher.Add(c);
             }
             catch (Exception)
             {
@@ -124,25 +132,32 @@ namespace School.WEB.Controllers
 
             var subjects = await _subjectRepository.GetAll();
 
+            var classes = await _classRepository.GetAll();
+
             try
             {
                 var selectedClass = _classRepository.GetRelatedData()
                     .FirstOrDefault(c =>
                         c.TeacherId == id);
 
-                ViewData["Classes"] = new SelectList(
-                    classes,
+                ViewData["ClassesWithoutClassTeacher"] = new SelectList(
+                    classesWithoutClassTeacher,
                     "Id",
                     "Name",
                     selectedClass);
             }
             catch (Exception)
             {
-                ViewData["Classes"] = new SelectList(
-                    classes,
+                ViewData["ClassesWithoutClassTeacher"] = new SelectList(
+                    classesWithoutClassTeacher,
                     "Id",
                     "Name");
             }
+
+            ViewData["Classes"] = new SelectList(
+                classes,
+                "Id",
+                "Name");
 
             ViewData["Subjects"] = new SelectList(
                 subjects,
@@ -182,9 +197,11 @@ namespace School.WEB.Controllers
 
                 await _teacherRepository.SaveChanges();
 
-                teacher = await _teacherRepository.GetOneRelated(model.Id);
+                teacher = await _teacherRepository.GetOne(model.Id);
 
-                teacher.Subjects.Clear();
+                teacher.SubjectId = model.SubjectId;
+
+                teacher.Subject = await _subjectRepository.GetOne(model.SubjectId);
 
                 _teacherRepository.Update(teacher);
 
@@ -192,16 +209,24 @@ namespace School.WEB.Controllers
 
                 teacher = await _teacherRepository.GetOneRelated(model.Id);
 
-                foreach (var t in model.SubjectIds)
-                    teacher.Subjects
-                        .Add(await _subjectRepository
+                teacher.Classes.Clear();
+
+                _teacherRepository.Update(teacher);
+
+                await _teacherRepository.SaveChanges();
+
+                teacher = await _teacherRepository.GetOneRelated(model.Id);
+
+                foreach (var t in model.ClassIds)
+                    teacher.Classes
+                        .Add(await _classRepository
                             .GetOne(t));
 
                 _teacherRepository.Update(teacher);
 
                 await _teacherRepository.SaveChanges();
 
-                TempData.Put("Result", 
+                TempData.Put("Result",
                     new OperationResult(
                         true,
                         $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
@@ -225,19 +250,19 @@ namespace School.WEB.Controllers
             _teacherRepository.Delete(teacher);
 
             await _teacherRepository.SaveChanges();
-            
+
             teacher = await _teacherRepository.GetOne(id);
 
             if (teacher == null)
             {
-                TempData.Put("Result", 
+                TempData.Put("Result",
                     new OperationResult(
                         true,
                         $"Teacher: with id: {id} was deleted at {DateTime.Now.ToShortTimeString()}"));
             }
             else
             {
-                TempData.Put("Result", 
+                TempData.Put("Result",
                     new OperationResult(
                         false,
                         $"Teacher: with id: {id} wasn't deleted"));
@@ -258,15 +283,38 @@ namespace School.WEB.Controllers
             }
 
             var @class = _classRepository
-                             .GetAll()
-                             .Result
-                             .FirstOrDefault(c =>
-                                 c.TeacherId == teacher.Id)
-                             ?.Name ??
-                         "no class";
+                .GetAll()
+                .Result
+                .FirstOrDefault(c =>
+                    c.TeacherId == teacher.Id);
+
+            ClassModel classModel = null;
+
+            if (@class != null)
+            {
+                classModel = new ClassModel
+                {
+                    Id = @class.Id,
+                    Name = @class.Name
+                };
+            }
+
+            SubjectModel subjectModel = null;
+
+            var subject = await _subjectRepository.GetOne(teacher.SubjectId);
+
+            if (subject != null)
+            {
+                subjectModel = new SubjectModel()
+                {
+                    Id = subject.Id,
+                    Name = subject.Name
+                };
+            }
 
             var model = new DetailsTeacherViewModel(teacher,
-                @class);
+                classModel,
+                subjectModel);
 
             return View(model);
         }

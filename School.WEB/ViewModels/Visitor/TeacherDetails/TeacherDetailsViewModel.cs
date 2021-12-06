@@ -18,21 +18,32 @@ namespace School.WEB.ViewModels.Visitor.TeacherDetails
 
         public string Image { get; set; }
         
-        public IEnumerable<string> SubjectNames { get; set; }
+        public SubjectModel Subject { get; set; }
 
-        public string ClassName { get; set; }
+        public ClassModel Class { get; set; }
         
-        public TeacherDetailsViewModel(Teacher teacher, string className)
+        public IEnumerable<ClassModel> Classes { get; set; }
+        
+        public TeacherDetailsViewModel(Teacher teacher, ClassModel @class)
         {
-
             Id = teacher.Id;
             FirstName = teacher.FirstName;
             Image = teacher.Image;
             LastName = teacher.LastName;
             Gender = teacher.Gender;
             Age = teacher.Age;
-            SubjectNames = teacher.Subjects.Select(s => s.Name);
-            ClassName = className;
+            Subject = new SubjectModel
+            {
+                Id = teacher.Subject.Id,
+                Name = teacher.Subject.Name
+            };
+            Class = @class;
+            Classes = from form in teacher.Classes
+                select new ClassModel
+                {
+                    Id = form.Id,
+                    Name = form.Name
+                };
         }
     }
 }

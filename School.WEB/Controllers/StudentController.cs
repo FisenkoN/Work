@@ -62,10 +62,9 @@ namespace School.WEB.Controllers
                 return NotFound();
             }
 
-            var @class = await _classRepository.GetOne(student?.ClassId);
+            var @class = await _classRepository.GetOne(student.ClassId);
 
-            var model = new StudentDetailsViewModel(student,
-                @class);
+            var model = new StudentDetailsViewModel(student, @class);
 
             return View(model);
         }
@@ -134,26 +133,6 @@ namespace School.WEB.Controllers
 
                 await _studentRepository.SaveChanges();
 
-                student = await _studentRepository.GetOneRelated(model.Id);
-
-                student.Subjects.Clear();
-
-                _studentRepository.Update(student);
-
-                await _studentRepository.SaveChanges();
-
-                student = await _studentRepository.GetOneRelated(model.Id);
-
-                foreach (var subjectId in model.SubjectIds)
-                {
-                    student.Subjects.Add(await _subjectRepository.GetOne(subjectId));
-                    await _studentRepository.SaveChanges();
-                }
-
-                _studentRepository.Update(student);
-
-                await _studentRepository.SaveChanges();
-                
                 TempData.Put("Result", 
                     new OperationResult(
                     true,

@@ -16,7 +16,5 @@ namespace School.WEB.ViewModels.Student.StudentDetails
         public int Age { get; set; }
         
         public Gender Gender { get; set; }
-
-        public IEnumerable<Subject> Subjects { get; set; }
     }
 }

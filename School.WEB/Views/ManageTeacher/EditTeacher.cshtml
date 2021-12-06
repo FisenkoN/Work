@@ -36,17 +36,25 @@
                 <select asp-for="Gender" required class="form-control" asp-items="Html.GetEnumSelectList<Gender>()"></select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
-            @if ((ViewBag.Classes as SelectList)!.Any())
+            @if ((ViewBag.ClassesWithoutClassTeacher as SelectList)!.Any())
             {
                 <div class="form-group">
                     <label asp-for="ClassId" class="control-label"></label>
-                    <select asp-for="ClassId" class="form-control" asp-items="ViewBag.Classes"></select>
+                    <select asp-for="ClassId" class="form-control" asp-items="ViewBag.ClassesWithoutClassTeacher"></select>
                     <span asp-validation-for="ClassId" class="text-danger"></span>
                 </div>
             }
+            @if ((ViewBag.Subjects as SelectList)!.Any())
+            {
+                <div class="form-group">
+                    <label asp-for="SubjectId" class="control-label"></label>
+                    <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.Subjects"></select>
+                    <span asp-validation-for="SubjectId" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
-                <label asp-for="SubjectIds" class="control-label"></label>
-                <select asp-for="SubjectIds" class="form-control" multiple="multiple" asp-items="ViewBag.Subjects"></select>
+                <label asp-for="ClassIds" class="control-label"></label>
+                <select asp-for="ClassIds" class="form-control" multiple="multiple" asp-items="ViewBag.Classes"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
@@ -54,7 +62,7 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div>
-                <a asp-action="@nameof(ManageTeacherController.GetTeachers)">
+                <a asp-action="@nameof(ManageTeacherController.GetTeachers)"  class="btn btn-secondary">
                     Back to List
                 </a>
             </div>

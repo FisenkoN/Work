@@ -31,12 +31,12 @@ namespace School.WEB.Controllers
         public IActionResult Login()
         {
             var model = new LoginModel();
-            
+
             if (TempData["Result"] != null)
             {
                 model.OperationResult = TempData.Get<OperationResult>("Result");
             }
-            
+
             return View(model);
         }
 
@@ -53,7 +53,7 @@ namespace School.WEB.Controllers
                 if (user != null)
                 {
                     await Authenticate(model.Email);
-                    
+
                     TempData.Put(
                         "Result",
                         new OperationResult(
@@ -80,7 +80,7 @@ namespace School.WEB.Controllers
             {
                 ViewBag.Result = TempData.Get<OperationResult>("Result");
             }
-            
+
             return View();
         }
 
@@ -102,7 +102,7 @@ namespace School.WEB.Controllers
                             Email = model.Email,
                             Password = model.Password
                         });
-                        
+
                         await _authRepository.SaveChanges();
 
                         await Authenticate(model.Email);
@@ -112,19 +112,19 @@ namespace School.WEB.Controllers
                             new OperationResult(
                                 true,
                                 $"User {model.Email} was added at {DateTime.Now.ToShortTimeString()}"));
-                        
+
                         return RedirectToAction("Index", "Home");
                     }
                     catch (DbUpdateException)
                     {
                         _authRepository.CleanLocal();
-                        
+
                         TempData.Put(
                             "Result",
                             new OperationResult(
                                 false,
                                 $"Email {model.Email} is already registered"));
-                        
+
                         return RedirectToAction("Register", "Account");
                     }
 
@@ -187,11 +187,11 @@ namespace School.WEB.Controllers
             await client.AuthenticateAsync(
                 "nazarii.fisenko@gmail.com",
                 await GetPassword());
-            
+
             await client.SendAsync(emailMessage);
 
             await client.DisconnectAsync(true);
-            
+
             TempData.Put(
                 "Result",
                 new OperationResult(
@@ -205,8 +205,7 @@ namespace School.WEB.Controllers
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, 
-                    userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };
 
             var id = new ClaimsIdentity(
@@ -233,16 +232,19 @@ namespace School.WEB.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> ChangePassword()
         {
-            var model = new ChangePasswordModel { Email = User.Identity.Name };
-            
+            var model = new ChangePasswordModel
+            {
+                Email = User.Identity.Name
+            };
+
             if (TempData["Result"] != null)
             {
                 model.OperationResult = TempData.Get<OperationResult>("Result");
             }
-            
+
             return View(model);
         }
-        
+
         [Authorize]
         [HttpPost("[action]")]
         public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
@@ -254,11 +256,11 @@ namespace School.WEB.Controllers
                 if (user != null)
                 {
                     user.Password = model.NewPassword;
-                    
+
                     _authRepository.Update(user);
 
                     await _authRepository.SaveChanges();
-                    
+
                     TempData.Put(
                         "Result",
                         new OperationResult(
@@ -273,7 +275,7 @@ namespace School.WEB.Controllers
                     new OperationResult(
                         false,
                         $"Password wasn't changed. You entered wrong old password!"));
-                    
+
                 return RedirectToAction("ChangePassword", "Account");
             }
 
@@ -283,7 +285,7 @@ namespace School.WEB.Controllers
         private async Task<string> GetPassword()
         {
             const string path = @"password.txt";
-            
+
             using var sr = new StreamReader(path);
 
             return await sr.ReadToEndAsync();

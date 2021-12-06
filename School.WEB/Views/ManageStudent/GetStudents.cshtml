@@ -6,71 +6,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
 <partial name="_OperationMessage" for="@Model.OperationResult"/>
 
-<td>
-    <a asp-action="@nameof(ManageStudentController.CreateStudent)">
-        Create
-    </a>
-</td>
-
-<h1>Students list</h1>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th></th>
-        <th>
-            First Name
-        </th>
-        <th>
-            Last Name
-        </th>
-        <th>
-            Age
-        </th>
-        <th>
-            Gender
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.Students)
-    {
-        <tr>
-            <td>
-                <img height="50" src="@item.Image" alt="avatar"/>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                <a asp-action="@nameof(ManageStudentController.EditStudent)" asp-route-id="@item.Id">
-                    Edit
-                </a>
-                <a asp-action="@nameof(ManageStudentController.DeleteStudent)" asp-route-id="@item.Id">
-                    Delete
-                </a>
-                <a asp-action="@nameof(ManageStudentController.DetailsStudent)" asp-route-id="@item.Id">
-                    Details
-                </a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<body>
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Manage <b>Students</b></h2>
+                </div>
+                <div class="col-sm-6">
+                    <a asp-action="@nameof(ManageStudentController.CreateStudent)" class="btn btn-success">
+                        <i class="material-icons">&#xE147;</i> 
+                        <span>Add New Student</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Avatar</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach(var item in Model.Students)
+            {<tr>
+                 <td>
+                     <a asp-action="@nameof(ManageStudentController.DetailsStudent)" asp-route-id="@item.Id">
+                         <img height="50" src="@item?.Image" alt="avatar"/>
+                     </a>
+                 </td>
+                 <td>
+                     @item.FirstName
+                 </td>
+                 <td>
+                     @item.LastName
+                 </td>
+                 <td>
+                     @item.Age
+                 </td>
+                 <td>
+                     @item.Gender
+                 </td>
+                 <td>
+                     <a asp-action="@nameof(ManageStudentController.EditStudent)" asp-route-id="@item.Id" class="edit">
+                         <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                     </a>
+                     <a asp-action="@nameof(ManageStudentController.DeleteStudent)" asp-route-id="@item.Id" class="delete">
+                         <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                     </a>
+                     <a asp-action="@nameof(ManageStudentController.DetailsStudent)" asp-route-id="@item.Id" class="details">
+                         <i class="material-icons" data-toggle="tooltip" title="Details">&#xe417;</i>
+                     </a>
+                 </td>
+             </tr>}
+            </tbody>
+        </table>
+    </div>
+</div>
 <div>
-    <a asp-action="@nameof(AdminController.Index)" asp-controller="Admin">
+    <a asp-action="@nameof(AdminController.Index)" asp-controller="Admin"  class="btn btn-warning">
         Back to Admin form
     </a>
 </div>
+</body>

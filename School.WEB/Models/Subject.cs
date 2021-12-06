@@ -10,14 +10,10 @@ namespace School.WEB.Models
         public string Name { get; set; }
 
         public ICollection<Teacher> Teachers { get; set; }
-
-        public ICollection<Student> Students { get; set; }
         
         public Subject()
         {
             Teachers = new List<Teacher>();
-
-            Students = new List<Student>();
         }
     }
 }

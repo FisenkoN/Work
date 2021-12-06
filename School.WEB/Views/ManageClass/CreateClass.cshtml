@@ -21,11 +21,11 @@
                 <input asp-for="Name" minlength="2" maxlength="5" required class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            @if ((ViewBag.Teachers as SelectList)!.Any())
+            @if ((ViewBag.ClassTeachers as SelectList)!.Any())
             {
                 <div class="form-group">
                     <label asp-for="TeacherId" class="control-label"></label>
-                    <select asp-for="TeacherId" class="form-control" asp-items="ViewBag.Teachers">
+                    <select asp-for="TeacherId" class="form-control" asp-items="ViewBag.ClassTeachers">
                         <option>-none-</option>
                     </select>
                 </div>
@@ -34,8 +34,12 @@
                 <p>Students<p/>
                 @Html.ListBoxFor(s => s.StudentIds, (MultiSelectList)ViewBag.Students)
             </div>
+            <div class="form-group">
+                <p>Teachers<p/>
+                @Html.ListBoxFor(s => s.TeacherIds, (MultiSelectList)ViewBag.Teachers)
+            </div>
             <div>
-                <a asp-action="@nameof(ManageClassController.GetClasses)">
+                <a asp-action="@nameof(ManageClassController.GetClasses)" class="btn btn-secondary" >
                     Back to List
                 </a>
             </div>

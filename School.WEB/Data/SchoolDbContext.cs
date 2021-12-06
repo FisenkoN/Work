@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using School.WEB.Models;
 
@@ -251,118 +252,51 @@ namespace School.WEB.Data
             {
                 Name = "10A",
                 Teacher = t1,
-                TeacherId = t1.Id
+                TeacherId = t1.Id,
+                Teachers = new List<Teacher>{t1,t2,t3,t7}
             };
 
             var c2 = new Class
             {
                 Name = "10B",
                 Teacher = t6,
-                TeacherId = t6.Id
+                TeacherId = t6.Id,
+                Teachers = new List<Teacher>{t1,t2,t3,t9,t10}
             };
 
             var c3 = new Class
             {
                 Name = "11A",
                 Teacher = t10,
-                TeacherId = t10.Id
+                TeacherId = t10.Id,
+                Teachers = new List<Teacher>{t1,t4,t6,t7}
             };
 
             var c4 = new Class
             {
                 Name = "10C",
                 Teacher = t3,
-                TeacherId = t3.Id
+                TeacherId = t3.Id,
+                Teachers = new List<Teacher>{t1,t2,t9,t8}
             };
 
             var c5 = new Class
             {
                 Name = "11B",
                 Teacher = t2,
-                TeacherId = t2.Id
+                TeacherId = t2.Id,
+                Teachers = new List<Teacher>{t1,t2,t3,t7,t9,t10,t5}
             };
 
             var c6 = new Class
             {
                 Name = "9A",
                 Teacher = t9,
-                TeacherId = t9.Id
+                TeacherId = t9.Id,
+                Teachers = new List<Teacher>{t6,t2,t3,t8}
             };
 
-            Classes.AddRange(c1,
-                c2,
-                c3,
-                c4,
-                c5,
-                c6);
-
-            var subjPacket1 = new List<Subject>
-            {
-                subj1,
-                subj2,
-                subj4,
-                subj9,
-                subj5,
-                subj12,
-                subj11
-            };
-
-            var subjPacket2 = new List<Subject>
-            {
-                subj3,
-                subj2,
-                subj4,
-                subj9,
-                subj6,
-                subj12,
-                subj8
-            };
-
-            var subjPacket3 = new List<Subject>
-            {
-                subj1,
-                subj2,
-                subj6,
-                subj3,
-                subj7,
-                subj10,
-                subj11
-            };
-
-            var subjPacket4 = new List<Subject>
-            {
-                subj1,
-                subj6,
-                subj7,
-                subj8
-            };
-
-            var subjPacket5 = new List<Subject>
-            {
-                subj10,
-                subj12,
-                subj4,
-                subj7,
-                subj5,
-                subj2,
-                subj11
-            };
-
-            var subjPacket6 = new List<Subject>
-            {
-                subj10,
-                subj12,
-                subj4,
-                subj7,
-                subj5,
-                subj2,
-                subj11,
-                subj1,
-                subj3,
-                subj6,
-                subj8,
-                subj9
-            };
+            Classes.AddRange(c1, c2, c3, c4, c5, c6);
 
             SaveChanges();
 
@@ -421,8 +355,7 @@ namespace School.WEB.Data
                 Gender = Gender.Male,
                 Image = "https://i.pinimg.com/564x/8a/df/f2/8adff2075693ad9460ef9dc9899b0d5a.jpg"
             };
-
-
+            
             var s6 = new Student
             {
                 FirstName = "Carolyn",
@@ -725,131 +658,9 @@ namespace School.WEB.Data
                 Image = "https://i.pinimg.com/564x/7c/57/47/7c5747448271c2e48c00c5257803a7fd.jpg"
             };
 
-            Students.AddRange(
-                s1,
-                s2,
-                s3,
-                s4,
-                s5,
-                s6,
-                s7,
-                s8,
-                s9,
-                s10,
-                s11,
-                s12,
-                s13,
-                s14,
-                s15,
-                s16,
-                s17,
-                s18,
-                s19,
-                s20,
-                s21,
-                s22,
-                s23,
-                s24,
-                s25,
-                s26,
-                s27,
-                s28,
-                s29,
-                s30,
-                s31,
-                s32,
-                s33);
-
-            SaveChanges();
-
-            foreach (var subject in subjPacket3)
-                s28.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket6)
-                s29.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket1)
-                s30.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket1)
-                s18.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket4)
-                s13.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket2)
-                s12.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket4)
-                s11.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket4)
-                s14.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket3)
-                s15.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket6)
-                s16.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket1)
-                s17.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket5)
-                s25.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket3)
-                s20.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket3)
-                s21.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket6)
-                s19.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket6)
-                s22.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket2)
-                s23.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket5)
-                s24.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket6)
-                s10.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket2)
-                s9.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket6)
-                s8.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket5)
-                s7.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket1)
-                s6.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket4)
-                s5.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket6)
-                s26.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket2)
-                s27.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket6)
-                s31.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket1)
-                s32.Subjects.Add(subject);
-
-            foreach (var subject in subjPacket3)
-                s33.Subjects.Add(subject);
-
-
+            Students.AddRange(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20,
+                s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33);
+            
             SaveChanges();
         }
 
@@ -859,6 +670,14 @@ namespace School.WEB.Data
             Database.EnsureCreated();
 
             InitializeData();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Teacher>()
+                .HasOne(t => t.Class)
+                .WithOne(c => c.Teacher)
+                .HasForeignKey<Class>(c => c.TeacherId);
         }
     }
 }

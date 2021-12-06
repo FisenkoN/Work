@@ -38,9 +38,6 @@ namespace School.WEB.ViewModels.ManageStudent.EditCreateStudent
         [DisplayName("Class")]
         public int? ClassId { get; set; }
 
-        [DisplayName("Subjects")]
-        public IEnumerable<int> SubjectIds { get; set; }
-
         public EditCreateStudentViewModel()
         {
             
@@ -55,7 +52,6 @@ namespace School.WEB.ViewModels.ManageStudent.EditCreateStudent
             Image = student.Image;
             Gender = student.Gender;
             ClassId = student.ClassId;
-            SubjectIds = student.Subjects.Select(s => s.Id);
         }
     }
 }

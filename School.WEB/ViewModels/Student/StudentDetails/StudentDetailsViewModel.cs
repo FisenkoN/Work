@@ -17,7 +17,6 @@ namespace School.WEB.ViewModels.Student.StudentDetails
                 FirstName = student.FirstName,
                 Gender = student.Gender,
                 LastName = student.LastName,
-                Subjects = student.Subjects,
                 Image = student.Image
             };
 

@@ -89,12 +89,19 @@ namespace School.WEB.Controllers
                 return NotFound();
             }
 
-            var className = _classRepository.GetRelatedData()
-                                .FirstOrDefault(p => p.TeacherId == teacher.Id)?.Name
-                            ?? "no class";
+            var @class = _classRepository
+                .GetRelatedData()
+                .FirstOrDefault(p => p.TeacherId == teacher.Id);
 
-            var model = new TeacherDetailsViewModel(teacher,
-                className);
+            var classModel = @class != null
+                ? new ViewModels.Visitor.TeacherDetails.ClassModel()
+                {
+                    Id = @class.Id,
+                    Name = @class.Name
+                }
+                : null;
+
+            var model = new TeacherDetailsViewModel(teacher,classModel);
 
             return View(model);
         }

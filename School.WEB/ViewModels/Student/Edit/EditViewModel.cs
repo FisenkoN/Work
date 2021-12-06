@@ -39,9 +39,6 @@ namespace School.WEB.ViewModels.Student.Edit
         [DisplayName("Image")]
         public string Image { get; set; }
 
-        [DisplayName("Subjects")]
-        public IEnumerable<int> SubjectIds { get; set; }
-
         public EditViewModel()
         {
             
@@ -56,7 +53,6 @@ namespace School.WEB.ViewModels.Student.Edit
             LastName = student.LastName;
             Image = student.Image;
             Gender = student.Gender;
-            SubjectIds = student.Subjects.Select(s => s.Id);
         }
     }
 }

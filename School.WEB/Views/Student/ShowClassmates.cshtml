@@ -6,6 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <h1>Classmates</h1>
 
 @{
@@ -16,16 +18,19 @@
             <tr>
                 <th></th>
                 <th>
-                    <p>First Name</p>
+                    First Name
                 </th>
                 <th>
-                    <p>Last Name</p>
+                    Last Name
                 </th>
                 <th>
-                    <p>Age</p>
+                    Age
                 </th>
                 <th>
-                    <p>Gender</p>
+                    Gender
+                </th>
+                <th>
+                    Action
                 </th>
             </tr>
             </thead>
@@ -34,7 +39,9 @@
             {
                 <tr>
                     <td>
-                        <img height="50" src="@item.Image" alt="avatar"/>
+                        <a asp-action="@nameof(StudentController.StudentDetails)" asp-route-id="@item.Id" class="details">
+                            <img height="50" src="@item.Image" alt="avatar"/>
+                        </a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FirstName)
@@ -48,6 +55,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Gender)
                     </td>
+                    <td>
+                        <a asp-action="@nameof(StudentController.StudentDetails)" asp-route-id="@item.Id" class="details">
+                            <i class="material-icons" data-toggle="tooltip" title="Details">&#xe417;</i>
+                        </a>
+                    </td>
                 </tr>
             }
             </tbody>
@@ -59,7 +71,7 @@
     }
 }
 <div>
-    <a asp-action="@nameof(StudentController.Index)">
+    <a asp-action="@nameof(StudentController.Index)" class="btn btn-warning">
         Back to categories
     </a>
 </div>

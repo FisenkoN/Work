@@ -13,21 +13,9 @@ namespace School.WEB.Extensions
         public static Subject To(
             this Subject subject,
             CreateSubjectViewModel model,
-            IStudentRepository studentRepository,
             ITeacherRepository teacherRepository)
         {
             subject.Name = model.Name;
-            subject.Students = model.StudentIds != null
-                ? studentRepository
-                    .GetAll()
-                    .Result
-                    .Where(i =>
-                        model.StudentIds
-                            .ToList()
-                            .Exists(t =>
-                                t == i.Id))
-                    .ToList()
-                : null;
             subject.Teachers = model.TeacherIds != null
                 ? teacherRepository
                     .GetAll()
@@ -46,7 +34,7 @@ namespace School.WEB.Extensions
         public static Class To(
             this Class @class,
             EditCreateClassViewModel model,
-            IStudentRepository repository)
+            IStudentRepository repository, ITeacherRepository teacherRepository)
         {
             @class.Name = model.Name;
             @class.TeacherId = model.TeacherId;
@@ -61,14 +49,24 @@ namespace School.WEB.Extensions
                                 t == i.Id))
                     .ToList()
                 : null;
+            @class.Teachers = model.TeacherIds != null
+                ? teacherRepository
+                    .GetAll()
+                    .Result
+                    .Where(i =>
+                        model.TeacherIds
+                            .ToList()
+                            .Exists(t =>
+                                t == i.Id))
+                    .ToList()
+                : null;
 
             return @class;
         }
 
         public static Student To(
             this Student student,
-            EditCreateStudentViewModel model,
-            ISubjectRepository subjectRepository)
+            EditCreateStudentViewModel model)
         {
             student.Age = model.Age;
             student.ClassId = model.ClassId;
@@ -76,17 +74,6 @@ namespace School.WEB.Extensions
             student.Gender = model.Gender;
             student.FirstName = model.FirstName;
             student.Image = model.Image;
-            student.Subjects = model.SubjectIds != null
-                ? subjectRepository
-                    .GetAll()
-                    .Result
-                    .Where(i =>
-                        model.SubjectIds
-                            .ToList()
-                            .Exists(t =>
-                                t == i.Id))
-                    .ToList()
-                : null;
 
             return student;
         }
@@ -94,25 +81,26 @@ namespace School.WEB.Extensions
         public static Teacher To(
             this Teacher teacher,
             EditCreateTeacherViewModel model,
-            ISubjectRepository subjectRepository)
+            IClassRepository classRepository)
         {
             teacher.Age = model.Age;
             teacher.ClassId = model.ClassId;
+            teacher.SubjectId = model.SubjectId;
+            teacher.Classes = model.ClassIds != null
+                ? classRepository
+                    .GetAll()
+                    .Result
+                    .Where(i =>
+                        model.ClassIds
+                            .ToList()
+                            .Exists(t =>
+                                t == i.Id))
+                    .ToList()
+                : null;
             teacher.FirstName = model.FirstName;
             teacher.LastName = model.LastName;
             teacher.Gender = model.Gender;
             teacher.Image = model.Image;
-            teacher.Subjects = model.SubjectIds != null
-                ? subjectRepository
-                    .GetAll()
-                    .Result
-                    .Where(i =>
-                        model.SubjectIds
-                            .ToList()
-                            .Exists(s =>
-                                s == i.Id))
-                    .ToList()
-                : null;
 
             return teacher;
         }

@@ -17,7 +17,7 @@
         <th>
             Full Name
         </th>
-        <th>Details / Classmates / ClassTeacher</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -25,23 +25,30 @@
     {
         <tr>
             <td>
-                <img height="50" src="@item.Image" alt="avatar"/>
+                <a asp-action="@nameof(StudentController.StudentDetails)" asp-route-id="@item.Id" class="details">
+                    <img height="50" src="@item.Image" alt="avatar"/>
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                <a asp-action="@nameof(StudentController.StudentDetails)" asp-route-id="@item.Id">
-                    Details
+                <a asp-action="@nameof(StudentController.StudentDetails)" asp-route-id="@item.Id" class="btn btn-primary">
+                    <span>Details</span>
                 </a>
-                <a asp-action="@nameof(StudentController.ShowClassmates)" asp-route-id="@item.Id">
-                    Show classmates
+                <a asp-action="@nameof(StudentController.ShowClassmates)" asp-route-id="@item.Id" class="btn btn-secondary">
+                    <span>Classmates</span>
                 </a>
-                <a asp-action="@nameof(StudentController.ShowClassTeacher)" asp-route-id="@item.Id">
-                    Show class teacher
+                <a asp-action="@nameof(StudentController.ShowClassTeacher)" asp-route-id="@item.Id" class="btn btn-success">
+                    <span>Class teacher</span>
                 </a>
             </td>
         </tr>
     }
     </tbody>
 </table>
+<div>
+    <a asp-action="@nameof(StudentController.Index)" class="btn btn-warning">
+        Back to categories
+    </a>
+</div>
