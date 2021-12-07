@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using School.WEB.Controllers;
@@ -750,6 +751,11 @@ namespace School.WEB.Data
                 .HasOne(u => u.Teacher)
                 .WithOne(a => a.User)
                 .HasForeignKey<Teacher>(p => p.UserId);
+            
+            modelBuilder.Entity<Teacher>()
+                .HasOne(t => t.Class)
+                .WithOne(c => c.Teacher)
+                .HasForeignKey<Class>(c => c.TeacherId);
                 
         }
 
@@ -759,14 +765,6 @@ namespace School.WEB.Data
             Database.EnsureCreated();
 
             InitializeData();
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Teacher>()
-                .HasOne(t => t.Class)
-                .WithOne(c => c.Teacher)
-                .HasForeignKey<Class>(c => c.TeacherId);
         }
     }
 }

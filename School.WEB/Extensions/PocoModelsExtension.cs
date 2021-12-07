@@ -90,6 +90,15 @@ namespace School.WEB.Extensions
             teacher.SubjectId = model.SubjectId;
             teacher.Classes = model.ClassIds != null
                 ? classRepository
+                    .GetAll()
+                    .Result
+                    .Where(i =>
+                        model.ClassIds
+                            .ToList()
+                            .Exists(t =>
+                                t == i.Id))
+                    .ToList()
+                : null;
             teacher.FirstName = model.FirstName;
             teacher.LastName = model.LastName;
             teacher.Gender = model.Gender;

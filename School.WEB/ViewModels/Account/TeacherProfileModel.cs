@@ -25,16 +25,16 @@ namespace School.WEB.ViewModels.Account
         
         public string ClassName { get; set; }
         
-        public IEnumerable<string> SubjectNames { get; set; }
+        public string SubjectName { get; set; }
         
-        public TeacherProfileModel(Teacher teacher, string className, IEnumerable<string> subjectNames, User user, Role role)
+        public TeacherProfileModel(Teacher teacher, string className, string subjectName, User user, Role role)
         {
             Id = teacher.Id;
             ClassName = className;
             FirstName = teacher.FirstName;
             LastName = teacher.LastName;
             Age = teacher.Age;
-            SubjectNames = subjectNames;
+            SubjectName = subjectName;
             Gender = teacher.Gender;
             Image = teacher.Image;
             Email = user.Email;

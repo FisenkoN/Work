@@ -67,7 +67,7 @@ namespace School.WEB.Controllers
             var classesWithoutClassTeacher = _classRepository.GetRelatedData()
                 .Where(c =>
                     c.TeacherId == null && c.Teacher == null);
-            
+
             if (email != "no")
             {
                 var user = await _userRepository.GetForEmail(email);
@@ -103,32 +103,35 @@ namespace School.WEB.Controllers
             {
                 await _teacherRepository
                     .Add(new Teacher()
-                        .To(model,
-                            _classRepository));
+                        .To(model, _classRepository));
 
                 await _teacherRepository.SaveChanges();
                 
-                var u = await _userRepository.GetOne(model.UserId);
+                if (model.UserId != null)
+                {
+                    var u = await _userRepository.GetOne(model.UserId);
 
-                var t = await _teacherRepository.GetOneRelated(
-                    _teacherRepository.GetAll()
-                        .Result
-                        .Count);
+                    var t = await _teacherRepository.GetOneRelated(
+                        _teacherRepository.GetAll()
+                            .Result
+                            .Count);
+                    
+                    u.TeacherId = t.Id;
 
-                u.TeacherId = t.Id;
-
-                u.Teacher = t;
-
-                await _userRepository.SaveChanges();
-
+                    u.Teacher = t;
+                    
+                    await _userRepository.SaveChanges();
+                }
+                
                 TempData.Put("Result",
                     new OperationResult(
                         true,
                         $"Teacher: {model.FirstName + " " + model.LastName} was created at {DateTime.Now.ToShortTimeString()}"));
 
                 return _roleRepository.GetForEmail(User.Identity.Name)
-                    .Result.Name == "admin"
-                    ? RedirectToAction("GetTeachers", 
+                           .Result.Name ==
+                       "admin"
+                    ? RedirectToAction("GetTeachers",
                         "ManageTeacher")
                     : RedirectToAction("Index",
                         "Home");
@@ -270,8 +273,9 @@ namespace School.WEB.Controllers
                         $"Teacher: {_teacherRepository.GetOne(model.Id).Result.FullName} was edited at {DateTime.Now.ToShortTimeString()}"));
 
                 return _roleRepository.GetForEmail(User.Identity.Name)
-                    .Result.Name == "admin"
-                    ? RedirectToAction("GetTeachers", 
+                           .Result.Name ==
+                       "admin"
+                    ? RedirectToAction("GetTeachers",
                         "ManageTeacher")
                     : RedirectToAction("Index",
                         "Home");
@@ -295,9 +299,9 @@ namespace School.WEB.Controllers
 
             _userRepository.Delete(
                 _userRepository.GetOne(
-                    _teacherRepository.GetOneRelated(id)
-                        .Result
-                        .UserId)
+                        _teacherRepository.GetOneRelated(id)
+                            .Result
+                            .UserId)
                     .Result);
 
             await _teacherRepository.SaveChanges();
@@ -319,7 +323,8 @@ namespace School.WEB.Controllers
                         $"Teacher: with id: {id} wasn't deleted"));
             }
 
-            return RedirectToAction("GetTeachers", "ManageTeacher");
+            return RedirectToAction("GetTeachers",
+                "ManageTeacher");
 
         }
 

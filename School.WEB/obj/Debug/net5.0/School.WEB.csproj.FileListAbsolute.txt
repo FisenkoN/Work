@@ -586,3 +586,4 @@ Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Teacher\Index.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Teacher\ShowClassmates.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Teacher\ShowClassTeacher.cshtml.g.cs
 Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Teacher\StudentDetails.cshtml.g.cs
+Z:\TASKS\School.WEB\obj\Debug\net5.0\Razor\Views\Student\Edit.cshtml.g.cs

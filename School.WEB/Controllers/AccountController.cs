@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
@@ -74,7 +73,7 @@ namespace School.WEB.Controllers
 
                 if (user != null)
                 {
-                    await Authenticate(model.Email);
+                    await Authenticate(user);
                     
                     TempData.Put(
                         "Result",
@@ -373,13 +372,11 @@ namespace School.WEB.Controllers
 
             var className = (await _classRepository.GetOne(student.ClassId))?.Name ?? "no class";
 
-            var subjectNames = student.Subjects.Select(s => s.Name);
-
             var user = await _authRepository.Get(student.UserId.Value);
 
             var role = await _roleRepository.Get(user.RoleId.Value);
 
-            var model = new StudentProfileModel(student, className, subjectNames, user, role);
+            var model = new StudentProfileModel(student, className, user, role);
 
             return View(model);
         }
@@ -413,13 +410,13 @@ namespace School.WEB.Controllers
                              ?.Name ??
                          "no class";
 
-            var subjectNames = teacher.Subjects.Select(s => s.Name);
+            var subjectName = teacher.Subject != null ? teacher.Subject.Name : null;
 
             var user = await _authRepository.Get(teacher.UserId.Value);
 
             var role = await _roleRepository.Get(user.RoleId.Value);
 
-            var model = new TeacherProfileModel(teacher, className, subjectNames, user, role);
+            var model = new TeacherProfileModel(teacher, className, subjectName, user, role);
 
             return View(model);
         }

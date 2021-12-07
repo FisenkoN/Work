@@ -24,17 +24,14 @@ namespace School.WEB.ViewModels.Account
         public Gender Gender { get; set; }
         
         public string ClassName { get; set; }
-        
-        public IEnumerable<string> SubjectNames { get; set; }
 
-        public StudentProfileModel(Models.Student student, string className, IEnumerable<string> subjectNames, User user, Role role)
+        public StudentProfileModel(Models.Student student, string className, User user, Role role)
         {
             Id = student.Id;
             ClassName = className;
             FirstName = student.FirstName;
             LastName = student.LastName;
             Age = student.Age;
-            SubjectNames = subjectNames;
             Gender = student.Gender;
             Image = student.Image;
             Email = user.Email;

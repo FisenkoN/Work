@@ -94,16 +94,19 @@ namespace School.WEB.Controllers
 
                 await _studentRepository.SaveChanges();
 
-                var u = await _userRepository.GetOne(model.UserId);
+                if (model.UserId != null) 
+                {
+                    var u = await _userRepository.GetOne(model.UserId);
 
-                var s = await _studentRepository.GetOneRelated(
-                    _studentRepository.GetAll()
-                    .Result
-                    .Count);
+                    var s = await _studentRepository.GetOneRelated(
+                        _studentRepository.GetAll()
+                            .Result
+                            .Count);
 
-                u.StudentId = s.Id;
+                    u.StudentId = s.Id;
 
-                u.Student = s;
+                    u.Student = s;
+                }
 
                 await _userRepository.SaveChanges();
 
@@ -115,10 +118,8 @@ namespace School.WEB.Controllers
 
                 return _roleRepository.GetForEmail(User.Identity.Name)
                     .Result.Name == "admin"
-                    ? RedirectToAction("GetStudents",
-                        "ManageStudent")
-                    : RedirectToAction("Index",
-                        "Home");
+                    ? RedirectToAction("GetStudents", "ManageStudent")
+                    : RedirectToAction("Index", "Home");
             }
 
             return View(model);
