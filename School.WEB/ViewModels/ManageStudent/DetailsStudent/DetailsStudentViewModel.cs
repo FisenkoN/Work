@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.ManageStudent.DetailsStudent
@@ -18,19 +16,22 @@ namespace School.WEB.ViewModels.ManageStudent.DetailsStudent
 
         public string Image { get; set; }
 
-        public string ClassName { get; set; }
+        public ClassModel Class { get; set; }
 
-        public IEnumerable<string> SubjectNames { get; set; }
-
-        public DetailsStudentViewModel(Models.Student student, string className)
+        public DetailsStudentViewModel(Models.Student student)
         {
             Id = student.Id;
             FirstName = student.FirstName;
             LastName = student.LastName;
             Age = student.Age;
             Gender = student.Gender;
-            ClassName = className;
-            SubjectNames = student.Subjects.Select(s => s.Name);
+            Class = student.Class != null
+                ? new ClassModel
+                {
+                    Id = student.Class.Id,
+                    Name = student.Class.Name
+                }
+                : null;
             Image = student.Image;
         }
     }

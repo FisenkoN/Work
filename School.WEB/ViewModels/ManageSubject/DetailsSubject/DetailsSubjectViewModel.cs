@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.ManageSubject.DetailsSubject
@@ -9,16 +10,18 @@ namespace School.WEB.ViewModels.ManageSubject.DetailsSubject
 
         public string Name { get; set; }
 
-        public IEnumerable<string> TeacherNames { get; set; }
-        
-        public IEnumerable<string> StudentNames { get; set; }
+        public IEnumerable<TeacherModel> Teachers { get; set; }
 
-        public DetailsSubjectViewModel(Subject s, IEnumerable<string> tNames, IEnumerable<string> SNames)
+        public DetailsSubjectViewModel(Subject s)
         {
             Id = s.Id;
             Name = s.Name;
-            TeacherNames = tNames;
-            StudentNames = SNames;
+            Teachers = from t in s.Teachers
+                select new TeacherModel
+                {
+                    Id = t.Id,
+                    FullName = t.FullName
+                };
         }
     }
 }

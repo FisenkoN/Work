@@ -39,27 +39,72 @@
             @Html.DisplayFor(model => model.Gender)
         </dd>
         <dt class="col-sm-2">
-            <p>Class</p>
+            <p>My class</p>
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClassName)
+            @if (Model.Class != null)
+            {
+                @Html.ActionLink(Model.Class.Name, "DetailsClass", "ManageClass", new { id = Model.Class.Id })
+            }
+            else
+            {
+                <p>No class</p>
+            }
         </dd>
         <dt class="col-sm-2">
-            <p>Subjects</p>
+            <p>Subject</p>
         </dt>
         <dd class="col-sm-10">
-            @Html.ListBox("subjects", new SelectList(Model.SubjectNames))
+            @if (Model.Subject != null)
+            {
+                @Html.ActionLink(Model.Subject.Name, "DetailsSubject", "ManageSubject", new { id = Model.Subject.Id })
+            }
+            else
+            {
+                <p>No subject</p>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            <p>Classes</p>
+        </dt>
+        <dd class="col-sm-6">
+            @if (Model.Classes.Any())
+            {
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">
+                            Classes where hi teach
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var form in Model.Classes)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(form.Name,"DetailsClass","ManageClass",new {id = form.Id})
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No classes</p>
+            }
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="@nameof(ManageTeacherController.EditTeacher)" asp-route-id="@Model.Id">
+    <a asp-action="@nameof(ManageTeacherController.EditTeacher)" asp-route-id="@Model.Id" class="btn btn-primary">
         Edit
     </a>
-    <a asp-action="@nameof(ManageTeacherController.DeleteTeacher)" asp-route-id="@Model.Id">
+    <a asp-action="@nameof(ManageTeacherController.DeleteTeacher)" asp-route-id="@Model.Id" class="btn btn-danger">
         Delete
     </a>
-    <a asp-action="@nameof(ManageTeacherController.GetTeachers)">
+    <a asp-action="@nameof(ManageTeacherController.GetTeachers)" class="btn btn-secondary">
         Back to List
     </a>
 </div>

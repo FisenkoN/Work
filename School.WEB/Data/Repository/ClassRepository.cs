@@ -15,6 +15,7 @@ namespace School.WEB.Data.Repository
         {
             return DbContext.Classes
                 .Include(c => c.Students)
+                .Include(c => c.Teachers)
                 .Include(c => c.Teacher);
         }
 

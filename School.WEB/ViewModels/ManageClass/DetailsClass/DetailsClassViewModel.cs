@@ -10,16 +10,34 @@ namespace School.WEB.ViewModels.ManageClass.DetailsClass
 
         public string Name { get; set; }
 
-        public string TeacherName { get; set; }
+        public TeacherModel Teacher { get; set; }
 
-        public IEnumerable<string> StudentNames { get; set; }
+        public IEnumerable<StudentModel> StudentNames { get; set; }
+        
+        public IEnumerable<TeacherModel> TeacherNames { get; set; }
 
-        public DetailsClassViewModel(Class form, string teacherName)
+        public DetailsClassViewModel(Class form)
         {
             Id = form.Id;
             Name = form.Name;
-            TeacherName = teacherName;
-            StudentNames = form.Students.Select(s => s.FullName);
+            if (form.TeacherId != null)
+            {
+                Teacher = new TeacherModel { FullName = form.Teacher.FullName, Id = form.TeacherId.Value };
+            }
+
+            StudentNames = from studentModel in form.Students
+                select new StudentModel
+                {
+                    FullName = studentModel.FullName,
+                    Id = studentModel.Id
+                };
+            
+            TeacherNames = from teacherModel in form.Teachers
+                select new TeacherModel()
+                {
+                    FullName = teacherModel.FullName,
+                    Id = teacherModel.Id
+                };
         }
     }
 }

@@ -18,8 +18,11 @@ namespace School.WEB.ViewModels.ManageClass.EditCreateClass
 
         [DisplayName("Students")]
         public IEnumerable<int> StudentIds { get; set; }
+        
+        [DisplayName("Teachers")]
+        public IEnumerable<int> TeacherIds { get; set; }
 
-        [DisplayName("Teacher")]
+        [DisplayName("Class teacher")]
         public int? TeacherId { get; set; }
 
         public EditCreateClassViewModel()
@@ -30,6 +33,7 @@ namespace School.WEB.ViewModels.ManageClass.EditCreateClass
         {
             Id = @class.Id;
             Name = @class.Name;
+            TeacherIds = @class.Teachers.Select(t => t.Id);
             StudentIds = @class.Students.Select(s => s.Id);
             TeacherId = @class.TeacherId;
         }

@@ -35,15 +35,18 @@ namespace School.WEB.ViewModels.ManageTeacher.EditCreateTeacher
         [DisplayName("Gender")]
         public Gender Gender { get; set; }
 
-        [DisplayName("Class")]
+        [DisplayName("My class")]
         public int? ClassId { get; set; }
         
         public int? UserId { get; set; }
         
         public User User { get; set; }
 
-        [DisplayName("Subjects")]
-        public IEnumerable<int> SubjectIds { get; set; }
+        [DisplayName("Subject")]
+        public int? SubjectId { get; set; }
+        
+        [DisplayName("Classes")]
+        public IEnumerable<int> ClassIds { get; set; }
 
         public EditCreateTeacherViewModel()
         {
@@ -61,7 +64,8 @@ namespace School.WEB.ViewModels.ManageTeacher.EditCreateTeacher
             Age = teacher.Age;
             Gender = teacher.Gender;
             ClassId = teacher.ClassId;
-            SubjectIds = teacher.Subjects.Select(s => s.Id);
+            SubjectId = teacher.SubjectId;
+            ClassIds = teacher.Classes.Select(s => s.Id);
         }
     }
 }

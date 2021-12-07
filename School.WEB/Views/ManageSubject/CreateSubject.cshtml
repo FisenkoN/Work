@@ -21,15 +21,11 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StudentIds" class="control-label"></label>
-                <select asp-for="StudentIds" class="form-control" asp-items="ViewBag.Students"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="TeacherIds" class="control-label"></label>
                 <select asp-for="TeacherIds" class="form-control" asp-items="ViewBag.Teachers"></select>
             </div>
             <div>
-                <a asp-action="@nameof(ManageSubjectController.GetSubjects)">
+                <a asp-action="@nameof(ManageSubjectController.GetSubjects)"  class="btn btn-secondary">
                     Back to List
                 </a>
             </div>

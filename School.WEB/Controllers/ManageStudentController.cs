@@ -77,11 +77,6 @@ namespace School.WEB.Controllers
                 "Id",
                 "Name");
 
-            ViewData["Subjects"] = new SelectList(
-                subjects,
-                "Id",
-                "Name");
-
             return View(model);
         }
 
@@ -89,14 +84,13 @@ namespace School.WEB.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateStudent(EditCreateStudentViewModel model)
         {
-            ModelState["ClassId"]
-                .ValidationState = ModelValidationState.Valid;
+            ModelState["ClassId"].ValidationState = ModelValidationState.Valid;
 
             if (ModelState.IsValid)
             {
                 await _studentRepository
                     .Add(new Student()
-                        .To(model, _subjectRepository));
+                        .To(model));
 
                 await _studentRepository.SaveChanges();
 
@@ -143,15 +137,8 @@ namespace School.WEB.Controllers
 
             var classes = await _classRepository.GetAll();
 
-            var subjects = await _subjectRepository.GetAll();
-
             ViewData["Classes"] = new SelectList(
                 classes,
-                "Id",
-                "Name");
-
-            ViewData["Subjects"] = new SelectList(
-                subjects,
                 "Id",
                 "Name");
 
@@ -200,32 +187,6 @@ namespace School.WEB.Controllers
                 _studentRepository.Update(student);
 
                 await _studentRepository.SaveChanges();
-
-                try
-                {
-                    student = await _studentRepository.GetOneRelated(model.Id);
-
-                    student.Subjects.Clear();
-
-                    _studentRepository.Update(student);
-
-                    await _studentRepository.SaveChanges();
-
-                    student = await _studentRepository.GetOneRelated(model.Id);
-
-                    foreach (var t in model.SubjectIds)
-                        student.Subjects
-                            .Add(await _subjectRepository
-                                .GetOne(t));
-
-                    _studentRepository.Update(student);
-
-                    await _studentRepository.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    return RedirectToAction("GetStudents", "ManageStudent");
-                }
 
                 TempData.Put("Result",
                     new OperationResult(
@@ -289,13 +250,7 @@ namespace School.WEB.Controllers
                 return NotFound();
             }
 
-            var @class = student.ClassId != null
-                ? _classRepository.GetOneRelated(student.ClassId)
-                    .Result
-                    .Name
-                : "no class";
-
-            var model = new DetailsStudentViewModel(student, @class);
+            var model = new DetailsStudentViewModel(student);
 
             return View(model);
         }

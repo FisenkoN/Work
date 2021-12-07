@@ -28,8 +28,6 @@ namespace School.WEB.Models
         [ForeignKey("ClassId")] 
         public Class Class { get; set; }
 
-        public ICollection<Subject> Subjects { get; set; }
-
         [RegularExpression(RegexPattern.Url, ErrorMessage = "Incorrect image url")]
         public string Image { get; set; }
 
@@ -39,7 +37,6 @@ namespace School.WEB.Models
         
         public Student()
         {
-            Subjects = new List<Subject>();
         }
     }
 }

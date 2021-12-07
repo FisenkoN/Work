@@ -51,16 +51,10 @@
                 <p>no class</p>
             }
         </dd>
-        <dt class="col-sm-2">
-            <p>Subjects</p>
-        </dt>
-        <dd class="col-sm-10">
-            @Html.ListBox("subjects", new SelectList(Model.Student.Subjects.Select(s=>s.Name)))
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="@nameof(TeacherController.Index)">
+     <a asp-action="@nameof(TeacherController.Index)">
         Back to List
     </a>
 </div>

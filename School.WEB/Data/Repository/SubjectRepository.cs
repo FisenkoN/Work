@@ -15,7 +15,6 @@ namespace School.WEB.Data.Repository
         public IIncludableQueryable<Subject, ICollection<Teacher>> GetRelatedData()
         {
             return DbContext.Subjects
-                .Include(s => s.Students)
                 .Include(s => s.Teachers);
         }
 

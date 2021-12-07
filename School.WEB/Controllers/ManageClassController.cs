@@ -52,7 +52,7 @@ namespace School.WEB.Controllers
         {
             var model = new EditCreateClassViewModel();
 
-            var teachers = _teacherRepository
+            var classTeachers = _teacherRepository
                 .GetAll()
                 .Result
                 .Except(
@@ -68,8 +68,15 @@ namespace School.WEB.Controllers
 
             var students = await _studentRepository.GetAll();
 
+            var teachers = await _teacherRepository.GetAll();
+
             ViewData["Students"] = new SelectList(
                 students,
+                "Id",
+                "FullName");
+
+            ViewData["ClassTeachers"] = new SelectList(
+                classTeachers,
                 "Id",
                 "FullName");
 
@@ -85,12 +92,14 @@ namespace School.WEB.Controllers
         public async Task<IActionResult> CreateClass(EditCreateClassViewModel model)
         {
             ModelState["TeacherId"].ValidationState = ModelValidationState.Valid;
-            
+
             if (ModelState.IsValid)
             {
                 await _classRepository.Add(
                     new Class()
-                        .To(model, _studentRepository));
+                        .To(model,
+                            _studentRepository,
+                            _teacherRepository));
 
                 await _classRepository.SaveChanges();
 
@@ -117,7 +126,9 @@ namespace School.WEB.Controllers
 
             var students = await _studentRepository.GetAll();
 
-            var teachers = _teacherRepository
+            var teachers = await _teacherRepository.GetAll();
+
+            var classTeachers = _teacherRepository
                 .GetAll()
                 .Result
                 .Except(
@@ -131,10 +142,15 @@ namespace School.WEB.Controllers
                                 .Exists(c =>
                                     c.TeacherId == t.Id)));
 
-            teachers = teachers.Append(await _teacherRepository.GetOne(@class.TeacherId));
+            classTeachers = classTeachers.Append(await _teacherRepository.GetOne(@class.TeacherId));
 
             ViewData["Students"] = new SelectList(
                 students,
+                "Id",
+                "FullName");
+
+            ViewData["ClassTeachers"] = new SelectList(
+                classTeachers,
                 "Id",
                 "FullName");
 
@@ -187,6 +203,25 @@ namespace School.WEB.Controllers
                     await _studentRepository.SaveChanges();
                 }
 
+                form = await _classRepository.GetOneRelated(form.Id);
+
+                form.Teachers.Clear();
+
+                _classRepository.Update(form);
+
+                await _classRepository.SaveChanges();
+
+                form = await _classRepository.GetOneRelated(form.Id);
+
+                foreach (var id in model.TeacherIds)
+                {
+                    form.Teachers.Add(await _teacherRepository.GetOne(id));
+                }
+
+                _classRepository.Update(form);
+
+                await _classRepository.SaveChanges();
+
                 TempData.Put("Result",
                     new OperationResult(
                         true,
@@ -229,8 +264,7 @@ namespace School.WEB.Controllers
                         $"Class: with id: {id} wasn't deleted"));
             }
 
-            return RedirectToAction("GetClasses",
-                "ManageClass");
+            return RedirectToAction("GetClasses", "ManageClass");
         }
 
         [HttpGet("[action]/{id}")]
@@ -243,15 +277,7 @@ namespace School.WEB.Controllers
                 return NotFound();
             }
 
-            var teacher = @class.TeacherId != null
-                ? _teacherRepository.GetOneRelated(@class.TeacherId)
-                    .Result?
-                    .FullName
-                : "no teacher";
-
-            var model = new DetailsClassViewModel(
-                @class,
-                teacher);
+            var model = new DetailsClassViewModel(@class);
 
             return View(model);
         }

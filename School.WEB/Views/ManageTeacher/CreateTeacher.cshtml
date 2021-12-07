@@ -36,9 +36,27 @@
                 <select asp-for="Gender" required class="form-control" asp-items="Html.GetEnumSelectList<Gender>()"></select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
+            @if ((ViewBag.ClassesWithoutClassTeacher as SelectList)!.Any())
+            {
+                <div class="form-group">
+                    <label asp-for="ClassId" class="control-label"></label>
+                    <select asp-for="ClassId" class="form-control" asp-items="ViewBag.ClassesWithoutClassTeacher">
+                        <option>-none-</option>
+                    </select>
+                </div>
+            }
+            @if ((ViewBag.Subjects as SelectList)!.Any())
+            {
+                <div class="form-group">
+                    <label asp-for="SubjectId" class="control-label"></label>
+                    <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.Subjects">
+                        <option>-none-</option>
+                    </select>
+                </div>
+            }
             <div class="form-group">
-                <label asp-for="SubjectIds" class="control-label"></label>
-                <select asp-for="SubjectIds" class="form-control" multiple="multiple" asp-items="ViewBag.Subjects"></select>
+                <p>Classes</p>
+                @Html.ListBoxFor(s => s.ClassIds, (MultiSelectList)ViewBag.Classes)
             </div>
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
@@ -48,7 +66,7 @@
             <input type="hidden" asp-for="User"/>
             <input type="hidden" asp-for="UserId"/>
             <div>
-                <a asp-action="@nameof(ManageTeacherController.GetTeachers)">
+                <a asp-action="@nameof(ManageTeacherController.GetTeachers)"  class="btn btn-secondary">
                     Back to List
                 </a>
             </div>

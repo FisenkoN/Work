@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,16 +17,12 @@ namespace School.WEB.Controllers
     public class ManageSubjectController : Controller
 
     {
-        private readonly IStudentRepository _studentRepository;
         private readonly ISubjectRepository _subjectRepository;
         private readonly ITeacherRepository _teacherRepository;
 
-        public ManageSubjectController(
-            IStudentRepository studentRepository,
-            ISubjectRepository subjectRepository,
+        public ManageSubjectController(ISubjectRepository subjectRepository,
             ITeacherRepository teacherRepository)
         {
-            _studentRepository = studentRepository;
             _subjectRepository = subjectRepository;
             _teacherRepository = teacherRepository;
         }
@@ -51,18 +46,10 @@ namespace School.WEB.Controllers
         public async Task<IActionResult> CreateSubject()
         {
             var model = new CreateSubjectViewModel();
-            
-            var students = await _studentRepository.GetAll();
-            
+
             var teachers = await _teacherRepository.GetAll();
 
-            ViewData["Students"] = new SelectList(
-                students,
-                "Id",
-                "FullName");
-
-            ViewData["Teachers"] = new SelectList(
-                teachers,
+            ViewData["Teachers"] = new SelectList(teachers,
                 "Id",
                 "FullName");
 
@@ -74,12 +61,8 @@ namespace School.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _subjectRepository.Add(
-                    new Subject()
-                        .To(
-                            model,
-                            _studentRepository,
-                            _teacherRepository));
+                await _subjectRepository.Add(new Subject().To(model,
+                    _teacherRepository));
 
                 await _subjectRepository.SaveChanges();
 
@@ -88,8 +71,7 @@ namespace School.WEB.Controllers
                         true,
                         $"Subject: {model.Name} was created at {DateTime.Now.ToShortTimeString()}"));
 
-                return RedirectToAction("GetSubjects",
-                    "ManageSubject");
+                return RedirectToAction("GetSubjects", "ManageSubject");
             }
 
             return View(model);
@@ -128,10 +110,10 @@ namespace School.WEB.Controllers
                     new OperationResult(
                         true,
                         $"Subject: {subject.Name} was edited at {DateTime.Now.ToShortTimeString()}"));
-
+                
                 return RedirectToAction("GetSubjects", "ManageSubject");
             }
-            
+
             return View(model);
         }
 
@@ -179,21 +161,7 @@ namespace School.WEB.Controllers
                 return NotFound();
             }
 
-            var students = _subjectRepository.GetOneRelated(id)
-                .Result
-                .Students
-                .Select(s => s.FullName);
-
-            var teachers = _subjectRepository
-                .GetOneRelated(id)
-                .Result
-                .Teachers
-                .Select(s => s.FullName);
-
-            var model = new DetailsSubjectViewModel(
-                subject,
-                students,
-                teachers);
+            var model = new DetailsSubjectViewModel(subject);
 
             return View(model);
         }

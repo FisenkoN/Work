@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using School.WEB.Models;
 
 namespace School.WEB.ViewModels.Student.StudentDetails
@@ -16,7 +15,5 @@ namespace School.WEB.ViewModels.Student.StudentDetails
         public int Age { get; set; }
         
         public Gender Gender { get; set; }
-
-        public IEnumerable<Subject> Subjects { get; set; }
     }
 }

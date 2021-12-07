@@ -17,6 +17,7 @@ namespace School.WEB.Controllers
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IClassRepository _classRepository;
+        private readonly ISubjectRepository _subjectRepository;
         private readonly ITeacherRepository _teacherRepository;
 
 
@@ -55,10 +56,9 @@ namespace School.WEB.Controllers
                 return NotFound();
             }
 
-            var @class = await _classRepository.GetOne(student?.ClassId);
+            var @class = await _classRepository.GetOne(student.ClassId);
 
-            var model = new StudentDetailsViewModel(student,
-                @class);
+            var model = new StudentDetailsViewModel(student, @class);
 
             return View(model);
         }

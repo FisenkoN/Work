@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using School.WEB.Extensions;
 using School.WEB.Models;
 
@@ -42,9 +40,6 @@ namespace School.WEB.ViewModels.ManageStudent.EditCreateStudent
         
         public User User { get; set; }
 
-        [DisplayName("Subjects")]
-        public IEnumerable<int> SubjectIds { get; set; }
-
         public EditCreateStudentViewModel()
         {
             
@@ -61,7 +56,6 @@ namespace School.WEB.ViewModels.ManageStudent.EditCreateStudent
             Image = student.Image;
             Gender = student.Gender;
             ClassId = student.ClassId;
-            SubjectIds = student.Subjects.Select(s => s.Id);
         }
     }
 }

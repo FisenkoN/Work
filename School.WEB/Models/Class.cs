@@ -15,6 +15,8 @@ namespace School.WEB.Models
 
         [ForeignKey("TeacherId")] 
         public Teacher Teacher { get; set; }
+        
+        public ICollection<Teacher> Teachers { get; set; }
 
         public ICollection<Student> Students { get; set; }
 
