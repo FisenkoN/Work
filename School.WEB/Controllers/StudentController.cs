@@ -115,6 +115,8 @@ namespace School.WEB.Controllers
 
                 student.Age = model.Age;
 
+                student.Active = model.Active;
+
                 student.Image = model.Image;
 
                 student.Gender = model.Gender;

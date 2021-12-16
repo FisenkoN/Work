@@ -29,6 +29,9 @@ namespace School.WEB.Models
         public ICollection<Class> Classes { get; set; }
 
         public string FullName => FirstName + " " + LastName;
+        
+        [Required] 
+        public bool Active { get; set; } = true;
 
         public int? SubjectId { get; set; }
         

@@ -72,6 +72,7 @@ namespace School.WEB.Extensions
             student.ClassId = model.ClassId;
             student.LastName = model.LastName;
             student.Gender = model.Gender;
+            student.Active = model.Active;
             student.FirstName = model.FirstName;
             student.Image = model.Image;
 
@@ -86,6 +87,7 @@ namespace School.WEB.Extensions
             teacher.Age = model.Age;
             teacher.ClassId = model.ClassId;
             teacher.SubjectId = model.SubjectId;
+            teacher.Active = model.Active;
             teacher.Classes = model.ClassIds != null
                 ? classRepository
                     .GetAll()

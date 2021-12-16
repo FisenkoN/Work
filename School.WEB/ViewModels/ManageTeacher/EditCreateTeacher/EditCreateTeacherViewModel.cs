@@ -40,6 +40,9 @@ namespace School.WEB.ViewModels.ManageTeacher.EditCreateTeacher
 
         [DisplayName("Subject")]
         public int? SubjectId { get; set; }
+
+        [DisplayName("Active")]
+        public bool Active { get; set; }
         
         [DisplayName("Classes")]
         public IEnumerable<int> ClassIds { get; set; }

@@ -72,6 +72,7 @@ namespace School.WEB.Data
                 FirstName = "Melody",
                 LastName = "Morrison",
                 Gender = Gender.Female,
+                Active = false,
                 Age = 20,
                 Image = "https://i.pinimg.com/564x/08/74/9b/08749b41d74203ded24925381ae03bc2.jpg"
             };
@@ -104,6 +105,7 @@ namespace School.WEB.Data
                 FirstName = "Santiago",
                 LastName = "Lucas",
                 Gender = Gender.Male,
+                Active = false,
                 Age = 51,
                 Image = "https://i.pinimg.com/564x/e2/38/f4/e238f4f89d6666a7e5d9b79da38d5593.jpg"
             };
@@ -329,6 +331,7 @@ namespace School.WEB.Data
                 LastName = "Long",
                 Age = 16,
                 Class = c1,
+                Active = false,
                 ClassId = c1.Id,
                 Gender = Gender.Male,
                 Image = "https://i.pinimg.com/564x/50/4a/40/504a40337fa40398b3a456095529bcaa.jpg"
@@ -373,6 +376,7 @@ namespace School.WEB.Data
                 LastName = "Hill",
                 Age = 16,
                 Class = c2,
+                Active = false,
                 ClassId = c2.Id,
                 Gender = Gender.Male,
                 Image = "https://i.pinimg.com/564x/6b/03/d8/6b03d8981533f204442fb7992d818be9.jpg"

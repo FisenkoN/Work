@@ -11,6 +11,8 @@ namespace School.WEB.ViewModels.ManageStudent.DetailsStudent
         public string LastName { get; set; }
 
         public int Age { get; set; }
+        
+        public bool Active { get; set; }
 
         public Gender Gender { get; set; }
 
@@ -23,6 +25,7 @@ namespace School.WEB.ViewModels.ManageStudent.DetailsStudent
             Id = student.Id;
             FirstName = student.FirstName;
             LastName = student.LastName;
+            Active = student.Active;
             Age = student.Age;
             Gender = student.Gender;
             Class = student.Class != null

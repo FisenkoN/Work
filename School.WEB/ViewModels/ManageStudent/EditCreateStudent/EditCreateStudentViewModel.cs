@@ -30,6 +30,10 @@ namespace School.WEB.ViewModels.ManageStudent.EditCreateStudent
         public int Age { get; set; }
 
         [Required]
+        [DisplayName("Active")]
+        public bool Active { get; set; }
+
+        [Required]
         [DisplayName("Gender")]
         public Gender Gender { get; set; }
 

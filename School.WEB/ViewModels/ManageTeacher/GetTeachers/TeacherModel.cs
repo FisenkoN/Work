@@ -9,6 +9,8 @@ namespace School.WEB.ViewModels.ManageTeacher.GetTeachers
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+        
+        public bool Active { get; set; }
 
         public int Age { get; set; }
 

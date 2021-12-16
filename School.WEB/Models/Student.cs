@@ -23,6 +23,9 @@ namespace School.WEB.Models
         
         public string FullName => FirstName + " " + LastName;
 
+        [Required] 
+        public bool Active { get; set; } = true;
+
         public int? ClassId { get; set; }
 
         [ForeignKey("ClassId")] 

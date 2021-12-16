@@ -28,6 +28,7 @@
                 <th>Last name</th>
                 <th>Age</th>
                 <th>Gender</th>
+                <th>Active</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -50,6 +51,9 @@
                  </td>
                  <td>
                      @item.Gender
+                 </td>
+                 <td>
+                     <input type="checkbox" onclick="return false;" checked = "@item.Active">
                  </td>
                  <td>
                      <a asp-action="@nameof(VisitorController.TeacherDetails)" asp-route-id="@item.Id" class="details">

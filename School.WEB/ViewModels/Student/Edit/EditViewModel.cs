@@ -25,6 +25,10 @@ namespace School.WEB.ViewModels.Student.Edit
         [Range(5, 18, ErrorMessage = "Age must be more then 5 and less then 18")]
         [DisplayName("Age")]
         public int Age { get; set; }
+        
+        [Required]
+        [DisplayName("Active")]
+        public bool Active { get; set; }
 
         [Required]
         [DisplayName("Gender")]

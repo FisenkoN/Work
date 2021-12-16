@@ -30,6 +30,9 @@
                     Gender
                 </th>
                 <th>
+                    Active
+                </th>
+                <th>
                     Action
                 </th>
             </tr>
@@ -54,6 +57,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        <input type="checkbox" onclick="return false;" checked = "@item.Active">
                     </td>
                     <td>
                         <a asp-action="@nameof(StudentController.StudentDetails)" asp-route-id="@item.Id" class="details">

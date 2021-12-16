@@ -14,6 +14,8 @@ namespace School.WEB.ViewModels.ManageTeacher.DetailsTeacher
 
         public int Age { get; set; }
 
+        public bool Active { get; set; }
+        
         public Gender Gender { get; set; }
 
         public ClassModel Class { get; set; }

@@ -9,6 +9,8 @@ namespace School.WEB.ViewModels.Student.ShowClassTeacher
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+        
+        public bool Active { get; set; }
 
         public string Image { get; set; }
 
@@ -20,6 +22,7 @@ namespace School.WEB.ViewModels.Student.ShowClassTeacher
         {
             Id = teacher.Id;
             Age = teacher.Age;
+            Active = teacher.Active;
             FirstName = teacher.FirstName;
             LastName = teacher.LastName;
             Gender = teacher.Gender;

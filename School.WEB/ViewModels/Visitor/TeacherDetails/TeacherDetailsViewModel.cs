@@ -15,6 +15,8 @@ namespace School.WEB.ViewModels.Visitor.TeacherDetails
         public Gender Gender { get; set; }
 
         public int Age { get; set; }
+        
+        public bool Active { get; set; }
 
         public string Image { get; set; }
         
@@ -28,6 +30,7 @@ namespace School.WEB.ViewModels.Visitor.TeacherDetails
         {
             Id = teacher.Id;
             FirstName = teacher.FirstName;
+            Active = teacher.Active;
             Image = teacher.Image;
             LastName = teacher.LastName;
             Gender = teacher.Gender;

@@ -14,6 +14,7 @@ namespace School.WEB.ViewModels.Student.Index
                     new StudentModel
                     {
                         Id = student.Id,
+                        Active = student.Active,
                         FullName = student.FirstName + " " + student.LastName,
                         Image = student.Image
                     };

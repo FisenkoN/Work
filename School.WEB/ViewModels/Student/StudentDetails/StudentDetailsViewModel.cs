@@ -13,6 +13,7 @@ namespace School.WEB.ViewModels.Student.StudentDetails
             Student = new StudentModel
             {
                 Id = student.Id,
+                Active = student.Active,
                 Age = student.Age,
                 FirstName = student.FirstName,
                 Gender = student.Gender,

@@ -14,6 +14,7 @@ namespace School.WEB.ViewModels.ManageStudent.GetStudents
                 {
                     Id = student.Id,
                     Age = student.Age,
+                    Active = student.Active,
                     FirstName = student.FirstName,
                     LastName = student.LastName,
                     Gender = student.Gender,

@@ -10,18 +10,24 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
+<script>
+    var action = 'DeleteStudent';
+</script>
+
+<script type="text/javascript" src="/js/deleteConfirm.js"></script>
 
 <partial name="_OperationMessage" for="@Model.OperationResult"/>
+<partial name="_DeleteConfirm"/>
 
 <body>
 <div class="container">
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
-                <div class="col-sm-6">
+                <div>
                     <h2>Manage <b>Students</b></h2>
                 </div>
-                <div class="col-sm-6">
+                <div class="container text-center">
                     <a asp-action="@nameof(ManageStudentController.CreateStudent)" class="btn btn-success">
                         <i class="material-icons">&#xE147;</i> 
                         <span>Add New Student</span>
@@ -37,6 +43,7 @@
                 <th>Last name</th>
                 <th>Age</th>
                 <th>Gender</th>
+                <th>Active</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -61,10 +68,13 @@
                      @item.Gender
                  </td>
                  <td>
+                     <input type="checkbox" onclick="return false;" checked = "@item.Active">
+                 </td>
+                 <td>
                      <a asp-action="@nameof(ManageStudentController.EditStudent)" asp-route-id="@item.Id" class="edit">
                          <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                      </a>
-                     <a asp-action="@nameof(ManageStudentController.DeleteStudent)" asp-route-id="@item.Id" class="delete">
+                     <a href="#" onclick="deleteConfirm('@string.Join(" ",item.FirstName, item.LastName)',@item.Id)" class="delete">
                          <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                      </a>
                      <a asp-action="@nameof(ManageStudentController.DetailsStudent)" asp-route-id="@item.Id" class="details">

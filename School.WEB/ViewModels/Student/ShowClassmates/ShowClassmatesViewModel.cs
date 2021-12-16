@@ -15,6 +15,7 @@ namespace School.WEB.ViewModels.Student.ShowClassmates
                     Id = student.Id,
                     Gender = student.Gender,
                     Age = student.Age,
+                    Active = student.Active,
                     FirstName = student.FirstName,
                     Image = student.Image,
                     LastName = student.LastName
