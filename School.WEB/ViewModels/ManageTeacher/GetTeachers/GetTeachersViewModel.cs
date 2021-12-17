@@ -15,6 +15,7 @@ namespace School.WEB.ViewModels.ManageTeacher.GetTeachers
                 {
                     Id = teacher.Id,
                     Age = teacher.Age,
+                    Active = teacher.Active,
                     FirstName = teacher.FirstName,
                     LastName = teacher.LastName,
                     Image = teacher.Image,

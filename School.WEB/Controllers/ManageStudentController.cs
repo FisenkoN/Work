@@ -119,6 +119,7 @@ namespace School.WEB.Controllers
                 student.LastName = model.LastName;
                 student.Image = model.Image;
                 student.Age = model.Age;
+                student.Active = model.Active;
                 student.Gender = model.Gender;
 
                 _studentRepository.Update(student);

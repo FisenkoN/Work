@@ -1,2 +1,30 @@
-
-
+<div class="modal fade" id="active-conformation" tabindex="-1" role="dialog" aria-labelledby="activeconformation">
+    <div class="modal-dialog" style="width:501px !important;margin:0 auto;">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#07f80a;color:white;">
+                <h4 class="modal-title" id="active-conformation">
+                    Activation
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span>
+                                Are you sure you want to active?
+                            </span>
+                            <p hidden="hidden" id="activeValueId">
+                            </p>
+                            <p hidden="hidden" id="activeControllerName">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-success" value="Activation" onclick="active()" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

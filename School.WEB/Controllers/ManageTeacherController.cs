@@ -180,6 +180,7 @@ namespace School.WEB.Controllers
                 teacher.FirstName = model.FirstName;
                 teacher.LastName = model.LastName;
                 teacher.Age = model.Age;
+                teacher.Active = model.Active;
                 teacher.Gender = model.Gender;
                 teacher.Image = model.Image;
 

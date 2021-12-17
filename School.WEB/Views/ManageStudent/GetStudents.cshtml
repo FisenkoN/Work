@@ -15,9 +15,13 @@
 </script>
 
 <script type="text/javascript" src="/js/deleteConfirm.js"></script>
+<script type="text/javascript" src="/js/active.js"></script>
 
 <partial name="_OperationMessage" for="@Model.OperationResult"/>
 <partial name="_DeleteConfirm"/>
+<partial name="_Active"/>
+<partial name="_Inactive"/>
+
 
 <body>
 <div class="container">
@@ -68,7 +72,18 @@
                      @item.Gender
                  </td>
                  <td>
-                     <input type="checkbox" onclick="return false;" checked = "@item.Active">
+                     @if (item.Active == true)
+                     {
+                         <a href="#" onclick="deactivateConfirm('@nameof(ManageStudentController)', @item.Id)">
+                             <i class="material-icons" data-toggle="tooltip" title="Active">&#xe5ca;</i>
+                         </a>
+                     }
+                     else
+                     {
+                         <a href="#" onclick="activeConfirm('@nameof(ManageStudentController)', @item.Id)">
+                             <i class="material-icons" data-toggle="tooltip" title="Active">&#xe5c9;</i>
+                         </a>
+                     }
                  </td>
                  <td>
                      <a asp-action="@nameof(ManageStudentController.EditStudent)" asp-route-id="@item.Id" class="edit">

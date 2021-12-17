@@ -59,6 +59,7 @@ namespace School.WEB.ViewModels.ManageTeacher.EditCreateTeacher
             LastName = teacher.LastName;
             Image = teacher.Image;
             Age = teacher.Age;
+            Active = teacher.Active;
             Gender = teacher.Gender;
             ClassId = teacher.ClassId;
             SubjectId = teacher.SubjectId;

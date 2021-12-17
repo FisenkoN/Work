@@ -16,9 +16,12 @@
 </script>
 
 <script type="text/javascript" src="/js/deleteConfirm.js"></script>
+<script type="text/javascript" src="/js/active.js"></script>
 
 <partial name="_OperationMessage" for="@Model.OperationResult"/>
 <partial name="_DeleteConfirm"/>
+<partial name="_Active"/>
+<partial name="_Inactive"/>
 
 <body>
 <div class="container">
@@ -44,6 +47,7 @@
                 <th>Last name</th>
                 <th>Age</th>
                 <th>Gender</th>
+                <th>Active</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -66,6 +70,20 @@
                  </td>
                  <td>
                      @item.Gender
+                 </td>
+                 <td>
+                     @if (item.Active)
+                     {
+                         <a href="#" onclick="deactivateConfirm('@nameof(ManageTeacherController)', @item.Id)">
+                             <i class="material-icons" data-toggle="tooltip" title="Active">&#xe5ca;</i>
+                         </a>
+                     }
+                     else
+                     {
+                         <a href="#" onclick="activeConfirm('@nameof(ManageTeacherController)', @item.Id)">
+                             <i class="material-icons" data-toggle="tooltip" title="Active">&#xe5c9;</i>
+                         </a>
+                     }
                  </td>
                  <td>
                      <a asp-action="@nameof(ManageTeacherController.EditTeacher)" asp-route-id="@item.Id" class="edit">

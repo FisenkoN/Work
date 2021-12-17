@@ -1,2 +1,30 @@
-
-
+<div class="modal fade" id="deactivate-conformation" tabindex="-1" role="dialog" aria-labelledby="deactivateconformation">
+    <div class="modal-dialog" style="width:501px !important;margin:0 auto;">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#ffec00;color:white;">
+                <h4 class="modal-title" id="deactivate-conformation">
+                    Deactivation
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <span>
+                                Are you sure you want to deactive?
+                            </span>
+                            <p hidden="hidden" id="deactivateValueId">
+                            </p>
+                            <p hidden="hidden" id="deactivateControllerName">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-danger" value="Deactivation" onclick="deactivate()" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -50,6 +50,7 @@ namespace School.WEB.ViewModels.ManageStudent.EditCreateStudent
             Id = student.Id;
             FirstName = student.FirstName;
             LastName = student.LastName;
+            Active = student.Active;
             Age = student.Age;
             Image = student.Image;
             Gender = student.Gender;
